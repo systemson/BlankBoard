@@ -1,2 +1,2 @@
 # BlankBoard
-Laravel with AdminLTE template and user authentification.
+Laravel default instalation with users, roles and permissions.
