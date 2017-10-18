@@ -1,2 +1,2 @@
 # BlankBoard
-Laravel with AdminLTE template.
+Laravel with AdminLTE template and user authentification.
