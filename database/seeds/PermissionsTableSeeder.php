@@ -12,20 +12,26 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('permissions')->insert([
-            // Users permissions
-            ['name' => 'users_module'],
-            ['name' => 'view_user'],
-            ['name' => 'create_user'],
-            ['name' => 'update_user'],
-            ['name' => 'delete_user'],
+        $modules = [
+            'users',
+            'roles',
+            'permissions',
+        ];
 
-            // Roles permissions
-            ['name' => 'roles_module'],
-            ['name' => 'view_role'],
-            ['name' => 'create_role'],
-            ['name' => 'update_role'],
-            ['name' => 'delete_role'],
-        ]);
+        $abilities = [
+            'module',
+            'view',
+            'create',
+            'update',
+            'delete',
+        ];
+
+        foreach($modules as $module) {
+            foreach($abilities as $ability) {
+                $insert[]['name'] = $ability . '_' . $module;
+            }
+        }
+
+        DB::table('permissions')->insert($insert);
     }
 }

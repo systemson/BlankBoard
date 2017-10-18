@@ -5,16 +5,16 @@ namespace App\Policies;
 use App\Http\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class PermissionPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * The permission name.
+     * The permission attr name.
      *
      * @var string
      */
-    private $name = 'users';
+    private $name = 'permissions';
 
     public function before($user, $ability)
     {

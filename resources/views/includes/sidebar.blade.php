@@ -49,13 +49,13 @@
         Auth::user()->hasPermission('roles_module')
     )
     <!-- Security section -->
-    <li class="treeview @if (routeNameIs(['users', 'roles'], true)) menu-open @endif">
+    <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
       <a href="#"><i class="fa fa-cog"></i> <span>Security</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles'], true)) style="display: block;"  @endif>
+      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions'], true)) style="display: block;"  @endif>
 		@if (Auth::user()->hasRole('superadmin') || Auth::user()->hasPermission('users_module'))
         <!-- Users module -->
         <li class="@if (routeNameIs('users', true)) active @endif">
@@ -71,6 +71,15 @@
         </li>
         <!-- /. role module -->
         @endif
+
+        @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasPermission('permission_module'))
+        <!-- Permission module -->
+        <li class="@if (routeNameIs('permissions', true)) active @endif">
+          <a href="{{ URL::route('permissions.index') }}"><i class="fa fa-user"></i><span>Permissions</span></a>
+        </li>
+        <!-- /. permission module -->
+        @endif
+
      </ul>
     </li>
     @endif

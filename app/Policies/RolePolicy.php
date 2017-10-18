@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Http\Models\User;
-use App\Http\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RolePolicy
@@ -11,49 +10,77 @@ class RolePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the role.
+     * The permission attr name.
      *
-     * @param  \App\Http\Models\User  $user
-     * @param  \App\Role  $role
-     * @return mixed
+     * @var string
      */
-    public function view(User $user, Role $role)
+    private $name = 'roles';
+
+    public function before($user, $ability)
     {
-        //
+        if ($user->hasRole('superadmin') || $user->hasPermission($this->name . '_module')) {
+            return true;
+        }
+            return true;
     }
 
     /**
-     * Determine whether the user can create roles.
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Http\Models\User  $user
+     * @return mixed
+     */
+    public function view(User $user)
+    {
+        if ($user->hasPermission('view_' . $this->name)) {
+            return true;
+        }
+
+        return abort(403, 'Access denied message.');
+    }
+
+    /**
+     * Determine whether the user can create models.
      *
      * @param  \App\Http\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
     {
-        //
+        if ($user->hasPermission('create_' . $this->name)) {
+            return true;
+        }
+
+        return abort(403, 'Access denied message.');
     }
 
     /**
-     * Determine whether the user can update the role.
+     * Determine whether the user can update the model.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Role  $role
      * @return mixed
      */
-    public function update(User $user, Role $role)
+    public function update(User $user)
     {
-        //
+        if ($user->hasPermission('update_' . $this->name)) {
+            return true;
+        }
+
+        return abort(403, 'Access denied message.');
     }
 
     /**
-     * Determine whether the user can delete the role.
+     * Determine whether the user can delete the model.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Role  $role
      * @return mixed
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user)
     {
-        //
+        if ($user->hasPermission('delete_' . $this->name)) {
+            return true;
+        }
+
+        return abort(403, 'Access denied message.');
     }
 }

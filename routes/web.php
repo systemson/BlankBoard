@@ -50,4 +50,7 @@ Route::namespace('Admin')
 
     /** Roles page */
     Route::resource('roles', 'RolesController');
+
+    /** Permissions page */
+    Route::resource('permissions', 'PermissionsController');
 });
