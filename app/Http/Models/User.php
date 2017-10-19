@@ -53,6 +53,10 @@ class User extends Authenticatable
     public function hasPermission($name)
     {
 
+        if($this->hasRole('superadmin')) {
+            return true;
+        }
+
         foreach($this->roles as $role) {
 
             $permissions = \App\Http\Models\Role::find($role->id)->permissions;

@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
-
-
 class PermissionsController extends Controller
 {
 
@@ -68,12 +66,7 @@ class PermissionsController extends Controller
         $this->authorize('store', Model::class);
 
         /** Create a new resource */
-        Model::create([
-            'user' => Input::get('user'),
-            'name' => Input::get('name'),
-            'email' => Input::get('email'),
-            'password' => bcrypt(Input::get('password')),
-        ]);
+        $resource->create(Input::all());
 
         /** Redirect to newly created user resource page */
         return redirect()->route($this->route . '.show', $resource->id);

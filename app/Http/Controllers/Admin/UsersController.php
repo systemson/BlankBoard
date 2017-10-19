@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
-
-
 class UsersController extends Controller
 {
 

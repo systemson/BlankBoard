@@ -15,7 +15,7 @@ class PermissionRoleTableSeeder extends Seeder
             1,
         ];
 
-        $permissions = 15;
+        $permissions = 100;
 
         foreach($roles as $role) {
 

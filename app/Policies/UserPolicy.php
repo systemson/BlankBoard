@@ -18,10 +18,9 @@ class UserPolicy
 
     public function before($user, $ability)
     {
-        if ($user->hasRole('superadmin') || $user->hasPermission($this->name . '_module')) {
+        if ($user->hasRole('superadmin') || $user->hasPermission('module_' . $this->name)) {
             return true;
         }
-            return true;
     }
 
     /**

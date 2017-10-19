@@ -44,19 +44,19 @@
     <!-- /. dashboard module -->
 
     @if (
-        Auth::user()->hasRole('superadmin') ||
-        Auth::user()->hasPermission('users_module') ||
-        Auth::user()->hasPermission('roles_module')
+      Auth::user()->hasPermission('module_users') ||
+      Auth::user()->hasPermission('module_roles') ||
+      Auth::user()->hasPermission('module_permissions')
     )
     <!-- Security section -->
     <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
-      <a href="#"><i class="fa fa-cog"></i> <span>Security</span>
+      <a href="#"><i class="fa fa-lock"></i> <span>Security</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
       <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions'], true)) style="display: block;"  @endif>
-		@if (Auth::user()->hasRole('superadmin') || Auth::user()->hasPermission('users_module'))
+		@if (Auth::user()->hasPermission('module_users'))
         <!-- Users module -->
         <li class="@if (routeNameIs('users', true)) active @endif">
           <a href="{{ URL::route('users.index') }}"><i class="fa fa-users"></i><span>Users</span></a>
@@ -64,7 +64,7 @@
         <!-- /. user module -->
         @endif
 
-        @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasPermission('roles_module'))
+        @if (Auth::user()->hasPermission('module_roles'))
         <!-- Role module -->
         <li class="@if (routeNameIs('roles', true)) active @endif">
           <a href="{{ URL::route('roles.index') }}"><i class="fa fa-user"></i><span>Roles</span></a>
@@ -72,10 +72,19 @@
         <!-- /. role module -->
         @endif
 
-        @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasPermission('permission_module'))
+        @if (Auth::user()->hasPermission('module_permissions'))
         <!-- Permission module -->
         <li class="@if (routeNameIs('permissions', true)) active @endif">
-          <a href="{{ URL::route('permissions.index') }}"><i class="fa fa-user"></i><span>Permissions</span></a>
+          <a href="{{ URL::route('permissions.index') }}"><i class="fa fa-user-secret"></i><span>Permissions</span></a>
+        </li>
+        <!-- /. permission module -->
+        @endif
+
+
+        @if (Auth::user()->hasPermission('module_users/config'))
+        <!-- Permission module -->
+        <li class="@if (routeNameIs('users/config', true)) active @endif">
+          <a href="{{ URL::route('users_config.index') }}"><i class="fa fa-cog"></i><span>Users config</span></a>
         </li>
         <!-- /. permission module -->
         @endif
@@ -85,17 +94,6 @@
     @endif
     <!-- /. security section -->
 
-    <li class="treeview">
-      <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
-		<ul class="treeview-menu">
-        <li><a href="#">Link in level 2</a></li>
-        <li><a href="#">Link in level 2</a></li>
-      </ul>
-    </li>
   </ul>
   <!-- /.sidebar-menu -->
 </section>

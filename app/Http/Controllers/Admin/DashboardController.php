@@ -15,9 +15,15 @@ class DashboardController extends Controller
      */
     private $route = 'dashboard';
 
+    /**
+     * Display the dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
 
+        /** Display the dashboard. */
         return view('admin.' . $this->route . '.index')
         ->with('name', $this->route);
     }

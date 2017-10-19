@@ -53,4 +53,10 @@ Route::namespace('Admin')
 
     /** Permissions page */
     Route::resource('permissions', 'PermissionsController');
+
+    /** Permissions page */
+    Route::resource('users_config', 'UsersConfigController', ['only' => [
+        'index',
+        'store'
+        ]]);
 });
