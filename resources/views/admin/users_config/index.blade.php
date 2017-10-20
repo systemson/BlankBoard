@@ -24,36 +24,9 @@
         </div><!-- Box header -->
 
         <div class="box-body no-padding">
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th class="text-center">Action</th>
-                <th class="col-sm-12">Name</th>
-                <th class="text-center">Status</th>
-              </tr>
-            </thead>
-            <tbody>
 
-            @foreach ($resources as $resource)
-              <tr>
-                <td>{{ $resource->id }}</td>
-                <td class="text-nowrap">
-                {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
-                  {{ Form::button('<i class="fa fa-trash"></i>', array(
-                    'type' => 'submit',
-                    'class'=> 'btn-danger',
-                    'onclick'=>'return confirm("This item will be deleted?")'
-                  )) }}
-                {{ Form::close() }}
-                </td>
-                <td><a href="{{ route($name . '.show', $resource->id) }}">{{ $resource->name }}</a></td>
-                <td><span class="label label-success">Active</span></td>
-              </tr>
-              @endforeach
+          @include('includes.forms.users_config')
 
-            </tbody>
-          </table>
         </div>
 
       </div>

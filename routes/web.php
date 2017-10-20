@@ -57,6 +57,6 @@ Route::namespace('Admin')
     /** Permissions page */
     Route::resource('users_config', 'UsersConfigController', ['only' => [
         'index',
-        'store'
+        'update'
         ]]);
 });

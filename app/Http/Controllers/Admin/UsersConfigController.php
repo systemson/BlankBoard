@@ -16,7 +16,7 @@ class UsersConfigController extends Controller
      *
      * @var string
      */
-    private $route = 'users_config';
+    protected $route = 'users_config';
 
     /**
      * Show the form for editing the specified resource.
@@ -52,11 +52,14 @@ class UsersConfigController extends Controller
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', Model::class);
 
-        /** Get the specified resource */
-        $resource = Model::findOrFail($id);
+        foreach(Input::all() as $config) {
 
-        /** Update the specified resource */
-        $resource->update(Input::all());
+            /** Get the specified resource */
+            $resource = Model::find($config->id);
+
+            /** Update the specified resource */
+            $resource->update($config->value);
+        }
 
         /** Redirect back */
         return back();

@@ -49,13 +49,13 @@
       Auth::user()->hasPermission('module_permissions')
     )
     <!-- Security section -->
-    <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
+    <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true)) menu-open @endif">
       <a href="#"><i class="fa fa-lock"></i> <span>Security</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions'], true)) style="display: block;"  @endif>
+      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true)) style="display: block;"  @endif>
 		@if (Auth::user()->hasPermission('module_users'))
         <!-- Users module -->
         <li class="@if (routeNameIs('users', true)) active @endif">
@@ -81,9 +81,9 @@
         @endif
 
 
-        @if (Auth::user()->hasPermission('module_users/config'))
+        @if (Auth::user()->hasPermission('module_users/config') && false)
         <!-- Permission module -->
-        <li class="@if (routeNameIs('users/config', true)) active @endif">
+        <li class="@if (routeNameIs('users_config', true)) active @endif">
           <a href="{{ URL::route('users_config.index') }}"><i class="fa fa-cog"></i><span>Users config</span></a>
         </li>
         <!-- /. permission module -->
