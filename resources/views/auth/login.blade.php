@@ -21,12 +21,12 @@
           {!! Form::open(array('url' => route('login'), 'method' => 'POST', 'class' => 'form-horizontal')) !!}
 
             <div class="form-group">
-              {{ Form::label('email', 'Email', array('class' => 'col-sm-3 control-label')) }}
+              {{ Form::label('user', 'User', array('class' => 'col-sm-3 control-label')) }}
               <div class="col-sm-6">
-                {{ Form::email('email', old('email'), array('class' => 'col-sm-12 control-form', 'placeholder' => 'Email')) }}
-                @if ($errors->has('email'))
+                {{ Form::text('user', old('user'), array('class' => 'col-sm-12 control-form', 'placeholder' => 'User')) }}
+                @if ($errors->has('user'))
                   <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('user') }}</strong>
                   </span>
                 @endif
               </div>
