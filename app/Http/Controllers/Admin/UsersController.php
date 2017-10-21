@@ -49,11 +49,35 @@ class UsersController extends ResourceController
             'user' => Input::get('user'),
             'name' => Input::get('name'),
             'email' => Input::get('email'),
+            'status' => Input::get('status'),
+            'description' => Input::get('description'),
             'password' => Input::get('password') ? bcrypt(Input::get('password')) : bcrypt('secret'),
         ]);
 
         /** Redirect to newly created user resource page */
         return redirect()->route($this->route . '.show', $resource->id);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id current resource id.
+     * @return \Illuminate\Http\Response
+     */
+
+    public function show($id)
+    {
+
+        /** Check if logged user is authorized to view resources */
+        $this->authorize('view', $this->model);
+
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
+
+        /** Displays the specified resource page */
+        return view('admin.' . $this->route . '.show')
+        ->with('resource', $resource)
+        ->with('name', $this->route);
     }
 
     /**

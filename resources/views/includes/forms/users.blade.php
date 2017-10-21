@@ -37,6 +37,13 @@
   </div>
 
   <div class="form-group">
+    {{ Form::label('status', 'Status', array('class' => 'col-sm-3 control-label')) }}
+    <div class="col-sm-9">
+      {{ Form::select('status', [1 => 'Active', 0 => 'Inactive'], $resource->status ?? null, array('class' => 'col-sm-12 control-form chosen-select')) }}
+    </div>
+  </div>
+
+  <div class="form-group">
     {{ Form::label('description', 'Description', array('class' => 'col-sm-3 control-label')) }}
     <div class="col-sm-9">
       {{ Form::textarea('description', $resource->description ?? null, array('class' => 'col-sm-12 control-form', 'rows' => '4')) }}

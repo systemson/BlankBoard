@@ -31,6 +31,7 @@
                 <th>ID</th>
                 <th class="text-center">Action</th>
                 <th class="col-sm-12">Name</th>
+                <th>Slug</th>
                 <th class="text-center">Status</th>
               </tr>
             </thead>
@@ -49,6 +50,7 @@
                 {{ Form::close() }}
                 </td>
                 <td><a href="{{ route($name . '.show', $resource->id) }}">{{ $resource->name }}</a></td>
+                <td>{{ $resource->slug }}</td>
                 <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
                   {{ __('messages.status.' . $resource->status . '.name') }}
                 </span></td>

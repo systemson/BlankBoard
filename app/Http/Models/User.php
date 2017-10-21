@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user', 'name', 'last_name', 'email', 'description',
+        'user', 'name', 'last_name', 'email', 'status', 'description',
     ];
 
     /**
@@ -27,6 +27,17 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     /**
@@ -40,11 +51,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->where('status', 1);
     }
 
-    public function hasRole($role)
+    public function hasRole($slug)
     {
-        if(is_string($role)) {
 
-            return $this->roles->contains('name', ucfirst(strtolower($role)));
+        if(is_string($slug)) {
+
+            return $this->roles->contains('slug', $slug);
         }
 
         return false;
@@ -65,9 +77,9 @@ class User extends Authenticatable
 
         foreach($this->roles as $role) {
 
-            $permissions = Role::find($role->id)->permissions;
+            $permissions = Role::find($role->id)->permissions->where('status', 1)->pluck('slug')->all();
 
-            if(array_intersect($permissions, $names)) {
+            if(is_array($permissions) && array_intersect($permissions, $names)) {
 
                return true;
             }

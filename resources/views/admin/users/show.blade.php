@@ -59,7 +59,7 @@
           <div id="settings" class="tab-pane">
             <div class="box-header with-border">
               <div class="pull-right">
-                <a href="" class="btn btn-primary">Advanced settings</a>
+                <a href="{{ route('users.edit', $resource->id) }}" class="btn btn-primary">Advanced settings</a>
                 <a href="" class="btn btn-primary">Change password</a>
               </div>
             </div>

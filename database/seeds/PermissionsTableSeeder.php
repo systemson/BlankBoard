@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -13,23 +14,28 @@ class PermissionsTableSeeder extends Seeder
     {
 
         $modules = [
-            'users',
-            'roles',
-            'permissions',
-            'users_config',
+            'Users',
+            'Roles',
+            'Permissions',
+            'Users Config',
         ];
 
         $abilities = [
-            'module',
-            'view',
-            'create',
-            'update',
-            'delete',
+            'Module',
+            'View',
+            'Create',
+            'Update',
+            'Delete',
         ];
 
         foreach($modules as $module) {
             foreach($abilities as $ability) {
-                $insert[]['name'] = $ability . '_' . $module;
+                $insert[] = [
+                    'name' => $ability . ' ' . $module,
+                    'slug' => strtolower($ability . '_' . str_replace(' ', '_', $module)),
+                    'module' => $module,
+                    'created_at' => Carbon::now(),
+                ];
             }
         }
 

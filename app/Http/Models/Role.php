@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Models\Permission;
 
 class Role extends Model
 {
@@ -13,9 +14,18 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description',
+        'name', 'slug', 'status', 'description',
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
 
     /**
      * Get roles with a certain permission.
@@ -25,6 +35,6 @@ class Role extends Model
     public function permissions()
     {
 
-        return $this->belongsToMany('App\Http\Models\Permission');
+        return $this->belongsToMany(Permission::class)->where('status', 1);
     }
 }
