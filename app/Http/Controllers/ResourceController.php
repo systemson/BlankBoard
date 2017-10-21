@@ -40,7 +40,7 @@ class ResourceController extends Controller
     {
 
         /** Check if logged user is authorized to create resources */
-        $this->authorize('update', $this->model);
+        $this->authorize('view', $this->model);
 
         /** Get the resources from the model */
         $resources = $this->model::paginate($this->paginate);

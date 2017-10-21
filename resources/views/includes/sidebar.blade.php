@@ -44,9 +44,11 @@
     <!-- /. dashboard module -->
 
     @if (
-      Auth::user()->hasPermission('module_users') ||
-      Auth::user()->hasPermission('module_roles') ||
-      Auth::user()->hasPermission('module_permissions')
+      Auth::user()->hasPermission([
+        'module_users', 'view_users',
+        'module_roles', 'view_roles',
+        'module_permissions',  'view_permissions',
+      ])
     )
     <!-- Security section -->
     <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true)) menu-open @endif">
@@ -56,7 +58,8 @@
         </span>
       </a>
       <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true)) style="display: block;"  @endif>
-		@if (Auth::user()->hasPermission('module_users'))
+
+		@if(Auth::user()->hasPermission(['module_users', 'view_users']))
         <!-- Users module -->
         <li class="@if (routeNameIs('users', true)) active @endif">
           <a href="{{ URL::route('users.index') }}"><i class="fa fa-users"></i><span>Users</span></a>
@@ -64,7 +67,7 @@
         <!-- /. user module -->
         @endif
 
-        @if (Auth::user()->hasPermission('module_roles'))
+        @if(Auth::user()->hasPermission(['module_roles', 'view_roles']))
         <!-- Role module -->
         <li class="@if (routeNameIs('roles', true)) active @endif">
           <a href="{{ URL::route('roles.index') }}"><i class="fa fa-user"></i><span>Roles</span></a>
@@ -72,7 +75,7 @@
         <!-- /. role module -->
         @endif
 
-        @if (Auth::user()->hasPermission('module_permissions'))
+        @if(Auth::user()->hasPermission(['module_permissions', 'view_permissions']))
         <!-- Permission module -->
         <li class="@if (routeNameIs('permissions', true)) active @endif">
           <a href="{{ URL::route('permissions.index') }}"><i class="fa fa-user-secret"></i><span>Permissions</span></a>

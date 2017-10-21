@@ -5,6 +5,7 @@ namespace App\Http\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Models\Role;
 
 class User extends Authenticatable
 {
@@ -36,36 +37,39 @@ class User extends Authenticatable
     public function roles()
     {
 
-        return $this->belongsToMany('App\Http\Models\Role')->where('status', 1);
+        return $this->belongsToMany(Role::class)->where('status', 1);
     }
 
-    public function hasRole($name)
+    public function hasRole($role)
     {
+        if(is_string($role)) {
 
-        foreach($this->roles as $role)
-            if(strtolower($role->name) == strtolower($name)) {
-                return true;
-            }
+            return $this->roles->contains('name', ucfirst(strtolower($role)));
+        }
 
         return false;
     }
 
-    public function hasPermission($name)
+    public function hasPermission($names)
     {
 
         if($this->hasRole('superadmin')) {
+
             return true;
+        }
+
+        if(is_string($names)) {
+
+            $names = array($names);
         }
 
         foreach($this->roles as $role) {
 
-            $permissions = \App\Http\Models\Role::find($role->id)->permissions;
+            $permissions = Role::find($role->id)->permissions;
 
-            foreach($permissions as $permission) {
+            if(array_intersect($permissions, $names)) {
 
-                if(strtolower($permission->name) == strtolower($name)) {
-                    return true;
-                }
+               return true;
             }
         }
 
