@@ -16,11 +16,7 @@
 
       <div class="box box-primary">
         <div class="box-body box-profile">
-          @if ($resource->image)
-          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset($resource->image) }}">
-          @else
-          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('img/avatar/default.png') }}">
-          @endif
+          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset($resource->image()) }}">
           <h3 class="profile-username text-center">{{ $resource->name }}</h3>
         </div>
       </div>

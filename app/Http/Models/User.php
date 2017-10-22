@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user', 'name', 'last_name', 'email', 'status', 'description',
+        'user', 'name', 'password', 'last_name', 'email', 'status', 'description',
     ];
 
     /**
@@ -35,15 +35,28 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
+        'created_at', 'updated_at', 'deleted_at',
     ];
+
+    /**
+     * Display user image.
+     *
+     * @return string
+     */
+    public function image()
+    {
+
+        if(isset($this->image) && $this->image != null) {
+            return $this->image;
+        } else {
+            return 'img/avatar/default.png';
+        }
+    }
 
     /**
      * Get roles with a certain user.
      *
-     * @return void
+     * @return boolean
      */
     public function roles()
     {
@@ -51,6 +64,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->where('status', 1);
     }
 
+    /**
+     * Check if user has the specified role
+     *
+     * @param string $slug
+     * @return boolean
+     */
     public function hasRole($slug)
     {
 
@@ -62,6 +81,12 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * Check if user has the specified permission
+     *
+     * @param string $slug
+     * @return boolean
+     */
     public function hasPermission($names)
     {
 

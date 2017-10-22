@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = URL::route('login');
+        $this->redirectTo = URL::route('dashboard.index');
         $this->middleware('guest');
     }
 
@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'user' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|confirmed',
         ]);
     }
 

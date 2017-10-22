@@ -17,7 +17,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">{{ ucfirst($name) }} list</h3>
           <div class="box-tools pull-right">
-            <a class="btn btn-success" href="{{ route($name . '.create') }}" ><i class="fa fa-plus-circle"></i> New</a>
+            <a class="{{ __('messages.btn.new.class') }}" href="{{ route($name . '.create') }}" ><i class="fa fa-plus-circle"></i> {{ __('messages.btn.new.name') }}</a>
             <button class="btn btn-box-tool" type="button" data-widget="collapse">
               <i class="fa fa-minus"></i>
             </button>
@@ -41,7 +41,7 @@
                 <td>{{ $resource->id }}</td>
                 <td class="text-nowrap">
                 {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
-                  {{ Form::button('<i class="fa fa-trash"></i>', array(
+                  {{ Form::button( __('messages.action.trash'), array(
                     'type' => 'submit',
                     'class'=> 'btn-danger',
                     'onclick'=>'return confirm("This item will be deleted?")'
