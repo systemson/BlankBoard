@@ -64,7 +64,7 @@
               </div>
             </div>
 
-            @include('includes.forms.' . $name, ['name' => $name])
+            @include('includes.forms.users_update', ['name' => $name])
           </div>
 
         </div>

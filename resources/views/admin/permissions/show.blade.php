@@ -15,9 +15,7 @@
       <h3 class="box-title">Edit</h3>
     </div>
     <div class="box-body">
-      <div class="col-sm-offset-1 col-sm-8">
-        @include('includes.forms.' . $name, ['name' => $name])
-      </div>
+      @include('includes.forms.' . $name, ['name' => $name])
     </div>
   </div>
 

@@ -13,11 +13,14 @@
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">Edit {{ strtolower($name) . ': ' . $resource->name }}</h3>
-    </div>
+         <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" type="button" data-widget="collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div><!-- Box header -->
     <div class="box-body">
-      <div class="col-sm-offset-1 col-sm-8">
-        @include('includes.forms.' . $name, ['name' => $name])
-      </div>
+      @include('includes.forms.' . $name, ['name' => $name])
     </div>
   </div>
 

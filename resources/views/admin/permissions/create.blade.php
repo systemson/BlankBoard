@@ -10,28 +10,21 @@
 <!-- Main content -->
 <section class="content container-fluid">
 
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box box-primary">
-
-        <div class="box-header with-border">
-          <h3 class="box-title">Add new record</h3>
-          <div class="box-tools pull-right">
-            <button class="btn btn-box-tool" type="button" data-widget="collapse">
-              <i class="fa fa-minus"></i>
-            </button>
-          </div>
-        </div><!-- Box header -->
-
-        <div class="box-body no-padding">
-          <div class="col-sm-10">
-            @include('includes.forms.' . $name, ['new' => 'true'])
-          </div>
-        </div>
-
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Add new record</h3>
+      <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" type="button" data-widget="collapse">
+          <i class="fa fa-minus"></i>
+        </button>
       </div>
-    </div>
-  </div>
+    </div><!-- /. box header -->
+
+    <div class="box-body">
+      @include('includes.forms.' . $name, ['new' => 'true'])
+    </div><!-- /. box body -->
+
+  </div><!-- /. box -->
 
 </section>
 <!-- /.content -->

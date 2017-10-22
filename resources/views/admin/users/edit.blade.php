@@ -46,13 +46,18 @@
 
         <div class="box-header with-border">
           <h3 class="box-title">Edit data</h3>
-        </div>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" type="button" data-widget="collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div><!-- /. box header -->
 
         <div class="box-body">
-          @include('includes.forms.' . $name)
-        </div>
+          @include('includes.forms.users_update')
+        </div><!-- /. box body -->
 
-      </div>
+      </div><!-- /. box -->
     </div>
   </div>
 

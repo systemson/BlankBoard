@@ -11,21 +11,22 @@ class PermissionRoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = [
-            1,
-            2
-        ];
 
-        $permissions = 20;
+        DB::table('permission_role')->insert([
 
-        foreach($roles as $role) {
+            // Superadmin
+            ['role_id' => 1, 'permission_id' => 1],
+            ['role_id' => 1, 'permission_id' => 6],
+            ['role_id' => 1, 'permission_id' => 11],
+            ['role_id' => 1, 'permission_id' => 16],
 
-            for ($x = 1; $x <= $permissions; $x++) {
+            // Administrator
+            ['role_id' => 2, 'permission_id' => 1],
+            ['role_id' => 2, 'permission_id' => 6],
+            ['role_id' => 2, 'permission_id' => 11],
 
-                $insert[] = ['role_id' => $role, 'permission_id' => $x];
-            }
-        }
-
-        DB::table('permission_role')->insert($insert);
+            // Manager
+            ['role_id' => 1, 'permission_id' => 1],
+        ]);
     }
 }
