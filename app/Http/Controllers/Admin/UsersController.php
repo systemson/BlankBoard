@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Models\User as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\ResourceController;
 use DB;
@@ -108,6 +109,31 @@ class UsersController extends ResourceController
             }
 
         }, 5);
+
+        /** Redirect back */
+        return back();
+    }
+
+    /**
+     * Update the specified resource password.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword($id)
+    {
+
+        /** Check if logged user is authorized to update resources */
+        $this->authorize('update', $this->model);
+
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
+
+        /** Validate user's password */
+        if (Hash::check(Input::post('od_password'), $resource->password)) {
+
+            /** Update user's password */
+            $resource->update(Input::post('password'));
+        }
 
         /** Redirect back */
         return back();

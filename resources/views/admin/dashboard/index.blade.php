@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', config('app.name', 'Laravel') . ' - ' . ucfirst($name))
+@section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
 @section('content')
 <!-- Content header (Page header) -->
@@ -23,7 +23,7 @@
         </div><!-- Box header -->
 
         <div class="box-body">
-          <p>Dashboard content.</p>
+          <p></p>
         </div>
       </div>
     </div>

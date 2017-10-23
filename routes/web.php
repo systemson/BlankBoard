@@ -48,13 +48,15 @@ Route::namespace('Admin')
     /** Users page */
     Route::resource('users', 'UsersController');
 
+    Route::patch('users/{id}/password', 'UsersController@changePassword')->name( 'chance.password' );
+
     /** Roles page */
     Route::resource('roles', 'RolesController');
 
     /** Permissions page */
     Route::resource('permissions', 'PermissionsController');
 
-    /** Permissions page */
+    /** User config page */
     Route::resource('users_config', 'UsersConfigController', ['only' => [
         'index',
         'update'

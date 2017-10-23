@@ -29,6 +29,7 @@ return [
         'delete' =>   ['name' => 'Delete', 'class' => 'btn btn-danger'],
         'cancel' =>   ['name' => 'Cancel', 'class' => 'btn btn-danger'],
         'logout' =>   ['name' => 'Sign out', 'class' => 'btn btn-danger'],
+        'reset' =>  ['name' => 'restart', 'class' => 'btn btn-default'],
         'edit' =>     ['name' => 'Edit', 'class' => 'btn btn-default'],
         'options' =>  ['name' => 'Options', 'class' => 'btn btn-default'],
     ],
@@ -39,9 +40,10 @@ return [
         'status' => '<i class="fa fa-check"></i>',
     ],
 
-
     'yes' => 'Yes',
     'no' => 'No',
     'help' => 'Help',
     'seach' => 'Seach',
+    'show' => 'Show',
+    'edit' => 'Edit',
 ];

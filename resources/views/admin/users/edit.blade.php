@@ -16,16 +16,13 @@
 
       <div class="box box-primary">
         <div class="box-body box-profile">
-          @if ($resource->image)
-          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset($resource->image) }}">
-          @else
-          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('img/avatar/default.png') }}">
-          @endif
-          <h3 class="profile-username text-center">{{ $resource->name }}</h3>
+
+          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset(Auth::image()) }}">
+
+          <h3 class="profile-username text-center">{{ Auth::name() }}</h3>
+
           <p class="text-muted text-center">
-          @foreach ($resource->roles as $roles)
-            {{ $roles->name }}&nbsp;
-          @endforeach
+          {{ Auth::user()->roles->implode('name', ', ') }}.
           </p>
         </div>
       </div>
@@ -42,22 +39,32 @@
     </div>
 
     <div class="col-sm-9">
-      <div class="box box-primary">
 
-        <div class="box-header with-border">
-          <h3 class="box-title">Edit data</h3>
-          <div class="box-tools pull-right">
-            <button class="btn btn-box-tool" type="button" data-widget="collapse">
-              <i class="fa fa-minus"></i>
-            </button>
+      <div class="nav-tabs-custom">
+
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#user-data" data-toggle="tab" aria-expanded="true">User data</a></li>
+          <li><a href="#password" data-toggle="tab" aria-expanded="true">Password</a></li>
+          <li><a href="#image" data-toggle="tab" aria-expanded="true">Image</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+          <div id="user-data" class="tab-pane active">
+            @include('includes.forms.users_update_adv')
           </div>
-        </div><!-- /. box header -->
 
-        <div class="box-body">
-          @include('includes.forms.users_update')
-        </div><!-- /. box body -->
+          <div id="password" class="tab-pane">
+            @include('includes.forms.users_password')
+          </div>
 
-      </div><!-- /. box -->
+          <div id="image" class="tab-pane">
+            @include('includes.forms.users_image')
+          </div>
+
+        </div>
+
+      </div>
     </div>
   </div>
 

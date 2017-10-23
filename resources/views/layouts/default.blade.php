@@ -3,7 +3,7 @@
 <head>
   @include('includes.head')
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue @auth sidebar-mini @else sidebar-collapse @endguest">
 
 <div class="wrapper">
 
@@ -13,13 +13,13 @@
   </header>
   <!-- /. main header -->
 
+  @auth
   <!-- /. sidebar -->
   <aside class="main-sidebar">
-  @if(Auth::check())
     @include('includes.sidebar')
-  @endif
   </aside>
   <!-- /. sidebar -->
+  @endauth
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

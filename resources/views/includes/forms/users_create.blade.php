@@ -1,51 +1,32 @@
-<div class="col-sm-12">
-  <p>(*) Campos obligatorios.</p>
-</div>
+{{ Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
 
-{!! Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal')) !!}
+  <div class="form-group">
+    <div class="col-sm-12 text-right">
+      {{ Form::submit(__('messages.btn.save.name'), array('class' => __('messages.btn.save.class'))) }}
+      {{ Form::reset(__('messages.btn.reset.name'), array('class' => __('messages.btn.reset.class'))) }}
+    </div>
+  </div>
 
   <div class="col-sm-8 form-horizontal">
 
     <div class="form-group">
-      {{ Form::label('user', 'User (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('user', __('auth.username') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('user', null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'User')) }}
+        {{ Form::text('user', null, array('class' => 'col-sm-12 control-form', 'placeholder' => __('auth.username'))) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('name', 'Name (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('name', __('auth.name') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('name', null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Name')) }}
+        {{ Form::text('name', null, array('class' => 'col-sm-12 control-form', 'placeholder' => __('auth.name'))) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('last_name', 'Last name', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('email', __('auth.email') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('last_name', null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Last name')) }}
-      </div>
-    </div>
-
-    <div class="form-group">
-      {{ Form::label('email', 'Email (*)', array('class' => 'col-sm-4 control-label')) }}
-      <div class="col-sm-8">
-        {{ Form::text('email', null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Email')) }}
-      </div>
-    </div>
-
-    <div class="form-group">
-      {{ Form::label('description', 'Description', array('class' => 'col-sm-4 control-label')) }}
-      <div class="col-sm-8">
-        {{ Form::textarea('description', $resource->description ?? null, array('class' => 'col-sm-12 control-form', 'rows' => '4')) }}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-sm-offset-4 col-sm-8">
-        <center>
-          {{ Form::submit('Send', array('class' => 'btn btn-success')) }}
-        </center>
+        {{ Form::text('email', null, array('class' => 'col-sm-12 control-form', 'placeholder' => __('auth.email'))) }}
       </div>
     </div>
 
@@ -54,7 +35,7 @@
   <div class="col-sm-4 form-vertical">
 
     <div class="form-group">
-      {{ Form::select('status', [1 => 'Active', 0 => 'Inactive'], $resource->status ?? null, array('class' => 'control-form chosen-select')) }}
+      {{ Form::select('status', [1 => __('auth.active'), 0 => __('auth.inactive')], null, array('class' => 'control-form chosen-select')) }}
     </div>
 
     <div class="form-group">

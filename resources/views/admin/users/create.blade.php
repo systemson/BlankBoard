@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'after' => ['New']])
+  @include('includes.content-header', ['name' => $name, 'after' => __('messages.new')])
 <!-- /. content header -->
 
 <!-- Main content -->

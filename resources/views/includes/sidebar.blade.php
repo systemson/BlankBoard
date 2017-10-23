@@ -1,20 +1,30 @@
 <!-- Sidebar -->
 <section class="sidebar">
+
   <!-- Sidebar user panel (optional) -->
-  <div class="user-panel">
-    <div class="pull-left image">
-      <img src="{{ URL::asset(Auth::image()) }}" class="img-circle" alt="User Image">
+  <a href="{{ route('users.show', Auth::user()->id) }}" title="Profile">
+    <div class="user-panel">
+
+      <!-- Avatar -->
+      <div class="pull-left image">
+        <img src="{{ URL::asset(Auth::image()) }}" class="img-circle" alt="{{ Auth::name() }}">
+      </div>
+
+      <div class="pull-left info">
+
+        <!-- Name -->
+        <p class="text-center">{{ Auth::name() }}</p>
+
+        <!-- Status -->
+        <small>
+          <span class="{{ __('messages.status.' . Auth::user()->status . '.class') }}">
+          {{ __('messages.status.' . Auth::user()->status . '.name') }}
+          </span>
+        </small>
+
+      </div>
     </div>
-    <div class="pull-left info">
-      <p>{{ Auth::name() }}</p>
-      <!-- Status -->
-      <small>
-        <span class="{{ __('messages.status.' . Auth::user()->status . '.class') }}">
-        {{ __('messages.status.' . Auth::user()->status . '.name') }}
-        </span>
-      </small>
-    </div>
-  </div>
+    </a>
   <!-- /. sidebar user panel -->
 
   <!-- Sidebar Menu -->
@@ -26,7 +36,7 @@
     <li class="@if (routeNameIs('dashboard.index')) active @endif">
       <a href="{{ URL::route('dashboard.index') }}">
         <i class="fa fa-home"></i>
-        <span>Dashboard</span>
+        <span>{{ __('dashboard.title') }}</span>
       </a>
     </li>
     <!-- /. dashboard module -->
@@ -50,7 +60,7 @@
 		@if(Auth::user()->hasPermission(['module_users', 'view_users']))
         <!-- Users module -->
         <li class="@if (routeNameIs('users', true)) active @endif">
-          <a href="{{ URL::route('users.index') }}"><i class="fa fa-users"></i><span>Users</span></a>
+          <a href="{{ URL::route('users.index') }}"><i class="fa fa-users"></i> <span>{{ __('users.title') }}</span></a>
         </li>
         <!-- /. user module -->
         @endif

@@ -1,62 +1,75 @@
 <!-- Logo -->
 <a href="{{ route('dashboard.index') }}" class="logo">
   <!-- mini logo for sidebar mini 50x50 pixels -->
-  <span class="logo-mini"><b>Nu</b>LT</span>
+  <span class="logo-mini"><b>DD</b>u</span>
   <!-- logo for regular state and mobile devices -->
-  <span class="logo-lg"><b>Nurse</b>LTE</span>
+  <span class="logo-lg"><b>{{ config('app.name') }}</b></span>
 </a>
 
 <!-- Header Navbar -->
 <nav class="navbar navbar-static-top" role="navigation">
 
-  <!-- Sidebar toggle button-->
-  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-    <span class="sr-only">Toggle navigation</span>
-  </a>
+  @auth
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
+  @endauth
 
   <!-- Navbar Right Menu -->
   <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
 
-      <!-- User Account Menu -->
-      @if(Auth::check())
-      <li class="dropdown user user-menu">
+      @auth
+        <!-- User Account Menu -->
+        <li class="dropdown user user-menu">
 
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <span class="hidden-xs">{{ Auth::user()->name }}</span>
-        </a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="hidden-xs">{{ Auth::user()->name }}</span>
+          </a>
 
-        <ul class="dropdown-menu">
+          <ul class="dropdown-menu">
 
-          <!-- The user image in the menu -->
-          <li class="user-header">
-            <img src="{{ URL::asset(Auth::image()) }}" class="img-circle" alt="User Image">
+            <li class="user-header">
+              <!-- The user image in the menu -->
+              <img src="{{ URL::asset(Auth::image()) }}" class="img-circle" alt="User Image">
 
-            <p>{{ Auth::name() }} - {{ Auth::user()->roles->implode('name', ', ') }}.</p>
-          </li>
+              <!-- The user name and roles in the menu -->
+              <p>{{ Auth::name() }} - {{ Auth::user()->roles->implode('name', ', ') }}.</p>
+            </li>
 
-          <!-- Menu Body -->
-          <li class="user-body">
-          </li>
+            <!-- Menu Body -->
+            <li class="user-body">
+            </li>
 
-          <!-- Menu Footer-->
-          <li class="user-footer">
-            <div class="pull-left">
-              <a href="{{ route('users.show', Auth::user()->id) }}" class="btn btn-default btn-flat">Profile</a>
-            </div>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <div class="pull-left">
+                <a href="{{ route('users.show', Auth::user()->id) }}" class="btn btn-default btn-flat">Profile</a>
+              </div>
 
+              <div class="pull-right">
+                <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                {{ Form::open(array(
+                  'url' => route('logout'),
+                  'method' => 'POST',
+                  'style' => 'display: none;',
+                  'id' => 'logout-form'))
+                }}
+                {{ Form::close() }}
 
-            <div class="pull-right">
-              <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-              </form>
-            </div>
-          </li>
+              </div>
+            </li>
+            <!-- /. menu footer-->
 
-        </ul>
+          </ul>
 
-      </li>
-      @endif
+        </li>
+        <!-- /. user account menu -->
+      @endauth
+
+    </ul>
+  </div>
+  <!-- /. navbar right menu -->
 
 </nav>
