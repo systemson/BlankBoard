@@ -1,10 +1,10 @@
 @extends('layouts.default')
 
-@section('title', config('app.name', 'Laravel') . ' - ' . ucfirst($name))
+@section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'after' => ['Edit']])
+  @include('includes.content-header', ['name' => $name, 'after' => [__('messages.edit')]])
 <!-- /. content header -->
 
 <!-- Main content -->
@@ -29,7 +29,7 @@
 
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">About me</h3>
+          <h3 class="box-title">{{ __('auth.description') }}</h3>
         </div>
         <div class="box-body">
           <p>{{ $resource->description }}</p>
@@ -43,9 +43,9 @@
       <div class="nav-tabs-custom">
 
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#user-data" data-toggle="tab" aria-expanded="true">User data</a></li>
-          <li><a href="#password" data-toggle="tab" aria-expanded="true">Password</a></li>
-          <li><a href="#image" data-toggle="tab" aria-expanded="true">Image</a></li>
+          <li class="active"><a href="#user-data" data-toggle="tab" aria-expanded="true">{{ __('users.tab-4') }}</a></li>
+          <li><a href="#password" data-toggle="tab" aria-expanded="true">{{ __('users.tab-5') }}</a></li>
+          <li><a href="#image" data-toggle="tab" aria-expanded="true">{{ __('users.tab-6') }}</a></li>
         </ul>
 
         <div class="tab-content">

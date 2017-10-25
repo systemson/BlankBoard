@@ -5,6 +5,9 @@ return [
     'title' => 'Roles',
     'name' => 'role|roles',
     'list' => ':Title list',
+    'add' => 'Add new :name',
+    'edit' => 'Edit :name :Resource',
+    'view' => 'View :name :Resource',
 
     'table' => [
       'id' => 'ID',

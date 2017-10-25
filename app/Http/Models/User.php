@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Models\Role;
+use App\Http\Models\Permission;
 
 class User extends Authenticatable
 {
@@ -39,13 +40,19 @@ class User extends Authenticatable
     ];
 
     /**
+     * The super user role.
+     *
+     * @var string
+     */
+    protected $superuser = 'superadmin';
+
+    /**
      * Display user image.
      *
      * @return string
      */
     public function image()
     {
-
         if(isset($this->image) && $this->image != null) {
             return $this->image;
         } else {
@@ -56,7 +63,7 @@ class User extends Authenticatable
     /**
      * Get roles with a certain user.
      *
-     * @return boolean
+     * @return mixed
      */
     public function roles()
     {
@@ -67,7 +74,7 @@ class User extends Authenticatable
     /**
      * Check if user has the specified role
      *
-     * @param string $slug
+     * @param string|integer $slug
      * @return boolean
      */
     public function hasRole($slug)
@@ -76,6 +83,10 @@ class User extends Authenticatable
         if(is_string($slug)) {
 
             return $this->roles->contains('slug', $slug);
+
+        } elseif (is_int($slug)) {
+
+            return $this->roles->contains('id', $slug);
         }
 
         return false;
@@ -90,7 +101,7 @@ class User extends Authenticatable
     public function hasPermission($names)
     {
 
-        if($this->hasRole('superadmin')) {
+        if($this->hasRole($this->superuser)) {
 
             return true;
         }
@@ -102,7 +113,7 @@ class User extends Authenticatable
 
         foreach($this->roles as $role) {
 
-            $permissions = Role::find($role->id)->permissions->where('status', 1)->pluck('slug')->all();
+            $permissions = Role::find($role->id)->permissions->pluck('slug')->all();
 
             if(is_array($permissions) && array_intersect($permissions, $names)) {
 

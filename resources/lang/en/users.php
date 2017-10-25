@@ -5,6 +5,7 @@ return [
     'title' => 'Users',
     'name' => 'user|users',
     'list' => ':Title list',
+    'add' => 'Add new :name',
 
     'table' => [
       'id' => 'ID',
@@ -25,5 +26,14 @@ return [
     'tab-3' => 'Basic settings',
     'adv-config' => 'Advanced settings',
 
+
+    /** Tab 4 */
+    'tab-4' => 'User data',
+
+    /** Tab 5 */
+    'tab-5' => 'Password',
+
+    /** Tab 6 */
+    'tab-6' => 'Image',
 
 ];

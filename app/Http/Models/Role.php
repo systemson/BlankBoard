@@ -23,12 +23,11 @@ class Role extends Model
      * @var array
      */
     protected $dates = [
-        'created_at',
-        'updated_at'
+        'created_at', 'updated_at',
     ];
 
     /**
-     * Get roles with a certain permission.
+     * Get permission with a certain roles.
      *
      * @return void
      */

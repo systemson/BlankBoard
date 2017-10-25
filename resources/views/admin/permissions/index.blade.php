@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', config('app.name', 'Laravel') . ' - ' . ucfirst($name))
+@section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
 @section('content')
 <!-- Content header (Page header) -->
@@ -15,7 +15,7 @@
       <div class="box box-primary">
 
         <div class="box-header with-border">
-          <h3 class="box-title">{{ ucfirst($name) }} list</h3>
+          <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
           <div class="box-tools pull-right">
             <a class="btn btn-success" href="{{ route($name . '.create') }}" ><i class="fa fa-plus-circle"></i> New</a>
             <button class="btn btn-box-tool" type="button" data-widget="collapse">
@@ -28,12 +28,12 @@
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
-                <th>ID</th>
-                <th class="text-center">Action</th>
-                <th class="col-sm-12">Name</th>
-                <th>Module</th>
-                <th>Slug</th>
-                <th class="text-center">Status</th>
+                <th>{{ __($name . '.table.id') }}</th>
+                <th class="text-center">{{ __($name . '.table.action') }}</th>
+                <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
+                <th>{{ __($name . '.table.module') }}</th>
+                <th>{{ __($name . '.table.slug') }}</th>
+                <th class="text-center">{{ __($name . '.table.slug') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +46,7 @@
                   {{ Form::button('<i class="fa fa-trash"></i>', array(
                     'type' => 'submit',
                     'class'=> 'btn-danger',
-                    'onclick'=>'return confirm("This item will be deleted?")'
+                    'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
                   )) }}
                 {{ Form::close() }}
                 </td>

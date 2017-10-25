@@ -104,7 +104,7 @@ class UsersController extends ResourceController
             /** Check if permissions are being set */
             if((Input::get('roles') != null)) {
 
-                /** Syncronize both tables through pivot tale */
+                /** Syncronize both tables through pivot table */
                 $resource->roles()->sync(Input::get('roles'));
             }
 

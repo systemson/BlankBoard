@@ -1,4 +1,4 @@
-{{ Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
+{{ Form::open(array('url' => route('users.store'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
 
   <div class="form-group">
     <div class="col-sm-12 text-right">

@@ -29,7 +29,7 @@ return [
         'delete' =>   ['name' => 'Delete', 'class' => 'btn btn-danger'],
         'cancel' =>   ['name' => 'Cancel', 'class' => 'btn btn-danger'],
         'logout' =>   ['name' => 'Sign out', 'class' => 'btn btn-danger'],
-        'reset' =>  ['name' => 'restart', 'class' => 'btn btn-default'],
+        'reset' =>    ['name' => 'Restart', 'class' => 'btn btn-default'],
         'edit' =>     ['name' => 'Edit', 'class' => 'btn btn-default'],
         'options' =>  ['name' => 'Options', 'class' => 'btn btn-default'],
     ],
@@ -44,6 +44,7 @@ return [
     'no' => 'No',
     'help' => 'Help',
     'seach' => 'Seach',
+    'new' => 'New',
     'show' => 'Show',
     'edit' => 'Edit',
 ];

@@ -18,16 +18,16 @@
     </div>
 
     <div class="form-group">
-      {{ Form::label('module', 'Module (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('slug', 'Slug (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('module', $resource->module ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Module')) }}
+        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Slug')) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('slug', 'Slug (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('module', 'Module', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Slug')) }}
+        {{ Form::text('module', $resource->module ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Module')) }}
       </div>
     </div>
 

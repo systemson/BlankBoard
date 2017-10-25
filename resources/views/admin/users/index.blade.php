@@ -15,7 +15,7 @@
       <div class="box box-primary">
 
         <div class="box-header with-border">
-          <h3 class="box-title">{{ __('users.list', ['title' => __($name . '.title')]) }}</h3>
+          <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
           <div class="box-tools pull-right">
             <a class="{{ __('messages.btn.new.class') }}" href="{{ route($name . '.create') }}" ><i class="fa fa-plus-circle"></i> {{ __('messages.btn.new.name') }}</a>
             <button class="btn btn-box-tool" type="button" data-widget="collapse">
@@ -29,10 +29,10 @@
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
-                <th>{{ __('users.table.id') }}</th>
-                <th class="text-center">{{ __('users.table.action') }}</th>
-                <th class="col-sm-12">{{ __('users.table.name') }}</th>
-                <th class="text-center">{{ __('users.table.status') }}</th>
+                <th>{{ __($name . '.table.id') }}</th>
+                <th class="text-center">{{ __($name . '.table.action') }}</th>
+                <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
+                <th class="text-center">{{ __($name . '.table.status') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -45,7 +45,7 @@
                   {{ Form::button( __('messages.action.trash'), array(
                     'type' => 'submit',
                     'class'=> 'btn-danger',
-                    'onclick'=>'return confirm("' . __('users.confirm-delete') . '")'
+                    'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
                   )) }}
                 {{ Form::close() }}
                 </td>
