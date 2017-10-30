@@ -29,11 +29,10 @@
             <thead>
               <tr>
                 <th>{{ __($name . '.table.id') }}</th>
-                <th class="text-center">{{ __($name . '.table.action') }}</th>
                 <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
                 <th>{{ __($name . '.table.module') }}</th>
                 <th>{{ __($name . '.table.slug') }}</th>
-                <th class="text-center">{{ __($name . '.table.slug') }}</th>
+                <th class="text-center">{{ __($name . '.table.status') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -41,16 +40,7 @@
             @foreach ($resources as $resource)
               <tr>
                 <td>{{ $resource->id }}</td>
-                <td class="text-nowrap">
-                {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
-                  {{ Form::button('<i class="fa fa-trash"></i>', array(
-                    'type' => 'submit',
-                    'class'=> 'btn-danger',
-                    'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
-                  )) }}
-                {{ Form::close() }}
-                </td>
-                <td><a href="{{ route($name . '.show', $resource->id) }}">{{ $resource->name }}</a></td>
+                <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a></td>
                 <td>{{ $resource->module }}</td>
                 <td>{{ $resource->slug }}</td>
                 <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">

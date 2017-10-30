@@ -6,10 +6,10 @@ use App\Http\Models\Role as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ResourceController as Controller;
 use DB;
 
-class RolesController extends ResourceController
+class RolesController extends Controller
 {
 
     /**

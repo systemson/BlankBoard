@@ -14,19 +14,21 @@
 /**
  * Auth routes
  */
-/** @deprecated middleware prevent-back-history */
-Route::middleware('prevent-back-history')
+/** @deprecated middleware prevent-back-history, should be renamed */
+Route::middleware('clear-cache')
 ->group(function () {
     Auth::routes();
 });
+
 
 /**
  * Public site
  */
 
-/** Defaul controller for front site */
+/** Default controller for front site */
 Route::get('/', 'Front\Home@index')->name( 'home' );
 Route::get('/home', 'Front\Home@index');
+
 
 /**
  * Admin site
@@ -36,25 +38,27 @@ Route::get('/home', 'Front\Home@index');
 Route::namespace('Admin')
 ->prefix('admin')
 /** @deprecated middleware prevent-back-history */
-->middleware(['auth', 'prevent-back-history'])
+->middleware(['auth', 'clear-cache', 'inactive'])
 ->group(function () {
 
     /** Defaul controller for admin site */
-    Route::get('/', 'DashboardController@index')->name( 'dashboard.index' );
+    Route::get('/', 'DashboardController@index');
 
     /** Dashboard page */
-    Route::get( 'dashboard', 'DashboardController@index' );
+    Route::get( 'dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
 
     /** Users page */
     Route::resource('users', 'UsersController');
-
     Route::patch('users/{id}/password', 'UsersController@changePassword')->name( 'chance.password' );
 
     /** Roles page */
-    Route::resource('roles', 'RolesController');
+    Route::resource('roles', 'RolesController')->except('show');
 
     /** Permissions page */
-    Route::resource('permissions', 'PermissionsController');
+    Route::resource('permissions', 'PermissionsController')->except([
+        'destroy',
+        'show',
+    ]);
 
     /** User config page */
     Route::resource('users_config', 'UsersConfigController', ['only' => [

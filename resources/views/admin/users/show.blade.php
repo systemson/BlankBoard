@@ -39,6 +39,14 @@
     </div>
 
     <div class="col-sm-9">
+
+      @if (Auth::user()->isActive() == false)
+      <div class="alert alert-warning">
+        <h3>Inactive short message</h3>
+        <p>Inactive long message</p>
+      </div>
+      @endif
+
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#info" data-toggle="tab" aria-expanded="true">{{ __('users.tab-1') }}</a></li>

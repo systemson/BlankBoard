@@ -34,7 +34,7 @@
     <div class="form-group">
       {{ Form::label('description', 'Description', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::textarea('description', $resource->description ?? null, array('class' => 'col-sm-12 control-form', 'rows' => '4')) }}
+        {{ Form::textarea('description', $resource->description ?? null, array('class' => 'col-sm-12 control-form', 'rows' => '4', 'protected')) }}
       </div>
     </div>
 

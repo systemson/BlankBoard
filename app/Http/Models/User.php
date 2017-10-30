@@ -2,15 +2,14 @@
 
 namespace App\Http\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Models\Role;
 use App\Http\Models\Permission;
+use App\User as BaseUserModel;
 
-class User extends Authenticatable
+class User extends BaseUserModel
 {
-    use Notifiable, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -54,6 +53,7 @@ class User extends Authenticatable
     public function image()
     {
         if(isset($this->image) && $this->image != null) {
+
             return $this->image;
         } else {
             return 'img/avatar/default.png';
@@ -104,6 +104,9 @@ class User extends Authenticatable
         if($this->hasRole($this->superuser)) {
 
             return true;
+        } elseif($this->isActive() == false) {
+
+            return false;
         }
 
         if(is_string($names)) {
@@ -113,14 +116,27 @@ class User extends Authenticatable
 
         foreach($this->roles as $role) {
 
-            $permissions = Role::find($role->id)->permissions->pluck('slug')->all();
+            $permissions = Role::find($role->id)->permissions->pluck('slug');
 
-            if(is_array($permissions) && array_intersect($permissions, $names)) {
+            if(!empty($permissions->intersect($names)->all())) {
 
                return true;
             }
         }
 
+        return false;
+    }
+
+    /**
+     * Check if the user is active.
+     *
+     * @return mixed
+     */
+    public function isActive()
+    {
+        if($this->status > 0 || $this->hasRole($this->superuser)) {
+            return true;
+        }
         return false;
     }
 }

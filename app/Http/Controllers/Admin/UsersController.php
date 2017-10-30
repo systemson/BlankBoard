@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ResourceController as Controller;
 use DB;
 
-class UsersController extends ResourceController
+class UsersController extends Controller
 {
 
     /**
@@ -35,6 +35,27 @@ class UsersController extends ResourceController
     protected $paginate = 15;
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id the specified resource id.
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+
+        /** Check if logged user is authorized to create resources */
+        $this->authorize('index', $this->model);
+
+        /** Get the resources from the model */
+        $resources = $this->model::paginate($this->paginate);
+
+        /** Display a listing of the resources */
+        return view('admin.' . $this->route . '.index')
+        ->with('resources' , $resources)
+        ->with('name', $this->route);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
@@ -43,7 +64,7 @@ class UsersController extends ResourceController
     {
 
         /** Check if logged user is authorized to create resources */
-        $this->authorize('create', Model::class);
+        $this->authorize('create', [$this->model, $id]);
 
         /** Create a new resource */
         $resource = Model::create([
@@ -68,9 +89,8 @@ class UsersController extends ResourceController
 
     public function show($id)
     {
-
         /** Check if logged user is authorized to view resources */
-        $this->authorize('view', $this->model);
+        $this->authorize('view', [$this->model, $id]);
 
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
@@ -82,6 +102,26 @@ class UsersController extends ResourceController
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id the specified resource id.
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+
+        /** Check if logged user is authorized to update resources */
+        $this->authorize('update', [$this->model, $id]);
+
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
+
+        /** Displays the edit resource page */
+        return view('admin.' . $this->route . '.edit')
+        ->with('resource', $resource)
+        ->with('name', $this->route);
+    }
+    /**
      * Update the specified resource in storage.
      *
      * @param  int $id the specified resource id
@@ -91,7 +131,7 @@ class UsersController extends ResourceController
     {
 
         /** Check if logged user is authorized to update resources */
-        $this->authorize('update', $this->model);
+        $this->authorize('update', [$this->model, $id]);
 
         DB::transaction(function () use ($id) {
 

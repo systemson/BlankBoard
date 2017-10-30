@@ -3,10 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-/**
- * @todo This class must be renamed to something shorter and more explicit
- */
-class PreventBackHistory
+
+class ClearCache
 {
 
     /**

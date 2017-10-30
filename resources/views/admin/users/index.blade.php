@@ -49,7 +49,7 @@
                   )) }}
                 {{ Form::close() }}
                 </td>
-                <td><a href="{{ route($name . '.show', $resource->id) }}">{{ $resource->name }}</a></td>
+                <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a></td>
                 <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
                   {{ __('messages.status.' . $resource->status . '.name') }}
                 </span></td>

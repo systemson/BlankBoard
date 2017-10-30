@@ -16,8 +16,8 @@ return [
     'status' => [
         1  => ['name' => 'Active', 'class' => 'label label-success'],
         0  => ['name' => 'Inactive', 'class' => 'label label-default'],
-        -1 => ['name' => 'Canceled', 'class' => 'label label-danger'],
-        -2 => ['name' => 'Suspended', 'class' => 'label label-warning'],
+        -1 => ['name' => 'Suspended', 'class' => 'label label-warning'],
+        -2 => ['name' => 'Cancelled', 'class' => 'label label-danger'],
     ],
 
     'btn' => [
@@ -47,4 +47,5 @@ return [
     'new' => 'New',
     'show' => 'Show',
     'edit' => 'Edit',
+    'here' => 'Here'
 ];

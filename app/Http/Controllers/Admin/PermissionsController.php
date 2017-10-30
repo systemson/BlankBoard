@@ -6,10 +6,9 @@ use App\Http\Models\Permission as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ResourceController as Controller;
 
-class PermissionsController extends ResourceController
+class PermissionsController extends Controller
 {
 
     /**

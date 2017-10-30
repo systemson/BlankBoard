@@ -1,34 +1,22 @@
 <?php
 
-namespace App\Policies;
+namespace App\Policies\Traits;
 
 use App\Http\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Policies\Traits\BeforePolicyTraits;
-use App\Policies\Traits\ActionPolicyTraits;
 
-class UserPolicy
+trait ActionPolicyTraits
 {
-    use HandlesAuthorization,
-        BeforePolicyTraits;
-
     /**
-     * The permission name.
-     *
-     * @var string
-     */
-    private $name = 'users';
-
-    /**
-     * Determine whether the user can view the models list.
+     * Determine whether the user can view the model.
      *
      * @param  \App\Http\Models\User  $user
      * @return mixed
      */
-    public function index(User $user)
+    public function view(User $user)
     {
 
         if ($user->hasPermission('view_' . $this->name)) {
+
             return true;
         }
 
@@ -36,16 +24,14 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can create models.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Http\Models\User  $resource
      * @return mixed
      */
-    public function view(User $user, $id)
+    public function create(User $user)
     {
-
-        if ($user->id == $id) {
+        if ($user->hasPermission('create_' . $this->name)) {
             return true;
         }
 
@@ -56,12 +42,11 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Http\Models\User  $resource
      * @return mixed
      */
-    public function update(User $user, $id)
+    public function update(User $user)
     {
-        if ($user->id == $id || ($user->hasPermission('update_' . $this->name))) {
+        if ($user->hasPermission('update_' . $this->name)) {
             return true;
         }
 
@@ -72,12 +57,11 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Http\Models\User  $resource
      * @return mixed
      */
-    public function delete(User $user, $id)
+    public function delete(User $user)
     {
-        if ($user->id == $id || ($user->hasPermission('delete_' . $this->name))) {
+        if ($user->hasPermission('delete_' . $this->name)) {
             return true;
         }
 

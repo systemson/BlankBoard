@@ -17,7 +17,7 @@
         <li class="active">{{ $item }}</li>
       @endforeach
     @else
-        <li class="active">Here</li>
+        <li class="active">{{ __('messages.here') }}</li>
     @endif
 
   </ol>
