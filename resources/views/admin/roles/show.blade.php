@@ -4,29 +4,37 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'after' => [__('messages.show')]])
+  @include('includes.content-header', ['name' => $name, 'before' => [__($name . '.parent')], 'after' => [__('messages.show')]])
 <!-- /. content header -->
 
 <!-- Main content -->
 <section class="content container-fluid">
+  <div class="row">
 
-  <div class="box box-primary">
+    <div class="col-sm-12" style="padding-top: 20px">
+      @include('includes.alerts')
+    </div>
 
-    <div class="box-header with-border">
-      <h3 class="box-title">{{ __($name . '.view', ['name' => trans_choice($name . '.name', 1), 'resource' => $resource->name ]) }}</h3>
-      <div class="box-tools pull-right">
-        <button class="btn btn-box-tool" type="button" data-widget="collapse">
-          <i class="fa fa-minus"></i>
-        </button>
-      </div>
-    </div><!-- /. box header -->
+    <div class="col-sm-12">
+      <div class="box box-primary">
 
-    <div class="box-body">
-      @include('includes.forms.' . $name, ['name' => $name])
-    </div><!-- /. box body -->
+        <div class="box-header with-border">
+          <h3 class="box-title">{{ __($name . '.view', ['name' => trans_choice($name . '.name', 1), 'resource' => $resource->name ]) }}</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" type="button" data-widget="collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div><!-- /. box header -->
 
-  </div><!-- /. box -->
+        <div class="box-body">
+          @include('includes.forms.' . $name, ['name' => $name])
+        </div><!-- /. box body -->
 
-</section>
-<!-- /.content -->
+      </div><!-- /. box -->
+
+    </div><!-- /. col -->
+  </div><!-- /. row -->
+
+</section><!-- /.content -->
 @stop

@@ -17,7 +17,6 @@ class PermissionsTableSeeder extends Seeder
             'Users',
             'Roles',
             'Permissions',
-            'Users Config',
         ];
 
         $abilities = [

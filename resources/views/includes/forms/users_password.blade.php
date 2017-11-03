@@ -1,4 +1,4 @@
-{{ Form::open(array('url' => route('chance.password', $resource->id), 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
+{{ Form::open(array('url' => route('change.password', $resource->id), 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
 
   <div class="form-group">
     <div class="col-sm-12 text-right">

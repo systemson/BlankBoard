@@ -3,9 +3,11 @@
 return [
 
     'title' => 'Users',
+    'parent' => 'Security',
     'name' => 'user|users',
     'list' => ':Title list',
     'add' => 'Add new :name',
+    'settings' => 'Settings',
 
     'table' => [
       'id' => 'ID',
@@ -15,6 +17,14 @@ return [
     ],
 
     'confirm-delete' => 'This action can be reverted. Are you sure?',
+
+    'setting' => [
+        'register' => 'Users registration',
+        'create' => 'Create users',
+        'deactivate' => 'Deactive users',
+        'first_login' => 'First login password change',
+        'change_password' => 'Force password change',
+    ],
 
     /** Tab 1 */
     'tab-1' => 'Info',

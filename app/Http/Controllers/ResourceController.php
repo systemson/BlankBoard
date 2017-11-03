@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Models\Setting;
 use Auth;
 
-class ResourceController extends Controller
+abstract class ResourceController extends Controller
 {
 
     /**
@@ -171,5 +172,29 @@ class ResourceController extends Controller
 
         /** Redirect to controller index */
         return redirect()->route($this->route . '.index');
+    }
+
+    /**
+     * Show the form for editing the settings.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function settings()
+    {
+
+        /** Check if logged user is authorized to edit users settings */
+        $this->authorize('view', $this->model);
+
+        /** Get all users settings from the model */
+        $settings = Setting::where('module', $this->route)->get(['slug', 'value']);
+
+        foreach($settings as $setting) {
+            $resources[$setting->slug] = $setting->value;
+        }
+
+        /** Display the form for editing the users settings */
+        return view('admin.settings.' . $this->route)
+        ->with('resources', $resources)
+        ->with('name', $this->route);
     }
 }

@@ -6,11 +6,11 @@
 
     @if (isset($before) && $before != null)
       @foreach ($before as $item)
-        <li class="active">{{ $item }}</li>
+        <li><a href="{{ route($name . '.index') }}">{{ $item }}</a></li>
       @endforeach
     @endif
 
-    <li><a href="{{ route($name . '.index') }}"><i class="fa fa-dashboard"></i> {{ __($name . '.title') }}</a></li>
+    <li><a href="{{ route($name . '.index') }}">{{ __($name . '.title') }}</a></li>
 
     @if (isset($after) && $after != null)
       @foreach ($after as $item)

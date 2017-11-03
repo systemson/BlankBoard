@@ -23,19 +23,6 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    @if (session('info'))
-    <br>
-    <div class="col-sm-12">
-      <div class="alert alert-info alert-dismissable fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">
-          <i class="fa fa-close"></i>
-        </a>
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        {{ session('info') }}
-      </div>
-    </div>
-    @endif
-
     @yield('content')
   </div>
   <!-- /. content wrapper -->

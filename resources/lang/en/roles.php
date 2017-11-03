@@ -3,6 +3,7 @@
 return [
 
     'title' => 'Roles',
+    'parent' => 'Security',
     'name' => 'role|roles',
     'list' => ':Title list',
     'add' => 'Add new :name',

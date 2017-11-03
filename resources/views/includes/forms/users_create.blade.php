@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="col-sm-8 form-horizontal">
+  <div class="col-sm-8">
 
     <div class="form-group">
       {{ Form::label('user', __('auth.username') . ' (*)', array('class' => 'col-sm-4 control-label')) }}

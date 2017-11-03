@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'after' => [__('messages.edit')]])
+  @include('includes.content-header', ['name' => $name, 'before' => [__($name . '.parent')], 'after' => [__('messages.edit')]])
 <!-- /. content header -->
 
 <!-- Main content -->
@@ -12,17 +12,22 @@
 
   <div class="row">
 
+    <div class="col-sm-12" style="padding-top: 20px">
+      @include('includes.alerts')
+    </div>
+
+    @if (Auth::id() == $resource->id)
     <div class="col-sm-3">
 
       <div class="box box-primary">
         <div class="box-body box-profile">
 
-          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset(Auth::image()) }}">
+          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset($resource->image()) }}">
 
-          <h3 class="profile-username text-center">{{ Auth::name() }}</h3>
+          <h3 class="profile-username text-center">{{ $resource->name }}</h3>
 
           <p class="text-muted text-center">
-          {{ Auth::user()->roles->implode('name', ', ') }}.
+          {{ $resource->roles->implode('name', ', ') }}.
           </p>
         </div>
       </div>
@@ -37,8 +42,9 @@
       </div>
 
     </div>
+    @endif
 
-    <div class="col-sm-9">
+    <div class="@if(Auth::id() == $resource->id) col-sm-9 @else col-sm-12 @endif">
 
       <div class="nav-tabs-custom">
 
@@ -62,12 +68,12 @@
             @include('includes.forms.users_image')
           </div>
 
-        </div>
+        </div><!-- /. tab content -->
 
-      </div>
-    </div>
-  </div>
+      </div><!-- /. box -->
 
-</section>
-<!-- /.content -->
+    </div><!-- /. col -->
+  </div><!-- /. row -->
+
+</section><!-- /.content -->
 @stop

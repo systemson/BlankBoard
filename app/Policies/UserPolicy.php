@@ -32,7 +32,7 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.access_denied'));
     }
 
     /**
@@ -49,7 +49,22 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.access_denied'));
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Http\Models\User  $user
+     * @return mixed
+     */
+    public function create(User $user)
+    {
+        if ($user->hasPermission('create_' . $this->name)) {
+            return true;
+        }
+
+        return abort(403, __('messages.access_denied'));
     }
 
     /**
@@ -65,7 +80,7 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.access_denied'));
     }
 
     /**
@@ -81,6 +96,6 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.access_denied'));
     }
 }

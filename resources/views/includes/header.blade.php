@@ -1,7 +1,7 @@
 <!-- Logo -->
 <a href="{{ route('dashboard.index') }}" class="logo">
   <!-- mini logo for sidebar mini 50x50 pixels -->
-  <span class="logo-mini"><b>DD</b>u</span>
+  <span class="logo-mini"><b>BB</b></span>
   <!-- logo for regular state and mobile devices -->
   <span class="logo-lg"><b>{{ config('app.name') }}</b></span>
 </a>
@@ -45,11 +45,11 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="{{ route('users.show', Auth::user()->id) }}" class="btn btn-default btn-flat">Profile</a>
+                <a href="{{ route('users.show', Auth::user()->id) }}" class="btn btn-{{ __('messages.btn.profile.class') }} btn-flat">{{ __('messages.btn.profile.name') }}</a>
               </div>
 
               <div class="pull-right">
-                <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                <a href="{{ route('logout') }}" class="btn btn-{{ __('messages.btn.logout.class') }} btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('messages.btn.logout.name') }}</a>
                 {{ Form::open(array(
                   'url' => route('logout'),
                   'method' => 'POST',

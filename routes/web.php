@@ -48,21 +48,20 @@ Route::namespace('Admin')
     Route::get( 'dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
 
     /** Users page */
+    Route::get('users/settings', 'UsersController@settings')->name( 'users.config' );
     Route::resource('users', 'UsersController');
-    Route::patch('users/{id}/password', 'UsersController@changePassword')->name( 'chance.password' );
+    Route::patch('users/{id}/password', 'UsersController@password')->name( 'change.password' );
 
     /** Roles page */
     Route::resource('roles', 'RolesController')->except('show');
 
     /** Permissions page */
-    Route::resource('permissions', 'PermissionsController')->except([
-        'destroy',
-        'show',
+    Route::resource('permissions', 'PermissionsController')->only([
+        'index',
+        'edit',
+        'update',
     ]);
 
-    /** User config page */
-    Route::resource('users_config', 'UsersConfigController', ['only' => [
-        'index',
-        'update'
-        ]]);
+    /** Store settings */
+    Route::resource('settings', 'SettingsController')->only('store');
 });

@@ -11,7 +11,12 @@
 <section class="content container-fluid">
 
   <div class="row">
-    <div class="col-xs-12">
+
+    <div class="col-sm-12" style="padding-top: 20px">
+      @include('includes.alerts')
+    </div>
+
+    <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title"></h3>
@@ -24,11 +29,12 @@
 
         <div class="box-body">
           <p></p>
-        </div>
-      </div>
-    </div>
-  </div>
+        </div><!-- /. box body -->
 
-</section>
-<!-- /.content -->
+      </div><!-- /. box -->
+
+    </div><!-- /. col -->
+  </div><!-- /. row -->
+
+</section><!-- /.content -->
 @stop

@@ -20,7 +20,7 @@ trait ActionPolicyTraits
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.acces_denied'));
     }
 
     /**
@@ -35,7 +35,7 @@ trait ActionPolicyTraits
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.access_denied'));
     }
 
     /**
@@ -50,7 +50,7 @@ trait ActionPolicyTraits
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.access_denied'));
     }
 
     /**
@@ -65,6 +65,6 @@ trait ActionPolicyTraits
             return true;
         }
 
-        return abort(403, 'Access denied message.');
+        return abort(403, __('messages.access_denied'));
     }
 }

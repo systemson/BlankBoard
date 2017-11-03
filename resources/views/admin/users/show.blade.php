@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'after' => [__('messages.show')]])
+  @include('includes.content-header', ['name' => $name, 'before' => [__($name . '.parent')], 'after' => [__('messages.show')]])
 <!-- /. content header -->
 
 <!-- Main content -->
@@ -12,17 +12,21 @@
 
   <div class="row">
 
+    <div class="col-sm-12" style="padding-top: 20px">
+      @include('includes.alerts')
+    </div>
+
     <div class="col-sm-3">
 
       <div class="box box-primary">
         <div class="box-body box-profile">
 
-          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset(Auth::image()) }}">
+          <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset($resource->image()) }}">
 
-          <h3 class="profile-username text-center">{{ Auth::name() }}</h3>
+          <h3 class="profile-username text-center">{{ $resource->name }}</h3>
 
           <p class="text-muted text-center">
-          {{ Auth::user()->roles->implode('name', ', ') }}.
+          {{ $resource->roles->implode('name', ', ') }}.
           </p>
         </div>
       </div>
@@ -39,13 +43,6 @@
     </div>
 
     <div class="col-sm-9">
-
-      @if (Auth::user()->isActive() == false)
-      <div class="alert alert-warning">
-        <h3>Inactive short message</h3>
-        <p>Inactive long message</p>
-      </div>
-      @endif
 
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
@@ -76,11 +73,12 @@
             @include('includes.forms.users_update', ['name' => $name])
           </div>
 
-        </div>
-      </div>
-    </div>
-  </div>
+        </div><!-- /. tab content -->
 
-</section>
-<!-- /.content -->
+      </div><!-- /. box -->
+
+    </div><!-- /. col -->
+  </div><!-- /. row -->
+
+</section><!-- /.content -->
 @stop

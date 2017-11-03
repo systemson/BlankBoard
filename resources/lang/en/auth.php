@@ -43,8 +43,9 @@ return [
     'restore' => 'Send me the reset link.',
     'profile' => 'My profile',
 
-    /** Forms titles */
+    /** Titles */
     'login' => 'Login',
+    'logout' => 'Logout',
     'register' => 'Register',
     'reset' => 'Reset password',
 ];

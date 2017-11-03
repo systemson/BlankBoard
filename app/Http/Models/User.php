@@ -95,7 +95,7 @@ class User extends BaseUserModel
     /**
      * Check if user has the specified permission
      *
-     * @param string $slug
+     * @param string|array $name
      * @return boolean
      */
     public function hasPermission($names)
@@ -104,6 +104,7 @@ class User extends BaseUserModel
         if($this->hasRole($this->superuser)) {
 
             return true;
+
         } elseif($this->isActive() == false) {
 
             return false;
@@ -111,7 +112,7 @@ class User extends BaseUserModel
 
         if(is_string($names)) {
 
-            $names = array($names);
+            $names = explode('.', $names);
         }
 
         foreach($this->roles as $role) {
@@ -130,11 +131,13 @@ class User extends BaseUserModel
     /**
      * Check if the user is active.
      *
-     * @return mixed
+     * @return boolean
      */
     public function isActive()
     {
+
         if($this->status > 0 || $this->hasRole($this->superuser)) {
+
             return true;
         }
         return false;

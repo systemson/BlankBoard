@@ -4,13 +4,18 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name])
+  @include('includes.content-header', ['name' => $name, 'before' => [__($name . '.parent')]])
 <!-- /. content header -->
 
 <!-- Main content -->
 <section class="content container-fluid">
 
   <div class="row">
+
+    <div class="col-sm-12" style="padding-top: 20px">
+      @include('includes.alerts')
+    </div>
+
     <div class="col-sm-12">
       <div class="box box-primary">
 
@@ -59,16 +64,17 @@
 
             </tbody>
           </table>
+
           <div class="col-sm-12">
             <div class="text-right">{{ $resources->links() }}</div>
           </div>
-          </div>
-        </div>
 
-      </div>
-    </div>
-  </div>
+        </div><!-- /. box body -->
 
-</section>
-<!-- /.content -->
+      </div><!-- /. box -->
+
+    </div><!-- /. col -->
+  </div><!-- /. row -->
+
+</section><!-- /.content -->
 @stop

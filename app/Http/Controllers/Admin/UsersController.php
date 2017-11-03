@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Models\User as Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +63,7 @@ class UsersController extends Controller
     {
 
         /** Check if logged user is authorized to create resources */
-        $this->authorize('create', [$this->model, $id]);
+        $this->authorize('create', [$this->model]);
 
         /** Create a new resource */
         $resource = Model::create([
@@ -159,7 +158,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function changePassword($id)
+    public function password($id)
     {
 
         /** Check if logged user is authorized to update resources */
@@ -169,10 +168,12 @@ class UsersController extends Controller
         $resource = $this->model::findOrFail($id);
 
         /** Validate user's password */
-        if (Hash::check(Input::post('od_password'), $resource->password)) {
+        if (Hash::check(Input::post('old_password'), $resource->password)) {
 
             /** Update user's password */
-            $resource->update(Input::post('password'));
+            $resource->update([
+                'password' => bcrypt(Input::get('password')),
+            ]);
         }
 
         /** Redirect back */

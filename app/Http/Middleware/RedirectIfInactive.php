@@ -18,11 +18,12 @@ class RedirectIfInactive
     {
         $user = $request->user();
 
-        if ($user->isActive() || $request->route()->getName() == 'users.show' ) {
+        if ($user->isActive() || routeNameIs(['users.show', 'users.edit', 'users.update'])) {
 
             return $next($request);
         }
 
-        return redirect()->route('users.show', $user->id);
+        return redirect()->route('users.show', $user->id)
+        ->with('warning', 'inactive');
     }
 }

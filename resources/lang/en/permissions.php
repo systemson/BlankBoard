@@ -3,6 +3,7 @@
 return [
 
     'title' => 'Permissions',
+    'parent' => 'Security',
     'name' => 'permission|permissions',
     'list' => ':Title list',
     'add' => 'Add new :name',
