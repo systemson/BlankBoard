@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.admin')
 
 @section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
@@ -12,7 +12,7 @@
 
   <div class="row">
 
-    <div class="col-sm-12" style="padding-top: 20px">
+    <div class="col-sm-12">
       @include('includes.alerts')
     </div>
 
@@ -23,7 +23,6 @@
           <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
           <div class="box-tools pull-right">
             <a class="{{ __('messages.btn.new.class') }}" href="{{ route($name . '.create') }}" ><i class="fa fa-plus-circle"></i> {{ __('messages.btn.new.name') }}</a>
-            <a class="{{ __('messages.btn.settings.class') }}" href="{{ route($name . '.config') }}" ><i class="fa fa-cog"></i> {{ __('messages.btn.settings.name') }}</a>
             <button class="btn btn-box-tool" type="button" data-widget="collapse">
               <i class="fa fa-minus"></i>
             </button>

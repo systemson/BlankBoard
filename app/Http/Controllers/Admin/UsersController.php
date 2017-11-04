@@ -6,7 +6,9 @@ use App\Http\Models\User as Model;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\ResourceController as Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use DB;
 
 class UsersController extends Controller
@@ -34,14 +36,12 @@ class UsersController extends Controller
     protected $paginate = 15;
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the resource list.
      *
-     * @param  int $id the specified resource id.
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
         /** Check if logged user is authorized to create resources */
         $this->authorize('index', $this->model);
 
@@ -61,7 +61,6 @@ class UsersController extends Controller
      */
     public function store()
     {
-
         /** Check if logged user is authorized to create resources */
         $this->authorize('create', [$this->model]);
 
@@ -72,7 +71,7 @@ class UsersController extends Controller
             'email' => Input::get('email'),
             'status' => Input::get('status'),
             'description' => Input::get('description'),
-            'password' => Input::get('password') ? bcrypt(Input::get('password')) : bcrypt('secret'),
+            'password' => bcrypt(config('user.default_password')),
         ]);
 
         /** Redirect to newly created user resource page */
@@ -108,7 +107,6 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', [$this->model, $id]);
 
@@ -120,28 +118,33 @@ class UsersController extends Controller
         ->with('resource', $resource)
         ->with('name', $this->route);
     }
+
     /**
      * Update the specified resource in storage.
      *
      * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', [$this->model, $id]);
 
-        DB::transaction(function () use ($id) {
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
 
-            /** Get the specified resource */
-            $resource = $this->model::findOrFail($id);
+       if(Input::file('avatar')) {
+            $this->avatarUpdate($request, $resource);
+            return back();
+        }
+
+        DB::transaction(function () use ($id) {
 
             /** Update the specified resource */
             $resource->update(Input::all());
 
             /** Check if permissions are being set */
-            if((Input::get('roles') != null)) {
+            if((Input::get('roles') != null) && $resource->hasPermission(['module_users', 'update_users'])) {
 
                 /** Syncronize both tables through pivot table */
                 $resource->roles()->sync(Input::get('roles'));
@@ -156,11 +159,11 @@ class UsersController extends Controller
     /**
      * Update the specified resource password.
      *
+     * @param  int $id the specified resource id.
      * @return \Illuminate\Http\Response
      */
     public function password($id)
     {
-
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', $this->model);
 
@@ -178,5 +181,44 @@ class UsersController extends Controller
 
         /** Redirect back */
         return back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id the specified resource id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        /** Check if logged user is authorized to delete resources */
+        $this->authorize('delete', $this->model);
+
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
+
+        /** Delete the specified resource */
+        $resource->delete();
+
+        /** Redirect to controller index */
+        return redirect()->route($this->route . '.index');
+    }
+
+    /**
+     * Update the avatar for the user.
+     *
+     * @param Illuminate\Http\Request
+     * @param App\Http\Models\User
+     * @return \Illuminate\Http\Response
+     */
+    public function avatarUpdate(Request $request, Model $user)
+    {
+        if(Storage::disk('public')->exists($user->image)) {
+
+            Storage::disk('public')->delete($user->image);
+        }
+
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $user->update(['image' => $path]);
     }
 }

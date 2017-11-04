@@ -18,14 +18,6 @@ return [
 
     'confirm-delete' => 'This action can be reverted. Are you sure?',
 
-    'setting' => [
-        'register' => 'Users registration',
-        'create' => 'Create users',
-        'deactivate' => 'Deactive users',
-        'first_login' => 'First login password change',
-        'change_password' => 'Force password change',
-    ],
-
     /** Tab 1 */
     'tab-1' => 'Info',
 

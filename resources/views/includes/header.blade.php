@@ -32,10 +32,10 @@
 
             <li class="user-header">
               <!-- The user image in the menu -->
-              <img src="{{ URL::asset(Auth::image()) }}" class="img-circle" alt="User Image">
+              <img src="{{ URL::asset(Auth::image()) }}" class="img-circle" style="object-fit: cover;" alt="User Image">
 
               <!-- The user name and roles in the menu -->
-              <p>{{ Auth::name() }} - {{ Auth::user()->roles->implode('name', ', ') }}.</p>
+              <p>{{ Auth::name() }}</p>
             </li>
 
             <!-- Menu Body -->

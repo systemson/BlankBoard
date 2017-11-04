@@ -6,7 +6,7 @@
 // jQuery no Conflict
 jQuery.noConflict()
 
-// Bootstrap show selected tab on reload
+// Bootstrap - show selected tab on reload
 jQuery(function() {
     jQuery('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         // save the latest tab
@@ -20,7 +20,7 @@ jQuery(function() {
     }
 });
 
-// Chosen Plugin
+// Chosen plugin
 jQuery(document).ready(function(){
     jQuery(".chosen-select").chosen({width: "100%"})
 });

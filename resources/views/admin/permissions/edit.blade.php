@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.admin')
 
 @section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
@@ -12,11 +12,11 @@
 
   <div class="row">
 
-    <div class="col-sm-12" style="padding-top: 20px">
+    <div class="col-sm-12">
       @include('includes.alerts')
     </div>
 
-    <div class="col-sm-12" style="padding-top: 20px">
+    <div class="col-sm-12">
 
       <div class="box box-primary">
         <div class="box-header with-border">

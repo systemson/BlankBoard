@@ -41,13 +41,7 @@
     </li>
     <!-- /. dashboard module -->
 
-    @if (
-      Auth::user()->hasPermission([
-        'module_users', 'view_users',
-        'module_roles', 'view_roles',
-        'module_permissions',  'view_permissions',
-      ])
-    )
+    @if (Auth::user()->hasPermission('Users|Roles|Permissions', true))
     <!-- Security section -->
     <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true) || routeNameIs(['users.config'])) menu-open @endif">
       <a href="#"><i class="fa fa-lock"></i> <span>Security</span>
@@ -57,7 +51,7 @@
       </a>
       <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true) || routeNameIs(['users.config'])) style="display: block;"  @endif>
 
-		@if(Auth::user()->hasPermission(['module_users', 'view_users']))
+		@if (Auth::user()->hasPermission('Users', true))
         <!-- Users module -->
         <li class="@if (routeNameIs('users', true) || routeNameIs(['users.config'])) active @endif">
           <a href="{{ URL::route('users.index') }}"><i class="fa fa-users"></i> <span>{{ __('users.title') }}</span></a>
@@ -65,7 +59,7 @@
         <!-- /. user module -->
         @endif
 
-        @if(Auth::user()->hasPermission(['module_roles', 'view_roles']))
+        @if (Auth::user()->hasPermission('Roles', true))
         <!-- Role module -->
         <li class="@if (routeNameIs('roles', true)) active @endif">
           <a href="{{ URL::route('roles.index') }}"><i class="fa fa-user"></i><span>{{ __('roles.title') }}</span></a>
@@ -73,7 +67,7 @@
         <!-- /. role module -->
         @endif
 
-        @if(Auth::user()->hasPermission(['module_permissions', 'view_permissions']))
+        @if (Auth::user()->hasPermission('Permissions', true))
         <!-- Permission module -->
         <li class="@if (routeNameIs('permissions', true)) active @endif">
           <a href="{{ URL::route('permissions.index') }}"><i class="fa fa-user-secret"></i><span>{{ __('permissions.title') }}</span></a>

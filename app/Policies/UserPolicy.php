@@ -27,8 +27,7 @@ class UserPolicy
      */
     public function index(User $user)
     {
-
-        if ($user->hasPermission('view_' . $this->name)) {
+        if ($user->hasPermission(ucfirst($this->name), true)) {
             return true;
         }
 
@@ -39,12 +38,11 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Http\Models\User  $resource
+     * @param  int $id the authorized user id.
      * @return mixed
      */
     public function view(User $user, $id)
     {
-
         if ($user->id == $id) {
             return true;
         }
@@ -71,7 +69,7 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Http\Models\User  $resource
+     * @param  int $id the authorized user id.
      * @return mixed
      */
     public function update(User $user, $id)
@@ -87,12 +85,12 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Http\Models\User  $user
-     * @param  \App\Http\Models\User  $resource
+     * @param  int $id the authorized user id.
      * @return mixed
      */
     public function delete(User $user, $id)
     {
-        if ($user->id == $id || ($user->hasPermission('delete_' . $this->name))) {
+        if ($user->id != $id || ($user->hasPermission('delete_' . $this->name))) {
             return true;
         }
 

@@ -63,11 +63,17 @@ return [
         'forbidden' => 'Access forbidden.',
         'forbidden-small' => 'You can not access the admin site. Try later or contact an administrator.',
 
+        'denied' => 'Access forbidden.',
+        'denied-small' => 'You have no access to this page.',
+
         'login' => 'Logged in.',
         'login-small' => 'You have been successfully logged in.',
 
         'inactive' => 'Inactive account.',
         'inactive-small' => 'Your account has been deactivated. Please activate back your account if you want to interact with the admin site.',
     ],
+
+    // Messages
+    'access_denied' => 'Access denied. You have no access to this page.',
 
 ];

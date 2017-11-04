@@ -14,7 +14,6 @@
 /**
  * Auth routes
  */
-/** @deprecated middleware prevent-back-history, should be renamed */
 Route::middleware('clear-cache')
 ->group(function () {
     Auth::routes();
@@ -26,8 +25,11 @@ Route::middleware('clear-cache')
  */
 
 /** Default controller for front site */
-Route::get('/', 'Front\Home@index')->name( 'home' );
-Route::get('/home', 'Front\Home@index');
+Route::namespace('Front')
+->group(function () {
+    Route::get('/', 'Home@index')->name( 'home' );
+    Route::get('/home', 'Home@index');
+});
 
 
 /**
@@ -48,7 +50,6 @@ Route::namespace('Admin')
     Route::get( 'dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
 
     /** Users page */
-    Route::get('users/settings', 'UsersController@settings')->name( 'users.config' );
     Route::resource('users', 'UsersController');
     Route::patch('users/{id}/password', 'UsersController@password')->name( 'change.password' );
 
@@ -61,7 +62,4 @@ Route::namespace('Admin')
         'edit',
         'update',
     ]);
-
-    /** Store settings */
-    Route::resource('settings', 'SettingsController')->only('store');
 });

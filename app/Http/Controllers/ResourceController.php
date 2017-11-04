@@ -33,16 +33,14 @@ abstract class ResourceController extends Controller
     protected $paginate;
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the resource list.
      *
-     * @param  int $id the specified resource id.
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
-        /** Check if logged user is authorized to create resources */
-        $this->authorize('view', $this->model);
+        /** Check if logged user is authorized to the resources list */
+        $this->authorize('index', $this->model);
 
         /** Get the resources from the model */
         $resources = $this->model::paginate($this->paginate);
@@ -60,7 +58,6 @@ abstract class ResourceController extends Controller
      */
     public function create()
     {
-
         /** Check if logged user is authorized to create resources */
         $this->authorize('create', $this->model);
 
@@ -76,7 +73,6 @@ abstract class ResourceController extends Controller
      */
     public function store()
     {
-
         /** Check if logged user is authorized to create resources */
         $this->authorize('create', $this->model);
 
@@ -90,13 +86,11 @@ abstract class ResourceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id current resource id.
+     * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-
     public function show($id)
     {
-
         /** Check if logged user is authorized to view resources */
         $this->authorize('view', $this->model);
 
@@ -117,7 +111,6 @@ abstract class ResourceController extends Controller
      */
     public function edit($id)
     {
-
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', $this->model);
 
@@ -138,7 +131,6 @@ abstract class ResourceController extends Controller
      */
     public function update($id)
     {
-
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', $this->model);
 
@@ -160,7 +152,6 @@ abstract class ResourceController extends Controller
      */
     public function destroy($id)
     {
-
         /** Check if logged user is authorized to delete resources */
         $this->authorize('delete', $this->model);
 
@@ -172,29 +163,5 @@ abstract class ResourceController extends Controller
 
         /** Redirect to controller index */
         return redirect()->route($this->route . '.index');
-    }
-
-    /**
-     * Show the form for editing the settings.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function settings()
-    {
-
-        /** Check if logged user is authorized to edit users settings */
-        $this->authorize('view', $this->model);
-
-        /** Get all users settings from the model */
-        $settings = Setting::where('module', $this->route)->get(['slug', 'value']);
-
-        foreach($settings as $setting) {
-            $resources[$setting->slug] = $setting->value;
-        }
-
-        /** Display the form for editing the users settings */
-        return view('admin.settings.' . $this->route)
-        ->with('resources', $resources)
-        ->with('name', $this->route);
     }
 }

@@ -41,7 +41,6 @@ class RolesController extends Controller
      */
     public function update($id)
     {
-
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', $this->model);
 

@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.admin')
 
 @section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
@@ -11,7 +11,7 @@
 <section class="content container-fluid">
   <div class="row">
 
-    <div class="col-sm-12" style="padding-top: 20px">
+    <div class="col-sm-12">
       @include('includes.alerts')
     </div>
 

@@ -7,6 +7,23 @@ use App\Http\Models\User;
 trait ActionPolicyTraits
 {
     /**
+     * Determine whether the user can view index page.
+     *
+     * @param  \App\Http\Models\User  $user
+     * @return mixed
+     */
+    public function index(User $user)
+    {
+
+        if ($user->hasPermission(ucfirst($this->name), true)) {
+
+            return true;
+        }
+
+        return abort(403, __('messages.access_denied'));
+    }
+
+    /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Http\Models\User  $user
@@ -20,7 +37,7 @@ trait ActionPolicyTraits
             return true;
         }
 
-        return abort(403, __('messages.acces_denied'));
+        return abort(403, __('messages.access_denied'));
     }
 
     /**
