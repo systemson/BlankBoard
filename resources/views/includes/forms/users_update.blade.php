@@ -28,4 +28,10 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <p class="text-red">{{ __('messages.required_fields') }}</p>
+    </div>
+  </div>
+
 {{ Form::close() }}

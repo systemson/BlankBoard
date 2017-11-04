@@ -51,7 +51,6 @@ Route::namespace('Admin')
 
     /** Users page */
     Route::resource('users', 'UsersController');
-    Route::patch('users/{id}/password', 'UsersController@password')->name( 'change.password' );
 
     /** Roles page */
     Route::resource('roles', 'RolesController')->except('show');

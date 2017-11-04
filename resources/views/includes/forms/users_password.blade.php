@@ -1,4 +1,4 @@
-{{ Form::open(array('url' => route('change.password', $resource->id), 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
+{{ Form::open(array('url' => route('users.update', $resource->id), 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
 
   <div class="form-group">
     <div class="col-sm-12 text-right">
@@ -27,6 +27,12 @@
     {{ Form::label('confirm_password', __('auth.confirm') . ' (*)', array('class' => 'col-sm-3 control-label')) }}
     <div class="col-sm-9">
       {{ Form::password('confirm_password', array('class' => 'col-sm-12 control-form', 'placeholder' => 'Confirm password')) }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <p class="text-red">{{ __('messages.required_fields') }}</p>
     </div>
   </div>
 

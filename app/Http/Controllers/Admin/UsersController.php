@@ -55,6 +55,21 @@ class UsersController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        /** Check if logged user is authorized to create resources */
+        $this->authorize('create', $this->model);
+
+        /** Show the form for creating a new resource. */
+        return view('admin.' . $this->route . '.create')
+        ->with('name', $this->route);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
@@ -75,7 +90,9 @@ class UsersController extends Controller
         ]);
 
         /** Redirect to newly created user resource page */
-        return redirect()->route($this->route . '.show', $resource->id);
+        return redirect()
+        ->route($this->route . '.show', $resource->id)
+        ->with('success', 'user-created');
     }
 
     /**
@@ -133,54 +150,24 @@ class UsersController extends Controller
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-       if(Input::file('avatar')) {
-            $this->avatarUpdate($request, $resource);
-            return back();
-        }
-
-        DB::transaction(function () use ($id) {
-
-            /** Update the specified resource */
-            $resource->update(Input::all());
-
-            /** Check if permissions are being set */
-            if((Input::get('roles') != null) && $resource->hasPermission(['module_users', 'update_users'])) {
-
-                /** Syncronize both tables through pivot table */
-                $resource->roles()->sync(Input::get('roles'));
+        if(Input::get('password')) {
+            if ($check = $this->passwordUpdate($resource)) {
+                return redirect()->back()->with('info', 'password');
             }
-
-        }, 5);
-
-        /** Redirect back */
-        return back();
-    }
-
-    /**
-     * Update the specified resource password.
-     *
-     * @param  int $id the specified resource id.
-     * @return \Illuminate\Http\Response
-     */
-    public function password($id)
-    {
-        /** Check if logged user is authorized to update resources */
-        $this->authorize('update', $this->model);
-
-        /** Get the specified resource */
-        $resource = $this->model::findOrFail($id);
-
-        /** Validate user's password */
-        if (Hash::check(Input::post('old_password'), $resource->password)) {
-
-            /** Update user's password */
-            $resource->update([
-                'password' => bcrypt(Input::get('password')),
-            ]);
+            return redirect()->back()->with('warning', 'password-failed');
         }
 
-        /** Redirect back */
-        return back();
+        if(Input::file('avatar')) {
+            $this->avatarUpdate($request, $resource);
+            return redirect()->back()->with('info', 'avatar-updated');
+        }
+
+        if($this->userUpdate($resource)) {
+            /** Redirect back */
+            return redirect()->back()->with('info', 'user-updated');
+        }
+
+        return redirect()->back()->with('warning', 'failed');
     }
 
     /**
@@ -201,24 +188,74 @@ class UsersController extends Controller
         $resource->delete();
 
         /** Redirect to controller index */
-        return redirect()->route($this->route . '.index');
+        return redirect()
+        ->route($this->route . '.index')
+        ->with('warning', 'user-deleted');
     }
 
     /**
-     * Update the avatar for the user.
+     * Update user in storage.
      *
      * @param Illuminate\Http\Request
      * @param App\Http\Models\User
      * @return \Illuminate\Http\Response
      */
-    public function avatarUpdate(Request $request, Model $user)
+    protected function userUpdate(Model $user)
     {
-        if(Storage::disk('public')->exists($user->image)) {
+        DB::transaction(function () use ($user) {
 
-            Storage::disk('public')->delete($user->image);
+            /** Update the specified resource */
+            $user->update(Input::all());
+
+            /** Check if permissions are being set */
+            if((Input::get('roles') != null) && $user->hasPermission(['module_users', 'update_users'])) {
+
+                /** Syncronize both tables through pivot table */
+                $user->roles()->sync(Input::get('roles'));
+            }
+
+        }, 5);
+
+        return true;
+    }
+
+    /**
+     * Update user's password.
+     *
+     * @param Illuminate\Http\Request
+     * @param App\Http\Models\User
+     * @return \Illuminate\Http\Response
+     */
+    protected function passwordUpdate(Model $user)
+    {
+        /** Validate user's password */
+        if (Hash::check(Input::post('old_password'), $user->password) && !Hash::check(Input::post('password'), $user->password)) {
+
+            /** Update user's password */
+            $user->update([
+                'password' => bcrypt(Input::get('password')),
+            ]);
+            /** Redirect back */
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Update the user's avatar.
+     *
+     * @param Illuminate\Http\Request
+     * @param App\Http\Models\User
+     * @return \Illuminate\Http\Response
+     */
+    protected function avatarUpdate(Request $request, Model $user)
+    {
+        if(Storage::disk(config('user.default_disk'))->exists($user->image)) {
+
+            Storage::disk(config('user.default_disk'))->delete($user->image);
         }
 
-        $path = $request->file('avatar')->store('avatars', 'public');
+        $path = $request->file('avatar')->store('avatars', config('user.default_disk'));
         $user->update(['image' => $path]);
     }
 }

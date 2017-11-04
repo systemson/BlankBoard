@@ -24,7 +24,7 @@ return [
     'password' => 'Password',
     'confirm' => 'Confirm password',
     'new_password' => 'New password',
-    'old_password' => 'Old password',
+    'old_password' => 'Current password',
     'avatar' => 'Profile picture',
     'description' => 'About me',
     'status' => 'Status',

@@ -62,6 +62,7 @@ class RolesController extends Controller
         }, 5);
 
         /** Redirect back */
-        return back();
+        return redirect()->back()
+        ->with('info', 'resource-updated');
     }
 }

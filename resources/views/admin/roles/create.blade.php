@@ -30,9 +30,7 @@
         </div><!-- /. box header -->
 
         <div class="box-body">
-          <div class="col-sm-12">
             @include('includes.forms.' . $name, ['new' => 'true'])
-          </div>
         </div><!-- /. box body -->
 
       </div><!-- /. box -->

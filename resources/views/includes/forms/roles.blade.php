@@ -1,12 +1,15 @@
-<div class="col-sm-12">
-  <p>(*) Campos obligatorios.</p>
-</div>
-
 @if (isset($new) && $new)
 {{ Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
 @else
-{{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT')) }}
+{{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
 @endif
+
+  <div class="form-group">
+    <div class="col-sm-12 text-right">
+      {{ Form::submit(__('messages.btn.save.name'), array('class' => __('messages.btn.save.class'))) }}
+      {{ Form::reset(__('messages.btn.reset.name'), array('class' => __('messages.btn.reset.class'))) }}
+    </div>
+  </div>
 
   <div class="col-sm-8 form-horizontal">
 
@@ -54,4 +57,11 @@
 
   </div>
 
+  <div class="col-sm-offset-3 col-sm-9">
+    <div class="form-group">
+      <p class="text-red">{{ __('messages.required_fields') }}</p>
+    </div>
+  </div>
+
 {{ Form::close() }}
+

@@ -9,7 +9,9 @@ return [
 
     'default_password' => 'secret',
     'default_avatar' => 'img/avatar/default.png',
+    'default_disk' => 'public',
 
-    'superuser' => 'superadmin'
+    'superuser' => 'superadmin',
+
 
 ];

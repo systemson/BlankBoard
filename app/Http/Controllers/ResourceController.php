@@ -80,7 +80,9 @@ abstract class ResourceController extends Controller
         $resource = $this->model::create(Input::all());
 
         /** Redirect to newly created user resource page */
-        return redirect()->route($this->route . '.show', $resource->id);
+        return redirect()
+        ->route($this->route . '.edit', $resource->id)
+        ->with('success', 'resource-created');
     }
 
     /**
@@ -141,7 +143,8 @@ abstract class ResourceController extends Controller
         $resource->update(Input::all());
 
         /** Redirect back */
-        return back();
+        return redirect()->back()
+        ->with('info', 'resource-updated');
     }
 
     /**
@@ -162,6 +165,8 @@ abstract class ResourceController extends Controller
         $resource->delete();
 
         /** Redirect to controller index */
-        return redirect()->route($this->route . '.index');
+        return redirect()
+        ->route($this->route . '.index')
+        ->with('warning', 'resource-deleted');
     }
 }

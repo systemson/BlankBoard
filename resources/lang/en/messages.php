@@ -57,17 +57,36 @@ return [
 
     // Alerts
     'alert' => [
+        'resource-created' => 'New resource created.',
+        'resource-updated' => 'Resource successfully updated.',
+        'resource-deleted' => 'Resource deleted.',
+        'resource-failed' => 'Resource not updated.',
+
+        'user-created' => 'New user created.',
+        'user-updated' => 'User successfully updated.',
+        'user-deleted' => 'User deleted.',
+
+        'avatar-updated' => 'Avatar successfully updated.',
+
+        'password-success' => 'Password successfully updated.',
+
+        'password-failed' => 'Password not updated.',
+        'password-failed-small' => 'Check the spelling and try again. These are the main reasons: 1) The current password is wrong, 2) The password and the password confirmation do not match, 3) The new password is the same of the current one. If you still can\'t change it, contact an administrator.',
+
+        'login' => 'Logged in.',
+        'login-small' => 'You have been successfully logged in.',
+
         'logout' => 'Logged out.',
         'logout-small' => 'You have been successfully logged out.',
 
         'forbidden' => 'Access forbidden.',
         'forbidden-small' => 'You can not access the admin site. Try later or contact an administrator.',
 
-        'denied' => 'Access forbidden.',
+        'denied' => 'Access denied.',
         'denied-small' => 'You have no access to this page.',
 
-        'login' => 'Logged in.',
-        'login-small' => 'You have been successfully logged in.',
+        'failed' => 'Action failed.',
+        'failed-small' => 'Try again or contact an administrator.',
 
         'inactive' => 'Inactive account.',
         'inactive-small' => 'Your account has been deactivated. Please activate back your account if you want to interact with the admin site.',
@@ -75,5 +94,6 @@ return [
 
     // Messages
     'access_denied' => 'Access denied. You have no access to this page.',
+    'required_fields' => '(*) Required fields.',
 
 ];

@@ -30,7 +30,7 @@
         </div><!-- /. box header -->
 
         <div class="box-body">
-          @include('includes.forms.' . $name, ['name' => $name])
+            @include('includes.forms.' . $name, ['name' => $name])
         </div><!-- /. box body -->
 
       </div><!-- /. box -->

@@ -45,4 +45,11 @@
 
   </div>
 
+  <div class="col-sm-offset-3 col-sm-9">
+    <div class="form-group">
+      <p class="text-red">{{ __('messages.required_fields') }}</p>
+    </div>
+  </div>
+
 {{ Form::close() }}
+
