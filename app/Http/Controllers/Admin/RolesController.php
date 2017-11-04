@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Models\Role as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\ResourceController as Controller;
 use DB;
 
@@ -39,7 +38,7 @@ class RolesController extends Controller
      * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', $this->model);

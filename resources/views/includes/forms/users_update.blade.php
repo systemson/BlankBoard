@@ -30,7 +30,7 @@
 
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
-      <p class="text-red">{{ __('messages.required_fields') }}</p>
+      <p class="text-red"><strong>{{ __('messages.required_fields') }}</strong></p>
     </div>
   </div>
 

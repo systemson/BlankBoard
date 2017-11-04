@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use App\Http\Models\Setting;
 use Auth;
 
@@ -69,9 +69,10 @@ abstract class ResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request  $request)
     {
         /** Check if logged user is authorized to create resources */
         $this->authorize('create', $this->model);
@@ -131,7 +132,7 @@ abstract class ResourceController extends Controller
      * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', $this->model);

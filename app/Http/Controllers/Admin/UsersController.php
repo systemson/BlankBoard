@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUser;
 use App\Http\Controllers\Controller;
 use DB;
 
@@ -74,7 +75,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreUser $request)
     {
         /** Check if logged user is authorized to create resources */
         $this->authorize('create', [$this->model]);
