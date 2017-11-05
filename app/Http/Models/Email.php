@@ -3,17 +3,20 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Models\Permission;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Models\User;
 
-class Role extends Model
+class Email extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'status', 'description',
+        'user_id', 'subject', 'body', 'status',
     ];
 
     /**
@@ -22,16 +25,14 @@ class Role extends Model
      * @var array
      */
     protected $dates = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at', 'deleted_at',
     ];
 
     /**
-     * Get permission with a certain roles.
-     *
-     * @return void
+     * Get the user that owns the email.
      */
-    public function permissions()
+    public function user()
     {
-        return $this->belongsToMany(Permission::class)->where('status', 1);
+        return $this->belongsTo(User::class);
     }
 }

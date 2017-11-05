@@ -12,10 +12,9 @@ trait ActionPolicyTraits
      * @param  \App\Http\Models\User  $user
      * @return mixed
      */
-    public function index(User $user)
+    public function index(User $user, $name, $publicActions = array())
     {
-
-        if ($user->hasPermission(ucfirst($this->name), true)) {
+        if ((isset($publicActions) && in_array('view', $publicActions)) || $user->hasPermission(ucfirst($name), true)) {
 
             return true;
         }
@@ -29,10 +28,9 @@ trait ActionPolicyTraits
      * @param  \App\Http\Models\User  $user
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, $name, $publicActions = array())
     {
-
-        if ($user->hasPermission('view_' . $this->name)) {
+        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('view_' . $name)) {
 
             return true;
         }
@@ -46,9 +44,10 @@ trait ActionPolicyTraits
      * @param  \App\Http\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, $name, $publicActions = array())
     {
-        if ($user->hasPermission('create_' . $this->name)) {
+        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('create_' . $name)) {
+
             return true;
         }
 
@@ -61,9 +60,10 @@ trait ActionPolicyTraits
      * @param  \App\Http\Models\User  $user
      * @return mixed
      */
-    public function update(User $user)
+    public function update(User $user, $name, $publicActions = array())
     {
-        if ($user->hasPermission('update_' . $this->name)) {
+        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('update_' . $name)) {
+
             return true;
         }
 
@@ -76,9 +76,10 @@ trait ActionPolicyTraits
      * @param  \App\Http\Models\User  $user
      * @return mixed
      */
-    public function delete(User $user)
+    public function delete(User $user, $name, $publicActions = array())
     {
-        if ($user->hasPermission('delete_' . $this->name)) {
+        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('delete_' . $name)) {
+
             return true;
         }
 

@@ -43,17 +43,17 @@
 
     @if (Auth::user()->hasPermission('Users|Roles|Permissions', true))
     <!-- Security section -->
-    <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true) || routeNameIs(['users.config'])) menu-open @endif">
+    <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
       <a href="#"><i class="fa fa-lock"></i> <span>Security</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions', 'users_config'], true) || routeNameIs(['users.config'])) style="display: block;"  @endif>
+      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions'], true)) style="display: block;"  @endif>
 
 		@if (Auth::user()->hasPermission('Users', true))
         <!-- Users module -->
-        <li class="@if (routeNameIs('users', true) || routeNameIs(['users.config'])) active @endif">
+        <li class="@if (routeNameIs('users', true)) active @endif">
           <a href="{{ URL::route('users.index') }}"><i class="fa fa-users"></i> <span>{{ __('users.title') }}</span></a>
         </li>
         <!-- /. user module -->
@@ -79,6 +79,25 @@
     </li>
     @endif
     <!-- /. security section -->
+
+    <!-- Messages section -->
+    <li class="treeview @if (routeNameIs('emails', true)) menu-open @endif">
+      <a href="#"><i class="fa fa-envelope"></i> <span>Mailbox</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu" @if (routeNameIs('emails', true)) style="display: block;"  @endif>
+
+        <!-- Emails module -->
+        <li class="@if (routeNameIs('emails.index')) active @endif">
+          <a href="{{ URL::route('emails.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('emails.title') }}</span></a>
+        </li>
+        <!-- /. emails module -->
+
+      </ul>
+    </li>
+    <!-- /. messages section -->
 
   </ul>
   <!-- /.sidebar-menu -->

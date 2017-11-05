@@ -4,6 +4,7 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Models\Role;
+use App\Http\Models\Email;
 use App\Http\Models\Permission;
 use App\User as BaseUserModel;
 
@@ -39,7 +40,7 @@ class User extends BaseUserModel
     ];
 
     /**
-     * Display user image.
+     * Display user avatar.
      *
      * @return string
      */
@@ -61,6 +62,46 @@ class User extends BaseUserModel
     public function roles()
     {
         return $this->belongsToMany(Role::class)->where('status', 1);
+    }
+
+    /**
+     * Get emails with a certain user.
+     *
+     * @return mixed
+     */
+    public function emails()
+    {
+        return $this->belongsToMany(Email::class)->where('emails.status', '>', 0);
+    }
+
+    /**
+     * Check if the user is superuser.
+     *
+     * @return boolean
+     */
+    public function isSuperuser()
+    {
+        if($this->hasRole(config('user.superuser'))) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the user is active.
+     *
+     * @return boolean
+     */
+    public function isActive()
+    {
+        if($this->status > 0 || $this->isSuperuser()) {
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -94,18 +135,18 @@ class User extends BaseUserModel
      */
     public function hasPermission($slugs, $anyInModule = false)
     {
-        /** Check if user is superuser */
-        if($this->hasRole(config('user.superuser'))) {
+        /** Check if user is inactive */
+        if($this->isSuperuser()) {
 
             return true;
 
         /** Check if user is inactive */
-        } elseif($this->isActive() == false) {
+        } elseif(!$this->isActive()) {
 
             return false;
         }
 
-        /** Transform string into array */
+        /** Convert $slugs string into array */
         if(is_string($slugs)) {
 
             $slugs = explode('|', $slugs);
@@ -115,32 +156,19 @@ class User extends BaseUserModel
 
             if($anyInModule) {
 
-                $permissions = Role::find($role->id)->permissions->pluck('module')->unique();
+                /** Find current role permission modules */
+                $permissions = $role->permissions()->whereIn('module', $slugs)->get();
 
             } else {
 
-                $permissions = Role::find($role->id)->permissions->pluck('slug');
+                /** Find current permissions slugs */
+                $permissions = $role->permissions()->whereIn('slug', $slugs)->get();
             }
 
-            if(!empty($permissions->intersect($slugs)->all())) {
+            if($permissions->isNotEmpty()) {
 
                return true;
             }
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if the user is active.
-     *
-     * @return boolean
-     */
-    public function isActive()
-    {
-        if($this->status > 0 || $this->hasRole(config('user.superuser'))) {
-
-            return true;
         }
 
         return false;

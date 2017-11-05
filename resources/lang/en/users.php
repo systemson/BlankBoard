@@ -8,6 +8,7 @@ return [
     'list' => ':Title list',
     'add' => 'Add new :name',
     'settings' => 'Settings',
+    'show' => 'Profile',
 
     'table' => [
       'id' => 'ID',

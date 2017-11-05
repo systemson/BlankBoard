@@ -39,26 +39,28 @@ Route::namespace('Front')
 /** Group for admin namespace */
 Route::namespace('Admin')
 ->prefix('admin')
-/** @deprecated middleware prevent-back-history */
 ->middleware(['auth', 'clear-cache', 'inactive'])
 ->group(function () {
 
     /** Defaul controller for admin site */
-    Route::get('/', 'DashboardController@index');
+    Route::get('/', 'DashboardController@index')->name('admin');
 
     /** Dashboard page */
     Route::get( 'dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
 
-    /** Users page */
+    /** Users module */
     Route::resource('users', 'UsersController');
 
-    /** Roles page */
+    /** Roles module */
     Route::resource('roles', 'RolesController')->except('show');
 
-    /** Permissions page */
+    /** Permissions module */
     Route::resource('permissions', 'PermissionsController')->only([
         'index',
         'edit',
         'update',
     ]);
+
+    /** Messages module */
+    Route::resource('emails', 'EmailsController');
 });

@@ -10,7 +10,6 @@ use DB;
 
 class RolesController extends Controller
 {
-
     /**
      * The controller resource route name.
      *
@@ -19,18 +18,17 @@ class RolesController extends Controller
     protected $route = 'roles';
 
     /**
+     * Whether the resource is private.
+     *
+     * @var boolean
+     */
+    protected $private = true;
+    /**
      * Model class.
      *
      * @var class
      */
     protected $model = Model::class;
-
-    /**
-     * Amount of resources to load from model.
-     *
-     * @var int
-     */
-    protected $paginate = 15;
 
     /**
      * Update the specified resource in storage.

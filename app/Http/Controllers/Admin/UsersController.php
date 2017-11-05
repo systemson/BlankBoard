@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Models\User as Model;
+use App\Http\Models\Permission;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,6 @@ use DB;
 
 class UsersController extends Controller
 {
-
     /**
      * The controller resource route name.
      *
@@ -30,11 +30,29 @@ class UsersController extends Controller
     protected $model = Model::class;
 
     /**
-     * Amount of resources to get from the model.
+     * Amount of resources to load from model.
      *
      * @var int
      */
     protected $paginate = 15;
+
+    /**
+     * The actions that should be omitted by the policy
+     *
+     * @var array
+     */
+    protected $publicActions = [];
+
+    /**
+    * Instantiate the controller.
+    *
+    * @return void
+    */
+    public function __construct()
+    {
+        /** Store the permissions on DB */
+        Permission::register($this->publicActions, $this->route);
+    }
 
     /**
      * Show the resource list.
@@ -197,8 +215,7 @@ class UsersController extends Controller
     /**
      * Update user in storage.
      *
-     * @param Illuminate\Http\Request
-     * @param App\Http\Models\User
+     * @param App\Http\Models\User $user
      * @return \Illuminate\Http\Response
      */
     protected function userUpdate(Model $user)
@@ -223,8 +240,7 @@ class UsersController extends Controller
     /**
      * Update user's password.
      *
-     * @param Illuminate\Http\Request
-     * @param App\Http\Models\User
+     * @param App\Http\Models\User $user
      * @return \Illuminate\Http\Response
      */
     protected function passwordUpdate(Model $user)
@@ -245,8 +261,8 @@ class UsersController extends Controller
     /**
      * Update the user's avatar.
      *
-     * @param Illuminate\Http\Request
-     * @param App\Http\Models\User
+     * @param Illuminate\Http\Request $request
+     * @param App\Http\Models\User $user
      * @return \Illuminate\Http\Response
      */
     protected function avatarUpdate(Request $request, Model $user)

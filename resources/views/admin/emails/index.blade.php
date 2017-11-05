@@ -29,32 +29,34 @@
         </div><!-- Box header -->
 
         <div class="box-body no-padding">
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>{{ __($name . '.table.id') }}</th>
-                <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
-                <th>{{ __($name . '.table.module') }}</th>
-                <th>{{ __($name . '.table.slug') }}</th>
-                <th class="text-center">{{ __($name . '.table.status') }}</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div class="mailbox-messages">
+            <table class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>{{ __($name . '.table.status') }}</th>
+                  <th>{{ __($name . '.table.from') }}</th>
+                  <th class="col-sm-12">{{ __($name . '.table.subject') }}</th>
+                  <th>{{ __($name . '.table.date') }}</th>
+                </tr>
+              </thead>
+              <tbody>
 
-            @foreach ($resources as $resource)
-              <tr>
-                <td>{{ $resource->id }}</td>
-                <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a></td>
-                <td>{{ $resource->module }}</td>
-                <td>{{ $resource->slug }}</td>
-                <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
-                  {{ __('messages.status.' . $resource->status . '.name') }}
-                </span></td>
-              </tr>
-              @endforeach
+              @forelse ($resources as $resource)
+                <tr>
+                  <td>{{ $resource->status }}</td>
+                  <td class="mailbox-name text-nowrap">{{ $resource->user->name }}</td>
+                  <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->subject }}</a></td>
+                  <td class="text-nowrap">{{ $resource->created_at->diffForHumans() }}</td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="4"><span class="col-sm-offset-1">Your inbox is empty</span></td>
+                </tr>
+              @endforelse
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
           <div class="col-sm-12">
             <div class="text-right">{{ $resources->links() }}</div>
           </div>

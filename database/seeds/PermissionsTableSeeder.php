@@ -17,10 +17,10 @@ class PermissionsTableSeeder extends Seeder
             'Users',
             'Roles',
             'Permissions',
+            'Emails',
         ];
 
         $abilities = [
-            'Module',
             'View',
             'Create',
             'Update',

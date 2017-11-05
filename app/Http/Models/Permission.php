@@ -3,19 +3,16 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Permission extends Model
 {
-    use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'status', 'description',
+        'slug', 'name', 'module', 'status', 'description',
     ];
 
     /**
@@ -24,6 +21,33 @@ class Permission extends Model
      * @var array
      */
     protected $dates = [
-        'created_at', 'updated_at', 'deleted_at',
+        'created_at', 'updated_at',
     ];
+
+    protected static $actionMap = [
+        'view', 'create', 'update', 'delete',
+    ];
+
+    /**
+     * Create permissions if don't exist.
+     *
+     * @param   array $permissions the permission to register.
+     * @param   string $module the module related to the permission.
+     * @return  void
+     */
+    public static function register($publicActions, $module = null)
+    {
+        /** Exclude the public actions */
+        $actions = collect(self::$actionMap)->diff($publicActions);
+
+        foreach($actions as $action) {
+
+            /** Create permission if don't exist */
+            self::firstOrCreate(['slug' => strtolower($action . '_' . $module)],
+                [
+                    'name' => ucwords($action . ' ' . $module),
+                    'module' => ucfirst($module),
+                ]);
+        }
+    }
 }

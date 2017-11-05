@@ -6,7 +6,15 @@
 
     @if (isset($before) && $before != null)
       @foreach ($before as $item)
-        <li><a href="{{ route($name . '.index') }}">{{ $item }}</a></li>
+        <li>
+          @if (isset($item['route']))
+            <a href="{{ route($item['route']) }}">
+          @else
+            <a href="{{ route($name . '.index') }}">
+          @endif
+            {{ $item['name'] ?? $item }}
+          </a>
+        </li>
       @endforeach
     @endif
 

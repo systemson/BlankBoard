@@ -40,4 +40,15 @@
       <p>{{ __('messages.alert.' . session('danger') . '-small') }}</p>
     @endif
   </div>
+@elseif ($errors->any())
+  <div class="alert alert-danger alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">
+      <i class="fa fa-close"></i>
+    </a>
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
 @endif
