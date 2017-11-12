@@ -99,7 +99,7 @@ abstract class ResourceController extends Controller
         /** Create a new resource */
         $resource = $this->model::create(Input::all());
 
-        /** Redirect to newly created user resource page */
+        /** Redirect to newly created resource page */
         return redirect()
         ->route($this->route . '.edit', $resource->id)
         ->with('success', 'resource-created');

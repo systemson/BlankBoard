@@ -16,7 +16,11 @@
       @include('includes.alerts')
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-3">
+      @include('includes.box-email')
+    </div>
+
+    <div class="col-sm-9">
       <div class="box box-primary">
 
         <div class="box-header with-border">
@@ -33,7 +37,7 @@
             <table class="table table-hover table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>{{ __($name . '.table.status') }}</th>
+                  <th></th>
                   <th>{{ __($name . '.table.from') }}</th>
                   <th class="col-sm-12">{{ __($name . '.table.subject') }}</th>
                   <th>{{ __($name . '.table.date') }}</th>
@@ -43,9 +47,20 @@
 
               @forelse ($resources as $resource)
                 <tr>
-                  <td>{{ $resource->status }}</td>
+                  @if ($resource->status == 1)
+                  <td>
+                    <label class="{{ __('messages.status.' . $resource->status. '.class') }}">
+                      <i class="fa fa-envelope"></i>
+                    </label>
+                  </td>
+                  @else
+                    <label class="label label-default">
+                      <i class="fa fa-envelope-open"></i>
+                    </label>
+                  </td>
+                  @endif
                   <td class="mailbox-name text-nowrap">{{ $resource->user->name }}</td>
-                  <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->subject }}</a></td>
+                  <td><a href="{{ route($name . '.show', $resource->id) }}">{{ $resource->subject }}</a></td>
                   <td class="text-nowrap">{{ $resource->created_at->diffForHumans() }}</td>
                 </tr>
               @empty

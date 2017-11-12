@@ -16,8 +16,7 @@ class PermissionsTableSeeder extends Seeder
         $modules = [
             'Users',
             'Roles',
-            'Permissions',
-            'Emails',
+            'Permissions'
         ];
 
         $abilities = [

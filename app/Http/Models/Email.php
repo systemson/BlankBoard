@@ -35,4 +35,15 @@ class Email extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get emails with a certain user.
+     *
+     * @return mixed
+     */
+    public function recipients()
+    {
+        return $this->belongsToMany(User::class, 'email_user')
+        ->latest();
+    }
 }

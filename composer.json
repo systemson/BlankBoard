@@ -26,7 +26,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Helpers/Sidebar.php"
+            "app/Helpers/Sidebar.php",
+            "app/Helpers/RouteNameIs.php"
         ]
     },
     "autoload-dev": {

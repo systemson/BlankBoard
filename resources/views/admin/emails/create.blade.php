@@ -16,7 +16,11 @@
       @include('includes.alerts')
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-3">
+      @include('includes.box-email')
+    </div>
+
+    <div class="col-sm-9">
 
       <div class="box box-primary">
         <div class="box-header with-border">
@@ -29,7 +33,7 @@
         </div><!-- /. box header -->
 
         <div class="box-body">
-          @include('includes.forms.' . $name, ['new' => 'true'])
+          @include('includes.forms.emails', ['new' => true])
         </div><!-- /. box body -->
 
       </div><!-- /. box -->

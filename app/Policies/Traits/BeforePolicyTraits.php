@@ -7,7 +7,7 @@ trait BeforePolicyTraits
 
     public function before($user, $ability)
     {
-        if ($user->isSuperuser()) {
+        if ($user->isSuperAdmin()) {
 
             return true;
         }

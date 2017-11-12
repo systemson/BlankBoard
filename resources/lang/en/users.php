@@ -3,7 +3,7 @@
 return [
 
     'title' => 'Users',
-    'parent' => 'Security',
+    'parent' => 'Access',
     'name' => 'user|users',
     'list' => ':Title list',
     'add' => 'Add new :name',

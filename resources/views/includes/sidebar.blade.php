@@ -44,7 +44,7 @@
     @if (Auth::user()->hasPermission('Users|Roles|Permissions', true))
     <!-- Security section -->
     <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
-      <a href="#"><i class="fa fa-lock"></i> <span>Security</span>
+      <a href="#"><i class="fa fa-lock"></i> <span>Access</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>

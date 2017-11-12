@@ -33,48 +33,6 @@
  | @todo  route to resource controller index
  | @todo  route to resource controller index
  |
- */
-/**
- * Should be renamed to something more acuerate.
- */
-if(!function_exists('routeNameIs')) {
-
-    function routeNameIs($compare, $isResource = false, $params = null) {
-
-        $current = Request::route()->getName();
-
-        $resourceMap = ['index', 'create', 'show', 'edit'];
-        $resourceMap = $params['only'] ?? $resourceMap;
-        $resourceMap = isset($params['except']) ? array_diff($resourceMap, $params['except']) : $resourceMap;
-
-        if(is_array($compare) && $isResource) {
-
-            foreach($compare as $name) {
-                foreach($resourceMap as $action) {
-                    $map[] = $name . '.' . $action;
-                }
-            }
-        } elseif($isResource) {
-
-            foreach($resourceMap as $action) {
-                $map[] = $compare . '.' . $action;
-            }
-        }
-
-        if($isResource && in_array($current, $map)) {
-
-            return true;
-        } elseif(is_array($compare) && in_array($current, $compare)) {
-
-            return true;
-        } elseif($current == $compare) {
-
-            return true;
-        }
-
-        return false;
-    }
-}
 
 /**
  * When this helpers evolve to a class, change this function to Sidebar::open()

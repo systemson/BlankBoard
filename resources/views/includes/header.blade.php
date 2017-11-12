@@ -21,10 +21,18 @@
     <ul class="nav navbar-nav">
 
       @auth
+      <li class="dropdown messages-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-envelope-o"></i>
+          <span class="label label-success">{{ Auth::user()->unreadEmails()->count() }}</span>
+        </a>
+      </li>
+
         <!-- User Account Menu -->
         <li class="dropdown user user-menu">
 
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="{{ URL::asset(Auth::image()) }}" class="user-image">
             <span class="hidden-xs">{{ Auth::user()->name }}</span>
           </a>
 

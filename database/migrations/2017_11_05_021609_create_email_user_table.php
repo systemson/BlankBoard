@@ -17,7 +17,7 @@ class CreateEmailUserTable extends Migration
             $table->integer('email_id');
             $table->integer('user_id');
             $table->integer('status')->default(1);
-            $table->integer('is_read')->default(1);
+            $table->integer('is_read')->default(0);
         });
     }
 

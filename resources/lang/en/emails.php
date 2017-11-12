@@ -4,7 +4,7 @@ return [
 
     'title' => 'Inbox',
     'parent' => 'Messages',
-    'name' => 'email|emails',
+    'name' => 'message|messages',
     'list' => ':Title list',
     'add' => 'Add new :name',
     'edit' => 'Edit :name :Resource',

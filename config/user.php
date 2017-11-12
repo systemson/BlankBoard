@@ -11,7 +11,7 @@ return [
     'default_avatar' => 'img/avatar/default.png',
     'default_disk' => 'public',
 
-    'superuser' => 'superadmin',
+    'superuser' => 1,
 
 
 ];

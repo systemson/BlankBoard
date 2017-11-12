@@ -17,7 +17,11 @@
       @include('includes.alerts')
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-3">
+      @include('includes.box-email')
+    </div>
+
+    <div class="col-sm-9">
       <div class="box box-primary">
 
         <div class="box-header with-border">
@@ -30,7 +34,31 @@
         </div><!-- /. box header -->
 
         <div class="box-body">
-          @include('includes.forms.' . $name, ['name' => $name])
+
+          <div class="mailbox-read-info">
+            <h3>{{ $resource->subject }}</h3>
+            <p>From: {{ $resource->user->name  }}
+              <span class="mailbox-read-time pull-right">{{ $resource->created_at->format('j M. Y g:i a') }}</span>
+            </p>
+            <p>To: {{ $resource->recipients->pluck('name')->implode(', ') }}</p>
+          </div>
+
+          <div class="mailbox-controls with-border text-center">
+            <div class="btn-group">
+              <div class="btn btn-default btn-sm"><i class="fa fa-trash"></i></div>
+              <div class="btn btn-default btn-sm"><i class="fa fa-reply"></i></div>
+              <div class="btn btn-default btn-sm"><i class="fa fa-share"></i></div>
+            </div>
+          </div>
+
+          <div class="mailbox-read-message">{{ $resource->body }}</div>
+        </div>
+
+        <div class="box-footer">
+          <div class="pull-right">
+            <div class="btn btn-default"><i class="fa fa-reply"></i> Reply</div>
+            <div class="btn btn-default"><i class="fa fa-share"></i> Forward</div>
+          </div>
         </div>
 
       </div><!-- /. box -->
