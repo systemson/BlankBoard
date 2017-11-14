@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-use App\Http\Models\Permission;
+use App\Models\Permission;
 use Auth;
 
 abstract class ResourceController extends Controller

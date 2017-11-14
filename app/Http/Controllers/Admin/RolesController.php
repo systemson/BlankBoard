@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Models\Role as Model;
+use App\Models\Role as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\ResourceController as Controller;
@@ -39,7 +39,7 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         /** Check if logged user is authorized to update resources */
-        $this->authorize('update', $this->model);
+        $this->authorize('update', [$this->model, $this->route]);
 
         DB::transaction(function () use ($id) {
 

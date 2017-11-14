@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Http\Models\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Policies\Traits\BeforePolicyTraits;
 use App\Policies\Traits\ActionPolicyTraits;
@@ -22,7 +22,7 @@ class UserPolicy
     /**
      * Determine whether the user can view the models list.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function index(User $user)
@@ -37,13 +37,13 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Http\Models\User  $user
-     * @param  int $id the authorized user id.
+     * @param  \App\Models\User  $user
+     * @param  int $id the resource id.
      * @return mixed
      */
     public function view(User $user, $id)
     {
-        if ($user->id == $id) {
+        if ($user->id == $id || $user->hasPermission('update_' . $this->name)) {
             return true;
         }
 
@@ -53,7 +53,7 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -68,13 +68,13 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
      * @param  int $id the authorized user id.
      * @return mixed
      */
     public function update(User $user, $id)
     {
-        if ($user->id == $id || ($user->hasPermission('update_' . $this->name))) {
+        if ($user->id == $id || $user->hasPermission('update_' . $this->name)) {
             return true;
         }
 
@@ -84,7 +84,7 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
      * @param  int $id the authorized user id.
      * @return mixed
      */

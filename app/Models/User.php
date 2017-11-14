@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Http\Models\Traits\UserEmailsTrait;
-use App\Http\Models\Traits\RolesPermissionTrait;
+use App\Models\Traits\UserEmailsTrait;
+use App\Models\Traits\RolesPermissionTrait;
 use App\User as BaseUserModel;
 
 class User extends BaseUserModel

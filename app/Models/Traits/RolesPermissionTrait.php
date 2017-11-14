@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Models\Traits;
+namespace App\Models\Traits;
 
-use App\Http\Models\Role;
-use App\Http\Models\Permission;
+use App\Models\Role;
+use App\Models\Permission;
 
 trait RolesPermissionTrait
 {

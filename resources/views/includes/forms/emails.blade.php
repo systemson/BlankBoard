@@ -15,7 +15,7 @@
 
 
     <div class="form-group">
-      {{ Form::select('to[]', \App\Http\Models\User::all()->except(Auth::id())->pluck('name','id'), $resource->user_id ?? null, array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
+      {{ Form::select('to[]', \App\Models\User::all()->except(Auth::id())->pluck('name','id'), $resource->user_id ?? null, array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
     </div>
 
     <div class="form-group">

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Models\Traits;
+namespace App\Models\Traits;
 
-use App\Http\Models\Email;
+use App\Models\Email;
 
 trait UserEmailsTrait
 {
@@ -52,6 +52,18 @@ trait UserEmailsTrait
     {
         return $this->belongsTo(Email::class, 'id', 'user_id')
         ->where('emails.status', '==', 0)
+        ->latest();
+    }
+
+    /**
+     * Get trahsed emails with a certain user.
+     *
+     * @return mixed
+     */
+    public function trashedEmails()
+    {
+        return $this->belongsTo(Email::class, 'id', 'user_id')
+        ->onlyTrashed()
         ->latest();
     }
 

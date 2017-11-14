@@ -52,7 +52,7 @@
 
     <div class="form-group">
       {{ Form::label('permissions', 'Permissions', array('class' => 'control-label')) }}
-      {{ Form::select('permissions[]', \App\Http\Models\Permission::pluck('name','id'), $resource->permissions ?? null, array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
+      {{ Form::select('permissions[]', \App\Models\Permission::pluck('name','id'), $resource->permissions ?? null, array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
     </div>
 
   </div>

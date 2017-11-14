@@ -31,15 +31,17 @@
         <div class="tab-content">
 
           <div id="info" class="tab-pane active">
-          <p>{{ __('auth.roles') }}:</p>
-          <ul>
-            @foreach ($resource->roles as $role)
-            <li>{{ $role->name }}</li>
-            @endforeach
-          </ul>
+            <p>{{ __('auth.roles') }}:</p>
+            <ul>
+              @foreach ($resource->roles as $role)
+              <li>{{ $role->name }}</li>
+              @endforeach
+            </ul>
           </div>
 
-          <div id="messages" class="tab-pane">B</div>
+          <div id="messages" class="tab-pane">
+            @include('includes.tables.user_emails')
+          </div>
 
           <div id="settings" class="tab-pane">
             <div class="box-header with-border">

@@ -10,10 +10,30 @@
   </div>
   <div class="box-body no-padding">
     <ul class="nav nav-pills nav-stacked">
-      <li class="@if (routeNameIs('emails.index')) active @endif"><a href="{{ route('emails.index') }}" ><i class="fa fa-inbox"></i> Inbox<span class="label label-primary pull-right">{{ Auth::user()->emails()->count() }}</span></a></li>
-      <li><a href="#" ><i class="fa fa-envelope"></i> Sent</a></li>
-      <li><a href="#" ><i class="fa fa-file-text"></i> Drafts<span class="label label-default pull-right">{{ Auth::user()->draftEmails()->count() }}</span></a></li>
-      <li><a href="#" ><i class="fa fa-trash"></i> Trash</a></li>
+      <li class="@if (routeNameIs('emails.index')) active @endif">
+        <a href="{{ route('emails.index') }}" >
+          <i class="fa fa-inbox"></i> {{ __('emails.title') }}<span class="label label-primary pull-right">{{ Auth::user()->unreadEmails()->count() }}</span>
+        </a>
+      </li>
+
+      <li class="@if (routeNameIs('emails.draft')) active @endif">
+        <a href="{{ route('emails.draft') }}">
+          <i class="fa fa-file-text"></i> {{ __('emails.draft') }}<span class="label label-default pull-right">{{ Auth::user()->draftEmails()->count() }}</span>
+        </a>
+      </li>
+
+      <li class="@if (routeNameIs('emails.sent')) active @endif">
+        <a href="{{ route('emails.sent') }}">
+          <i class="fa fa-envelope"></i> {{ __('emails.sent') }}
+        </a>
+      </li>
+
+      <li class="@if (routeNameIs('emails.trash')) active @endif">
+        <a href="{{ route('emails.trash') }}">
+          <i class="fa fa-trash"></i> {{ __('emails.trash') }}
+        </a>
+      </li>
+
     </ul>
   </div>
 </div>

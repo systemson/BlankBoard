@@ -2,19 +2,19 @@
 
 namespace App\Policies\Traits;
 
-use App\Http\Models\User;
+use App\Models\User;
 
 trait ActionPolicyTraits
 {
     /**
      * Determine whether the user can view index page.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function index(User $user, $name, $publicActions = array())
+    public function index(User $user, $name, array $publicActions = [])
     {
-        if ((isset($publicActions) && in_array('view', $publicActions)) || $user->hasPermission(ucfirst($name), true)) {
+        if (in_array('view', $publicActions) || $user->hasPermission(ucfirst($name), true)) {
 
             return true;
         }
@@ -25,12 +25,14 @@ trait ActionPolicyTraits
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
+     * @param  string  $name the name of the resource.
+     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function view(User $user, $name, $publicActions = array())
+    public function view(User $user, $name, array $publicActions = [])
     {
-        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('view_' . $name)) {
+        if (in_array('view', $publicActions) || $user->hasPermission('view_' . $name)) {
 
             return true;
         }
@@ -41,12 +43,14 @@ trait ActionPolicyTraits
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
+     * @param  string  $name the name of the resource.
+     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function create(User $user, $name, $publicActions = array())
+    public function create(User $user, $name, array $publicActions = [])
     {
-        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('create_' . $name)) {
+        if (in_array('create', $publicActions) || $user->hasPermission('create_' . $name)) {
 
             return true;
         }
@@ -57,12 +61,14 @@ trait ActionPolicyTraits
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
+     * @param  string  $name the name of the resource.
+     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function update(User $user, $name, $publicActions = array())
+    public function update(User $user, $name, array $publicActions = [])
     {
-        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('update_' . $name)) {
+        if (in_array('update', $publicActions) || $user->hasPermission('update_' . $name)) {
 
             return true;
         }
@@ -73,12 +79,14 @@ trait ActionPolicyTraits
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Http\Models\User  $user
+     * @param  \App\Models\User  $user
+     * @param  string  $name the name of the resource.
+     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function delete(User $user, $name, $publicActions = array())
+    public function delete(User $user, $name, array $publicActions = [])
     {
-        if ((isset($publicActions) && in_array('index', $publicActions)) || $user->hasPermission('delete_' . $name)) {
+        if (in_array('delete', $publicActions) || $user->hasPermission('delete_' . $name)) {
 
             return true;
         }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Models\Email as Model;
+use App\Models\Email as Model;
 use App\Http\Controllers\ResourceController as Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
@@ -30,7 +30,7 @@ class EmailsController extends Controller
      * @var array  view|create|update|delete
      */
     protected $publicActions = [
-        'view', 'create',
+        'view', 'create'
     ];
 
     /**
@@ -58,7 +58,7 @@ class EmailsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request  $request)
+    public function store(Request $request)
     {
         DB::transaction(function () {
 
@@ -79,5 +79,79 @@ class EmailsController extends Controller
         return redirect()
         ->route($this->route . '.index')
         ->with('success', 'resource-created');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id the specified resource id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
+
+        /** Check if logged user is authorized to view resources */
+        $this->authorize('view', [$this->model, $resource]);
+
+        /** Displays the specified resource page */
+        return view('admin.' . $this->route . '.show')
+        ->with('resource', $resource)
+        ->with('name', $this->route);
+    }
+
+    /**
+     * Show the sent mail list.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sentEmails()
+    {
+        /** Get the resources from the model */
+        $resources = auth()->user()
+        ->sentEmails()
+        ->paginate($this->paginate);
+
+        /** Display a listing of the resources */
+        return view('admin.' . $this->route . '.index')
+        ->with('resources' , $resources)
+        ->with('name', $this->route);
+    }
+
+    /**
+     * Show the sent mail list.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function draftEmails()
+    {
+        /** Get the resources from the model */
+        $resources = auth()->user()
+        ->draftEmails()
+        ->paginate($this->paginate);
+
+        /** Display a listing of the resources */
+        return view('admin.' . $this->route . '.index')
+        ->with('resources' , $resources)
+        ->with('name', $this->route);
+    }
+
+    /**
+     * Show the sent mail list.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashedEmails()
+    {
+        /** Get the resources from the model */
+        $resources = auth()->user()
+        ->trashedEmails()
+        ->paginate($this->paginate);
+
+        /** Display a listing of the resources */
+        return view('admin.' . $this->route . '.index')
+        ->with('resources' , $resources)
+        ->with('name', $this->route);
     }
 }

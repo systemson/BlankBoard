@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Models\User as Model;
-use App\Http\Models\Permission;
+use App\Models\User as Model;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

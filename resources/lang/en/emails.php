@@ -3,6 +3,10 @@
 return [
 
     'title' => 'Inbox',
+    'inbox' => 'Inbox',
+    'draft' => 'Drafts',
+    'sent' => 'Sent',
+    'trash' => 'Trashed',
     'parent' => 'Messages',
     'name' => 'message|messages',
     'list' => ':Title list',
@@ -11,7 +15,6 @@ return [
     'view' => 'View :name :Resource',
 
     'table' => [
-        'status' => 'Status',
         'from' => 'From',
         'subject' => 'Subject',
         'date' => 'Date',

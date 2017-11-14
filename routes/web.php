@@ -63,4 +63,8 @@ Route::namespace('Admin')
 
     /** Messages module */
     Route::resource('emails', 'EmailsController');
+    Route::get('sent_emails', 'EmailsController@sentEmails')->name('emails.sent');
+    Route::get('draft_emails', 'EmailsController@draftEmails')->name('emails.draft');
+    Route::get('trashed_emails', 'EmailsController@trashedEmails')->name('emails.trash');
+
 });

@@ -52,7 +52,7 @@
   <div class="form-group">
     {{ Form::label('roles', __('auth.roles'), array('class' => 'col-sm-3 control-label')) }}
     <div class="col-sm-9">
-      {{ Form::select('roles[]', \app\Http\Models\Role::pluck('name','id'), $resource->roles, array('class' => 'col-sm-12 control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
+      {{ Form::select('roles[]', \app\Models\Role::pluck('name','id'), $resource->roles, array('class' => 'col-sm-12 control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
     </div>
   </div>
 
