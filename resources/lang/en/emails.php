@@ -3,11 +3,10 @@
 return [
 
     'title' => 'Inbox',
-    'inbox' => 'Inbox',
     'draft' => 'Drafts',
     'sent' => 'Sent',
-    'trash' => 'Trashed',
-    'parent' => 'Messages',
+    'trash' => 'Trash',
+    'parent' => 'Mailbox',
     'name' => 'message|messages',
     'list' => ':Title list',
     'add' => 'Add new :name',
@@ -16,9 +15,11 @@ return [
 
     'table' => [
         'from' => 'From',
+        'to' => 'To',
         'subject' => 'Subject',
         'date' => 'Date',
     ],
 
-    'confirm-delete' => 'This action can be reverted. Are you sure?',
+    'confirm-trash' => 'This email will be moved to Trash folder. Are you sure?',
+    'confirm-delete' => 'This email will be permanently deleted. Are you sure?',
 ];

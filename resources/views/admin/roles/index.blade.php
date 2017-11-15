@@ -46,13 +46,14 @@
               <tr>
                 <td>{{ $resource->id }}</td>
                 <td class="text-nowrap">
-                {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
-                  {{ Form::button('<i class="fa fa-trash"></i>', array(
-                    'type' => 'submit',
-                    'class'=> 'btn-danger',
-                    'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
-                  )) }}
-                {{ Form::close() }}
+
+                  {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
+                    {{ Form::button('<i class="fa fa-trash"></i>', array(
+                      'type' => 'submit',
+                      'class'=> 'btn-danger btn-xs',
+                      'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
+                    )) }}
+                  {{ Form::close() }}
                 </td>
                 <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a></td>
                 <td>{{ $resource->slug }}</td>

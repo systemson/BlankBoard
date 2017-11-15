@@ -44,6 +44,7 @@ class Email extends Model
     public function recipients()
     {
         return $this->belongsToMany(User::class, 'email_user')
-        ->latest();
+        ->latest()
+        ->withPivot('is_read', 'status');
     }
 }

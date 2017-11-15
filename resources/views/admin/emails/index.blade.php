@@ -34,7 +34,15 @@
 
         <div class="box-body no-padding">
           <div class="mailbox-messages">
-            @include('includes.tables.emails')
+            @if (routeNameIs('emails.index'))
+              @include('includes.tables.emails')
+            @elseif (routeNameIS('emails.draft'))
+              @include('includes.tables.emails_draft')
+            @elseif (routeNameIS('emails.sent'))
+              @include('includes.tables.emails_sent')
+            @elseif (routeNameIS('emails.trash'))
+              @include('includes.tables.emails_trash')
+            @endif
           </div>
           <div class="col-sm-12">
             <div class="text-right">{{ $resources->links() }}</div>

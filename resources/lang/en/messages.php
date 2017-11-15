@@ -32,6 +32,7 @@ return [
         'delete' =>   ['name' => 'Delete', 'class' => 'btn btn-danger'],
         'cancel' =>   ['name' => 'Cancel', 'class' => 'btn btn-danger'],
         'logout' =>   ['name' => 'Sign out', 'class' => 'btn btn-danger'],
+        'draft' =>    ['name' => 'Draft', 'class' => 'btn btn-default'],
         'reset' =>    ['name' => 'Restart', 'class' => 'btn btn-default'],
         'edit' =>     ['name' => 'Edit', 'class' => 'btn btn-default'],
         'settings' => ['name' => 'Settings', 'class' => 'btn btn-default'],
@@ -57,14 +58,23 @@ return [
 
     // Alerts
     'alert' => [
+        // Resources
         'resource-created' => 'New resource created.',
         'resource-updated' => 'Resource successfully updated.',
         'resource-deleted' => 'Resource deleted.',
         'resource-failed' => 'Resource not updated.',
 
+        // Users
         'user-created' => 'New user created.',
         'user-updated' => 'User successfully updated.',
         'user-deleted' => 'User deleted.',
+
+        // Emails
+        'email-sended' => 'Email successfully sended.',
+        'email-drafted' => 'Email successfully drafted.',
+        'email-updated' => 'Email successfully updated.',
+        'email-trashed' => 'Email moved to Trash folder.',
+        'email-deleted' => 'Email permanently deleted.',
 
         'avatar-updated' => 'Avatar successfully updated.',
 

@@ -7,9 +7,12 @@ use App\Http\Controllers\ResourceController as Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Controllers\Admin\Traits\EmailFoldersTrait;
 
 class EmailsController extends Controller
 {
+    use EmailFoldersTrait;
+
     /**
      * The controller resource route name.
      *
@@ -30,27 +33,8 @@ class EmailsController extends Controller
      * @var array  view|create|update|delete
      */
     protected $publicActions = [
-        'view', 'create'
+        'create'
     ];
-
-    /**
-     * Show the resource list.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        /** Get the resources from the model */
-        $resources = auth()->user()
-        ->emails()
-        ->paginate($this->paginate);
-
-        /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
-        ->with('resources' , $resources)
-        ->with('name', $this->route);
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -67,6 +51,7 @@ class EmailsController extends Controller
                 'user_id' => auth()->user()->id,
                 'subject' => Input::get('subject'),
                 'body' => Input::get('body'),
+                'status' => Input::get('status'),
             ]);
 
             /** Syncronize both tables through pivot table */
@@ -74,11 +59,16 @@ class EmailsController extends Controller
 
         }, 5);
 
-
-        /** Redirect to newly created resource page */
-        return redirect()
-        ->route($this->route . '.index')
-        ->with('success', 'resource-created');
+        /** Redirect to inbox */
+        if(Input::get('status') == 1) {
+            return redirect()
+            ->route($this->route . '.index')
+            ->with('success', 'email-sended');
+        } else {
+            return redirect()
+            ->route($this->route . '.index')
+            ->with('info', 'email-drafted');
+        }
     }
 
     /**
@@ -95,6 +85,11 @@ class EmailsController extends Controller
         /** Check if logged user is authorized to view resources */
         $this->authorize('view', [$this->model, $resource]);
 
+        /** Mark current email as read */
+        /*if($resource->recipients->get()->pivot->is_read === 0) {
+            $resource->recipients()->sync([ auth()->user()->id => ['is_read' => 1] ]);
+        }*/
+
         /** Displays the specified resource page */
         return view('admin.' . $this->route . '.show')
         ->with('resource', $resource)
@@ -102,56 +97,99 @@ class EmailsController extends Controller
     }
 
     /**
-     * Show the sent mail list.
+     * Show the form for editing the specified resource.
      *
+     * @param  int $id the specified resource id.
      * @return \Illuminate\Http\Response
      */
-    public function sentEmails()
+    public function edit($id)
     {
-        /** Get the resources from the model */
-        $resources = auth()->user()
-        ->sentEmails()
-        ->paginate($this->paginate);
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
 
-        /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
-        ->with('resources' , $resources)
+        /** Check if logged user is authorized to update resources */
+        $this->authorize('update', [$this->model, $resource]);
+
+        /** Displays the edit resource page */
+        return view('admin.' . $this->route . '.edit')
+        ->with('resource', $resource)
         ->with('name', $this->route);
     }
 
     /**
-     * Show the sent mail list.
+     * Update the specified resource in storage.
      *
+     * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function draftEmails()
+    public function update(Request $request, $id)
     {
-        /** Get the resources from the model */
-        $resources = auth()->user()
-        ->draftEmails()
-        ->paginate($this->paginate);
+        /** Get the specified resource */
+        $resource = $this->model::findOrFail($id);
 
-        /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
-        ->with('resources' , $resources)
-        ->with('name', $this->route);
+        /** Check if logged user is authorized to update resources */
+        $this->authorize('update', [$this->model, $resource]);
+        DB::transaction(function () use ($resource) {
+
+            /** Update the specified resource */
+            $resource->update([
+                'user_id' => auth()->user()->id,
+                'subject' => Input::get('subject'),
+                'body' => Input::get('body'),
+                'status' => Input::get('status'),
+            ]);
+
+            /** Syncronize both tables through pivot table */
+            $resource->recipients()->sync(Input::get('to'));
+
+        }, 5);
+
+        if(Input::get('status') == 1) {
+
+            /** If email is sended, redirect to inbox */
+            return redirect()
+            ->route($this->route . '.index')
+            ->with('success', 'email-sended');
+
+        } else {
+
+            /** If email is drafted, redirect back */
+            return back()
+            ->with('info', 'email-updated');
+        }
     }
 
     /**
-     * Show the sent mail list.
+     * Remove the specified resource from storage.
      *
+     * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function trashedEmails()
+    public function destroy($id)
     {
-        /** Get the resources from the model */
-        $resources = auth()->user()
-        ->trashedEmails()
-        ->paginate($this->paginate);
 
-        /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
-        ->with('resources' , $resources)
-        ->with('name', $this->route);
+        /** Get the specified resource */
+        $resource = $this->model::withTrashed()
+        ->findOrFail($id);
+
+        /** Check if logged user is authorized to delete resources */
+        $this->authorize('delete', [$this->model, $resource]);
+
+        /** Delete the specified resource */
+        if($resource->trashed()) {
+
+            $resource->forceDelete();
+
+            /** Redirect back */
+            return back()
+            ->with('danger', 'email-deleted');
+        } else {
+
+            $resource->delete();
+
+            /** Redirect back */
+            return back()
+            ->with('warning', 'email-trashed');
+        }
     }
 }

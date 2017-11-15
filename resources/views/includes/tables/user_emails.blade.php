@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    @forelse (Auth::user()->emails as $resource)
+    @forelse (Auth::user()->emails->slice(0,10)->all() as $resource)
       <tr>
         @if ($resource->status == 1)
           <td>

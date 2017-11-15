@@ -39,12 +39,12 @@ class EmailPolicy
      */
     public function update(User $user, Email $email)
     {
-        if ($user->id == $email->user_id ) {
+        if ($user->id == $email->user_id && $email->status == 0) {
 
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(404);
     }
 
     /**
