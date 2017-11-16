@@ -24,7 +24,11 @@
       <li class="dropdown messages-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="fa fa-envelope-o"></i>
-          <span class="label label-success">{{ Auth::user()->unreadEmails()->count() }}</span>
+          @if (Auth::user()->unreadEmails()->count() > 0)
+            <span class="label label-success">
+              {{ Auth::user()->unreadEmails()->count() }}
+            </span>
+          @endif
         </a>
       </li>
 

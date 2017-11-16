@@ -86,9 +86,10 @@ class EmailsController extends Controller
         $this->authorize('view', [$this->model, $resource]);
 
         /** Mark current email as read */
-        /*if($resource->recipients->get()->pivot->is_read === 0) {
-            $resource->recipients()->sync([ auth()->user()->id => ['is_read' => 1] ]);
-        }*/
+        if($resource->user_id != auth()->id() && $resource->recipients()->wherePivot('user_id', auth()->id())->first()->pivot->is_read === 0) {
+            $resource->recipients()
+            ->updateExistingPivot(auth()->id(), ['is_read' => 1], false);
+        }
 
         /** Displays the specified resource page */
         return view('admin.' . $this->route . '.show')
@@ -169,27 +170,32 @@ class EmailsController extends Controller
     {
 
         /** Get the specified resource */
-        $resource = $this->model::withTrashed()
-        ->findOrFail($id);
+        $resource = $this->model::findOrFail($id);
 
         /** Check if logged user is authorized to delete resources */
         $this->authorize('delete', [$this->model, $resource]);
 
         /** Delete the specified resource */
-        if($resource->trashed()) {
+        if($resource->user_id == auth()->id() && $resource->status > 0) {
 
-            $resource->forceDelete();
+            /** Set email to trashed status */
+            $resource->update(['status' => -1]);
 
             /** Redirect back */
-            return back()
-            ->with('danger', 'email-deleted');
+            return back()->with('warning', 'email-trashed');
+
+        } elseif($resource->user_id == auth()->id()) {
+
+            /** Set email to deleted status */
+            $resource->update(['status' => -2]);
+
+            /** Redirect back */
+            return back()->with('danger', 'email-deleted');
+
         } else {
 
-            $resource->delete();
-
-            /** Redirect back */
             return back()
-            ->with('warning', 'email-trashed');
+            ->with('danger', 'email-deleted');
         }
     }
 }

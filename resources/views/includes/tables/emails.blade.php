@@ -10,9 +10,8 @@
   </thead>
   <tbody>
     @forelse ($resources as $resource)
-      <tr>
         <td class="text-nowrap">
-          @if ($resource->recipients->first()->pivot->is_read === 0)
+          @if ($resource->recipients->where('id', Auth::id())->first()->pivot->is_read === 0)
             <label class="label label-success">
                 <i class="fa fa-envelope"></i>
             </label>
@@ -28,7 +27,6 @@
         <td>{{ $resource->subject }}</td>
         <td class="text-nowrap">{{ $resource->created_at->diffForHumans() }}</td>
         <td>
-        <!--
           {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
             {{ Form::button('<i class="fa fa-trash"></i>', array(
               'type' => 'submit',
@@ -36,7 +34,6 @@
               'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
             )) }}
           {{ Form::close() }}
-        -->
         </td>
       </tr>
     @empty

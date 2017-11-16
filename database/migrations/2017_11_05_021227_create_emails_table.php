@@ -20,7 +20,6 @@ class CreateEmailsTable extends Migration
             $table->longText('body')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

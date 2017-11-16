@@ -14,7 +14,8 @@ trait UserEmailsTrait
     public function emails()
     {
         return $this->belongsToMany(Email::class)
-        ->where('emails.status', '>', 0)
+        ->where('emails.status', '<>', 0)
+        ->wherePivot('status', '>', 0)
         ->latest();
     }
 
@@ -26,8 +27,9 @@ trait UserEmailsTrait
     public function unreadEmails()
     {
         return $this->belongsToMany(Email::class)
-        ->where('emails.status', '>', 0)
-        ->where('email_user.is_read', '==', 0)
+        ->where('emails.status', '<>', 0)
+        ->where('email_user.is_read', '=', 0)
+        ->wherePivot('status', '>', 0)
         ->latest();
     }
 
@@ -51,7 +53,7 @@ trait UserEmailsTrait
     public function draftEmails()
     {
         return $this->belongsTo(Email::class, 'id', 'user_id')
-        ->where('emails.status', '==', 0)
+        ->where('emails.status', '=', 0)
         ->latest();
     }
 
@@ -63,7 +65,7 @@ trait UserEmailsTrait
     public function trashedEmails()
     {
         return $this->belongsTo(Email::class, 'id', 'user_id')
-        ->onlyTrashed()
+        ->where('emails.status', '=', -1)
         ->latest();
     }
 

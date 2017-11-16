@@ -24,9 +24,11 @@ Route::middleware('clear-cache')
  * Public site
  */
 
-/** Default controller for front site */
+/** Group for Public namespace */
+/** @todo  rename namespace to "Public" */
 Route::namespace('Front')
 ->group(function () {
+    /** Default controller for front site */
     Route::get('/', 'Home@index')->name( 'home' );
     Route::get('/home', 'Home@index');
 });
@@ -36,13 +38,13 @@ Route::namespace('Front')
  * Admin site
  */
 
-/** Group for admin namespace */
+/** Group for Admin namespace */
 Route::namespace('Admin')
 ->prefix('admin')
 ->middleware(['auth', 'clear-cache', 'inactive'])
 ->group(function () {
 
-    /** Defaul controller for admin site */
+    /** Default controller for admin site */
     Route::get('/', 'DashboardController@index')->name('admin');
 
     /** Dashboard page */
@@ -61,7 +63,7 @@ Route::namespace('Admin')
         'update',
     ]);
 
-    /** Messages module */
+    /** Emails module */
     Route::resource('emails', 'EmailsController');
     Route::get('sent_emails', 'EmailsController@sentEmails')->name('emails.sent');
     Route::get('draft_emails', 'EmailsController@draftEmails')->name('emails.draft');

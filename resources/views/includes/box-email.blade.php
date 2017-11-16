@@ -12,13 +12,23 @@
     <ul class="nav nav-pills nav-stacked">
       <li class="@if (routeNameIs('emails.index')) active @endif">
         <a href="{{ route('emails.index') }}" >
-          <i class="fa fa-inbox"></i> {{ __('emails.title') }}<span class="label label-primary pull-right">{{ Auth::user()->unreadEmails()->count() }}</span>
+          <i class="fa fa-inbox"></i> {{ __('emails.title') }}
+          @if (Auth::user()->unreadEmails()->count() > 0)
+            <span class="label label-primary pull-right">
+              {{ Auth::user()->unreadEmails()->count() }}
+            </span>
+          @endif
         </a>
       </li>
 
       <li class="@if (routeNameIs('emails.draft')) active @endif">
         <a href="{{ route('emails.draft') }}">
-          <i class="fa fa-file-text"></i> {{ __('emails.draft') }}<span class="label label-default pull-right">{{ Auth::user()->draftEmails()->count() }}</span>
+          <i class="fa fa-file-text"></i> {{ __('emails.draft') }}
+          @if (Auth::user()->draftEmails()->count() > 0)
+            <span class="label label-default pull-right">
+              {{ Auth::user()->draftEmails()->count() }}
+            </span>
+          @endif
         </a>
       </li>
 
