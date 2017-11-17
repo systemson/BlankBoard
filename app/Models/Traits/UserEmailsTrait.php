@@ -28,7 +28,7 @@ trait UserEmailsTrait
     {
         return $this->belongsToMany(Email::class)
         ->where('emails.status', '<>', 0)
-        ->where('email_user.is_read', '=', 0)
+        ->wherePivot('is_read', '=', 0)
         ->wherePivot('status', '>', 0)
         ->latest();
     }
@@ -41,7 +41,7 @@ trait UserEmailsTrait
     public function sentEmails()
     {
         return $this->belongsTo(Email::class, 'id', 'user_id')
-        ->where('emails.status', '>', 0)
+        ->where('emails.status', 1)
         ->latest();
     }
 
@@ -53,20 +53,26 @@ trait UserEmailsTrait
     public function draftEmails()
     {
         return $this->belongsTo(Email::class, 'id', 'user_id')
-        ->where('emails.status', '=', 0)
+        ->where('emails.status', 0)
         ->latest();
     }
 
     /**
-     * Get trahsed emails with a certain user.
+     * Get trashed emails with a certain user.
      *
      * @return mixed
      */
     public function trashedEmails()
     {
-        return $this->belongsTo(Email::class, 'id', 'user_id')
-        ->where('emails.status', '=', -1)
-        ->latest();
+        $sended = $this->belongsTo(Email::class, 'id', 'user_id')
+        ->where('emails.status', -1)
+        ->get();
+
+        $received = $this->belongsToMany(Email::class)
+        ->wherePivot('status', '=', -1)
+        ->get();
+
+        return $sended->merge($received);
     }
 
 }

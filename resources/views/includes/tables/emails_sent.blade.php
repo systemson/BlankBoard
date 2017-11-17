@@ -1,4 +1,4 @@
-<table class="table table-hover table-bordered table-striped">
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>{{ __($name . '.table.to') }}</th>
@@ -29,7 +29,7 @@
       </tr>
     @empty
       <tr>
-        <td colspan="4"><span class="col-sm-offset-1">Your inbox is empty</span></td>
+        <td colspan="4"><span class="col-sm-offset-1">{{ __('emails.table-empty') }}</span></td>
       </tr>
     @endforelse
   </tbody>

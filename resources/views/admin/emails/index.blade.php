@@ -44,9 +44,6 @@
               @include('includes.tables.emails_trash')
             @endif
           </div>
-          <div class="col-sm-12">
-            <div class="text-right">{{ $resources->links() }}</div>
-          </div>
         </div>
 
       </div><!-- /. box -->

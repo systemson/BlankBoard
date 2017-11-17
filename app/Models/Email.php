@@ -44,4 +44,19 @@ class Email extends Model
         ->latest()
         ->withPivot('is_read', 'status');
     }
+
+    public function getPivotStatus($user_id)
+    {
+        if($pivot = $this->recipients()->wherePivot('user_id', $user_id)->first()) {
+
+            return $pivot->pivot->status;
+        }
+
+        return false;
+    }
+
+    public function hasOwner($user_id)
+    {
+        return $this->user_id == auth()->id();
+    }
 }

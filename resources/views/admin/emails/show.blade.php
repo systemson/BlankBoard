@@ -45,9 +45,17 @@
 
           <div class="mailbox-controls with-border text-center">
             <div class="btn-group">
-              <div class="btn btn-default btn-sm"><i class="fa fa-trash"></i></div>
-              <div class="btn btn-default btn-sm"><i class="fa fa-reply"></i></div>
-              <div class="btn btn-default btn-sm"><i class="fa fa-share"></i></div>
+              <div>
+                {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
+                  {{ Form::button('<i class="fa fa-trash"></i>', [
+                    'type' => 'submit',
+                    'class'=> 'btn btn-danger btn-xs',
+                    'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
+                   ]) }}
+                {{ Form::close() }}
+              </div>
+              <!--<div class="btn btn-default btn-sm"><i class="fa fa-reply"></i></div>
+              <div class="btn btn-default btn-sm"><i class="fa fa-share"></i></div>-->
             </div>
           </div>
 

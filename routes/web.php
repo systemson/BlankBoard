@@ -63,8 +63,18 @@ Route::namespace('Admin')
         'update',
     ]);
 
-    /** Emails module */
+
+    /**
+     * Emails module
+     */
+
+    /** Restore emails */
+    Route::patch('emails/{id}', 'EmailsController@restore')->name('emails.restore');
+
+    /** Resource routes */
     Route::resource('emails', 'EmailsController');
+
+    /** Emails folders */
     Route::get('sent_emails', 'EmailsController@sentEmails')->name('emails.sent');
     Route::get('draft_emails', 'EmailsController@draftEmails')->name('emails.draft');
     Route::get('trashed_emails', 'EmailsController@trashedEmails')->name('emails.trash');

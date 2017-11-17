@@ -13,7 +13,7 @@ class EmailsTableSeeder extends Seeder
     public function run()
     {
         DB::table('emails')->insert([
-            ['user_id' => 1, 'subject' => 'Test 0', 'body' => 'Test', 'created_at' => Carbon::now()],
+            ['user_id' => 1, 'subject' => 'Test 0', 'body' => 'Test', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ]);
     }
 }

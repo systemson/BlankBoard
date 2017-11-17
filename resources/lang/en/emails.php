@@ -20,6 +20,8 @@ return [
         'date' => 'Date',
     ],
 
+    'table-empty' => 'This folder is empty',
+
     'confirm-trash' => 'This email will be moved to Trash folder. Are you sure?',
     'confirm-delete' => 'This email will be permanently deleted. Are you sure?',
 ];

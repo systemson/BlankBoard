@@ -68,8 +68,7 @@ trait EmailFoldersTrait
     {
         /** Get the resources from the model */
         $resources = auth()->user()
-        ->trashedEmails()
-        ->paginate($this->paginate);
+        ->trashedEmails();
 
         /** Display a listing of the resources */
         return view('admin.' . $this->route . '.index')

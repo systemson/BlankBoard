@@ -71,10 +71,11 @@ return [
 
         // Emails
         'email-sended' => 'Email successfully sended.',
-        'email-drafted' => 'Email successfully drafted.',
-        'email-updated' => 'Email successfully updated.',
+        'email-drafted' => 'Email drafted.',
+        'email-updated' => 'Email updated.',
         'email-trashed' => 'Email moved to Trash folder.',
         'email-deleted' => 'Email permanently deleted.',
+        'email-restored' => 'Email restored.',
 
         'avatar-updated' => 'Avatar successfully updated.',
 

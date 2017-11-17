@@ -55,7 +55,7 @@ class EmailPolicy
      */
     public function delete(User $user, Email $email)
     {
-        if ($user->id == $email->user_id ) {
+        if ($user->id == $email->user_id || $email->recipients->pluck('id')->intersect($user->id)) {
 
             return true;
         }
