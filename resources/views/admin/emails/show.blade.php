@@ -38,7 +38,7 @@
           <div class="mailbox-read-info">
             <h3>{{ $resource->subject }}</h3>
             <p>From: {{ $resource->user->name  }}
-              <span class="mailbox-read-time pull-right">{{ $resource->created_at->format('j M. Y g:i a') }}</span>
+              <span class="mailbox-read-time pull-right">{{ $resource->created_at->format(__('messages.date-format')) }}</span>
             </p>
             <p>To: {{ $resource->recipients->pluck('name')->implode(', ') }}</p>
           </div>
@@ -46,16 +46,31 @@
           <div class="mailbox-controls with-border text-center">
             <div class="btn-group">
               <div>
-                {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
+                {{ Form::open(['method' => 'GET','route' => [$name . '.create'], 'class' => 'inline']) }}
+                  {{ Form::button('<i class="fa fa-reply"></i>', [
+                    'type' => 'submit',
+                    'class'=> 'btn btn-info btn-xs',
+                    'value' => $resource->id,
+                    'name' => 'parent_id',
+                   ]) }}
+                {{ Form::close() }}
+               {{ Form::open(['method' => 'GET','route' => [$name . '.create'], 'class' => 'inline']) }}
+                 {{ Form::button('<i class="fa fa-share"></i>', [
+                   'type' => 'submit',
+                   'class'=> 'btn btn-info btn-xs',
+                   'value' => $resource->id,
+                   'name' => 'parent_id',
+                  ]) }}
+                  {{ Form::hidden('forward', 1) }}
+                {{ Form::close() }}
+                {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id], 'class' => 'inline']) }}
                   {{ Form::button('<i class="fa fa-trash"></i>', [
                     'type' => 'submit',
                     'class'=> 'btn btn-danger btn-xs',
                     'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
-                   ]) }}
-                {{ Form::close() }}
+                  ]) }}
+               {{ Form::close() }}
               </div>
-              <!--<div class="btn btn-default btn-sm"><i class="fa fa-reply"></i></div>
-              <div class="btn btn-default btn-sm"><i class="fa fa-share"></i></div>-->
             </div>
           </div>
 
@@ -64,8 +79,30 @@
 
         <div class="box-footer">
           <div class="pull-right">
-            <div class="btn btn-default"><i class="fa fa-reply"></i> Reply</div>
-            <div class="btn btn-default"><i class="fa fa-share"></i> Forward</div>
+            {{ Form::open(['method' => 'GET','route' => [$name . '.create'], 'class' => 'inline']) }}
+              {{ Form::button('<i class="fa fa-reply"></i> ' . __('messages.reply'), [
+                'type' => 'submit',
+                'class'=> 'btn btn-default',
+                'value' => $resource->id,
+                'name' => 'parent_id',
+               ]) }}
+            {{ Form::close() }}
+            {{ Form::open(['method' => 'GET','route' => [$name . '.create'], 'class' => 'inline']) }}
+              {{ Form::button('<i class="fa fa-share"></i> ' . __('messages.forward'), [
+                'type' => 'submit',
+                'class'=> 'btn btn-default',
+                'value' => $resource->id,
+                'name' => 'parent_id',
+               ]) }}
+               {{ Form::hidden('forward', 1) }}
+            {{ Form::close() }}
+            {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id], 'class' => 'inline']) }}
+              {{ Form::button('<i class="fa fa-trash"></i> ' . __('messages.delete'), [
+                'type' => 'submit',
+                'class'=> 'btn btn-default',
+                'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
+               ]) }}
+            {{ Form::close() }}
           </div>
         </div>
 

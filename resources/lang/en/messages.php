@@ -55,6 +55,9 @@ return [
     'edit' => 'Edit',
     'create' => 'Create',
     'here' => 'Here',
+    'reply' => 'Reply',
+    'forward' => 'Forward',
+    'delete' => 'Delete',
 
     // Alerts
     'alert' => [
@@ -106,5 +109,8 @@ return [
     // Messages
     'access_denied' => 'Access denied. You have no access to this page.',
     'required_fields' => '(*) Required fields.',
+
+    // Date format
+    'date-format' => 'j M. Y g:i a'
 
 ];

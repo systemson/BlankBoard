@@ -3,12 +3,49 @@
 namespace App\Http\Controllers\Admin\Traits;
 
 use App\Models\Email;
+use App\Models\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use DB;
 
 trait EmailActionsTrait
 {
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $resource = Email::find(Input::get('parent_id'));
+
+        if($resource != null) {
+
+            $message = [
+                'to' => Input::get('forward') != 1 ? $resource->user_id : null,
+                'subject' => 'Re: ' . $resource->subject,
+                'body' =>
+                    "\n\n\n\n\n" .
+                    '------------------------------------------------------------' . "\n" .
+                    'From: ' . User::find($resource->user_id)->name . "\n" .
+                    'To: ' . User::whereIn('id', $resource->recipients)->get()->pluck('name')->implode(', ') . "\n" .
+                    'Subject: ' . $resource->subject . "\n" .
+                    'Date: ' . $resource->created_at . "\n" .
+                    '------------------------------------------------------------' . "\n" .
+                    "\n" .
+                    $resource->body,
+            ];
+
+        } else {
+            $message = null;
+        }
+
+        /** Show the form for creating a new resource. */
+        return view('admin.' . $this->route . '.create')
+        ->with('name', $this->route)
+        ->with('message', $message);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -59,9 +96,8 @@ trait EmailActionsTrait
         $this->authorize('view', [$this->model, $resource]);
 
         /** Mark current email as read */
-        if($resource->user_id != auth()->id() && $resource->recipients()->wherePivot('user_id', auth()->id())->first()->pivot->is_read === 0) {
-            $resource->recipients()
-            ->updateExistingPivot(auth()->id(), ['is_read' => 1], false);
+        if($resource->user_id != auth()->id() && $this->getPivotColumn($resource->recipients(), 'is_read') === 0) {
+            $this->updatePivotColumn($resource->recipients(), ['is_read' => 1]);
         }
 
         /** Displays the specified resource page */
@@ -84,10 +120,17 @@ trait EmailActionsTrait
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', [$this->model, $resource]);
 
+        $message = [
+            'to' => $resource->recipients->pluck('id'),
+            'subject' => $resource->subject,
+            'body' => $resource->body,
+        ];
+
         /** Displays the edit resource page */
         return view('admin.' . $this->route . '.edit')
         ->with('resource', $resource)
-        ->with('name', $this->route);
+        ->with('name', $this->route)
+        ->with('message', $message);
     }
 
     /**
@@ -149,13 +192,13 @@ trait EmailActionsTrait
         $this->authorize('delete', [$this->model, $resource]);
 
         /** Move email to trash folder */
-        if(($resource->hasOwner(auth()->id()) && $resource->status == 1) || $resource->getPivotStatus(auth()->id()) == 1) {
+        if(($resource->hasOwner(auth()->id()) && $resource->status == 1) || $this->getPivotColumn($resource->recipients(), 'status') == 1) {
             $this->trashEmail($resource);
 
             /** Redirect back */
             return back()->with('warning', 'email-trashed');
 
-        } elseif(($resource->hasOwner(auth()->id()) && $resource->status < 1) || $resource->getPivotStatus(auth()->id()) == -1) {
+        } elseif(($resource->hasOwner(auth()->id()) && $resource->status < 1) || $this->getPivotColumn($resource->recipients(), 'status') == -1) {
 
             /** Delete email */
             $this->deleteEmail($resource);
@@ -191,8 +234,7 @@ trait EmailActionsTrait
         }
 
         /** Restore email to inbox folder */
-        $resource->recipients()
-        ->updateExistingPivot(auth()->id(), ['status' => 1], false);
+        $this->updatePivotColumn($resource->recipients(), ['status' => 1]);
 
         /** Redirect back */
         return back()->with('info', 'email-restored');
@@ -204,8 +246,7 @@ trait EmailActionsTrait
         if($email->hasOwner(auth()->id())) {
             $email->update(['status' => -1]);
         } else {
-            $email->recipients()
-            ->updateExistingPivot(auth()->id(), ['status' => -1], false);
+            $this->updatePivotColumn($email->recipients(), ['status' => -1]);
         }
     }
 
@@ -214,8 +255,7 @@ trait EmailActionsTrait
         if($email->hasOwner(auth()->id())) {
             $email->update(['status' => -2]);
         } else {
-            $email->recipients()
-            ->updateExistingPivot(auth()->id(), ['status' => -2], false);
+            $this->updatePivotColumn($email->recipients(), ['status' => -2]);
         }
     }
 }

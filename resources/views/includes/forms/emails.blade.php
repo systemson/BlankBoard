@@ -15,19 +15,15 @@
   </div>
 
     <div class="form-group">
-      {{ Form::select('to[]', \App\Models\User::all()->except(Auth::id())->pluck('name','id'),
-        isset($resource)
-        ? $resource->recipients->pluck('id')
-        : null,
-        array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
+      {{ Form::select('to[]', \App\Models\User::all()->except(Auth::id())->pluck('name','id'), $message['to'], ['class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple']) }}
     </div>
 
     <div class="form-group">
-      {{ Form::text('subject', $resource->subject ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Subject')) }}
+      {{ Form::text('subject', $message['subject'], array('class' => 'col-sm-12 control-form', 'placeholder' => 'Subject')) }}
     </div>
 
     <div class="form-group">
-      {{ Form::textarea('body', $resource->body ?? null, array('class' => 'col-sm-12 control-form')) }}
+      {{ Form::textarea('body', $message['body'], array('class' => 'col-sm-12 control-form')) }}
     </div>
 
   </div>
