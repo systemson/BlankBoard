@@ -50,20 +50,6 @@ Route::namespace('Admin')
     /** Dashboard page */
     Route::get( 'dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
 
-    /** Users module */
-    Route::resource('users', 'UsersController');
-
-    /** Roles module */
-    Route::resource('roles', 'RolesController')->except('show');
-
-    /** Permissions module */
-    Route::resource('permissions', 'PermissionsController')->only([
-        'index',
-        'edit',
-        'update',
-    ]);
-
-
     /**
      * Emails module
      */
@@ -78,5 +64,18 @@ Route::namespace('Admin')
     Route::get('sent_emails', 'EmailsController@sentEmails')->name('emails.sent');
     Route::get('draft_emails', 'EmailsController@draftEmails')->name('emails.draft');
     Route::get('trashed_emails', 'EmailsController@trashedEmails')->name('emails.trash');
+
+    /** Users module */
+    Route::resource('users', 'UsersController');
+
+    /** Roles module */
+    Route::resource('roles', 'RolesController')->except('show');
+
+    /** Permissions module */
+    Route::resource('permissions', 'PermissionsController')->only([
+        'index',
+        'edit',
+        'update',
+    ]);
 
 });

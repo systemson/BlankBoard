@@ -35,7 +35,7 @@
         <div class="box-body no-padding">
           <div class="mailbox-messages">
             @if (routeNameIs('emails.index'))
-              @include('includes.tables.emails')
+              @include('includes.tables.emails_inbox')
             @elseif (routeNameIS('emails.draft'))
               @include('includes.tables.emails_draft')
             @elseif (routeNameIS('emails.sent'))

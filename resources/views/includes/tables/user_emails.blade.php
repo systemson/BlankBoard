@@ -1,36 +1,20 @@
-<table class="table table-hover table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>{{ __('emails.table.from') }}</th>
-      <th class="col-sm-12">{{ __('emails.table.subject') }}</th>
-      <th>{{ __('emails.table.date') }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    @forelse (Auth::user()->emails->slice(0,10)->all() as $resource)
-      <tr>
-        @if ($resource->status == 1)
-          <td>
-            <label class="{{ __('messages.status.' . $resource->status. '.class') }}">
-              <i class="fa fa-envelope"></i>
-            </label>
-          </td>
-        @else
-          <td>
-            <label class="label label-default">
-              <i class="fa fa-envelope-open"></i>
-            </label>
-          </td>
-        @endif
-        <td class="mailbox-name text-nowrap">{{ $resource->user->name }}</td>
-        <td><a href="{{ route($name . '.show', $resource->id) }}">{{ $resource->subject }}</a></td>
-        <td class="text-nowrap">{{ $resource->created_at->diffForHumans() }}</td>
-      </tr>
-    @empty
-      <tr>
-        <td colspan="4"><span class="col-sm-offset-1">{{ __('emails.table-empty') }}</span></td>
-      </tr>
-    @endforelse
-  </tbody>
-</table>
+@forelse (Auth::user()->unreadEmails->slice(0,10)->all() as $resource)
+  <li>
+    <a href="{{ route('emails.show', $resource->id) }}">
+      <div class="pull-left">
+        <img class="img-circle" src="{{ URL::asset(\App\Models\User::find($resource->user_id)->image()) }}">
+      </div>
+      <h4>
+        {{ str_limit($resource->subject, 20) }}
+        <small><i class="fa fa-clock-o"></i> {{ $resource->created_at->diffForHumans() }}</small>
+      </h4>
+      <p>{{ str_limit($resource->body, 40) }}</p>
+    </a>
+  </li>
+@empty
+  <li>
+    <a href="#">
+      <p>{{ __('emails.table-empty') }}</p>
+    </a>
+  </li>
+@endforelse

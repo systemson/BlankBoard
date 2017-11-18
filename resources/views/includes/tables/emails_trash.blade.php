@@ -1,6 +1,7 @@
 <table class="table table-hover table-striped">
   <thead>
     <tr>
+      <th></th>
       <th>{{ __($name . '.table.from') }}</th>
       <th class="col-sm-12">{{ __($name . '.table.subject') }}</th>
       <th>{{ __($name . '.table.date') }}</th>
@@ -10,6 +11,9 @@
   <tbody>
     @forelse ($resources as $resource)
       <tr>
+        <td>
+          <label class="label label-default"><i class="fa fa-trash"></i></label>
+        </td>
         <td class="mailbox-name text-nowrap">
           <a href="{{ route($name . '.show', $resource->id) }}">
             {{ $resource->user->name }}

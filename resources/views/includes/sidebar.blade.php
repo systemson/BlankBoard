@@ -41,8 +41,39 @@
     </li>
     <!-- /. dashboard module -->
 
+    <!-- Mailbox Module -->
+    <li class="treeview @if (routeNameIs('emails', true) || routeNameIs(['emails.sent', 'emails.draft', 'emails.trash'])) menu-open @endif">
+      <a href="#"><i class="fa fa-envelope"></i> <span>Mailbox</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu" @if (routeNameIs('emails', true) || routeNameIs(['emails.sent', 'emails.draft', 'emails.trash'])) style="display: block;"  @endif>
+
+        <!-- Inbox -->
+        <li class="@if (routeNameIs('emails', true) || routeNameIs('emails.draft')) active @endif">
+          <a href="{{ URL::route('emails.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('emails.title') }}</span></a>
+        </li>
+        <!-- /. inbox -->
+
+        <!-- Sent emails -->
+        <li class="@if (routeNameIs('emails.sent')) active @endif">
+          <a href="{{ URL::route('emails.sent') }}"><i class="fa fa-circle-o"></i><span>{{ __('emails.sent') }}</span></a>
+        </li>
+        <!-- /. sent emails -->
+
+        <!-- Trash emails -->
+        <li class="@if (routeNameIs('emails.trash')) active @endif">
+          <a href="{{ URL::route('emails.trash') }}"><i class="fa fa-circle-o"></i><span>{{ __('emails.trash') }}</span></a>
+        </li>
+        <!-- /. trash emails -->
+
+      </ul>
+    </li>
+    <!-- /. mailbox module -->
+
     @if (Auth::user()->hasPermission('Users|Roles|Permissions', true))
-    <!-- Security section -->
+    <!-- Access section -->
     <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
       <a href="#"><i class="fa fa-lock"></i> <span>Access</span>
         <span class="pull-right-container">
@@ -78,38 +109,7 @@
      </ul>
     </li>
     @endif
-    <!-- /. security section -->
-
-    <!-- Mailbox Module -->
-    <li class="treeview @if (routeNameIs('emails', true) || routeNameIs(['emails.sent', 'emails.draft', 'emails.trash'])) menu-open @endif">
-      <a href="#"><i class="fa fa-envelope"></i> <span>Mailbox</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu" @if (routeNameIs('emails', true) || routeNameIs(['emails.sent', 'emails.draft', 'emails.trash'])) style="display: block;"  @endif>
-
-        <!-- Inbox -->
-        <li class="@if (routeNameIs('emails', true) || routeNameIs('emails.draft')) active @endif">
-          <a href="{{ URL::route('emails.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('emails.title') }}</span></a>
-        </li>
-        <!-- /. inbox -->
-
-        <!-- Sent emails -->
-        <li class="@if (routeNameIs('emails.sent')) active @endif">
-          <a href="{{ URL::route('emails.sent') }}"><i class="fa fa-circle-o"></i><span>{{ __('emails.sent') }}</span></a>
-        </li>
-        <!-- /. sent emails -->
-
-        <!-- Trash emails -->
-        <li class="@if (routeNameIs('emails.trash')) active @endif">
-          <a href="{{ URL::route('emails.trash') }}"><i class="fa fa-circle-o"></i><span>{{ __('emails.trash') }}</span></a>
-        </li>
-        <!-- /. trash emails -->
-
-      </ul>
-    </li>
-    <!-- /. mailbox section -->
+    <!-- /. access section -->
 
   </ul>
   <!-- /.sidebar-menu -->

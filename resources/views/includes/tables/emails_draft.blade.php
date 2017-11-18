@@ -11,7 +11,7 @@
   <tbody>
     @forelse ($resources as $resource)
       <tr>
-        <td class="text-nowrap">
+        <td>
           <label class="label label-default">
             <i class="fa fa-pencil"></i>
           </label>

@@ -30,6 +30,17 @@
             </span>
           @endif
         </a>
+        <ul class="dropdown-menu">
+          <li class="header">{{ trans_choice('emails.unread-messages', Auth::user()->unreadEmails()->count()) }}</li>
+          <li>
+            <ul class="menu">
+              @include('includes.tables.user_emails')
+            </ul>
+          </li>
+          <li class="footer">
+            <a href="{{ route('emails.index') }}">{{ __('emails.open-inbox') }}</a>
+          </li>
+        </ul>
       </li>
 
         <!-- User Account Menu -->

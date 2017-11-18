@@ -1,6 +1,7 @@
 <table class="table table-hover table-striped">
   <thead>
     <tr>
+      <th></th>
       <th>{{ __($name . '.table.to') }}</th>
       <th class="col-sm-12">{{ __($name . '.table.subject') }}</th>
       <th>{{ __($name . '.table.date') }}</th>
@@ -10,6 +11,9 @@
   <tbody>
     @forelse ($resources as $resource)
       <tr>
+        <td>
+          <label class="label label-primary"><i class="fa fa-paper-plane"></i></label>
+        </td>
         <td class="mailbox-name text-nowrap">
           <a href="{{ route($name . '.show', $resource->id) }}">
             {{ $resource->recipients->pluck('name')->implode(', ') }}
@@ -29,7 +33,7 @@
       </tr>
     @empty
       <tr>
-        <td colspan="4"><span class="col-sm-offset-1">{{ __('emails.table-empty') }}</span></td>
+        <td colspan="5"><span class="col-sm-offset-1">{{ __('emails.table-empty') }}</span></td>
       </tr>
     @endforelse
   </tbody>
