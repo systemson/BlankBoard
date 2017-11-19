@@ -14,9 +14,6 @@ Permissions are created directly thruough the module's Controller. On the instia
 You are be able to create, send and delete messages. If you want, you can store messages as drafts to be procesed in the future.
 
 ToDo:
-**This list should be updated**
+**This list should be soon updated**
 
-* Add form validations to every form.
 * Move Controller registration to a independent action.
-* Improve ResourceController authentification.
-* Improve ResourceController permission registration.
