@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'before' => [['name' => 'Admin', 'route' => 'admin'], __($name . '.parent')], 'after' => [__('users.show')]])
+  @include('includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')], 'after' => [__('users.show')]])
 <!-- /. content header -->
 
 <!-- Main content -->

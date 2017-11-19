@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Traits;
+namespace App\Http\Controllers\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 

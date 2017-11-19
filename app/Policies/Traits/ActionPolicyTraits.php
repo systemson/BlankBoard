@@ -12,14 +12,14 @@ trait ActionPolicyTraits
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function index(User $user, $name, array $publicActions = [])
+    public function index(User $user, $name)
     {
-        if (in_array('view', $publicActions) || $user->hasPermission(ucfirst($name), true)) {
+        if ($user->hasPermission(ucfirst($name), true)) {
 
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -27,17 +27,15 @@ trait ActionPolicyTraits
      *
      * @param  \App\Models\User  $user
      * @param  string  $name the name of the resource.
-     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function view(User $user, $name, array $publicActions = [])
+    public function view(User $user, $name)
     {
-        if (in_array('view', $publicActions) || $user->hasPermission('view_' . $name)) {
-
+        if ($user->hasPermission('view_' . $name)) {
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -45,17 +43,16 @@ trait ActionPolicyTraits
      *
      * @param  \App\Models\User  $user
      * @param  string  $name the name of the resource.
-     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function create(User $user, $name, array $publicActions = [])
+    public function create(User $user, $name)
     {
-        if (in_array('create', $publicActions) || $user->hasPermission('create_' . $name)) {
+        if ($user->hasPermission('create_' . $name)) {
 
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -63,17 +60,16 @@ trait ActionPolicyTraits
      *
      * @param  \App\Models\User  $user
      * @param  string  $name the name of the resource.
-     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function update(User $user, $name, array $publicActions = [])
+    public function update(User $user, $name)
     {
-        if (in_array('update', $publicActions) || $user->hasPermission('update_' . $name)) {
+        if ($user->hasPermission('update_' . $name)) {
 
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -81,16 +77,15 @@ trait ActionPolicyTraits
      *
      * @param  \App\Models\User  $user
      * @param  string  $name the name of the resource.
-     * @param  array  $publicActions the actions that don't require validation.
      * @return mixed
      */
-    public function delete(User $user, $name, array $publicActions = [])
+    public function delete(User $user, $name)
     {
-        if (in_array('delete', $publicActions) || $user->hasPermission('delete_' . $name)) {
+        if ($user->hasPermission('delete_' . $name)) {
 
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 }

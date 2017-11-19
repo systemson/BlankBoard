@@ -10,40 +10,33 @@
   <div class="col-sm-8 form-horizontal">
 
     <div class="form-group">
-      {{ Form::label('name', 'Name (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('name', __($name . '.table.name') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('name', $resource->name ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Name', 'disabled' => 'disabled')) }}
+        {{ Form::text('name', $resource->name ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.name'), 'disabled' => 'disabled')) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('slug', 'Slug (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('slug', __($name . '.table.slug') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Slug', 'disabled' => 'disabled')) }}
+        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.slug'), 'disabled' => 'disabled')) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('module', 'Module', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('module', __($name . '.table.module'), array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('module', $resource->module ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Module')) }}
+        {{ Form::text('module', $resource->module ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.module'))) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('description', 'Description', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('description', __($name . '.table.description'), array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
         {{ Form::textarea('description', $resource->description ?? null, array('class' => 'col-sm-12 control-form', 'rows' => '4', 'protected')) }}
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <center>
-          {{ Form::submit('Send', array('class' => 'btn btn-success')) }}
-        </center>
-      </div>
-    </div>
   </div>
 
   <div class="col-sm-4 form-vertical">

@@ -37,13 +37,6 @@ class UsersController extends Controller
     protected $paginate = 15;
 
     /**
-     * The actions that should be omitted by the policy
-     *
-     * @var array
-     */
-    protected $publicActions = [];
-
-    /**
     * Instantiate the controller.
     *
     * @return void
@@ -51,7 +44,7 @@ class UsersController extends Controller
     public function __construct()
     {
         /** Store the permissions on DB */
-        Permission::register($this->publicActions, $this->route);
+        Permission::register([], $this->route);
     }
 
     /**
@@ -105,7 +98,7 @@ class UsersController extends Controller
             'email' => Input::get('email'),
             'status' => Input::get('status'),
             'description' => Input::get('description'),
-            'password' => bcrypt(config('user.default_password')),
+            'password' => bcrypt(config('user.default_password', 'secret')),
         ]);
 
         /** Redirect to newly created user resource page */
@@ -198,7 +191,7 @@ class UsersController extends Controller
     public function destroy($id)
     {
         /** Check if logged user is authorized to delete resources */
-        $this->authorize('delete', $this->model);
+        $this->authorize('delete', [$this->model, $id]);
 
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);

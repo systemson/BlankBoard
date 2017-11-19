@@ -38,8 +38,8 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /** Check if logged user is authorized to update resources */
-        $this->authorize('update', [$this->model, $this->route]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         DB::transaction(function () use ($id) {
 

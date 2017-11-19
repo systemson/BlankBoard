@@ -12,6 +12,7 @@ return [
     'add' => 'Add new :name',
     'edit' => 'Edit :name :Resource',
     'view' => 'View :name :Resource',
+    'compose' => 'Compose',
 
     'table' => [
         'from' => 'From',

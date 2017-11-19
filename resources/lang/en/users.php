@@ -17,6 +17,7 @@ return [
       'status' => 'Status',
     ],
 
+    'delete-self' => 'Action denied. You can\'t delete your own account.',
     'confirm-delete' => 'This action can be reverted. Are you sure?',
 
     /** Tab 1 */

@@ -26,7 +26,6 @@ trait RolesPermissionTrait
     public function isSuperAdmin()
     {
         if($this->hasRole(config('user.superuser'))) {
-
             return true;
         }
 
@@ -54,46 +53,42 @@ trait RolesPermissionTrait
     }
 
     /**
-     * Check if user has the specified permission
+     * Check if user has the specified permission.
      *
-     * @param string|array $slugs the slug of the permission or the module
-     * @param boolean $anyInModule check for any permission for the module
+     * @param string|array $slugs the slug of the permission or the module.
+     * @param boolean $anyInModule check for any permission for the specified module.
      * @return boolean
      */
     public function hasPermission($slugs, $anyInModule = false)
     {
         /** Check if user is inactive */
         if($this->isSuperAdmin()) {
-
             return true;
 
         /** Check if user is inactive */
         } elseif($this->isInactive()) {
-
             return false;
         }
 
         /** Convert $slugs string into array */
         if(is_string($slugs)) {
-
             $slugs = explode('|', $slugs);
         }
 
         foreach($this->roles as $role) {
 
-            if($anyInModule) {
+            $permissions = $role->permissions;
 
+            if($anyInModule) {
                 /** Find current role permission modules */
-                $permissions = $role->permissions()->whereIn('module', $slugs)->get();
+                $exists = $role->permissions()->whereIn('module', $slugs)->exists();
 
             } else {
-
                 /** Find current permissions slugs */
-                $permissions = $role->permissions()->whereIn('slug', $slugs)->get();
+                $exists = $role->permissions()->whereIn('slug', $slugs)->exists();
             }
 
-            if($permissions->isNotEmpty()) {
-
+            if($exists) {
                return true;
             }
         }

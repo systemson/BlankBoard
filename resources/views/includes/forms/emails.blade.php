@@ -10,7 +10,7 @@
   <div class="form-group">
     <div class="col-sm-12 text-right">
       <button name="status" class="{{ __('messages.btn.send.class') }}" type="input" value="1"><i class="fa fa-envelope-o"></i> {{ __('messages.btn.send.name') }}</button>
-      <button name="status" class="{{ __('messages.btn.draft.class') }}" type="input" value="0"><i class="fa fa-envelope-o"></i> {{ __('messages.btn.draft.name') }}</button>
+      <button name="status" class="{{ __('messages.btn.draft.class') }}" type="input" value="0"><i class="fa fa-pencil"></i> {{ __('messages.btn.draft.name') }}</button>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-group">
-      {{ Form::text('subject', $message['subject'], array('class' => 'col-sm-12 control-form', 'placeholder' => 'Subject')) }}
+      {{ Form::text('subject', $message['subject'], array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.subject'))) }}
     </div>
 
     <div class="form-group">

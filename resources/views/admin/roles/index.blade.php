@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'before' => [['name' => 'Admin', 'route' => 'admin'], __($name . '.parent')]])
+  @include('includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')]])
 <!-- /. content header -->
 
 <!-- Main content -->
@@ -22,7 +22,12 @@
         <div class="box-header with-border">
           <h3 class="box-title">{{ ucfirst($name) }} list</h3>
           <div class="box-tools pull-right">
-            <a class="{{ __('messages.btn.new.class') }}" href="{{ route($name . '.create') }}" ><i class="fa fa-plus-circle"></i> {{ __('messages.btn.new.name') }}</a>
+            @if (Auth::user()->hasPermission('create_' . $name))
+              <a class="{{ __('messages.btn.new.class') }}" href="{{ route($name . '.create') }}" >
+                <i class="fa fa-plus-circle"></i>
+                {{ __('messages.btn.new.name') }}
+              </a>
+            @endif
             <button class="btn btn-box-tool" type="button" data-widget="collapse">
               <i class="fa fa-minus"></i>
             </button>
@@ -34,7 +39,9 @@
             <thead>
               <tr>
                 <th>{{ __($name . '.table.id') }}</th>
-                <th class="text-center">{{ __($name . '.table.action') }}</th>
+                @if (Auth::user()->hasPermission('delete_' . $name))
+                  <th class="text-center">{{ __($name . '.table.action') }}</th>
+                @endif
                 <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
                 <th>{{ __($name . '.table.slug') }}</th>
                 <th class="text-center">{{ __($name . '.table.status') }}</th>
@@ -45,17 +52,24 @@
             @foreach ($resources as $resource)
               <tr>
                 <td>{{ $resource->id }}</td>
-                <td class="text-nowrap">
-
-                  {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
-                    {{ Form::button('<i class="fa fa-trash"></i>', array(
-                      'type' => 'submit',
-                      'class'=> 'btn-danger btn-xs',
-                      'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
-                    )) }}
-                  {{ Form::close() }}
+                @if (Auth::user()->hasPermission('delete_' . $name))
+                  <td class="text-nowrap">
+                    {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
+                      {{ Form::button( __('messages.action.trash'), array(
+                        'type' => 'submit',
+                        'class'=> 'btn-danger btn-xs',
+                        'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
+                      )) }}
+                    {{ Form::close() }}
+                  </td>
+                @endif
+                <td>
+                  @if (Auth::user()->hasPermission('update_' . $name))
+                    <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a>
+                  @else
+                    {{ $resource->name }}
+                  @endif
                 </td>
-                <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a></td>
                 <td>{{ $resource->slug }}</td>
                 <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
                   {{ __('messages.status.' . $resource->status . '.name') }}

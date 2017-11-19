@@ -30,7 +30,7 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -46,7 +46,7 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -61,7 +61,7 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -77,7 +77,7 @@ class UserPolicy
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -89,7 +89,11 @@ class UserPolicy
      */
     public function delete(User $user, $id)
     {
-        if ($user->id != $id || ($user->hasPermission('delete_' . $this->name))) {
+        if ($user->id == $id) {
+
+            return abort(403, __('users.delete-self'));
+
+        } elseif ($user->hasPermission('delete_' . $this->name)) {
             return true;
         }
 

@@ -28,7 +28,7 @@ class EmailPolicy
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 
     /**
@@ -60,6 +60,6 @@ class EmailPolicy
             return true;
         }
 
-        return abort(403, __('messages.access_denied'));
+        return abort(403, __('messages.access-denied'));
     }
 }

@@ -1,4 +1,4 @@
-<a class="btn btn-primary btn-block margin-bottom" href="{{ route('emails.create') }}" >Compose</a>
+<a class="btn btn-primary btn-block margin-bottom" href="{{ route('emails.create') }}" >{{ __('emails.compose') }}</a>
 <div class="box box-solid">
   <div class="box-header with-border">
   <h3 class="box-title">Mailbox</h3>

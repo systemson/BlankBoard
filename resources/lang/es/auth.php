@@ -16,4 +16,37 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    /** Auth and User forms */
+    'username' => 'Usuario',
+    'name' => 'Nombre',
+    'lastname' => 'Apellido',
+    'email' => 'Correo',
+    'password' => 'Contraseña',
+    'confirm' => 'Confirmar',
+    'new_password' => 'Nueva contraseña',
+    'old_password' => 'Contraseña actual',
+    'avatar' => 'Imagen de perfil',
+    'description' => 'Acerca de mi',
+    'status' => 'Estado',
+    'active' => 'Activo',
+    'inactive' => 'Inactivo',
+    'slug' => 'Slug',
+    'module' => 'Módulo',
+    'roles' => 'Roles',
+    'permissions' => 'Permisos',
+
+    /** Forms messages */
+    'remember' => 'Mantenerme conectado.',
+    'forgot' => 'Olvidé mi contraseña.',
+    'change' => 'Cambiar contraseña.',
+    'unregistered' => 'Registrar cuenta.',
+    'registered' => 'Ya tengo una cuenta.',
+    'restore' => 'Enviar enlace de reseteo.',
+    'profile' => 'Mi perfil',
+
+    /** Titles */
+    'login' => 'Entrar',
+    'logout' => 'Salid',
+    'register' => 'Registrar',
+    'reset' => 'Resetear contraseña',
 ];

@@ -43,7 +43,7 @@
 
     <!-- Mailbox Module -->
     <li class="treeview @if (routeNameIs('emails', true) || routeNameIs(['emails.sent', 'emails.draft', 'emails.trash'])) menu-open @endif">
-      <a href="#"><i class="fa fa-envelope"></i> <span>Mailbox</span>
+      <a href="#"><i class="fa fa-envelope"></i> <span>{{ __('emails.parent') }}</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -75,7 +75,7 @@
     @if (Auth::user()->hasPermission('Users|Roles|Permissions', true))
     <!-- Access section -->
     <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
-      <a href="#"><i class="fa fa-lock"></i> <span>Access</span>
+      <a href="#"><i class="fa fa-lock"></i> <span>{{ __('users.parent') }}</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>

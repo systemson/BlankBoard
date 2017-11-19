@@ -15,6 +15,8 @@ return [
       'action' => 'Action',
       'name' => 'Name',
       'slug' => 'Slug',
+      'description' => 'Description',
+      'permissions' => 'Permissions',
       'status' => 'Status',
     ],
 

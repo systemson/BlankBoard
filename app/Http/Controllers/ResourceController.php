@@ -32,6 +32,13 @@ abstract class ResourceController extends Controller
     protected $paginate;
 
     /**
+     * Request.
+     *
+     * @var Illuminate\Http\Request
+     */
+    protected $request;
+
+    /**
      * The actions that should be omitted by the policy.
      *
      * @var array  view|create|update|delete
@@ -45,8 +52,10 @@ abstract class ResourceController extends Controller
     *
     * @return void
     */
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->request = $request;
+
         /** Store the permissions on DB */
         Permission::register($this->publicActions, $this->route);
     }
@@ -58,8 +67,8 @@ abstract class ResourceController extends Controller
      */
     public function index()
     {
-        /** Check if logged user is authorized to the resources list */
-        $this->authorize('index', [$this->model, $this->route, $this->publicActions]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         /** Get the resources from the model */
         $resources = $this->model::paginate($this->paginate);
@@ -77,8 +86,8 @@ abstract class ResourceController extends Controller
      */
     public function create()
     {
-        /** Check if logged user is authorized to create resources */
-        $this->authorize('create', [$this->model, $this->route, $this->publicActions]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         /** Show the form for creating a new resource. */
         return view('admin.' . $this->route . '.create')
@@ -93,8 +102,8 @@ abstract class ResourceController extends Controller
      */
     public function store(Request  $request)
     {
-        /** Check if logged user is authorized to create resources */
-        $this->authorize('create', [$this->model, $this->route, $this->publicActions]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         /** Create a new resource */
         $resource = $this->model::create(Input::all());
@@ -113,8 +122,8 @@ abstract class ResourceController extends Controller
      */
     public function show($id)
     {
-        /** Check if logged user is authorized to view resources */
-        $this->authorize('view', [$this->model, $this->route, $this->publicActions]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
@@ -133,8 +142,8 @@ abstract class ResourceController extends Controller
      */
     public function edit($id)
     {
-        /** Check if logged user is authorized to update resources */
-        $this->authorize('update', [$this->model, $this->route, $this->publicActions]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
@@ -148,13 +157,14 @@ abstract class ResourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int $id the specified resource id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        /** Check if logged user is authorized to update resources */
-        $this->authorize('update', [$this->model, $this->route, $this->publicActions]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
@@ -175,8 +185,8 @@ abstract class ResourceController extends Controller
      */
     public function destroy($id)
     {
-        /** Check if logged user is authorized to delete resources */
-        $this->authorize('delete', [$this->model, $this->route, $this->publicActions]);
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
 
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
@@ -189,4 +199,48 @@ abstract class ResourceController extends Controller
         ->route($this->route . '.index')
         ->with('warning', 'resource-deleted');
     }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'index',
+            'show' => 'view',
+            'create' => 'create',
+            'store' => 'create',
+            'edit' => 'update',
+            'update' => 'update',
+            'destroy' => 'delete',
+            'restore' => 'restore',
+        ];
+    }
+
+    protected function authorizeAction()
+    {
+        if($this->getAbility()) {
+            $this->authorize('view', [$this->model, $this->route]);
+        }
+    }
+
+    protected function getActionMethod()
+    {
+        return $this->request->route()->getActionMethod();
+    }
+
+    protected function getAbility()
+    {
+        if(isset($this->resourceAbilityMap()[$this->getActionMethod()])) {
+            return $this->resourceAbilityMap()[$this->getActionMethod()];
+        }
+        return false;
+
+    }
 }
+
+
+
+

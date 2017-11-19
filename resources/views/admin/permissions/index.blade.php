@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'before' => [['name' => 'Admin', 'route' => 'admin'], __($name . '.parent')]])
+  @include('includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')]])
 <!-- /. content header -->
 
 <!-- Main content -->
@@ -44,7 +44,14 @@
             @foreach ($resources as $resource)
               <tr>
                 <td>{{ $resource->id }}</td>
-                <td><a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a></td>
+                <td>
+                  @if (Auth::user()->hasPermission('update_' . $name))
+                    <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a>
+                  @else
+                    {{ $resource->name }}
+                  @endif
+                </td>
+                </td>
                 <td>{{ $resource->module }}</td>
                 <td>{{ $resource->slug }}</td>
                 <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">

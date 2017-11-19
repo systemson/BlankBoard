@@ -16,6 +16,7 @@ return [
       'name' => 'Name',
       'module' => 'Module',
       'slug' => 'Slug',
+      'description' => 'Description',
       'status' => 'Status',
     ],
 

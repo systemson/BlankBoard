@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'before' => [['name' => 'Admin', 'route' => 'admin'], __($name . '.parent')]])
+  @include('includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')]])
 <!-- /. content header -->
 
 <!-- Main content -->
@@ -22,15 +22,6 @@
 
     <div class="col-sm-9">
       <div class="box box-primary">
-
-        <div class="box-header with-border">
-          <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
-          <div class="box-tools pull-right">
-            <button class="btn btn-box-tool" type="button" data-widget="collapse">
-              <i class="fa fa-minus"></i>
-            </button>
-          </div>
-        </div><!-- Box header -->
 
         <div class="box-body no-padding">
           <div class="mailbox-messages">

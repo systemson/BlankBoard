@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Traits;
+namespace App\Http\Controllers\Traits;
 
 use App\Models\Email;
 use App\Models\User;
@@ -27,10 +27,10 @@ trait EmailActionsTrait
                 'body' =>
                     "\n\n\n\n\n" .
                     '------------------------------------------------------------' . "\n" .
-                    'From: ' . User::find($resource->user_id)->name . "\n" .
-                    'To: ' . User::whereIn('id', $resource->recipients)->get()->pluck('name')->implode(', ') . "\n" .
-                    'Subject: ' . $resource->subject . "\n" .
-                    'Date: ' . $resource->created_at . "\n" .
+                    __('emails.table.from') . ': ' . User::find($resource->user_id)->name . "\n" .
+                    __('emails.table.to') . ': ' . User::whereIn('id', $resource->recipients)->get()->pluck('name')->implode(', ') . "\n" .
+                    __('emails.table.subject') . ': ' . $resource->subject . "\n" .
+                    __('emails.table.date') .  ': ' . $resource->created_at . "\n" .
                     '------------------------------------------------------------' . "\n" .
                     "\n" .
                     $resource->body,

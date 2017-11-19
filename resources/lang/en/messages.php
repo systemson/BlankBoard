@@ -13,6 +13,9 @@ return [
     |
     */
 
+    //
+    'admin-site' => 'Admin',
+
     // Statuses
     'status' => [
         1  => ['name' => 'Active', 'class' => 'label label-success'],
@@ -107,8 +110,8 @@ return [
     ],
 
     // Messages
-    'access_denied' => 'Access denied. You have no access to this page.',
-    'required_fields' => '(*) Required fields.',
+    'access-denied' => 'Access denied. You have no access to this page.',
+    'required-fields' => '(*) Required fields.',
 
     // Date format
     'date-format' => 'j M. Y g:i a'

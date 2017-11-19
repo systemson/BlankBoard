@@ -14,31 +14,23 @@
   <div class="col-sm-8 form-horizontal">
 
     <div class="form-group">
-      {{ Form::label('name', 'Name (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('name', __($name . '.table.name') . '(*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('name', $resource->name ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Name')) }}
+        {{ Form::text('name', $resource->name ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.name'))) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('slug', 'Slug (*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('slug', __($name . '.table.slug') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => 'Slug')) }}
+        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.slug'))) }}
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::label('description', 'Description', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('description', __($name . '.table.description'), array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
         {{ Form::textarea('description', $resource->description ?? null, array('class' => 'col-sm-12 control-form', 'rows' => '4')) }}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-sm-offset-4 col-sm-8">
-        <center>
-          {{ Form::submit('Send', array('class' => 'btn btn-success')) }}
-        </center>
       </div>
     </div>
 
@@ -51,7 +43,7 @@
     </div>
 
     <div class="form-group">
-      {{ Form::label('permissions', 'Permissions', array('class' => 'control-label')) }}
+      {{ Form::label('permissions', __($name . '.table.permissions'), array('class' => 'control-label')) }}
       {{ Form::select('permissions[]', \App\Models\Permission::pluck('name','id'), $resource->permissions ?? null, array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
     </div>
 
