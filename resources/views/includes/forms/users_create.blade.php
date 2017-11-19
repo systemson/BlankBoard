@@ -72,7 +72,7 @@
 
   <div class="col-sm-offset-3 col-sm-9">
     <div class="form-group">
-      <p class="text-red"><strong>{{ __('messages.required_fields') }}</strong></p>
+      <p class="text-red"><strong>{{ __('messages.required-fields') }}</strong></p>
     </div>
   </div>
 

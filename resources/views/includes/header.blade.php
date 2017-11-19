@@ -34,7 +34,7 @@
           <li class="header">{{ trans_choice('emails.unread-messages', Auth::user()->unreadEmails()->count()) }}</li>
           <li>
             <ul class="menu">
-              @include('includes.tables.user_emails')
+              @include('includes.tables.header_emails')
             </ul>
           </li>
           <li class="footer">

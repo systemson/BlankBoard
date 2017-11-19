@@ -33,7 +33,7 @@ trait EmailActionsTrait
                     __('emails.table.date') .  ': ' . $resource->created_at . "\n" .
                     '------------------------------------------------------------' . "\n" .
                     "\n" .
-                    $resource->body,
+                    str_limit($resource->body, 1195),
             ];
 
         } else {
@@ -54,6 +54,12 @@ trait EmailActionsTrait
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'to' => 'required',
+            'subject' => 'required|max:80',
+            'body' => 'nullable|max:1200',
+        ]);
+
         DB::transaction(function () {
 
             /** Update the specified resource */
@@ -93,7 +99,9 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged user is authorized to view resources */
-        $this->authorize('view', [$this->model, $resource]);
+        $this->authorizeAction([
+            $resource
+        ]);
 
         /** Mark current email as read */
         if($resource->user_id != auth()->id() && $this->getPivotColumn($resource->recipients(), 'is_read') === 0) {
@@ -118,7 +126,9 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged user is authorized to update resources */
-        $this->authorize('update', [$this->model, $resource]);
+        $this->authorizeAction([
+            $resource
+        ]);
 
         $message = [
             'to' => $resource->recipients->pluck('id'),
@@ -145,7 +155,9 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged user is authorized to update resources */
-        $this->authorize('update', [$this->model, $resource]);
+        $this->authorizeAction([
+            $resource
+        ]);
 
         DB::transaction(function () use ($resource) {
 
@@ -189,7 +201,9 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged user is authorized to delete resources */
-        $this->authorize('delete', [$this->model, $resource]);
+        $this->authorize([
+            $resource
+        ]);
 
         /** Move email to trash folder */
         if(($resource->hasOwner(auth()->id()) && $resource->status == 1) || $this->getPivotColumn($resource->recipients(), 'status') == 1) {
@@ -222,7 +236,9 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged user is authorized to delete resources */
-        $this->authorize('delete', [$this->model, $resource]);
+        $this->authorize([
+            $resource
+        ]);
 
         /** Restore email to sent folder */
         if($resource->user_id == auth()->id()) {

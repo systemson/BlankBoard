@@ -12,7 +12,7 @@ class Permission extends Model
      * @var array
      */
     protected $fillable = [
-        'slug', 'name', 'module', 'status', 'description',
+        'name', 'slug', 'module', 'status', 'description',
     ];
 
     /**
@@ -24,30 +24,26 @@ class Permission extends Model
         'created_at', 'updated_at',
     ];
 
-    protected static $actionMap = [
-        'view', 'create', 'update', 'delete',
-    ];
-
     /**
      * Create permissions if don't exist.
      *
-     * @param   array $permissions the permission to register.
      * @param   string $module the module related to the permission.
+     * @param   array $permissions the permission to register.
      * @return  void
      */
-    public static function register($publicActions, $module = null)
+    public static function register($module, array $permissions = [])
     {
-        /** Exclude the public actions */
-        $actions = collect(self::$actionMap)->diff($publicActions);
+        if(!empty($permissions)) {
 
-        foreach($actions as $action) {
+            foreach($permissions as $ability) {
 
-            /** Create permission if don't exist */
-            self::firstOrCreate(['slug' => strtolower($action . '_' . $module)],
-                [
-                    'name' => ucwords($action . ' ' . $module),
-                    'module' => ucfirst($module),
-                ]);
+                /** Create permission if don't exist */
+                self::firstOrCreate(['slug' => strtolower($ability . '_' . $module)],
+                    [
+                        'name' => ucwords($ability . ' ' . $module),
+                        'module' => ucfirst($module),
+                    ]);
+            }
         }
     }
 }

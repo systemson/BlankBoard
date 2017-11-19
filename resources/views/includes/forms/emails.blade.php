@@ -14,20 +14,18 @@
     </div>
   </div>
 
-    <div class="form-group">
+    <div class="form-group{{ $errors->has('to') ? ' has-error' : '' }}">
       {{ Form::select('to[]', \App\Models\User::all()->except(Auth::id())->pluck('name','id'), $message['to'], ['class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple']) }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group{{ $errors->has('subject') ? ' has-error' : '' }}">
       {{ Form::text('subject', $message['subject'], array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.subject'))) }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
       {{ Form::textarea('body', $message['body'], array('class' => 'col-sm-12 control-form')) }}
     </div>
 
   </div>
 
-
 {{ Form::close() }}
-

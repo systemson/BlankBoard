@@ -24,11 +24,11 @@ class StoreUser extends FormRequest
     public function rules()
     {
         return [
-            'user' => 'required',
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'status' => 'required',
-            'roles' => 'nullable',
+            'user' => 'required|unique:users|max:18|alpha_num',
+            'name' => 'required|max:50',
+            'email' => 'required|email|unique:users|max:100',
+            'status' => 'required|integer',
+            'roles' => 'nullable|array',
         ];
     }
 }

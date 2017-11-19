@@ -65,14 +65,14 @@ return [
     // Alerts
     'alert' => [
         // Resources
-        'resource-created' => 'Nuevo elemento creado.',
-        'resource-updated' => 'Elemento creado safistactoriamente.',
+        'resource-created' => 'Elemento creado safistactoriamente.',
+        'resource-updated' => 'Elemento actualizado.',
         'resource-deleted' => 'Elemento borrado.',
         'resource-failed' => 'Elemento no actualizado.',
 
         // Users
-        'user-created' => 'Nuevo usuario creado.',
-        'user-updated' => 'Usuario creado safistactoriamente.',
+        'user-created' => 'Usuario creado safistactoriamente.',
+        'user-updated' => 'Usuario actualizado.',
         'user-deleted' => 'Usuario eliminado.',
 
         // Emails
@@ -93,7 +93,7 @@ return [
         'login' => 'Bienvenido.',
         'login-small' => 'Te has conectado safistactoriamente.',
 
-        'logout' => 'Session cerrada.',
+        'logout' => 'Desconectado.',
         'logout-small' => 'Te has desconectado safistactoriamente.',
 
         'forbidden' => 'Acceso prohibido.',

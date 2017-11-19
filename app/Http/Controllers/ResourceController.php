@@ -39,12 +39,12 @@ abstract class ResourceController extends Controller
     protected $request;
 
     /**
-     * The actions that should be omitted by the policy.
+     * The permissions that should be registered.
      *
      * @var array  view|create|update|delete
      */
-    protected $publicActions = [
-        //'view', 'create', 'update', 'delete',
+    protected $permissions = [
+        //
     ];
 
     /**
@@ -57,7 +57,7 @@ abstract class ResourceController extends Controller
         $this->request = $request;
 
         /** Store the permissions on DB */
-        Permission::register($this->publicActions, $this->route);
+        Permission::register($this->route, $this->permissions);
     }
 
     /**
@@ -104,6 +104,10 @@ abstract class ResourceController extends Controller
     {
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
+
+        if(method_exists($this, 'storeValidations')) {
+            $request->validate($this->storeValidations());
+        }
 
         /** Create a new resource */
         $resource = $this->model::create(Input::all());
@@ -166,6 +170,10 @@ abstract class ResourceController extends Controller
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
+        if(method_exists($this, 'updateValidations')) {
+            $request->validate($this->updateValidations());
+        }
+
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
@@ -215,14 +223,18 @@ abstract class ResourceController extends Controller
             'edit' => 'update',
             'update' => 'update',
             'destroy' => 'delete',
-            'restore' => 'restore',
+            'restore' => 'delete',
         ];
     }
 
-    protected function authorizeAction()
+    protected function authorizeAction(array $params = [])
     {
+        $params = empty($params) ? [$this->route] : $params;
+
+        $arguments = array_merge([$this->model], $params);
+
         if($this->getAbility()) {
-            $this->authorize('view', [$this->model, $this->route]);
+            $this->authorize($this->getAbility(), $arguments);
         }
     }
 

@@ -23,7 +23,7 @@ class EmailPolicy
      */
     public function view(User $user, Email $email)
     {
-        if ($user->id == $email->user_id || $email->recipients->pluck('id')->intersect($user->id)) {
+        if ($user->id == $email->user_id || $email->recipients->where('id', $user->id)->isNotEmpty()) {
 
             return true;
         }
@@ -55,7 +55,7 @@ class EmailPolicy
      */
     public function delete(User $user, Email $email)
     {
-        if ($user->id == $email->user_id || $email->recipients->pluck('id')->intersect($user->id)) {
+        if ($user->id == $email->user_id || $email->recipients->where('id', $user->id)->isNotEmpty()) {
 
             return true;
         }

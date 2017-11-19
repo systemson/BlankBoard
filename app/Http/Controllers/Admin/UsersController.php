@@ -6,10 +6,10 @@ use App\Models\User as Model;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 use App\Http\Controllers\Controller;
 use DB;
 
@@ -35,17 +35,6 @@ class UsersController extends Controller
      * @var int
      */
     protected $paginate = 15;
-
-    /**
-    * Instantiate the controller.
-    *
-    * @return void
-    */
-    public function __construct()
-    {
-        /** Store the permissions on DB */
-        Permission::register([], $this->route);
-    }
 
     /**
      * Show the resource list.
@@ -91,19 +80,30 @@ class UsersController extends Controller
         /** Check if logged user is authorized to create resources */
         $this->authorize('create', [$this->model]);
 
-        /** Create a new resource */
-        $resource = Model::create([
-            'user' => Input::get('user'),
-            'name' => Input::get('name'),
-            'email' => Input::get('email'),
-            'status' => Input::get('status'),
-            'description' => Input::get('description'),
-            'password' => bcrypt(config('user.default_password', 'secret')),
-        ]);
+        DB::transaction(function () {
+
+            /** Create a new resource */
+            $resource = Model::create([
+                'user' => Input::get('user'),
+                'name' => Input::get('name'),
+                'email' => Input::get('email'),
+                'status' => Input::get('status'),
+                'password' => bcrypt(config('user.default_password', 'secret')),
+            ]);
+
+
+            /** Check if permissions are being set */
+            if(Input::get('roles') != null) {
+
+                /** Syncronize both tables through pivot table */
+                $resource->roles()->sync(Input::get('roles'));
+            }
+
+        }, 5);
 
         /** Redirect to newly created user resource page */
         return redirect()
-        ->route($this->route . '.show', $resource->id)
+        ->route($this->route . '.index')
         ->with('success', 'user-created');
     }
 
@@ -151,10 +151,11 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  App\Http\Requests\UpdateUser;
      * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUser $request, $id)
     {
         /** Check if logged user is authorized to update resources */
         $this->authorize('update', [$this->model, $id]);
@@ -219,7 +220,7 @@ class UsersController extends Controller
             $user->update(Input::all());
 
             /** Check if permissions are being set */
-            if((Input::get('roles') != null) && $user->hasPermission(['module_users', 'update_users'])) {
+            if(Input::get('roles') != null && auth()->user()->hasPermission('create_users|update_users')) {
 
                 /** Syncronize both tables through pivot table */
                 $user->roles()->sync(Input::get('roles'));
@@ -254,18 +255,19 @@ class UsersController extends Controller
     /**
      * Update the user's avatar.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\UpdateUser;
      * @param App\Http\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    protected function avatarUpdate(Request $request, Model $user)
+    protected function avatarUpdate(UpdateUser $request, Model $user)
     {
         if(Storage::disk(config('user.default_disk'))->exists($user->image)) {
 
             Storage::disk(config('user.default_disk'))->delete($user->image);
         }
 
-        $path = $request->file('avatar')->store('avatars', config('user.default_disk'));
+        $path = Storage::disk(config('user.default_disk'))->putFile('avatars', $request->file('avatar'));
+
         $user->update(['image' => $path]);
     }
 }
