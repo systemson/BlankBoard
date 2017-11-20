@@ -21,27 +21,27 @@
     <ul class="nav navbar-nav">
 
       @auth
-      <li class="dropdown messages-menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-envelope-o"></i>
-          @if (Auth::user()->unreadEmails()->count() > 0)
-            <span class="label label-success">
-              {{ Auth::user()->unreadEmails()->count() }}
-            </span>
-          @endif
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header">{{ trans_choice('emails.unread-messages', Auth::user()->unreadEmails()->count()) }}</li>
-          <li>
-            <ul class="menu">
-              @include('includes.tables.header_emails')
-            </ul>
-          </li>
-          <li class="footer">
-            <a href="{{ route('emails.index') }}">{{ __('emails.open-inbox') }}</a>
-          </li>
-        </ul>
-      </li>
+        <li class="dropdown messages-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-envelope-o"></i>
+            @if (Auth::user()->unreadEmails()->count() > 0)
+              <span class="label label-success">
+                {{ Auth::user()->unreadEmails()->count() }}
+              </span>
+            @endif
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header">{{ trans_choice('emails.unread-messages', Auth::user()->unreadEmails()->count()) }}</li>
+            <li>
+              <ul class="menu">
+                @include('includes.tables.header_emails')
+              </ul>
+            </li>
+            <li class="footer">
+              <a href="{{ route('emails.index') }}">{{ __('emails.open-inbox') }}</a>
+            </li>
+          </ul>
+        </li>
 
         <!-- User Account Menu -->
         <li class="dropdown user user-menu">
@@ -90,6 +90,23 @@
         </li>
         <!-- /. user account menu -->
       @endauth
+      @guest
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="hidden-xs">Menu</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <ul class="menu">
+                <div class="col-sm-12 text-center text-nowrap">
+                  <a class="btn btn-success" href="{{ route('login') }}" >Login</a>
+                  <a class="btn btn-default" href="{{ route('register') }}" >Register</a>
+                </div>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      @endguest
 
     </ul>
   </div>

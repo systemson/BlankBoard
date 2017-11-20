@@ -20,7 +20,7 @@
       <div class="box box-primary">
 
         <div class="box-header with-border">
-          <h3 class="box-title">{{ ucfirst($name) }} list</h3>
+          <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
           <div class="box-tools pull-right">
             @if (Auth::user()->hasPermission('create_' . $name))
               <a class="{{ __('messages.btn.new.class') }}" href="{{ route($name . '.create') }}" >

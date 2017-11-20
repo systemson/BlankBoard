@@ -1,26 +1,37 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+<section class="content container-fluid">
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    @if (Auth::check())
-                        You are logged in!
-                    @else
-                        You are not logged in!
-                    @endif
-                </div>
+  <div class="col-sm-offset-2 col-sm-8">
+
+    <div class="row">
+
+      <div class="col-sm-12">
+        @include('includes.alerts')
+      </div>
+
+      <div class="col-sm-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Home</h3>
+            <div class="box-tools pull-right">
+              <button class="btn btn-box-tool" type="button" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+              </button>
             </div>
-        </div>
-    </div>
-</div>
+          </div><!-- Box header -->
+
+          <div class="box-body">
+
+          </div><!-- /. box body -->
+
+        </div><!-- /. box -->
+
+      </div><!-- /. col -->
+    </div><!-- /. row -->
+
+  </div><!-- /. col -->
+
+</section>
 @endsection
