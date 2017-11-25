@@ -41,8 +41,8 @@ trait EmailActionsTrait
         }
 
         /** Show the form for creating a new resource. */
-        return view('admin.' . $this->route . '.create')
-        ->with('name', $this->route)
+        return view('admin.' . $this->name . '.create')
+        ->with('name', $this->name)
         ->with('message', $message);
     }
 
@@ -78,11 +78,11 @@ trait EmailActionsTrait
         /** Redirect to inbox */
         if(Input::get('status') == 1) {
             return redirect()
-            ->route($this->route . '.index')
+            ->route($this->name . '.index')
             ->with('success', 'email-sended');
         } else {
             return redirect()
-            ->route($this->route . '.index')
+            ->route($this->name . '.index')
             ->with('info', 'email-drafted');
         }
     }
@@ -98,7 +98,7 @@ trait EmailActionsTrait
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Check if logged user is authorized to view resources */
+        /** Check if logged in user is authorized to make this request */
         $this->authorizeAction([
             $resource
         ]);
@@ -109,9 +109,9 @@ trait EmailActionsTrait
         }
 
         /** Displays the specified resource page */
-        return view('admin.' . $this->route . '.show')
+        return view('admin.' . $this->name . '.show')
         ->with('resource', $resource)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -125,7 +125,7 @@ trait EmailActionsTrait
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Check if logged user is authorized to update resources */
+        /** Check if logged in user is authorized to make this request */
         $this->authorizeAction([
             $resource
         ]);
@@ -137,9 +137,9 @@ trait EmailActionsTrait
         ];
 
         /** Displays the edit resource page */
-        return view('admin.' . $this->route . '.edit')
+        return view('admin.' . $this->name . '.edit')
         ->with('resource', $resource)
-        ->with('name', $this->route)
+        ->with('name', $this->name)
         ->with('message', $message);
     }
 
@@ -154,7 +154,7 @@ trait EmailActionsTrait
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Check if logged user is authorized to update resources */
+        /** Check if logged in user is authorized to make this request */
         $this->authorizeAction([
             $resource
         ]);
@@ -178,7 +178,7 @@ trait EmailActionsTrait
 
             /** If email is sended, redirect to inbox */
             return redirect()
-            ->route($this->route . '.index')
+            ->route($this->name . '.index')
             ->with('success', 'email-sended');
 
         } else {
@@ -200,7 +200,7 @@ trait EmailActionsTrait
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Check if logged user is authorized to delete resources */
+        /** Check if logged in user is authorized to make this request */
         $this->authorize([
             $resource
         ]);
@@ -219,7 +219,7 @@ trait EmailActionsTrait
 
             /** Redirect back */
             return redirect()
-            ->route($this->route . '.trash')
+            ->route($this->name . '.trash')
             ->with('danger', 'email-deleted');
         }
     }
@@ -235,7 +235,7 @@ trait EmailActionsTrait
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Check if logged user is authorized to delete resources */
+        /** Check if logged in user is authorized to make this request */
         $this->authorize([
             $resource
         ]);

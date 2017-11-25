@@ -20,12 +20,12 @@ class UsersController extends Controller
      *
      * @var string
      */
-    protected $route = 'users';
+    protected $name = 'users';
 
     /**
      * Model class.
      *
-     * @var class
+     * @var string
      */
     protected $model = Model::class;
 
@@ -50,9 +50,9 @@ class UsersController extends Controller
         $resources = $this->model::paginate($this->paginate);
 
         /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
+        return view('admin.' . $this->name . '.index')
         ->with('resources' , $resources)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -66,8 +66,8 @@ class UsersController extends Controller
         $this->authorize('create', $this->model);
 
         /** Show the form for creating a new resource. */
-        return view('admin.' . $this->route . '.create')
-        ->with('name', $this->route);
+        return view('admin.' . $this->name . '.create')
+        ->with('name', $this->name);
     }
 
     /**
@@ -103,7 +103,7 @@ class UsersController extends Controller
 
         /** Redirect to newly created user resource page */
         return redirect()
-        ->route($this->route . '.index')
+        ->route($this->name . '.index')
         ->with('success', 'user-created');
     }
 
@@ -123,9 +123,9 @@ class UsersController extends Controller
         $resource = $this->model::findOrFail($id);
 
         /** Displays the specified resource page */
-        return view('admin.' . $this->route . '.show')
+        return view('admin.' . $this->name . '.show')
         ->with('resource', $resource)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -143,9 +143,9 @@ class UsersController extends Controller
         $resource = $this->model::findOrFail($id);
 
         /** Displays the edit resource page */
-        return view('admin.' . $this->route . '.edit')
+        return view('admin.' . $this->name . '.edit')
         ->with('resource', $resource)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -202,7 +202,7 @@ class UsersController extends Controller
 
         /** Redirect to controller index */
         return redirect()
-        ->route($this->route . '.index')
+        ->route($this->name . '.index')
         ->with('warning', 'user-deleted');
     }
 

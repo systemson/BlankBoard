@@ -10,8 +10,8 @@ trait PivotTrait
      * Update the pivot column.
      *
      * @param  Relation $relation
-     * @param  array $columns The columns to update in the pivot table.
-     * @param  int $user_id The user id.
+     * @param  array $columns the columns to update in the pivot table.
+     * @param  int $user_id the user id.
      * @return \Illuminate\Http\Response
      */
     public function updatePivotColumn(Relation $relation, array $column, $user_id = null)

@@ -33,6 +33,7 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => strtolower($ability . '_' . str_replace(' ', '_', $module)),
                     'module' => $module,
                     'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ];
             }
         }

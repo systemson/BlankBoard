@@ -19,9 +19,9 @@ trait EmailFoldersTrait
 
 
         /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
+        return view('admin.' . $this->name . '.index')
         ->with('resources' , $resources)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
     /**
      * Show the sent mail list.
@@ -36,9 +36,9 @@ trait EmailFoldersTrait
         ->paginate($this->paginate);
 
         /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
+        return view('admin.' . $this->name . '.index')
         ->with('resources' , $resources)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -54,9 +54,9 @@ trait EmailFoldersTrait
         ->paginate($this->paginate);
 
         /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
+        return view('admin.' . $this->name . '.index')
         ->with('resources' , $resources)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -71,8 +71,8 @@ trait EmailFoldersTrait
         ->trashedEmails();
 
         /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
+        return view('admin.' . $this->name . '.index')
         ->with('resources' , $resources)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 }

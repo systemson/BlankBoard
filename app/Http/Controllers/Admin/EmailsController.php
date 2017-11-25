@@ -19,7 +19,7 @@ class EmailsController extends Controller
      *
      * @var string
      */
-    protected $route = 'emails';
+    protected $name = 'emails';
 
     /**
      * Model class.

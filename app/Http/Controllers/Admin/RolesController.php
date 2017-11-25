@@ -12,23 +12,18 @@ use DB;
 class RolesController extends Controller
 {
     use RoleValidationTrait;
+
     /**
      * The controller resource route name.
      *
      * @var string
      */
-    protected $route = 'roles';
+    protected $name = 'roles';
 
-    /**
-     * Whether the resource is private.
-     *
-     * @var boolean
-     */
-    protected $private = true;
     /**
      * Model class.
      *
-     * @var class
+     * @var string
      */
     protected $model = Model::class;
 
@@ -43,6 +38,7 @@ class RolesController extends Controller
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
+        /** Validate the form input */
         $request->validate($this->updateValidations());
 
         DB::transaction(function () use ($id) {
@@ -65,5 +61,22 @@ class RolesController extends Controller
         /** Redirect back */
         return redirect()->back()
         ->with('info', 'resource-updated');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'index',
+            'create' => 'create',
+            'store' => 'create',
+            'edit' => 'update',
+            'update' => 'update',
+            'destroy' => 'delete',
+        ];
     }
 }

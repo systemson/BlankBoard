@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\AuthorizeActionTrait;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-use App\Models\Permission;
-use Auth;
 
 abstract class ResourceController extends Controller
 {
+    use AuthorizeActionTrait;
+
     /**
-     * The controller resource route name.
+     * The controller resource name.
      *
      * @var string
      */
-    protected $route;
+    protected $name;
 
     /**
      * Model class.
      *
-     * @var class
+     * @var string
      */
     protected $model;
 
@@ -54,10 +55,11 @@ abstract class ResourceController extends Controller
     */
     public function __construct(Request $request)
     {
+        /** Request instance */
         $this->request = $request;
 
         /** Store the permissions on DB */
-        Permission::register($this->route, $this->permissions);
+        $this->registerPermissions($this->resourceAbilityMap());
     }
 
     /**
@@ -74,9 +76,9 @@ abstract class ResourceController extends Controller
         $resources = $this->model::paginate($this->paginate);
 
         /** Display a listing of the resources */
-        return view('admin.' . $this->route . '.index')
+        return view('admin.' . $this->name . '.index')
         ->with('resources' , $resources)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -90,8 +92,8 @@ abstract class ResourceController extends Controller
         $this->authorizeAction();
 
         /** Show the form for creating a new resource. */
-        return view('admin.' . $this->route . '.create')
-        ->with('name', $this->route);
+        return view('admin.' . $this->name . '.create')
+        ->with('name', $this->name);
     }
 
     /**
@@ -100,7 +102,7 @@ abstract class ResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request  $request)
+    public function store(Request $request)
     {
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
@@ -114,7 +116,7 @@ abstract class ResourceController extends Controller
 
         /** Redirect to newly created resource page */
         return redirect()
-        ->route($this->route . '.edit', $resource->id)
+        ->route($this->name . '.edit', $resource->id)
         ->with('success', 'resource-created');
     }
 
@@ -133,9 +135,9 @@ abstract class ResourceController extends Controller
         $resource = $this->model::findOrFail($id);
 
         /** Displays the specified resource page */
-        return view('admin.' . $this->route . '.show')
+        return view('admin.' . $this->name . '.show')
         ->with('resource', $resource)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -153,9 +155,9 @@ abstract class ResourceController extends Controller
         $resource = $this->model::findOrFail($id);
 
         /** Displays the edit resource page */
-        return view('admin.' . $this->route . '.edit')
+        return view('admin.' . $this->name . '.edit')
         ->with('resource', $resource)
-        ->with('name', $this->route);
+        ->with('name', $this->name);
     }
 
     /**
@@ -204,7 +206,7 @@ abstract class ResourceController extends Controller
 
         /** Redirect to controller index */
         return redirect()
-        ->route($this->route . '.index')
+        ->route($this->name . '.index')
         ->with('warning', 'resource-deleted');
     }
 
@@ -216,40 +218,8 @@ abstract class ResourceController extends Controller
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'index',
-            'show' => 'view',
-            'create' => 'create',
-            'store' => 'create',
-            'edit' => 'update',
-            'update' => 'update',
-            'destroy' => 'delete',
-            'restore' => 'delete',
+            //
         ];
-    }
-
-    protected function authorizeAction(array $params = [])
-    {
-        $params = empty($params) ? [$this->route] : $params;
-
-        $arguments = array_merge([$this->model], $params);
-
-        if($this->getAbility()) {
-            $this->authorize($this->getAbility(), $arguments);
-        }
-    }
-
-    protected function getActionMethod()
-    {
-        return $this->request->route()->getActionMethod();
-    }
-
-    protected function getAbility()
-    {
-        if(isset($this->resourceAbilityMap()[$this->getActionMethod()])) {
-            return $this->resourceAbilityMap()[$this->getActionMethod()];
-        }
-        return false;
-
     }
 }
 
