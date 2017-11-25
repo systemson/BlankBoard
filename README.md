@@ -1,19 +1,19 @@
-# BlankBoard (75%)
-Laravel, AdminLTE template and user authentification.
+# BlankBoard (70%)
+Basic users and permissions management system, with Laravel 5.5 on the AdminLTE template.
 
-1- Users
+### Users
 Using Laravel's API with BlankBoard you're able create new users, assing roles (or not) to the users to grant them access through out the app.
 
-2- Roles
+### Roles
 Roles are created within the GUI. You can attach permissions to the roles.
 
-3- Permissions
+### Permissions
 Permissions are created directly through the Controller. On the instiantiation of the Controller (would be moved to an independent action, to register the Controller on demand). The GUI don't let you creater or delete the Permissions. If you want to remove any permission from you app, just deactivate the desired permission.
 
-3- Messages
+### Messages
 You are be able to create, send and delete messages. If you want, you can store messages as drafts to be procesed in the future.
 
-ToDo:
-**This list should be soon updated**
+#### ToDo: ####
+This list should be soon updated
 
-* Move Controller registration to a independent action.
+* Move Controller's permission registration to a independent action.
