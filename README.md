@@ -1,4 +1,4 @@
-# BlankBoard (70%)
+# BlankBoard (80%)
 Basic users and permissions management system, with Laravel 5.5 on the AdminLTE template.
 
 ### Users
