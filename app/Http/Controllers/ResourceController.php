@@ -264,7 +264,3 @@ abstract class ResourceController extends Controller
         ];
     }
 }
-
-
-
-
