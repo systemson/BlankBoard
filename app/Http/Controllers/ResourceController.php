@@ -198,16 +198,58 @@ abstract class ResourceController extends Controller
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        /** Get the specified resource */
-        $resource = $this->model::findOrFail($id);
+        if (method_exists($this->model, 'trashed')) {
 
-        /** Delete the specified resource */
-        $resource->delete();
+            $resource = $this->model::withTrashed()->findOrFail($id);
+
+            if($resource->trashed()) {
+
+                $resource->forceDelete();
+
+            } else {
+
+                $resource->delete();
+
+                /** Redirect to controller index */
+                return redirect()
+                ->route($this->name . '.index')
+                ->with('warning', 'resource-trashed');
+            }
+
+        } else {
+            /** Get the specified resource */
+            $resource = $this->model::findOrFail($id);
+
+            $resource->delete();
+        }
 
         /** Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
-        ->with('warning', 'resource-deleted');
+        ->with('danger', 'resource-deleted');
+    }
+
+    /**
+     * Restore the specified resource.
+     *
+     * @param  int $id the specified resource id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
+
+        /** Get the specified resource */
+        $resource = $this->model::withTrashed()->findOrFail($id);
+
+        /** Delete the specified resource */
+        $resource->restore();
+
+        /** Redirect to controller index */
+        return redirect()
+        ->route($this->name . '.index')
+        ->with('info', 'resource-restored');
     }
 
     /**

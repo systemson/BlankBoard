@@ -68,6 +68,8 @@ return [
         'resource-created' => 'New resource created.',
         'resource-updated' => 'Resource successfully updated.',
         'resource-deleted' => 'Resource deleted.',
+        'resource-trashed' => 'Resource trashed.',
+        'resource-restored' => 'Resource restored.',
         'resource-failed' => 'Resource not updated.',
 
         // Users

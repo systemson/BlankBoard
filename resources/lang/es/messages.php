@@ -67,7 +67,9 @@ return [
         // Resources
         'resource-created' => 'Elemento creado safistactoriamente.',
         'resource-updated' => 'Elemento actualizado.',
-        'resource-deleted' => 'Elemento borrado.',
+        'resource-deleted' => 'Elemento eliminado.',
+        'resource-trashed' => 'Elemento movido a la papelera.',
+        'resource-restored' => 'Elemento restaurado.',
         'resource-failed' => 'Elemento no actualizado.',
 
         // Users

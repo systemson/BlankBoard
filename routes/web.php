@@ -55,7 +55,7 @@ Route::namespace('Admin')
      */
 
     /** Restore emails */
-    Route::patch('emails/{id}', 'EmailsController@restore')->name('emails.restore');
+    Route::patch('emails/{id}/restore', 'EmailsController@restore')->name('emails.restore');
 
     /** Resource routes */
     Route::resource('emails', 'EmailsController');
