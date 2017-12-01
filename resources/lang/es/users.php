@@ -40,4 +40,15 @@ return [
     /** Tab 6 */
     'tab-6' => 'Imagen',
 
+    // Alerts
+    'resource-created' => 'Nuevo usuario creado.',
+    'resource-updated' => 'Usuario actualizado satisfactoriamente.',
+    'resource-deleted' => 'Usuario eliminado.',
+
+    'avatar-updated' => 'Imagen de perfil actualizada.',
+
+    'password-success' => 'Contraseña actualizada satisfactoriamente.',
+    'password-failed' => 'Contraseña no actualizada.',
+    'password-failed-small' => 'La "contraseña actual" que has ingresado no se corresponde con nuestros registros. Por favor intenta de nuevo.',
+
 ];

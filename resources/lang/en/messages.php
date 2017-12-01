@@ -72,11 +72,6 @@ return [
         'resource-restored' => 'Resource restored.',
         'resource-failed' => 'Resource not updated.',
 
-        // Users
-        'user-created' => 'New user created.',
-        'user-updated' => 'User successfully updated.',
-        'user-deleted' => 'User deleted.',
-
         // Emails
         'email-sended' => 'Email successfully sended.',
         'email-drafted' => 'Email drafted.',
@@ -84,13 +79,6 @@ return [
         'email-trashed' => 'Email moved to Trash folder.',
         'email-deleted' => 'Email permanently deleted.',
         'email-restored' => 'Email restored.',
-
-        'avatar-updated' => 'Avatar successfully updated.',
-
-        'password-success' => 'Password successfully updated.',
-
-        'password-failed' => 'Password not updated.',
-        'password-failed-small' => 'Check the spelling and try again. These are the main reasons: 1) The current password is wrong, 2) The password and the password confirmation do not match, 3) The new password is the same of the current one. If you still can\'t change it, contact an administrator.',
 
         'login' => 'Logged in.',
         'login-small' => 'You have been successfully logged in.',

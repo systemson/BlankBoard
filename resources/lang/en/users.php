@@ -40,4 +40,15 @@ return [
     /** Tab 6 */
     'tab-6' => 'Image',
 
+    // Alerts
+    'resource-created' => 'New user created.',
+    'resource-updated' => 'User successfully updated.',
+    'resource-deleted' => 'User deleted.',
+
+    'avatar-updated' => 'Avatar successfully updated.',
+
+    'password-success' => 'Password successfully updated.',
+    'password-failed' => 'Password not updated.',
+    'password-failed-small' => 'The current password you provided doesn\'t match our records. Check the spelling and try again.',
+
 ];

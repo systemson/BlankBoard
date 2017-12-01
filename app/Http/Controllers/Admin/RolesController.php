@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\ResourceController as Controller;
 use App\Http\Controllers\Traits\RoleValidationTrait;
 use DB;
+use Lang;
 
 class RolesController extends Controller
 {
@@ -60,7 +61,10 @@ class RolesController extends Controller
 
         /** Redirect back */
         return redirect()->back()
-        ->with('info', 'resource-updated');
+        ->with('info', Lang::has($this->name . '.resource-updated') ?
+            $this->name . '.resource-updated' :
+            'messages.alert.resource-updated'
+        );
     }
 
     /**

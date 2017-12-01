@@ -104,7 +104,7 @@ class UsersController extends Controller
         /** Redirect to newly created user resource page */
         return redirect()
         ->route($this->name . '.index')
-        ->with('success', 'user-created');
+        ->with('success', $this->name . '.resource-created');
     }
 
     /**
@@ -165,19 +165,26 @@ class UsersController extends Controller
 
         if(Input::get('password')) {
             if ($check = $this->passwordUpdate($resource)) {
-                return redirect()->back()->with('info', 'password');
+
+                return redirect()
+                ->back()->with('info', $this->name . '.password-success');
             }
-            return redirect()->back()->with('warning', 'password-failed');
+            return redirect()->back()->with('warning', $this->name . '.password-failed');
         }
 
         if(Input::file('avatar')) {
             $this->avatarUpdate($request, $resource);
-            return redirect()->back()->with('info', 'avatar-updated');
+
+            return redirect()
+            ->back()
+            ->with('success', $this->name . '.avatar-updated');
         }
 
         if($this->userUpdate($resource)) {
             /** Redirect back */
-            return redirect()->back()->with('info', 'user-updated');
+            return redirect()
+            ->back()
+            ->with('success', $this->name . '.resource-updated');
         }
 
         return redirect()->back()->with('warning', 'failed');
@@ -191,7 +198,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        /** Check if logged user is authorized to delete resources */
+        /** Check if logged user is authorized */
         $this->authorize('delete', [$this->model, $id]);
 
         /** Get the specified resource */
@@ -203,7 +210,7 @@ class UsersController extends Controller
         /** Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
-        ->with('warning', 'user-deleted');
+        ->with('danger', $this->name . '.resource-deleted');
     }
 
     /**

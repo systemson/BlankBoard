@@ -20,5 +20,10 @@ return [
       'status' => 'Status',
     ],
 
+    // Alerts
+    'resource-created' => 'New role created.',
+    'resource-updated' => 'Role successfully updated.',
+    'resource-deleted' => 'Role deleted.',
+
     'confirm-delete' => 'This action can be reverted. Are you sure?',
 ];

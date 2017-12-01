@@ -20,5 +20,8 @@ return [
       'status' => 'Status',
     ],
 
+    // Alerts
+    'resource-updated' => 'Permission successfully updated.',
+
     'confirm-delete' => 'This action can be reverted. Are you sure?',
 ];

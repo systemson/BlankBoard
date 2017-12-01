@@ -3,9 +3,9 @@
     <a href="#" class="close" data-dismiss="alert" aria-label="close">
       <i class="fa fa-close"></i>
     </a>
-    <p><strong>{{ __('messages.alert.' . session('success')) }}</strong>
-      @if (Lang::has('messages.alert.' . session('success') . '-small'))
-        {{ __('messages.alert.' . session('success') . '-small') }}
+    <p><strong>{{ __(session('success')) }}</strong>
+      @if (Lang::has(session('success') . '-small'))
+        {{ __(session('success') . '-small') }}
       @endif
     </p>
   </div>
@@ -14,9 +14,9 @@
     <a href="#" class="close" data-dismiss="alert" aria-label="close">
       <i class="fa fa-close"></i>
     </a>
-    <p><strong>{{ __('messages.alert.' . session('info')) }}</strong>
-      @if (Lang::has('messages.alert.' . session('info') . '-small'))
-        {{ __('messages.alert.' . session('info') . '-small') }}
+    <p><strong>{{ __(session('info')) }}</strong>
+      @if (Lang::has(session('info') . '-small'))
+        {{ __(session('info') . '-small') }}
       @endif
     </p>
   </div>
@@ -25,9 +25,9 @@
     <a href="#" class="close" data-dismiss="alert" aria-label="close">
       <i class="fa fa-close"></i>
     </a>
-    <h3>{{ __('messages.alert.' . session('warning')) }}</h3>
-    @if (Lang::has('messages.alert.' . session('warning') . '-small'))
-      <p>{{ __('messages.alert.' . session('warning') . '-small') }}</p>
+    <h3>{{ __(session('warning')) }}</h3>
+    @if (Lang::has(session('warning') . '-small'))
+      <p>{{ __(session('warning') . '-small') }}</p>
     @endif
   </div>
 @elseif (session('danger'))
@@ -35,9 +35,9 @@
     <a href="#" class="close" data-dismiss="alert" aria-label="close">
       <i class="fa fa-close"></i>
     </a>
-    <h3>{{ __('messages.alert.' . session('danger')) }}</h3>
-    @if (Lang::has('messages.alert.' . session('danger') . '-small'))
-      <p>{{ __('messages.alert.' . session('danger') . '-small') }}</p>
+    <h3>{{ __(session('danger')) }}</h3>
+    @if (Lang::has(session('danger') . '-small'))
+      <p>{{ __(session('danger') . '-small') }}</p>
     @endif
   </div>
 @elseif ($errors->any())

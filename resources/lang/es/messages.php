@@ -72,11 +72,6 @@ return [
         'resource-restored' => 'Elemento restaurado.',
         'resource-failed' => 'Elemento no actualizado.',
 
-        // Users
-        'user-created' => 'Usuario creado safistactoriamente.',
-        'user-updated' => 'Usuario actualizado.',
-        'user-deleted' => 'Usuario eliminado.',
-
         // Emails
         'email-sended' => 'Correo enviado safistactoriamente.',
         'email-drafted' => 'Correo movido a borradores.',
@@ -84,13 +79,6 @@ return [
         'email-trashed' => 'Correo movido a la papelera.',
         'email-deleted' => 'Correo eliminado.',
         'email-restored' => 'Correo restaurado.',
-
-        'avatar-updated' => 'Imagen de perfil actualizada.',
-
-        'password-success' => 'Contraseña actualizada safistactoriamente.',
-
-        'password-failed' => 'Contraseña no actualizada.',
-        'password-failed-small' => 'Verifica nuevamente e intenta de nuevi. Estas son las prinipales razones: 1) La contraseña actual no es la correcta, 2) La confirmación no se corresponde con la contraseña, 3) La nueva contraseña es la misma que la actual. Si aún tienes problemas contacta con un administrador.',
 
         'login' => 'Bienvenido.',
         'login-small' => 'Te has conectado safistactoriamente.',

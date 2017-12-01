@@ -75,7 +75,7 @@ class LoginController extends Controller
         }
 
         return redirect()->intended($this->redirectPath())
-        ->with('success', 'login');
+        ->with('success', 'messages.alert.login');
     }
 
     /**
@@ -92,6 +92,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         return redirect($this->redirectAfterLogoutTo)
-        ->with('info', 'logout');
+        ->with('info', 'messages.alert.logout');
     }
 }

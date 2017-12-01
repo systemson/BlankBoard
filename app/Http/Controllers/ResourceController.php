@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\AuthorizeActionTrait;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use Lang;
 
 abstract class ResourceController extends Controller
 {
@@ -117,7 +118,10 @@ abstract class ResourceController extends Controller
         /** Redirect to newly created resource page */
         return redirect()
         ->route($this->name . '.edit', $resource->id)
-        ->with('success', 'resource-created');
+        ->with('success', Lang::has($this->name . '.resource-created') ?
+            $this->name . '.resource-created' :
+            'messages.alert.resource-created'
+        );
     }
 
     /**
@@ -184,7 +188,10 @@ abstract class ResourceController extends Controller
 
         /** Redirect back */
         return redirect()->back()
-        ->with('info', 'resource-updated');
+        ->with('info', Lang::has($this->name . '.resource-updated') ?
+            $this->name . '.resource-updated' :
+            'messages.alert.resource-updated'
+        );
     }
 
     /**
@@ -213,7 +220,10 @@ abstract class ResourceController extends Controller
                 /** Redirect to controller index */
                 return redirect()
                 ->route($this->name . '.index')
-                ->with('warning', 'resource-trashed');
+                ->with('warning', Lang::has($this->name . '.resource-trashed') ?
+                    $this->name . '.resource-trashed' :
+                    'messages.alert.resource-trashed'
+                );
             }
 
         } else {
@@ -226,7 +236,10 @@ abstract class ResourceController extends Controller
         /** Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
-        ->with('danger', 'resource-deleted');
+        ->with('danger', Lang::has($this->name . '.resource-deleted') ?
+            $this->name . '.resource-deleted' :
+            'messages.alert.resource-deleted'
+        );
     }
 
     /**
@@ -249,7 +262,10 @@ abstract class ResourceController extends Controller
         /** Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
-        ->with('info', 'resource-restored');
+        ->with('success', Lang::has($this->name . '.resource-restored') ?
+            $this->name . '.resource-restored' :
+            'messages.alert.resource-restored'
+        );
     }
 
     /**

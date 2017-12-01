@@ -20,5 +20,8 @@ return [
       'status' => 'Estado',
     ],
 
+    // Alerts
+    'resource-updated' => 'Permiso actualizado satisfactoriamente.',
+
     'confirm-delete' => 'Esta acción no puede ser revertida. ¿Estás seguro?',
 ];
