@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('status')->default(1);
             $table->string('image', 255)->nullable();
             $table->text('description')->nullable();
+            $table->dateTime('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

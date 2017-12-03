@@ -11,7 +11,7 @@
  *
  * @param   array|string $compare the route names to compare
  * @param   boolean $isResource define the resource
- * @param   aray $params the names to add or remove from $resourceMap
+ * @param   array $params the names to add or remove from $actionMap
  */
 if(!function_exists('routeNameIs')) {
 
@@ -19,20 +19,20 @@ if(!function_exists('routeNameIs')) {
 
         $current = Request::route()->getName();
 
-        $resourceMap = ['index', 'create', 'show', 'edit'];
-        $resourceMap = $params['only'] ?? $resourceMap;
-        $resourceMap = isset($params['except']) ? array_diff($resourceMap, $params['except']) : $resourceMap;
+        $actionMap = ['index', 'create', 'show', 'edit'];
+        $actionMap = $params['only'] ?? $actionMap;
+        $actionMap = isset($params['except']) ? array_diff($actionMap, $params['except']) : $actionMap;
 
         if(is_array($compare) && $isResource) {
 
             foreach($compare as $name) {
-                foreach($resourceMap as $action) {
+                foreach($actionMap as $action) {
                     $map[] = $name . '.' . $action;
                 }
             }
         } elseif($isResource) {
 
-            foreach($resourceMap as $action) {
+            foreach($actionMap as $action) {
                 $map[] = $compare . '.' . $action;
             }
         }

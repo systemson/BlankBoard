@@ -65,7 +65,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
 
-        /** @todo  check if is a good practice to valide user status here */
+        /** @todo  check if is a good practice to validate user status here */
         if($user->status < 0) {
             $this->guard()->logout();
             $request->session()->invalidate();

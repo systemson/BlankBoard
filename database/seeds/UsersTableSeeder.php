@@ -13,7 +13,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            ['user' => 'superadmin',
+            [
+            'user' => 'superadmin',
             'name' => 'Superadmin',
             'last_name' => null,
             'description' => 'I am the superuser. I have no limitations. Don\'t use me on production.',
