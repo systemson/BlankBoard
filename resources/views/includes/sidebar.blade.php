@@ -41,7 +41,7 @@
     </li>
     <!-- /. dashboard module -->
 
-    @if (Auth::user()->isActive() && Auth::user()->last_password_change != null)
+    @if (Auth::user()->isActive(true))
     <!-- Mailbox Module -->
     <li class="treeview @if (routeNameIs('emails', true) || routeNameIs(['emails.sent', 'emails.draft', 'emails.trash'])) menu-open @endif">
       <a href="#"><i class="fa fa-envelope"></i> <span>{{ __('emails.parent') }}</span>

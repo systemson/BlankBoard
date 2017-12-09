@@ -61,12 +61,12 @@ trait RolesPermissionTrait
      */
     public function hasPermission($slugs, $anyInModule = false)
     {
-        /** Check if user is inactive */
+        /** Check if user is super admin */
         if($this->isSuperAdmin()) {
             return true;
 
         /** Check if user is inactive */
-        } elseif($this->isInactive() || $this->last_password_change == null) {
+        } elseif($this->isInactive(true)) {
             return false;
         }
 
@@ -95,5 +95,4 @@ trait RolesPermissionTrait
 
         return false;
     }
-
 }

@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'last_password_change' => Carbon::now(),
+            'last_password_change' => null,
             ],
         ]);
     }

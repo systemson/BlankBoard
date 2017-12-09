@@ -58,13 +58,18 @@ class User extends BaseUserModel
     /**
      * Check if the user is active.
      *
+     * @param boolean $new_user
      * @return boolean
      */
-    public function isActive()
+    public function isActive($new_user = false)
     {
         if($this->status > 0 || $this->isSuperAdmin()) {
 
             return true;
+
+        } elseif($new_user && $this->last_password_change == null) {
+
+            return false;
         }
 
         return false;
@@ -77,7 +82,7 @@ class User extends BaseUserModel
      */
     public function isInactive()
     {
-        if($this->status <= 0) {
+        if($this->status <= 0 && !$this->isSuperAdmin()) {
 
             return true;
         }
