@@ -50,6 +50,8 @@ return [
     'password-success' => 'Password successfully updated.',
     'password-failed' => 'Password not updated.',
     'password-failed-small' => 'The password provided doesn\'t match our records. Check the spelling and try again.',
+    'password-expired' => 'Your password has expired.',
+    'password-expired-small' => 'Please change your password to continue using your account.',
 
     'new-user' => 'Welcome for the first time.',
     'new-user-small' => 'Your account is already registered, but before you start using it, you first need to activate it. Please change your password to activate your account.',

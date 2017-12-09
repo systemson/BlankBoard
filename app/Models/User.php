@@ -61,13 +61,52 @@ class User extends BaseUserModel
      * @param boolean $new_user
      * @return boolean
      */
+    public function isNew()
+    {
+        if($this->last_password_change == null) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the user is active.
+     *
+     * @param boolean $new_user
+     * @return boolean
+     */
+    public function passwordExpired()
+    {
+        /** Days from last password change */
+        $passwordDays = $this->last_password_change != null ? $this->last_password_change->diffInDays() : 0;
+
+        /** Days for password expiring */
+        $days = config('user.password_expire');
+
+        /** Check if the password is expired or the user is newly registered */
+        if(($days > 0 && $passwordDays > $days) || $this->isNew()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the user is active.
+     *
+     * @param boolean $new_user
+     * @return boolean
+     */
     public function isActive($new_user = false)
     {
         if($this->status > 0 || $this->isSuperAdmin()) {
 
             return true;
 
-        } elseif($new_user && $this->last_password_change == null) {
+        } elseif($new_user && $this->passwordExpired()) {
 
             return false;
         }

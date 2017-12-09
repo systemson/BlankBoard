@@ -2,10 +2,9 @@
 
 return [
 
-
     /*
     |--------------------------------------------------------------------------
-    | Set the days to deactivate users that have no activity.
+    | Allow visitors to register new accounts.
     |
     | **Not working yet**
     |--------------------------------------------------------------------------
@@ -20,21 +19,20 @@ return [
     | **Not working yet**
     |--------------------------------------------------------------------------
     |
-    | 0 disable this feature.
-    |
+    | Set 0 to disable this feature.
     */
 
     'deactivate_users_after' => 0,
 
     /*
     |--------------------------------------------------------------------------
-    | Set the days to force a password change for users.
-    |
-    | **Not working yet**
+    | Set the days for password expiring.
     |--------------------------------------------------------------------------
+    |
+    | Set 0 to disable this feature.
     */
 
-    'change_password_after' => 0,
+    'password_expire' => 0,
 
     /*
     |--------------------------------------------------------------------------

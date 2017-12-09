@@ -66,7 +66,7 @@ trait RolesPermissionTrait
             return true;
 
         /** Check if user is inactive */
-        } elseif($this->isInactive(true)) {
+        } elseif($this->isInactive() || $this->passwordExpired()) {
             return false;
         }
 

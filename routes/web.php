@@ -41,7 +41,7 @@ Route::namespace('Front')
 /** Group for Admin namespace */
 Route::namespace('Admin')
 ->prefix('admin')
-->middleware(['auth', 'clear-cache', 'inactive', 'new-user'])
+->middleware(['auth', 'clear-cache', 'inactive', 'password-expire'])
 ->group(function () {
 
     /** Default controller for admin site */
