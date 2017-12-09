@@ -12,6 +12,7 @@ use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
 use App\Http\Controllers\Controller;
 use DB;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -164,7 +165,7 @@ class UsersController extends Controller
         $resource = $this->model::findOrFail($id);
 
         if(Input::get('password')) {
-            if ($check = $this->passwordUpdate($resource)) {
+            if ($this->passwordUpdate($resource)) {
 
                 return redirect()
                 ->back()->with('info', $this->name . '.password-success');
@@ -248,13 +249,14 @@ class UsersController extends Controller
     {
         /** Validate user's password */
         if (Hash::check(Input::post('old_password'), $user->password) && !Hash::check(Input::post('password'), $user->password)) {
-
             /** Update user's password */
-            $user->update([
+            if($user->update([
                 'password' => bcrypt(Input::get('password')),
-            ]);
-            /** Redirect back */
-            return true;
+                'last_password_change' => Carbon::now(),
+            ])) {
+                return true;
+            };
+
         }
         return false;
     }

@@ -19,7 +19,7 @@ class User extends BaseUserModel
      * @var array
      */
     protected $fillable = [
-        'user', 'name', 'password', 'last_name', 'email', 'image', 'status', 'description',
+        'name', 'last_name', 'email', 'password', 'status', 'image', 'description', 'last_login', 'last_password_change',
     ];
 
     /**
@@ -37,7 +37,7 @@ class User extends BaseUserModel
      * @var array
      */
     protected $dates = [
-        'created_at', 'updated_at', 'deleted_at',
+        'last_password_change', 'created_at', 'updated_at', 'deleted_at',
     ];
 
     /**

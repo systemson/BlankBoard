@@ -51,4 +51,7 @@ return [
     'password-failed' => 'Contraseña no actualizada.',
     'password-failed-small' => 'La "contraseña actual" que has ingresado no se corresponde con nuestros registros. Por favor intenta de nuevo.',
 
+    'new-user' => 'Bienvenido por primera vez.',
+    'new-user-small' => 'Tu cuenta ya se encuentra registrada, pero antes de empezar a utilizarla, debes activarla. Por favor cambia tu contraseña para activar tu cuenta.',
+
 ];

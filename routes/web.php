@@ -41,7 +41,7 @@ Route::namespace('Front')
 /** Group for Admin namespace */
 Route::namespace('Admin')
 ->prefix('admin')
-->middleware(['auth', 'clear-cache', 'inactive'])
+->middleware(['auth', 'clear-cache', 'inactive', 'new-user'])
 ->group(function () {
 
     /** Default controller for admin site */
@@ -54,9 +54,6 @@ Route::namespace('Admin')
      * Emails module
      */
 
-    /** Restore emails */
-    Route::patch('emails/{id}/restore', 'EmailsController@restore')->name('emails.restore');
-
     /** Resource routes */
     Route::resource('emails', 'EmailsController');
 
@@ -64,6 +61,9 @@ Route::namespace('Admin')
     Route::get('sent_emails', 'EmailsController@sentEmails')->name('emails.sent');
     Route::get('draft_emails', 'EmailsController@draftEmails')->name('emails.draft');
     Route::get('trashed_emails', 'EmailsController@trashedEmails')->name('emails.trash');
+
+    /** Restore emails */
+    Route::patch('emails/{id}/restore', 'EmailsController@restore')->name('emails.restore');
 
     /** Users module */
     Route::resource('users', 'UsersController');

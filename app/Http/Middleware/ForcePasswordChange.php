@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class RedirectIfInactive
+class ForcePasswordChange
 {
-
     /**
      * Handle an incoming request.
      *
@@ -18,12 +17,12 @@ class RedirectIfInactive
     {
         $user = $request->user();
 
-        if ($user->isActive() || routeNameIs(['users.show', 'users.edit', 'users.update'])) {
+        if ($user->last_password_change != null || routeNameIs(['users.edit', 'users.update'])) {
 
             return $next($request);
         }
 
-        return redirect()->route('users.show', $user->id)
-        ->with('warning', 'messages.alert.inactive');
+        return redirect()->route('users.edit', $user->id)
+        ->with('info', 'users.new-user');
     }
 }

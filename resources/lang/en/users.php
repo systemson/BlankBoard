@@ -49,6 +49,9 @@ return [
 
     'password-success' => 'Password successfully updated.',
     'password-failed' => 'Password not updated.',
-    'password-failed-small' => 'The current password you provided doesn\'t match our records. Check the spelling and try again.',
+    'password-failed-small' => 'The password provided doesn\'t match our records. Check the spelling and try again.',
+
+    'new-user' => 'Welcome for the first time.',
+    'new-user-small' => 'Your account is already registered, but before you start using it, you first need to activate it. Please change your password to activate your account.',
 
 ];

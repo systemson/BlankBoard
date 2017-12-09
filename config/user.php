@@ -6,6 +6,8 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Set the days to deactivate users that have no activity.
+    |
+    | **Not working yet**
     |--------------------------------------------------------------------------
     */
 
@@ -14,6 +16,8 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Set the days to deactivate users that have no activity.
+    |
+    | **Not working yet**
     |--------------------------------------------------------------------------
     |
     | 0 disable this feature.
@@ -25,6 +29,8 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Set the days to force a password change for users.
+    |
+    | **Not working yet**
     |--------------------------------------------------------------------------
     */
 
@@ -40,7 +46,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set the default avatar for the users haven't set any avatar yet.
+    | Set the default avatar for the users that haven't set any avatar yet.
     |--------------------------------------------------------------------------
     */
 
@@ -48,7 +54,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set the default disc role for the Superadmin user.
+    | Set the default disc for storing the avatar images
     |--------------------------------------------------------------------------
      */
 
@@ -56,7 +62,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set the user role for super admin.
+    | User role for super admin.
     |--------------------------------------------------------------------------
     |
     | Set the id or slug for the super admin role.

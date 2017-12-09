@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'inactive' => \App\Http\Middleware\RedirectIfInactive::class,
         'clear-cache' => \App\Http\Middleware\ClearCache::class,
+        'new-user' => \App\Http\Middleware\ForcePasswordChange::class,
     ];
 }
