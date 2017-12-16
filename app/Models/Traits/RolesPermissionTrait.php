@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 
 use App\Models\Role;
 use App\Models\Permission;
+use Illuminate\Support\Facades\Cache;
 
 trait RolesPermissionTrait
 {
@@ -17,6 +18,33 @@ trait RolesPermissionTrait
         return $this->belongsToMany(Role::class)->where('status', 1);
     }
 
+    /**
+     * Cache user roles.
+     *
+     * @return mixed
+     */
+    public function cachedRoles()
+    {
+        return Cache::remember('user_' . $this->id . '_roles', 15, function () {
+            return $this->roles;
+        });
+    }
+
+    /**
+     * Get cached roles with a certain user.
+     *
+     * @return mixed
+     */
+    public function cachedPermissions()
+    {
+        return Cache::remember('user_' . $this->id . '_permissions', 15, function () {
+            $permissions = collect([]);
+            foreach($this->roles as $role) {
+                $permissions = $permissions->merge($role->permissions->toArray());
+            }
+            return $permissions;
+        });
+    }
 
     /**
      * Check if the user is super admin.
@@ -42,11 +70,11 @@ trait RolesPermissionTrait
     {
         if(is_string($slug)) {
 
-            return $this->roles->contains('slug', $slug);
+            return $this->cachedRoles()->contains('slug', $slug);
 
         } elseif (is_int($slug)) {
 
-            return $this->roles->contains('id', $slug);
+            return $this->cachedRoles()->contains('id', $slug);
         }
 
         return false;
@@ -75,24 +103,13 @@ trait RolesPermissionTrait
             $slugs = explode('|', $slugs);
         }
 
-        foreach($this->roles as $role) {
+        if(!$anyInModule) {
+            /** Find current permissions slugs */
+            return $this->cachedPermissions()->whereIn('slug', $slugs)->isNotEmpty();
 
-            $permissions = $role->permissions;
-
-            if($anyInModule) {
-                /** Find current role permission modules */
-                $exists = $role->permissions()->whereIn('module', $slugs)->exists();
-
-            } else {
-                /** Find current permissions slugs */
-                $exists = $role->permissions()->whereIn('slug', $slugs)->exists();
-            }
-
-            if($exists) {
-               return true;
-            }
+        } else {
+            /** Find current role permission modules */
+            return $this->cachedPermissions()->whereIn('module', $slugs)->isNotEmpty();
         }
-
-        return false;
     }
 }

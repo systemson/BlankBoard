@@ -6,7 +6,7 @@ return [
     'draft' => 'Borradores',
     'sent' => 'Enviados',
     'trash' => 'Papelera',
-    'parent' => 'Correo',
+    'parent' => 'Mensajes',
     'name' => 'mensaje|mensajes',
     'list' => 'Listado de :title',
     'add' => 'Agregar un nuevo :name',
@@ -29,17 +29,5 @@ return [
     'confirm-delete' => 'Este correo será eliminado de forma permanente. ¿Estás seguro?',
 
     'unread-messages' => '{0} No hay mensajes.|[1,4] Tienes algunos mensajes nuevos.|[5,12] Tienes muchos mensajes nuevos.|[13,*] Debes revisar tus correos.',
+
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-
