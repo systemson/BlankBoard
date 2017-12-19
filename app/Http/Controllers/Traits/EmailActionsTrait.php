@@ -79,11 +79,11 @@ trait EmailActionsTrait
         if(Input::get('status') == 1) {
             return redirect()
             ->route($this->name . '.index')
-            ->with('success', 'email-sended');
+            ->with('success', $this->name . '.alert.email-sended');
         } else {
             return redirect()
             ->route($this->name . '.index')
-            ->with('info', 'email-drafted');
+            ->with('info', $this->name . '.alert.email-drafted');
         }
     }
 
@@ -99,7 +99,7 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged in user is authorized to make this request */
-        $this->authorizeAction([
+        $this->authorize('view', [
             $resource
         ]);
 
@@ -126,10 +126,11 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged in user is authorized to make this request */
-        $this->authorizeAction([
+        $this->authorize('update', [
             $resource
         ]);
 
+        /** Set the message headers */
         $message = [
             'to' => $resource->recipients->pluck('id'),
             'subject' => $resource->subject,
@@ -155,7 +156,7 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged in user is authorized to make this request */
-        $this->authorizeAction([
+        $this->authorize('update', [
             $resource
         ]);
 
@@ -179,13 +180,13 @@ trait EmailActionsTrait
             /** If email is sended, redirect to inbox */
             return redirect()
             ->route($this->name . '.index')
-            ->with('success', 'email-sended');
+            ->with('success', $this->name . '.alert.email-sended');
 
         } else {
 
             /** If email is drafted, redirect back */
             return back()
-            ->with('info', 'email-updated');
+            ->with('info', $this->name . '.alert.email-updated');
         }
     }
 
@@ -201,7 +202,7 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged in user is authorized to make this request */
-        $this->authorize([
+        $this->authorize('delete', [
             $resource
         ]);
 
@@ -210,7 +211,7 @@ trait EmailActionsTrait
             $this->trashEmail($resource);
 
             /** Redirect back */
-            return back()->with('warning', 'email-trashed');
+            return back()->with('warning', $this->name . '.alert.email-trashed');
 
         } elseif(($resource->hasOwner(auth()->id()) && $resource->status < 1) || $this->getPivotColumn($resource->recipients(), 'status') == -1) {
 
@@ -220,7 +221,7 @@ trait EmailActionsTrait
             /** Redirect back */
             return redirect()
             ->route($this->name . '.trash')
-            ->with('danger', 'email-deleted');
+            ->with('danger', $this->name . '.alert.email-deleted');
         }
     }
 
@@ -236,7 +237,7 @@ trait EmailActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Check if logged in user is authorized to make this request */
-        $this->authorize([
+        $this->authorize('delete', [
             $resource
         ]);
 
@@ -253,7 +254,7 @@ trait EmailActionsTrait
         $this->updatePivotColumn($resource->recipients(), ['status' => 1]);
 
         /** Redirect back */
-        return back()->with('info', 'email-restored');
+        return back()->with('info', $this->name . '.alert.email-restored');
 
     }
 

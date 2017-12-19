@@ -72,14 +72,6 @@ return [
         'resource-restored' => 'Resource restored.',
         'resource-failed' => 'Resource not updated.',
 
-        // Emails
-        'email-sended' => 'Email successfully sended.',
-        'email-drafted' => 'Email drafted.',
-        'email-updated' => 'Email updated.',
-        'email-trashed' => 'Email moved to Trash folder.',
-        'email-deleted' => 'Email permanently deleted.',
-        'email-restored' => 'Email restored.',
-
         'login' => 'Logged in.',
         'login-small' => 'You have been successfully logged in.',
 

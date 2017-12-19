@@ -30,4 +30,13 @@ return [
 
     'unread-messages' => '{0} No hay mensajes.|[1,4] Tienes algunos mensajes nuevos.|[5,12] Tienes muchos mensajes nuevos.|[13,*] Debes revisar tus correos.',
 
+    // Alerts
+    'alert' => [
+        'email-sended' => 'Correo enviado safistactoriamente.',
+        'email-drafted' => 'Correo movido a borradores.',
+        'email-updated' => 'Correo actualizado.',
+        'email-trashed' => 'Correo movido a la papelera.',
+        'email-deleted' => 'Correo eliminado.',
+        'email-restored' => 'Correo restaurado.',
+    ],
 ];

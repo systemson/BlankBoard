@@ -29,17 +29,13 @@ return [
     'confirm-delete' => 'This email will be permanently deleted. Are you sure?',
 
     'unread-messages' => '{0} No new messages.|[1,4] You have a few new messages.|[5,12] You have many new messages.|[13,*] You SHOULD check your inbox.',
+
+    'alert' => [
+        'email-sended' => 'Email successfully sended.',
+        'email-drafted' => 'Email drafted.',
+        'email-updated' => 'Email updated.',
+        'email-trashed' => 'Email moved to rash folder.',
+        'email-deleted' => 'Email permanently deleted.',
+        'email-restored' => 'Email restored.',
+    ],
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-

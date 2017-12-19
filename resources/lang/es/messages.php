@@ -72,14 +72,6 @@ return [
         'resource-restored' => 'Elemento restaurado.',
         'resource-failed' => 'Elemento no actualizado.',
 
-        // Emails
-        'email-sended' => 'Correo enviado safistactoriamente.',
-        'email-drafted' => 'Correo movido a borradores.',
-        'email-updated' => 'Correo actualizado.',
-        'email-trashed' => 'Correo movido a la papelera.',
-        'email-deleted' => 'Correo eliminado.',
-        'email-restored' => 'Correo restaurado.',
-
         'login' => 'Bienvenido.',
         'login-small' => 'Te has conectado safistactoriamente.',
 
