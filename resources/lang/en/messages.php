@@ -21,7 +21,7 @@ return [
         1  => ['name' => 'Active', 'class' => 'label label-success'],
         0  => ['name' => 'Inactive', 'class' => 'label label-default'],
         -1 => ['name' => 'Suspended', 'class' => 'label label-warning'],
-        -2 => ['name' => 'Cancelled', 'class' => 'label label-danger'],
+        -2 => ['name' => 'Canceled', 'class' => 'label label-danger'],
     ],
 
     // Buttons
@@ -88,7 +88,13 @@ return [
         'failed-small' => 'Try again or contact an administrator.',
 
         'inactive' => 'Inactive account.',
-        'inactive-small' => 'Your account has been deactivated. Please activate back your account if you want to interact with the admin site.',
+        'inactive-small' => 'Your account has been deactivated. Please activate it back if you want to interact with the admin site.',
+
+        'suspended' => 'Suspended account.',
+        'suspended-small' => 'Your account has been suspended. To reactivate your account please contact an administrator.',
+
+        'canceled' => 'Canceled account.',
+        'canceled-small' => 'Your account has been canceled. You have no access to this site.',
     ],
 
     // Messages

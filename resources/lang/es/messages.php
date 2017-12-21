@@ -89,7 +89,14 @@ return [
 
         'inactive' => 'Cuenta inactiva.',
         'inactive-small' => 'Tu cuenta ha sido desactivada.',
+
+        'suspended' => 'Cuenta suspendida.',
+        'suspended-small' => 'Tu cuenta ha sido suspendida. Para reactivarla por favor contacta a un administrador.',
+
+        'canceled' => 'Cuenta cancelada.',
+        'canceled-small' => 'Tu cuenta ha sido cancelada. No tienes accesso a esta página.',
     ],
+
 
     // Messages
     'access-denied' => 'Acceso denegado. No puedes acceder a esta página.',

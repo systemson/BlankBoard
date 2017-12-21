@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\UserEmailsTrait;
 use App\Models\Traits\RolesPermissionTrait;
+use App\Models\AccessLog;
 use App\User as BaseUserModel;
 
 class User extends BaseUserModel
@@ -39,6 +40,17 @@ class User extends BaseUserModel
     protected $dates = [
         'last_password_change', 'created_at', 'updated_at', 'deleted_at',
     ];
+
+    /**
+     * Get failed login attempts with a certain user.
+     *
+     * @return mixed
+     */
+    public function failed_login_attemps()
+    {
+        return $this->hasMany(AccessLog::class)
+        ->where('event', 'failed');
+    }
 
     /**
      * Display user avatar.
