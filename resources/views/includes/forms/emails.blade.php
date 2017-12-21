@@ -15,7 +15,7 @@
   </div>
 
     <div class="form-group{{ $errors->has('to') ? ' has-error' : '' }}">
-      {{ Form::select('to[]', \App\Models\User::all()->except(Auth::id())->pluck('name','id'), $message['to'], ['class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple']) }}
+      {{ Form::select('to[]', \App\Models\User::where('status', '>', 0)->get()->except(Auth::id())->pluck('name','id'), $message['to'], ['class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple']) }}
     </div>
 
     <div class="form-group{{ $errors->has('subject') ? ' has-error' : '' }}">

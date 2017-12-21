@@ -14,19 +14,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set the days to deactivate users that have no activity.
-    |
-    | **Not working yet**
-    |--------------------------------------------------------------------------
-    |
-    | Set 0 to disable this feature.
-    */
-
-    'deactivate_users_after' => 0,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Set the days for password expiring.
+    | Days for password expiring.
     |--------------------------------------------------------------------------
     |
     | Set 0 to disable this feature.
@@ -36,7 +24,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set the default password for new users.
+    | Default password for new users.
     |--------------------------------------------------------------------------
     */
 
@@ -44,7 +32,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set the default avatar for the users that haven't set any avatar yet.
+    | Default avatar for the users that haven't set one yet.
     |--------------------------------------------------------------------------
     */
 
@@ -52,7 +40,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set the default disc for storing the avatar images
+    | Default disc for storing the avatar images
     |--------------------------------------------------------------------------
      */
 
@@ -68,4 +56,27 @@ return [
     */
 
     'superuser' => 1,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fail login attempt limits.
+    |--------------------------------------------------------------------------
+    |
+    | Set the rules for the failed attempt limits. Set the number of days and
+    | the limit of failed attempts to suspend the user. To access this feature
+    | the "failed_limits" must be an array containing the number days as key(s)
+    | and the limit of failed attempts as values. This will tell the Blankboard
+    | login to suspend users if they have reached the limit in the specified
+    | days. You can add multiple limits by different numbers of days, just by
+    | adding a new item to the array.
+    |
+    | Set an empty array to disable this feature.
+    |
+    */
+
+    'failed_limits' => [
+        1 => 7,
+        7 => 15,
+        30 => 21,
+    ],
 ];

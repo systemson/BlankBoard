@@ -15,7 +15,7 @@ class AccessLogsTable extends Migration
     {
         Schema::create('access_logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
             $table->string('user_name', 50);
             $table->string('event', 50);
             $table->timestamps();

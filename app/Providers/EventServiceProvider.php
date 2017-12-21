@@ -18,11 +18,15 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\UdateLastLogin',
+            'App\Listeners\LogSuccessfulLogin',
         ],
 
         'Illuminate\Auth\Events\Failed' => [
             'App\Listeners\LogFailedLogin',
+        ],
+
+        'Illuminate\Auth\Events\Logout' => [
+            'App\Listeners\LogSuccessfulLogout',
         ],
     ];
 

@@ -140,4 +140,19 @@ class User extends BaseUserModel
 
         return false;
     }
+
+    /**
+     * Check if the user is inactive.
+     *
+     * @return boolean
+     */
+    public function isForbidden()
+    {
+        if($this->status < 0 && !$this->isSuperAdmin()) {
+
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -85,7 +85,7 @@ class LoginController extends Controller
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
         if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent();
+            $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
         }
@@ -96,7 +96,7 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            if($this->guard()->user()->status < 0) {
+            if($this->guard()->user()->isForbidden()) {
                 return $this->sendForbiddenResponse($request);
             } else {
                 return $this->sendLoginResponse($request);

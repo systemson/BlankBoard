@@ -35,7 +35,6 @@ class LogFailedLogin
             ]);
         } else {
             AccessLog::create([
-                'user_id' => 0,
                 'user_name' => $event->credentials['user'],
                 'event' => 'failed',
             ]);

@@ -31,13 +31,16 @@ trait LoginSuspensionTrait
      */
     public function reachedFailedAttemptsLimit(Request $request)
     {
-        if($this->failedAttempts($request, 1) >= 5 ||
-            $this->failedAttempts($request, 7) >= 7 ||
-            $this->failedAttempts($request, 30) >= 20
-        ) {
-            return true;
+        $array = config('user.failed_limits', []);
 
+        foreach($array as $days => $limit) {
+
+            if($this->failedAttempts($request, $days) >= $limit) {
+
+                return true;
+            }
         }
+
         return false;
     }
 
@@ -52,8 +55,11 @@ trait LoginSuspensionTrait
         $user = User::where('user', $request->user)
         ->first();
 
-        $user->status = -1;
-        $user->save();
+        if($user != null) {
+
+            $user->status = -1;
+            $user->save();
+        }
     }
 
     /**
@@ -65,9 +71,11 @@ trait LoginSuspensionTrait
     public function sendForbiddenResponse(Request $request)
     {
         switch($this->guard()->user()->status) {
+
             case -1:
                 $status = 'suspended';
                 break;
+
             case -2:
                 $status = 'canceled';
                 break;
