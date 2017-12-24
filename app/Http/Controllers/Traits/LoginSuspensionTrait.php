@@ -19,6 +19,7 @@ trait LoginSuspensionTrait
     public function failedAttempts(Request $request, $days)
     {
         return AccessLog::where('user_name', $request->user)
+        ->where('event', 'failed')
         ->where('created_at', '>', Carbon::now()->subDays($days))
         ->count();
     }

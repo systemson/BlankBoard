@@ -47,6 +47,6 @@ class Email extends Model
 
     public function hasOwner($user_id)
     {
-        return $this->user_id == auth()->id();
+        return $this->user_id == $user_id;
     }
 }

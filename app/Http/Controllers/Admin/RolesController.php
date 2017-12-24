@@ -29,6 +29,45 @@ class RolesController extends Controller
     protected $model = Model::class;
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        /** Check if logged in user is authorized to make this request */
+        $this->authorizeAction();
+
+        $request->validate($this->storeValidations());
+
+        /** Create a new resource */
+       $resource = DB::transaction(function () {
+
+            /** Update the specified resource */
+            $resource = $this->model::create(Input::all());
+
+            /** Check if permissions are being set */
+            if((Input::get('permissions') != null)) {
+
+                /** Syncronize both tables through pivot table */
+                $resource->permissions()->sync(Input::get('permissions'));
+            }
+
+            return $resource;
+
+        }, 5);
+
+        /** Redirect to newly created resource page */
+        return redirect()
+        ->route($this->name . '.edit', $resource->id)
+        ->with('success', Lang::has($this->name . '.resource-created') ?
+            $this->name . '.resource-created' :
+            'messages.alert.resource-created'
+        );
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  int $id the specified resource id
@@ -53,7 +92,7 @@ class RolesController extends Controller
             /** Check if permissions are being set */
             if((Input::get('permissions') != null)) {
 
-                /** Syncronize both tables through pivot tale */
+                /** Syncronize both tables through pivot table */
                 $resource->permissions()->sync(Input::get('permissions'));
             }
 

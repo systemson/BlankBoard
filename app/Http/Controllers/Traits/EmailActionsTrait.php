@@ -242,7 +242,7 @@ trait EmailActionsTrait
         ]);
 
         /** Restore email to sent folder */
-        if($resource->user_id == auth()->id()) {
+        if($resource->hasOwner(auth()->id())) {
 
             $resource->update(['status' => 1]);
 
@@ -269,7 +269,12 @@ trait EmailActionsTrait
 
     protected function deleteEmail(Email $email)
     {
-        if($email->hasOwner(auth()->id())) {
+        if($email->status == 0) {
+            DB::transaction(function () use ($email) {
+                $email->delete();
+                $email->recipients()->detach();
+            }, 5);
+        } elseif($email->hasOwner(auth()->id())) {
             $email->update(['status' => -2]);
         } else {
             $this->updatePivotColumn($email->recipients(), ['status' => -2]);

@@ -64,7 +64,7 @@ trait UserEmailsTrait
      */
     public function trashedEmails()
     {
-        $sended = $this->belongsTo(Email::class, 'id', 'user_id')
+        $sent = $this->belongsTo(Email::class, 'id', 'user_id')
         ->where('emails.status', -1)
         ->get();
 
@@ -72,7 +72,7 @@ trait UserEmailsTrait
         ->wherePivot('status', '=', -1)
         ->get();
 
-        return $sended->merge($received);
+        return $sent->merge($received);
     }
 
 }

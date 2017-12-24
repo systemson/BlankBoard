@@ -1,4 +1,4 @@
-# BlankBoard (90%)
+# BlankBoard (95%)
 Basic users and permissions management system, with Laravel 5.5 on the AdminLTE template.
 
 ### Users
@@ -14,6 +14,5 @@ Permissions are created directly through the Controller. On the instiantiation o
 You are be able to create, send and delete messages. If you want, you can store messages as drafts to be procesed in the future.
 
 #### ToDo: ####
-This list should be soon updated
 
 * Move Controller's permission registration to a independent action.
