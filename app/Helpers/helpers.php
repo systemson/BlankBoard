@@ -82,7 +82,7 @@ if(!function_exists('breadcrumb')) {
 
         if (!empty($children)) {
             foreach($children as $child) {
-                $breadcrumb .= '<li class="active">'; .$child . '</li>';
+                $breadcrumb .= '<li class="active">' .$child . '</li>';
             }
         } else {
             $breadcrumb .= '<li class="active">' . __('messages.here') . '</li>';
