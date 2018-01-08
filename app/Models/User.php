@@ -84,9 +84,8 @@ class User extends BaseUserModel
     }
 
     /**
-     * Check if the user is active.
+     * Check if the user password is expired.
      *
-     * @param boolean $new_user
      * @return boolean
      */
     public function passwordExpired()
@@ -94,7 +93,7 @@ class User extends BaseUserModel
         /** Days from last password change */
         $passwordDays = $this->last_password_change != null ? $this->last_password_change->diffInDays() : 0;
 
-        /** Days for password expiring */
+        /** Days until password expiring */
         $days = config('user.password_expire');
 
         /** Check if the password is expired or the user is newly registered */
@@ -109,7 +108,7 @@ class User extends BaseUserModel
     /**
      * Check if the user is active.
      *
-     * @param boolean $new_user
+     * @param boolean $new_user if true validate password expiry.
      * @return boolean
      */
     public function isActive($new_user = false)
@@ -142,7 +141,7 @@ class User extends BaseUserModel
     }
 
     /**
-     * Check if the user is inactive.
+     * Check if the user is forbidden.
      *
      * @return boolean
      */

@@ -31,7 +31,7 @@ trait RolesPermissionTrait
     }
 
     /**
-     * Get cached roles with a certain user.
+     * Get cached permissions with a certain user.
      *
      * @return mixed
      */
