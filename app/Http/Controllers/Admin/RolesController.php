@@ -9,6 +9,7 @@ use App\Http\Controllers\ResourceController as Controller;
 use App\Http\Controllers\Traits\RoleValidationTrait;
 use DB;
 use Lang;
+use Illuminate\Support\Facades\Cache;
 
 class RolesController extends Controller
 {
@@ -97,6 +98,9 @@ class RolesController extends Controller
             }
 
         }, 5);
+
+        /** Clear user permissions cache */
+        Cache::forget('user_' . $id . '_permissions');
 
         /** Redirect back */
         return redirect()->back()
