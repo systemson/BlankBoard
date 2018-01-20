@@ -3,6 +3,8 @@
 /**
  * Check if the provided route name(s) is(are) is the current route name.
  *
+ * @todo    Accept multiple names with | as divider.
+ *
  * @param   array|string $compare the route names to compare.
  * @param   boolean $isResource define the resource.
  * @param   array $params the names to add or remove from $actionMap.
@@ -24,7 +26,7 @@ if(!function_exists('routeNameIs')) {
                     $map[] = $name . '.' . $action;
                 }
             }
-        } elseif($isResource) {
+        }elseif($isResource) {
             foreach($actionMap as $action) {
                 $map[] = $compare . '.' . $action;
             }
@@ -80,6 +82,7 @@ if(!function_exists('breadcrumb')) {
         /** Add the main item */
         $breadcrumb .= '<li><a href="' . route($main['route']) . '">' . $main['name'] . '</a></li>';
 
+        /** Add the children items */
         if (!empty($children)) {
             foreach($children as $child) {
                 $breadcrumb .= '<li class="active">' .$child . '</li>';

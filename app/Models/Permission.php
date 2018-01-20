@@ -31,7 +31,7 @@ class Permission extends Model
      * @param   array $permissions the permission to register.
      * @return  void
      */
-    public static function register($module, array $permissions = [])
+    public function register($module, array $permissions = [])
     {
         if(!empty($permissions)) {
 
@@ -41,7 +41,7 @@ class Permission extends Model
                 self::firstOrCreate(['slug' => strtolower($ability . '_' . $module)],
                     [
                         'name' => ucwords($ability . ' ' . $module),
-                        'module' => ucfirst($module),
+                        'module' => studly_case($module),
                     ]);
             }
         }

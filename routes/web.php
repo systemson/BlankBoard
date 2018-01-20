@@ -65,6 +65,10 @@ Route::namespace('Admin')
     /** Restore emails */
     Route::patch('emails/{id}/restore', 'EmailsController@restore')->name('emails.restore');
 
+    /**
+     * Access section
+     */
+
     /** Users module */
     Route::resource('users', 'UsersController');
 

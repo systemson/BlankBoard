@@ -70,7 +70,7 @@ trait RolesPermissionTrait
     {
         if(is_string($slug)) {
 
-            return $this->cachedRoles()->contains('slug', $slug);
+            return $this->cachedRoles()->contains('slug', strtolower($slug));
 
         } elseif (is_int($slug)) {
 
