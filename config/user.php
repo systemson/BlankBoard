@@ -32,7 +32,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default avatar for the users that haven't set one yet.
+    | Default role id for new users.
+    |--------------------------------------------------------------------------
+    |
+    | Set 0 to disable this feature.
+    */
+
+    'default_role' => 4,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default avatar for users without one.
     |--------------------------------------------------------------------------
     */
 
@@ -59,7 +69,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Fail login attempt limits.
+    | Failed login attempt limits.
     |--------------------------------------------------------------------------
     |
     | Set the rules for the failed attempt limits. Set the number of days and
@@ -75,8 +85,9 @@ return [
     */
 
     'failed_limits' => [
-        1 => 7,
-        7 => 15,
-        30 => 21,
+    //  Days  => Failed attempts
+         1    =>  7,
+         7    => 15,
+        30    => 21,
     ],
 ];

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\URL;
+use DB;
 use Carbon\Carbon;
 
 class RegisterController extends Controller
@@ -66,12 +67,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'user' => $data['user'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'last_password_change' => Carbon::now(),
-        ]);
+
+        return DB::transaction(function () use ($data) {
+
+            /** Create a new resource */
+            $resource = User::create([
+                'user' => $data['user'],
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'last_password_change' => Carbon::now(),
+            ]);
+
+            /** Synchronize both tables through pivot table */
+            $resource->roles()->sync(config('user.default_role'));
+
+            /** Returns the newly created resource */
+            return $resource;
+        }, 5);
     }
 }

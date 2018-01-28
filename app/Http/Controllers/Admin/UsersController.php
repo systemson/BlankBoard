@@ -92,17 +92,15 @@ class UsersController extends Controller
                 'password' => bcrypt(config('user.default_password', 'secret')),
             ]);
 
-
             /** Check if permissions are being set */
             if(Input::get('roles') != null) {
-
-                /** Syncronize both tables through pivot table */
+                /** Synchronize both tables through pivot table */
                 $resource->roles()->sync(Input::get('roles'));
             }
 
         }, 5);
 
-        /** Redirect to newly created user resource page */
+        /** Redirect to resource index page */
         return redirect()
         ->route($this->name . '.index')
         ->with('success', $this->name . '.resource-created');
@@ -230,7 +228,7 @@ class UsersController extends Controller
             /** Check if permissions are being set */
             if(Input::get('roles') != null && auth()->user()->hasPermission('create_users|update_users')) {
 
-                /** Syncronize both tables through pivot table */
+                /** Synchronize both tables through pivot table */
                 $user->roles()->sync(Input::get('roles'));
             }
 
