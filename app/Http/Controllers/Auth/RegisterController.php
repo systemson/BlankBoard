@@ -79,8 +79,10 @@ class RegisterController extends Controller
                 'last_password_change' => Carbon::now(),
             ]);
 
-            /** Synchronize both tables through pivot table */
-            $resource->roles()->sync(config('user.default_role'));
+            if (config('user.default_role')) {
+                /** Synchronize both tables through pivot table */
+                $resource->roles()->sync(config('user.default_role'));
+            }
 
             /** Returns the newly created resource */
             return $resource;
