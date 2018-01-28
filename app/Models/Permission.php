@@ -31,10 +31,9 @@ class Permission extends Model
      * @param   array $permissions the permission to register.
      * @return  void
      */
-    public function register($module, array $permissions = [])
+    public static function register($module, array $permissions = [])
     {
         if(!empty($permissions)) {
-
             foreach($permissions as $ability) {
 
                 /** Create permission if don't exist */

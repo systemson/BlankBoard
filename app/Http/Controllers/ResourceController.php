@@ -36,7 +36,7 @@ abstract class ResourceController extends Controller
     protected $paginate;
 
     /**
-     * Request.
+     * Instance of Illuminate\Http\Request.
      *
      * @var Illuminate\Http\Request
      */
