@@ -40,7 +40,7 @@
       <p>{{ __(session('danger') . '-small') }}</p>
     @endif
   </div>
-@elseif ($errors->any())
+@elseif (isset($errors) && $errors->any())
   <div class="alert alert-danger alert-dismissable fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">
       <i class="fa fa-close"></i>
