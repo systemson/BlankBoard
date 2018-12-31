@@ -2,56 +2,46 @@
 
 @section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
-@section('content')
+@section('content-header')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')], 'after' => [__('messages.edit')]])
+  @include('admin.includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')], 'after' => [__('messages.edit')]])
 <!-- /. content header -->
+@stop
 
-<!-- Main content -->
-<section class="content container-fluid">
+@section('content')
+@if (Auth::id() == $resource->id)
+<div class="col-sm-3">
+  @include('admin.includes.box-profile')
+</div>
+@endif
 
-  <div class="row">
+<div class="@if(Auth::id() == $resource->id) col-sm-9 @else col-sm-12 @endif">
 
-    <div class="col-sm-12">
-      @include('includes.alerts')
-    </div>
+  <div class="nav-tabs-custom">
 
-    @if (Auth::id() == $resource->id)
-      <div class="col-sm-3">
-        @include('includes.box-profile')
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#user-data" data-toggle="tab" aria-expanded="true">{{ __('users.tab-4') }}</a></li>
+      <li><a href="#password" data-toggle="tab" aria-expanded="true">{{ __('users.tab-5') }}</a></li>
+      <li><a href="#image" data-toggle="tab" aria-expanded="true">{{ __('users.tab-6') }}</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <div id="user-data" class="tab-pane active">
+        @include('admin.includes.forms.users_update_adv')
       </div>
-    @endif
 
-    <div class="@if(Auth::id() == $resource->id) col-sm-9 @else col-sm-12 @endif">
+      <div id="password" class="tab-pane">
+        @include('admin.includes.forms.users_password')
+      </div>
 
-      <div class="nav-tabs-custom">
+      <div id="image" class="tab-pane">
+        @include('admin.includes.forms.users_image')
+      </div>
 
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#user-data" data-toggle="tab" aria-expanded="true">{{ __('users.tab-4') }}</a></li>
-          <li><a href="#password" data-toggle="tab" aria-expanded="true">{{ __('users.tab-5') }}</a></li>
-          <li><a href="#image" data-toggle="tab" aria-expanded="true">{{ __('users.tab-6') }}</a></li>
-        </ul>
+    </div><!-- /. tab content -->
 
-        <div class="tab-content">
+  </div><!-- /. box -->
 
-          <div id="user-data" class="tab-pane active">
-            @include('includes.forms.users_update_adv')
-          </div>
-
-          <div id="password" class="tab-pane">
-            @include('includes.forms.users_password')
-          </div>
-
-          <div id="image" class="tab-pane">
-            @include('includes.forms.users_image')
-          </div>
-
-        </div><!-- /. tab content -->
-
-      </div><!-- /. box -->
-
-    </div><!-- /. col -->
-  </div><!-- /. row -->
-
-</section><!-- /.content -->
+</div><!-- /. col -->
 @stop

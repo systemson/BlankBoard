@@ -26,15 +26,22 @@ class PermissionsTableSeeder extends Seeder
             'Delete',
         ];
 
+        $except = [
+            'permissions.create',
+            'permissions.delete',
+        ];
+
         foreach($modules as $module) {
             foreach($abilities as $ability) {
-                $insert[] = [
-                    'name' => $ability . ' ' . $module,
-                    'slug' => strtolower($ability . '_' . str_replace(' ', '_', $module)),
-                    'module' => $module,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ];
+                if (!in_array($module . '.' . $ability, $except)) {
+                    $insert[] = [
+                        'name' => $ability . ' ' . $module,
+                        'slug' => strtolower($ability . '_' . str_replace(' ', '_', $module)),
+                        'module' => $module,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ];
+                }
             }
         }
 

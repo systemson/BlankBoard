@@ -2,45 +2,35 @@
 
 @section('title', config('app.name', 'Laravel') . ' - ' . __($name . '.title'))
 
-@section('content')
+@section('content-header')
 <!-- Content header (Page header) -->
-  @include('includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')]])
+  @include('admin.includes.content-header', ['name' => $name, 'before' => [['name' => __('messages.admin-site'), 'route' => 'admin'], __($name . '.parent')]])
 <!-- /. content header -->
+@stop
 
-<!-- Main content -->
-<section class="content container-fluid">
+@section('content')
+<div class="col-sm-3">
+  @include('admin.includes.box-email')
+</div>
 
-  <div class="row">
+<div class="col-sm-9">
+  <div class="box box-primary">
 
-    <div class="col-sm-12">
-      @include('includes.alerts')
+    <div class="box-body no-padding">
+      <div class="mailbox-messages">
+        @if (routeNameIs('emails.index'))
+        @include('admin.includes.tables.emails_inbox')
+        @elseif (routeNameIS('emails.draft'))
+        @include('admin.includes.tables.emails_draft')
+        @elseif (routeNameIS('emails.sent'))
+        @include('admin.includes.tables.emails_sent')
+        @elseif (routeNameIS('emails.trash'))
+        @include('admin.includes.tables.emails_trash')
+        @endif
+      </div>
     </div>
 
-    <div class="col-sm-3">
-      @include('includes.box-email')
-    </div>
+  </div><!-- /. box -->
 
-    <div class="col-sm-9">
-      <div class="box box-primary">
-
-        <div class="box-body no-padding">
-          <div class="mailbox-messages">
-            @if (routeNameIs('emails.index'))
-              @include('includes.tables.emails_inbox')
-            @elseif (routeNameIS('emails.draft'))
-              @include('includes.tables.emails_draft')
-            @elseif (routeNameIS('emails.sent'))
-              @include('includes.tables.emails_sent')
-            @elseif (routeNameIS('emails.trash'))
-              @include('includes.tables.emails_trash')
-            @endif
-          </div>
-        </div>
-
-      </div><!-- /. box -->
-
-    </div><!-- /. col -->
-  </div><!-- /. row -->
-
-</section><!-- /.content -->
+</div><!-- /. col -->
 @stop

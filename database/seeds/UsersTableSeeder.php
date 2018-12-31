@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
             'last_password_change' => Carbon::now(),
             ],
             ['user' => 'admin',
-            'name' => 'Diseños Devilu',
+            'name' => 'Administrator',
             'last_name' => null,
             'description' => 'I am the main administration account. Use me when you need to administrate the app.',
             'email' => 'devilu@admin.com',

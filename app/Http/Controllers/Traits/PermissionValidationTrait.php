@@ -13,7 +13,6 @@ trait PermissionValidationTrait
      */
     protected function updateValidations() {
         return [
-            'module' => 'required|max:32',
             'description' => 'nullable|max:120',
         ];
     }

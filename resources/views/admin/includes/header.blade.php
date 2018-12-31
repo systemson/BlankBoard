@@ -1,7 +1,7 @@
 <!-- Logo -->
 <a href="{{ route('dashboard.index') }}" class="logo">
   <!-- mini logo for sidebar mini 50x50 pixels -->
-  <span class="logo-mini"><b>DDU</b></span>
+  <span class="logo-mini"><b>{{ config('app.short-name', 'AS') }}</b></span>
   <!-- logo for regular state and mobile devices -->
   <span class="logo-lg"><b>{{ config('app.name') }}</b></span>
 </a>
@@ -34,7 +34,7 @@
             <li class="header">{{ trans_choice('emails.unread-messages', Auth::user()->unreadEmails()->count()) }}</li>
             <li>
               <ul class="menu">
-                @include('includes.tables.header_emails')
+                @include('admin.includes.tables.header_emails')
               </ul>
             </li>
             <li class="footer">

@@ -14,10 +14,21 @@ class CreateEmailUserTable extends Migration
     public function up()
     {
         Schema::create('email_user', function (Blueprint $table) {
-            $table->integer('email_id');
-            $table->integer('user_id');
+            $table->increments('id');
+            $table->integer('email_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('status')->default(1);
             $table->integer('is_read')->default(0);
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+
+            $table->foreign('email_id')
+            ->references('id')
+            ->on('emails')
+            ->onDelete('cascade');
         });
     }
 
