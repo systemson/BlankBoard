@@ -36,7 +36,6 @@
             <th class="text-center">{{ __($name . '.table.action') }}</th>
             @endif
             <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
-            <th>{{ __($name . '.table.slug') }}</th>
             <th class="text-center">{{ __($name . '.table.status') }}</th>
           </tr>
         </thead>
@@ -63,7 +62,6 @@
               {{ $resource->name }}
               @endif
             </td>
-            <td>{{ $resource->slug }}</td>
             <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
               {{ __('messages.status.' . $resource->status . '.name') }}
             </span></td>

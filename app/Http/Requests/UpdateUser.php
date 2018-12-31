@@ -34,7 +34,7 @@ class UpdateUser extends FormRequest
                 break;
             case 'user-update':
                 $rules = [
-                    'user' => 'required|max:18|alpha_num',
+                    'username' => 'required|max:18|alpha_num',
                     'name' => 'required|max:50',
                     'last_name' => 'nullable|max:50',
                     'email' => 'required|email|max:100',

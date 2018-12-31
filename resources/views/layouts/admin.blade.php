@@ -2,6 +2,7 @@
 <html>
 <head>
   @include('admin.includes.head')
+  @yield('styles')
 </head>
 <body class="hold-transition skin-blue @auth sidebar-mini @else sidebar-collapse @endguest">
 
@@ -54,6 +55,7 @@
 
   <!-- scripts -->
   @include('admin.includes.scripts')
+  @yield('scripts')
 
 </body>
 </html>

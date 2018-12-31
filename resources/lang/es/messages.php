@@ -101,6 +101,7 @@ return [
     // Messages
     'access-denied' => 'Acceso denegado. No puedes acceder a esta página.',
     'required-fields' => '(*) Campos obligatorios.',
+    'no-results' => 'No se han encontrado resultados.',
 
     // Date format
     'date-format' => 'j M. Y g:i a'

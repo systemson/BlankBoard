@@ -16,7 +16,9 @@ class PermissionsTableSeeder extends Seeder
         $modules = [
             'Users',
             'Roles',
-            'Permissions'
+            'Permissions',
+            'Categories',
+            'Articles',
         ];
 
         $abilities = [
@@ -27,9 +29,12 @@ class PermissionsTableSeeder extends Seeder
         ];
 
         $except = [
-            'permissions.create',
-            'permissions.delete',
+            'Permissions.Create',
+            'Permissions.Delete',
+            'Roles.View',
         ];
+
+        //$insert = collect();
 
         foreach($modules as $module) {
             foreach($abilities as $ability) {
@@ -45,6 +50,7 @@ class PermissionsTableSeeder extends Seeder
             }
         }
 
+        //DB::table('permissions')->insert($insert->all());
         DB::table('permissions')->insert($insert);
     }
 }

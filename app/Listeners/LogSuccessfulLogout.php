@@ -29,7 +29,7 @@ class LogSuccessfulLogout
     {
         AccessLog::create([
             'user_id' => $event->user->id,
-            'user_name' => $event->user->user,
+            'user_name' => $event->user->username,
             'event' => 'logout',
         ]);
     }

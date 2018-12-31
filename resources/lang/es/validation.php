@@ -111,12 +111,14 @@ return [
     */
     'attributes' => [
         // User forms
-        'user' => 'usuario',
+        'username' => 'usuario',
         'name' => 'nombre',
+        'title' => 'titulo',
         'last_name' => 'apellido',
         'email' => 'correo',
         'status' => 'estado',
         'description' => 'descripción',
+        'content' => 'contenido',
         'roles' => 'roles',
         'old_password' => 'contraseña actual',
         'password' => 'contraseña',

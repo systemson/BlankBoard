@@ -42,10 +42,10 @@
         </thead>
         <tbody>
 
-          @foreach ($resources as $resource)
+          @forelse ($resources as $resource)
           <tr>
             <td>{{ $resource->id }}</td>
-            @if (Auth::user()->hasPermission('delete_' . $name))
+            @if (Auth::user()->hasPermission('delete_' . $name) && auth()->user()->id !== $resource->id && $resource->id !== 1)
             <td class="text-nowrap">
               {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
               {{ Form::button( __('messages.action.trash'), array(
@@ -55,6 +55,8 @@
               )) }}
               {{ Form::close() }}
             </td>
+            @else
+            <td></td>
             @endif
             <td>
               @if (Auth::user()->hasPermission('update_' . $name))
@@ -67,7 +69,9 @@
               {{ __('messages.status.' . $resource->status . '.name') }}
             </span></td>
           </tr>
-          @endforeach
+          @empty
+          <tr><td colspan="4">{{ __('messages.no-results') }}</td></tr>
+          @endforelse
 
         </tbody>
       </table>

@@ -11,7 +11,7 @@
 |
 */
 
-/**
+/*
  * Auth routes
  */
 Route::middleware('clear-cache')
@@ -20,12 +20,12 @@ Route::middleware('clear-cache')
 });
 
 
-/**
+/*
  * Public site
  */
 
-/** Group for Public namespace */
-/** @todo  rename namespace to "Public" */
+/* Group for Public namespace */
+/**@todo  rename namespace to "Public" */
 Route::namespace('Front')
 ->group(function () {
     /** Default controller for front site */
@@ -34,52 +34,64 @@ Route::namespace('Front')
 });
 
 
-/**
+/*
  * Admin site
  */
 
-/** Group for Admin namespace */
+/* Group for Admin namespace */
 Route::namespace('Admin')
 ->prefix('admin')
 ->middleware(['auth', 'clear-cache', 'inactive', 'password-expire'])
 ->group(function () {
 
-    /** Default controller for admin site */
+    /* Default controller for the admin site */
     Route::get('/', 'DashboardController@index')->name('admin');
 
-    /** Dashboard page */
+    /* Dashboard page */
     Route::get( 'dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
 
-    /**
+
+    /*
      * Emails module
      */
 
-    /** Resource routes */
+    /* Resource routes */
     Route::resource('emails', 'EmailsController');
 
-    /** Emails folders */
+    /* Emails folders */
     Route::get('sent_emails', 'EmailsController@sentEmails')->name('emails.sent');
     Route::get('draft_emails', 'EmailsController@draftEmails')->name('emails.draft');
     Route::get('trashed_emails', 'EmailsController@trashedEmails')->name('emails.trash');
 
-    /** Restore emails */
+    /* Restore emails */
     Route::patch('emails/{id}/restore', 'EmailsController@restore')->name('emails.restore');
 
-    /**
+
+    /*
      * Access section
      */
 
-    /** Users module */
+    /* Users module */
     Route::resource('users', 'UsersController');
 
-    /** Roles module */
+    /* Roles module */
     Route::resource('roles', 'RolesController')->except('show');
 
-    /** Permissions module */
+    /* Permissions module */
     Route::resource('permissions', 'PermissionsController')->only([
         'index',
         'edit',
         'update',
     ]);
 
+
+    /*
+     * Content section
+     */
+
+    /* Articles module */
+    Route::resource('articles', 'ArticlesController')->except('show');
+
+    /* Categories module */
+    Route::resource('categories', 'CategoriesController')->except('show');
 });

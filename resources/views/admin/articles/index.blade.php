@@ -35,8 +35,9 @@
             @if (Auth::user()->hasPermission('delete_' . $name))
             <th class="text-center">{{ __($name . '.table.action') }}</th>
             @endif
-            <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
-            <th>{{ __($name . '.table.slug') }}</th>
+            <th class="col-sm-12">{{ __($name . '.table.title') }}</th>
+            <th class="col-sm-12">{{ __($name . '.table.author') }}</th>
+            <th class="col-sm-12">{{ __($name . '.table.category') }}</th>
             <th class="text-center">{{ __($name . '.table.status') }}</th>
           </tr>
         </thead>
@@ -58,12 +59,13 @@
             @endif
             <td>
               @if (Auth::user()->hasPermission('update_' . $name))
-              <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a>
+              <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->title }}</a>
               @else
-              {{ $resource->name }}
+              {{ $resource->title }}
               @endif
             </td>
-            <td>{{ $resource->slug }}</td>
+            <td>{{ optional($resource->author)->name }}</td>
+            <td>{{ optional($resource->category)->name }}</td>
             <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
               {{ __('messages.status.' . $resource->status . '.name') }}
             </span></td>

@@ -34,7 +34,7 @@
         </thead>
         <tbody>
 
-          @foreach ($resources as $resource)
+          @forelse ($resources as $resource)
           <tr>
             <td>{{ $resource->id }}</td>
             <td>
@@ -51,7 +51,9 @@
             {{ __('messages.status.' . $resource->status . '.name') }}
           </span></td>
         </tr>
-        @endforeach
+        @empty
+          <tr><td colspan="5">{{ __('messages.no-results') }}</td></tr>
+        @endforelse
 
       </tbody>
     </table>

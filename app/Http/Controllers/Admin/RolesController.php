@@ -118,7 +118,7 @@ class RolesController extends Controller
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'index',
+            'show' => 'show',
             'create' => 'create',
             'store' => 'create',
             'edit' => 'update',

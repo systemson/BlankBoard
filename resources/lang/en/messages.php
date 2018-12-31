@@ -100,6 +100,7 @@ return [
     // Messages
     'access-denied' => 'Access denied. You have no access to this page.',
     'required-fields' => '(*) Required fields.',
+    'no-results' => 'No results found.',
 
     // Date format
     'date-format' => 'j M. Y g:i a'

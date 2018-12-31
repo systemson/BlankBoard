@@ -18,13 +18,13 @@
         <!-- Status -->
         <small>
           <span class="{{ __('messages.status.' . Auth::user()->status . '.class') }}">
-          {{ __('messages.status.' . Auth::user()->status . '.name') }}
+            {{ __('messages.status.' . Auth::user()->status . '.name') }}
           </span>
         </small>
 
       </div>
     </div>
-    </a>
+  </a>
   <!-- /. sidebar user panel -->
 
   <!-- Sidebar Menu -->
@@ -84,7 +84,7 @@
       </a>
       <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions'], true)) style="display: block;"  @endif>
 
-		@if (Auth::user()->hasPermission('Users', true))
+        @if (Auth::user()->hasPermission('Users', true))
         <!-- Users module -->
         <li class="@if (routeNameIs('users', true)) active @endif">
           <a href="{{ URL::route('users.index') }}"><i class="fa fa-users"></i> <span>{{ __('users.title') }}</span></a>
@@ -108,10 +108,36 @@
         <!-- /. permission module -->
         @endif
 
-     </ul>
+      </ul>
     </li>
     @endif
     <!-- /. access section -->
+
+    <!-- Content module -->
+    @if (Auth::user()->hasPermission('Categories|Articles', true))
+    <li class="treeview @if (routeNameIs(['categories', 'articles'], true)) menu-open @endif">
+      <a href="#"><i class="fa fa-pencil"></i> <span>Contenido</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu" @if (routeNameIs(['categories', 'articles'], true)) style="display: block;"  @endif>
+
+        <!-- Inbox -->
+        <li class="@if (routeNameIs('articles', true)) active @endif">
+          <a href="{{ URL::route('articles.index') }}"><i class="fa fa-circle-o"></i><span>Publicaciones</span></a>
+        </li>
+        <!-- /. inbox -->
+
+        <!-- Sent emails -->
+        <li class="@if (routeNameIs('categories', true)) active @endif">
+          <a href="{{ URL::route('categories.index') }}"><i class="fa fa-circle-o"></i><span>Categorias</span></a>
+        </li>
+
+      </ul>
+    </li>
+    @endif
+    <!-- /. content section -->
 
   </ul>
   <!-- /.sidebar-menu -->

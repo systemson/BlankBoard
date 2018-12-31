@@ -18,7 +18,7 @@ class CreateEmailsTable extends Migration
             $table->integer('user_id');
             $table->string('subject')->nullable();
             $table->longText('body')->nullable();
-            $table->integer('status')->default(1);
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }

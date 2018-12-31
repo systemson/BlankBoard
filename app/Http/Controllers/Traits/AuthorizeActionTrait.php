@@ -10,11 +10,13 @@ trait AuthorizeActionTrait
      * Authorize current action.
      *
      * @param $params the parameters for the policy.
-     * @param $ability the ability relate the action.
+     * @param $ability the ability related to the action.
      * @return void
      */
     protected function authorizeAction(array $params = [], $ability = null)
     {
+        if (auth()->user()->id === config('user.superuser')) return;
+
         $params = empty($params) ? [$this->name] : $params;
 
         $arguments = array_merge([$this->model], $params);
@@ -24,7 +26,6 @@ trait AuthorizeActionTrait
             $this->authorize($ability, $arguments);
 
         } elseif($this->getAbility($this->request)) {
-
             $this->authorize($this->getAbility(), $arguments);
         }
     }

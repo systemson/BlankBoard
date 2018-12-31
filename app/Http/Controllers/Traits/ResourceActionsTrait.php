@@ -9,6 +9,30 @@ use Lang;
 trait ResourceActionsTrait
 {
     /**
+     * The columns to select for the index table.
+     *
+     * @var array
+     */
+    protected $select = ['*'];
+
+    /**
+     * The columns to select for the index table.
+     *
+     * @var array
+     */
+    protected $where = [];
+    protected $order = [];
+
+    protected function resourceFilters()
+    {
+        return (object) [
+            'select' => $this->select,
+            'where' => $this->where,
+            'order' => $this->order,
+        ];
+    }
+
+    /**
      * Show the resource list.
      *
      * @return \Illuminate\Http\Response
@@ -18,8 +42,11 @@ trait ResourceActionsTrait
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
+        $filters = $this->resourceFilters();
+
         /** Get the resources from the model */
-        $resources = $this->model::paginate($this->paginate);
+        $resources = $this->model::select($filters->select)
+        ->paginate($this->paginate);
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')
@@ -172,13 +199,13 @@ trait ResourceActionsTrait
             }
 
         } else {
-            /** Get the specified resource */
+            /* Get the specified resource */
             $resource = $this->model::findOrFail($id);
 
             $resource->delete();
         }
 
-        /** Redirect to controller index */
+        /* Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
         ->with('danger', Lang::has($this->name . '.resource-deleted') ?

@@ -9,13 +9,13 @@
     </div>
   </div>
 
-  <div class="form-group{{ $errors->has('user') ? ' has-error' : '' }}">
-    {{ Form::label('user', __('auth.username') . ' (*)', array('class' => 'col-sm-3 control-label')) }}
+  <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+    {{ Form::label('username', __('auth.username') . ' (*)', array('class' => 'col-sm-3 control-label')) }}
     <div class="col-sm-9">
-      {{ Form::text('user', $resource->user, array('class' => 'col-sm-12 control-form', 'placeholder' => __('auth.username'))) }}
-      @if ($errors->has('user'))
+      {{ Form::text('username', $resource->username, array('class' => 'col-sm-12 control-form', 'placeholder' => __('auth.username'))) }}
+      @if ($errors->has('username'))
         <span class="help-block">
-          <strong>{{ $errors->first('user') }}</strong>
+          <strong>{{ $errors->first('username') }}</strong>
         </span>
       @endif
     </div>

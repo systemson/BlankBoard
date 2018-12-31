@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-            'user' => 'superadmin',
+            'username' => 'superadmin',
             'name' => 'Superadmin',
             'last_name' => null,
             'description' => 'I am the superuser. I have no limitations. Don\'t use me on production.',
@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
             'last_password_change' => Carbon::now(),
             ],
-            ['user' => 'admin',
+            ['username' => 'admin',
             'name' => 'Administrator',
             'last_name' => null,
             'description' => 'I am the main administration account. Use me when you need to administrate the app.',
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
             'last_password_change' => Carbon::now(),
             ],
-            ['user' => 'manager',
+            ['username' => 'manager',
             'name' => 'Manager',
             'last_name' => null,
             'description' => 'I am the manager of the app. Use me on a regular basis.',
@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
             'last_password_change' => Carbon::now(),
             ],
-            ['user' => 'user',
+            ['username' => 'user',
             'name' => 'Default User',
             'last_name' => null,
             'description' => 'I am the default user. Grant me no special permissions.',
