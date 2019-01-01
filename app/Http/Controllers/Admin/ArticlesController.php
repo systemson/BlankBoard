@@ -26,6 +26,15 @@ class ArticlesController extends Controller
     protected $model = Model::class;
 
     /**
+     * The columns to select for the index table.
+     *
+     * @var array
+     */
+    protected $select = [
+        'id', 'title', 'created_by', 'category_id', 'status',
+    ];
+
+    /**
      * Get the map of resource methods to ability names.
      *
      * @return array

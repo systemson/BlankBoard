@@ -26,6 +26,15 @@ class CategoriesController extends Controller
     protected $model = Model::class;
 
     /**
+     * The columns to select for the index table.
+     *
+     * @var array
+     */
+    protected $select = [
+        'id', 'name', 'status',
+    ];
+
+    /**
      * Get the map of resource methods to ability names.
      *
      * @return array

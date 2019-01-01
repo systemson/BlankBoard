@@ -22,6 +22,7 @@ return [
         0  => ['name' => 'Inactivo', 'class' => 'label label-default'],
         -1 => ['name' => 'Suspendido', 'class' => 'label label-warning'],
         -2 => ['name' => 'Cancelado', 'class' => 'label label-danger'],
+        -3 => ['name' => 'Eliminado', 'class' => 'label label-default'],
     ],
 
     // Buttons

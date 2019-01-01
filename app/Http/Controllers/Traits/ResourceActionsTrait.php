@@ -21,7 +21,7 @@ trait ResourceActionsTrait
      * @var array
      */
     protected $where = [];
-    protected $order = [];
+    protected $order = ['id' => 'asc'];
 
     protected function resourceFilters()
     {
@@ -45,8 +45,20 @@ trait ResourceActionsTrait
         $filters = $this->resourceFilters();
 
         /** Get the resources from the model */
-        $resources = $this->model::select($filters->select)
-        ->paginate($this->paginate);
+        $query = $this->model::select($filters->select)
+        ->where(function ($q) use ($filters) {
+        	if (!empty($filters->where)) {
+        		foreach ($filters->where as $column => $value) {
+        			$q->where($column, $value);
+        		}
+        	}
+        });
+
+        foreach ($filters->order as $column => $order) {
+        	$query = $query->orderBy($column, $order);
+        }
+
+        $resources = $query->paginate($this->paginate);
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')

@@ -48,7 +48,8 @@ class UsersController extends Controller
         $this->authorize('index', $this->model);
 
         /** Get the resources from the model */
-        $resources = $this->model::paginate($this->paginate);
+        $resources = $this->model::orderBy('id')
+        ->paginate($this->paginate);
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')

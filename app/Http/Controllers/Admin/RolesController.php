@@ -30,6 +30,15 @@ class RolesController extends Controller
     protected $model = Model::class;
 
     /**
+     * The columns to select for the index table.
+     *
+     * @var array
+     */
+    protected $select = [
+        'id', 'name', 'slug', 'status',
+    ];
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
