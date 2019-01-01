@@ -52,16 +52,16 @@ abstract class ResourceController extends Controller
     ];
 
     /**
-    * Instantiate the controller.
-    *
-    * @return void
-    */
+     * Instantiate the controller.
+     *
+     * @return void
+     */
     public function __construct(Request $request)
     {
-        /** Request instance */
+        /* Request instance */
         $this->request = $request;
 
-        /** Store the permissions on DB */
+        /* Store the resource permissions on DB */
         $this->registerPermissions($this->resourceAbilityMap());
     }
 }

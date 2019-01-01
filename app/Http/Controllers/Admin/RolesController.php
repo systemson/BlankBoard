@@ -46,21 +46,21 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
         $request->validate($this->storeValidations());
 
-        /** Create a new resource */
-       $resource = DB::transaction(function () {
+        /* Create a new resource */
+        $resource = DB::transaction(function () {
 
-            /** Update the specified resource */
+            /* Update the specified resource */
             $resource = $this->model::create(Input::all());
 
-            /** Check if permissions are being set */
+            /* Check if permissions are being set */
             if((Input::get('permissions') != null)) {
 
-                /** Syncronize both tables through pivot table */
+                /* Syncronize both tables through pivot table */
                 $resource->permissions()->sync(Input::get('permissions'));
             }
 
@@ -68,7 +68,7 @@ class RolesController extends Controller
 
         }, 5);
 
-        /** Redirect to newly created resource page */
+        /* Redirect to newly created resource page */
         return redirect()
         ->route($this->name . '.edit', $resource->id)
         ->with('success', Lang::has($this->name . '.resource-created') ?
@@ -85,33 +85,33 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        /** Validate the form input */
+        /* Validate the form input */
         $request->validate($this->updateValidations());
 
         DB::transaction(function () use ($id) {
 
-            /** Get the specified resource */
+            /* Get the specified resource */
             $resource = $this->model::findOrFail($id);
 
-            /** Update the specified resource */
+            /* Update the specified resource */
             $resource->update(Input::all());
 
-            /** Check if permissions are being set */
+            /* Check if permissions are being set */
             if((Input::get('permissions') != null)) {
 
-                /** Syncronize both tables through pivot table */
+                /* Syncronize both tables through pivot table */
                 $resource->permissions()->sync(Input::get('permissions'));
             }
 
         }, 5);
 
-        /** Clear user permissions cache */
+        /* Clear user permissions cache */
         Cache::forget('user_' . $id . '_permissions');
 
-        /** Redirect back */
+        /* Redirect back */
         return redirect()->back()
         ->with('info', Lang::has($this->name . '.resource-updated') ?
             $this->name . '.resource-updated' :
@@ -127,7 +127,7 @@ class RolesController extends Controller
     protected function resourceAbilityMap()
     {
         return [
-            'show' => 'show',
+            'index' => 'index',
             'create' => 'create',
             'store' => 'create',
             'edit' => 'update',

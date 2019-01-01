@@ -16,10 +16,7 @@
       <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
       <div class="box-tools pull-right">
         @if (Auth::user()->hasPermission('create_' . $name))
-        <a class="{{ __('messages.btn.new.class') }}" href="{{ route($name . '.create') }}" >
-          <i class="fa fa-plus-circle"></i>
-          {{ __('messages.btn.new.name') }}
-        </a>
+        {!! button('new', route($name . '.create')) !!}
         @endif
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
           <i class="fa fa-minus"></i>

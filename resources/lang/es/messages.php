@@ -18,16 +18,18 @@ return [
 
     // Statuses
     'status' => [
+        2  => ['name' => 'Aprobado', 'class' => 'label label-success'],
         1  => ['name' => 'Activo', 'class' => 'label label-success'],
         0  => ['name' => 'Inactivo', 'class' => 'label label-default'],
         -1 => ['name' => 'Suspendido', 'class' => 'label label-warning'],
         -2 => ['name' => 'Cancelado', 'class' => 'label label-danger'],
         -3 => ['name' => 'Eliminado', 'class' => 'label label-default'],
+        -4 => ['name' => 'Archivado', 'class' => 'label label-default'],
     ],
 
     // Buttons
     'btn' => [
-        'new' =>      ['name' => 'Nuevo', 'class' => 'btn btn-success'],
+        'new' =>      ['name' => 'Nuevo', 'class' => 'btn btn-success', 'icon' => 'fa fa-plus-circle'],
         'login' =>    ['name' => 'Entrar', 'class' => 'btn btn-success'],
         'send' =>     ['name' => 'Enviar', 'class' => 'btn btn-primary'],
         'save' =>     ['name' => 'Guardar', 'class' => 'btn btn-primary'],

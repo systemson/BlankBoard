@@ -98,3 +98,23 @@ if(!function_exists('breadcrumb')) {
         return $breadcrumb;
     }
 }
+
+if(!function_exists('button')) {
+
+    function button(string $type, $url = '#', array $param = [])
+    {
+        if (!Lang::has('messages.btn.' . $type)) return;
+
+        $config = Lang::get('messages.btn.' . $type);
+
+        $class = $config['class'];
+        $name = $config['name'];
+        $icon = $config['icon'] ?? null;
+
+        $title = !is_null($icon) ? "<i class=\"{$icon}\"></i>" : null; 
+        $title .= " <span class=\"hidden-xs\">{$name}</span>";
+
+
+        return "<a class=\"{$class}\" href=\"{$url}\">{$title}</a>";
+    }
+}

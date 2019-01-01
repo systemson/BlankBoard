@@ -2,9 +2,9 @@
 
 return [
 
-    'title' => 'Articulos',
+    'title' => 'Publicaciones',
     'parent' => 'Contenido',
-    'name' => 'articulo|articulos',
+    'name' => 'publicacion|publicaciones',
     'list' => 'Listado de :title',
     'add' => 'Agregar nueva :name',
     'edit' => 'Editar :name :Resource',
@@ -24,9 +24,9 @@ return [
     ],
 
     // Alerts
-    'resource-created' => 'Nueva articulo creado.',
-    'resource-updated' => 'Articulo actualizado satisfactoriamente.',
-    'resource-deleted' => 'Articulo eliminado.',
+    'resource-created' => 'Nueva publicacion creada.',
+    'resource-updated' => 'Publicacion actualizada satisfactoriamente.',
+    'resource-deleted' => 'Publicacion eliminada.',
 
     'confirm-delete' => 'Esta acción no puede ser revertida. ¿Estás seguro?',
 ];
