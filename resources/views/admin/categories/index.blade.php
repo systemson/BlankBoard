@@ -33,16 +33,18 @@
             <th class="text-center">{{ __($name . '.table.action') }}</th>
             @endif
             <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
+            <th class="text-center">{{ __($name . '.table.slug') }}</th>
             <th class="text-center">{{ __($name . '.table.status') }}</th>
           </tr>
         </thead>
         <tbody>
 
-          @forelse ($resources as $resource)
+          @foreach ($resources as $resource)
           <tr>
             <td>{{ $resource->id }}</td>
             @if (Auth::user()->hasPermission('delete_' . $name))
             <td class="text-nowrap">
+              @if ($resource->id !== 1)
               {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
               {{ Form::button( __('messages.action.trash'), array(
               'type' => 'submit',
@@ -50,6 +52,7 @@
               'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
               )) }}
               {{ Form::close() }}
+              @endif
             </td>
             @endif
             <td>
@@ -59,13 +62,12 @@
               {{ $resource->name }}
               @endif
             </td>
+            <td>{{ $resource->slug }}</td>
             <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
               {{ __('messages.status.' . $resource->status . '.name') }}
             </span></td>
           </tr>
-          @empty
-          <tr><td colspan="5">{{ __('messages.no-results') }}</td></tr>
-          @endforelse
+          @endforeach
 
         </tbody>
       </table>

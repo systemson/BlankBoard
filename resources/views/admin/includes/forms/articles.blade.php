@@ -45,7 +45,7 @@
   <div class="col-sm-4 form-vertical">
 
     <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-      {{ Form::select('status', [1 => __('messages.status.1.name'), 0 => __('messages.status.0.name'), -3 => __('messages.status.-3.name'),
+      {{ Form::select('status', [1 => __('messages.status.1.name'), 0 => __('messages.status.0.name'), -4 => __('messages.status.-4.name'),
         ], $resource->status ?? null, array('class' => 'control-form chosen-select')) }}
       @if ($errors->has('status'))
         <span class="help-block">

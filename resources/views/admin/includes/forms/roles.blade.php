@@ -64,7 +64,7 @@
 
     <div class="form-group{{ $errors->has('permissions') ? ' has-error' : '' }}">
       {{ Form::label('permissions', __($name . '.table.permissions'), array('class' => 'control-label')) }}
-      {{ Form::select('permissions[]', \App\Models\Permission::pluck('name','id'), $resource->permissions ?? null, array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
+      {{ Form::select('permissions[]', \App\Models\Permission::where('status',1)->pluck('name','id'), $resource->permissions ?? null, array('class' => 'control-form chosen-select', 'rows' => '4', 'multiple' => 'multiple')) }}
       @if ($errors->has('permissions'))
         <span class="help-block">
           <strong>{{ $errors->first('permissions') }}</strong>

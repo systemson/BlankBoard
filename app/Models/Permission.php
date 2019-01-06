@@ -3,9 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Role;
 
 class Permission extends Model
 {
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::updated(function($model) {
+            foreach ($model->roles as $role) {
+                foreach ($role->users as $user) {
+                    $user->clearCache();
+                }
+
+            }
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,5 +60,15 @@ class Permission extends Model
                     ]);
             }
         }
+    }
+
+    /**
+     * Get permission with a certain roles.
+     *
+     * @return void
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->where('status', 1);
     }
 }

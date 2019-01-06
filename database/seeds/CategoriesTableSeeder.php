@@ -14,7 +14,8 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-            	'name' => 'Default',
+                'name' => 'Default',
+            	'slug' => 'default',
             	'created_by' => 1,
             	'created_at' => Carbon::now(),
             	'updated_by' => 1,

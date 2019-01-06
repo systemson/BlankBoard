@@ -19,6 +19,32 @@ trait RolesPermissionTrait
     }
 
     /**
+     * Get permissions with a certain user.
+     *
+     * @return mixed
+     */
+    public function permissions()
+    {
+        $permissions = collect([]);
+        foreach($this->roles as $role) {
+            foreach ($role->permissions as $permission) {
+                $permissions->push($permission);
+            }
+        }
+        return $permissions->unique('id')->where('status', 1);
+    }
+
+    /**
+     * Get permissions attribute.
+     *
+     * @return mixed
+     */
+    public function getPermissionsAttribute()
+    {
+        return $this->permissions();
+    }
+
+    /**
      * Cache user roles.
      *
      * @return mixed
@@ -31,6 +57,16 @@ trait RolesPermissionTrait
     }
 
     /**
+     * Clear cached user roles.
+     *
+     * @return mixed
+     */
+    public function clearCachedRoles()
+    {
+        Cache::forget('user_' . $this->id . '_roles');
+    }
+
+    /**
      * Get cached permissions with a certain user.
      *
      * @return mixed
@@ -38,12 +74,29 @@ trait RolesPermissionTrait
     public function cachedPermissions()
     {
         return Cache::remember('user_' . $this->id . '_permissions', 15, function () {
-            $permissions = collect([]);
-            foreach($this->roles as $role) {
-                $permissions = $permissions->merge($role->permissions->toArray());
-            }
-            return $permissions;
+            return $this->permissions;
         });
+    }
+
+    /**
+     * Clear cached user permissions.
+     *
+     * @return mixed
+     */
+    public function clearCachedPermissions()
+    {
+        Cache::forget('user_' . $this->id . '_permissions');
+    }
+
+    /**
+     * Clear all cached user data.
+     *
+     * @return mixed
+     */
+    public function clearCache()
+    {
+        $this->clearCachedRoles();
+        $this->clearCachedPermissions();
     }
 
     /**

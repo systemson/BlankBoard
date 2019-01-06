@@ -14,6 +14,7 @@ return [
       'id' => 'ID',
       'action' => 'Acción',
       'name' => 'Nombre',
+      'slug' => 'Url',
       'description' => 'Descripción',
       'status' => 'Estado',
     ],

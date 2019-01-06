@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="box-title">Home</h2>
+@foreach ($articles as $article)
+@endforeach
 @endsection

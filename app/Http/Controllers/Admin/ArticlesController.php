@@ -34,6 +34,18 @@ class ArticlesController extends Controller
         'id', 'title', 'created_by', 'category_id', 'status',
     ];
 
+    public function archived()
+    {
+        $this->where = ['status' => -4];
+        return $this->index();
+    }
+
+    public function highlighted()
+    {
+        $this->where = ['highlighted' => 1];
+        return $this->index();
+    }
+
     /**
      * Get the map of resource methods to ability names.
      *

@@ -25,12 +25,22 @@ Route::middleware('clear-cache')
  */
 
 /* Group for Public namespace */
-/**@todo  rename namespace to "Public" */
 Route::namespace('Front')
+//->middleware('guest')
 ->group(function () {
-    /** Default controller for front site */
+
+
+    /* Default controller for front site */
     Route::get('/', 'Home@index')->name( 'home' );
     Route::get('/home', 'Home@index');
+
+
+    $categories = \App\Models\Category::pluck('slug')->implode('|');
+    //dd($categories);
+
+    Route::get('/{category}', 'CategoryController@index')->where('category', $categories);
+
+    Route::get('/{category}/{id}', 'ArticleController@index')->where('category', $categories);
 });
 
 
@@ -91,6 +101,8 @@ Route::namespace('Admin')
 
     /* Articles module */
     Route::resource('articles', 'ArticlesController')->except('show');
+    Route::get('articles/archived', 'ArticlesController@archived')->name('articles.archived');
+    Route::get('articles/highlighted', 'ArticlesController@highlighted')->name('articles.highlighted');
 
     /* Categories module */
     Route::resource('categories', 'CategoriesController')->except('show');

@@ -68,7 +68,7 @@
             </span></td>
           </tr>
           @empty
-          <tr><td colspan="5">{{ __('messages.no-results') }}</td></tr>
+          <tr><td colspan="6">{{ __('messages.no-results') }}</td></tr>
           @endforelse
 
         </tbody>

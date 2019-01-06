@@ -30,3 +30,15 @@
 
 </div><!-- /. col -->
 @stop
+
+@section('scripts')
+  <script type="text/javascript">
+    jQuery('#name').change(function () {
+      var value = jQuery(this).val();
+      value = value.split(' ').join('-').toLowerCase();
+      value = value.split(' ').join('-').toLowerCase();
+
+      jQuery('#slug').val(encodeURI(value));
+    });
+  </script>
+@stop

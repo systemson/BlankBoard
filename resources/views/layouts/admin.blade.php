@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
   @include('admin.includes.head')
   @yield('styles')

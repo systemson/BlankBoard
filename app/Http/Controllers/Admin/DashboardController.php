@@ -22,8 +22,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
-        /** Display the dashboard. */
+        /* Display the dashboard. */
         return view('admin.' . $this->route . '.index')
         ->with('name', $this->route);
     }

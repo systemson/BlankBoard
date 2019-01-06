@@ -31,7 +31,7 @@ class CategoriesController extends Controller
      * @var array
      */
     protected $select = [
-        'id', 'name', 'status',
+        'id', 'name', 'slug', 'status',
     ];
 
     /**

@@ -3,6 +3,7 @@
 {{ Form::hidden('created_by', auth()->user()->id) }}
 @else
 {{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+{{ Form::hidden('id', $resource->id) }}
 @endif
 
 {{ Form::hidden('updated_by', auth()->user()->id) }}
@@ -17,12 +18,24 @@
   <div class="col-sm-8 form-horizontal">
 
     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-      {{ Form::label('name', __($name . '.table.name') . '(*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('name', __($name . '.table.name') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
         {{ Form::text('name', $resource->name ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.name'))) }}
         @if ($errors->has('name'))
           <span class="help-block">
             <strong>{{ $errors->first('name') }}</strong>
+          </span>
+        @endif
+      </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
+      {{ Form::label('slug', __($name . '.table.slug'), array('class' => 'col-sm-4 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form disabled', 'placeholder' => __($name . '.table.slug'), 'readonly' => 'readonly')) }}
+        @if ($errors->has('slug'))
+          <span class="help-block">
+            <strong>{{ $errors->first('slug') }}</strong>
           </span>
         @endif
       </div>
