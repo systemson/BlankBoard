@@ -34,8 +34,11 @@ Route::namespace('Front')
     Route::get('/', 'Home@index')->name( 'home' );
     Route::get('/home', 'Home@index');
 
-
-    $categories = \App\Models\Category::pluck('slug')->implode('|');
+    try {
+        $categories = \App\Models\Category::pluck('slug')->implode('|');
+    } catch (\Exception $e) {
+        $categories = null;
+    }
     //dd($categories);
 
     Route::get('/{category}', 'CategoryController@index')->where('category', $categories);
