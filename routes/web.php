@@ -37,7 +37,7 @@ Route::namespace('Front')
     try {
         $categories = \App\Models\Category::pluck('slug')->implode('|');
     } catch (\Exception $e) {
-        $categories = null;
+        $categories = 'default';
     }
     //dd($categories);
 
