@@ -11,8 +11,6 @@ use App\Http\Controllers\Traits\LoginSuspensionTrait;
 
 class LoginController extends Controller
 {
-    use LoginSuspensionTrait;
-
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -24,7 +22,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, LoginSuspensionTrait;
 
     /**
      * Set the maximum number of login attempts to allow.
@@ -41,23 +39,12 @@ class LoginController extends Controller
      protected $decayMinutes = 15;
 
     /**
-     * Where to redirect users after logout.
-     *
-     * @var string
-     */
-    protected $redirectAfterLogoutTo;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->redirectTo = URL::route('dashboard.index');
-
-        $this->redirectAfterLogoutTo = URL::route('login');
-
         $this->middleware('guest')->except('logout');
     }
 
@@ -120,22 +107,39 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->intended($this->redirectPath())
-        ->with('success', 'messages.alert.login');
+        return redirect()->route($this->redirectPath())
+        ->withSuccess('messages.alert.login');
     }
 
     /**
-     * Log the user out of the application.
+     * The user has logged out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function logout(Request $request)
+    protected function loggedOut(Request $request)
     {
-        $this->guard()->logout();
-        $request->session()->invalidate();
+        return redirect()->route($this->redirectAfterLogoutTo())
+        ->withInfo('messages.alert.logout');
+    }
 
-        return redirect($this->redirectAfterLogoutTo)
-        ->with('info', 'messages.alert.logout');
+    /**
+     * Where to redirect users after login.
+     *
+     * @return string
+     */
+    protected function redirectTo()
+    {
+        return 'dashboard.index';
+    }
+
+    /**
+     * Where to redirect users after logout.
+     *
+     * @return string
+     */
+    protected function redirectAfterLogoutTo()
+    {
+        return 'login';
     }
 }

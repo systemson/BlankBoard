@@ -32,16 +32,17 @@
             @if (Auth::user()->hasPermission('delete_' . $name))
             <th class="text-center">{{ __($name . '.table.action') }}</th>
             @endif
-            <th class="col-sm-12">{{ __($name . '.table.title') }}</th>
-            <th class="col-sm-12">{{ __($name . '.table.author') }}</th>
-            <th class="col-sm-12">{{ __($name . '.table.category') }}</th>
+            <th class="col-sm-6">{{ __($name . '.table.title') }}</th>
+            <th class="text-center">{{ __($name . '.table.author') }}</th>
+            <th class="text-center">{{ __($name . '.table.category') }}</th>
+            <th class="text-center">{{ __($name . '.table.created_at') }}</th>
             <th class="text-center">{{ __($name . '.table.status') }}</th>
           </tr>
         </thead>
         <tbody>
 
           @forelse ($resources as $resource)
-          <tr>
+          <tr class="text-center">
             <td>{{ $resource->id }}</td>
             @if (Auth::user()->hasPermission('delete_' . $name))
             <td class="text-nowrap">
@@ -54,7 +55,7 @@
               {{ Form::close() }}
             </td>
             @endif
-            <td>
+            <td class="text-left">
               @if (Auth::user()->hasPermission('update_' . $name))
               <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->title }}</a>
               @else
@@ -63,6 +64,7 @@
             </td>
             <td>{{ optional($resource->author)->name }}</td>
             <td>{{ optional($resource->category)->name }}</td>
+            <td>{{ optional($resource->created_at)->diffForHumans() }}</td>
             <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
               {{ __('messages.status.' . $resource->status . '.name') }}
             </span></td>

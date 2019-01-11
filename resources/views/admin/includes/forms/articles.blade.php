@@ -1,8 +1,8 @@
 @if (isset($new) && $new)
-{{ Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
+{{ Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal', 'files' => true)) }}
 {{ Form::hidden('created_by', auth()->user()->id) }}
 @else
-{{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+{{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT', 'class' => 'form-horizontal', 'files' => true)) }}
 @endif
 
 {{ Form::hidden('updated_by', auth()->user()->id) }}
@@ -17,12 +17,24 @@
   <div class="col-sm-8 form-horizontal">
 
     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-      {{ Form::label('title', __($name . '.table.title') . '(*)', array('class' => 'col-sm-4 control-label')) }}
+      {{ Form::label('title', __($name . '.table.title') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
         {{ Form::text('title', $resource->title ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.title'))) }}
         @if ($errors->has('title'))
           <span class="help-block">
             <strong>{{ $errors->first('title') }}</strong>
+          </span>
+        @endif
+      </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('image_file') ? ' has-error' : '' }}">
+      {{ Form::label('image_file', __($name . '.table.image_file') , array('class' => 'col-sm-4 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::file('image_file', ['accept' => 'image/*']) }}
+        @if ($errors->has('image_file'))
+          <span class="help-block">
+            <strong>{{ $errors->first('image_file') }}</strong>
           </span>
         @endif
       </div>
@@ -56,7 +68,7 @@
 
     <div class="form-group{{ $errors->has('url_alias') ? ' has-error' : '' }}">
       {{ Form::label('url_alias', __($name . '.table.url_alias'), array('class' => 'control-label')) }}
-      {{ Form::text('url_alias', $resource->url_alias ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.url_alias'))) }}
+      {{ Form::text('url_alias', $resource->url_alias ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.url_alias'), 'readonly')) }}
       @if ($errors->has('url_alias'))
       <span class="help-block">
         <strong>{{ $errors->first('url_alias') }}</strong>
@@ -88,7 +100,7 @@
   <div class="col-sm-12 form-vertical">
 
     <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-      {{ Form::label('content', __($name . '.table.content') . '(*)', array('class' => 'control-label')) }}
+      {{ Form::label('content', __($name . '.table.content') . ' (*)', array('class' => 'control-label')) }}
         {{ Form::textarea('content', $resource->content ?? null, array('class' => 'col-sm-12 control-form')) }}
         @if ($errors->has('content'))
           <span class="help-block">

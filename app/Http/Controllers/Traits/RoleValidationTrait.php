@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rule;
 
 trait RoleValidationTrait
 {
@@ -14,7 +16,7 @@ trait RoleValidationTrait
     protected function storeValidations() {
         return [
             'name' => 'required|max:32',
-            'slug' => 'required|max:32|alpha_dash',
+            'slug' => 'required|unique:roles|max:32|alpha_dash',
             'description' => 'nullable|max:120',
         ];
     }
@@ -25,9 +27,10 @@ trait RoleValidationTrait
      * @return array
      */
     protected function updateValidations() {
+        $id = Input::get('id');
         return [
             'name' => 'required|max:32',
-            'slug' => 'required|max:32|alpha_dash',
+            'slug' =>['required',Rule::unique('roles')->ignore($id),'max:32','alpha_dash'],
             'description' => 'nullable|max:120',
         ];
     }

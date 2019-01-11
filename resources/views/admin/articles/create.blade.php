@@ -47,4 +47,12 @@
     jQuery('#content').froalaEditor()
   });
 </script>
+  <script type="text/javascript">
+    jQuery('#title').change(function () {
+      var value = jQuery(this).val();
+      value = value.split(' ').join('-').toLowerCase();
+
+      jQuery('#url_alias').val(value);
+    });
+  </script>
 @stop

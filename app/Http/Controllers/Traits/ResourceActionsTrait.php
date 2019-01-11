@@ -21,6 +21,12 @@ trait ResourceActionsTrait
      * @var array
      */
     protected $where = [];
+
+    /**
+     * The columns to oder for the index table.
+     *
+     * @var array
+     */
     protected $order = ['id' => 'asc'];
 
     protected function resourceFilters()
@@ -30,6 +36,26 @@ trait ResourceActionsTrait
             'where' => $this->where,
             'order' => $this->order,
         ];
+    }
+
+    protected function resourcesList()
+    {
+        $filters = $this->resourceFilters();
+
+        $query = $this->model::select($filters->select)
+        ->where(function ($q) use ($filters) {
+            if (!empty($filters->where)) {
+                foreach ($filters->where as $column => $value) {
+                    $q->where($column, $value);
+                }
+            }
+        });
+
+        foreach ($filters->order as $column => $order) {
+            $query = $query->orderBy($column, $order);
+        }
+
+        return $query->paginate($this->paginate);
     }
 
     /**
@@ -42,23 +68,8 @@ trait ResourceActionsTrait
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        $filters = $this->resourceFilters();
-
         /** Get the resources from the model */
-        $query = $this->model::select($filters->select)
-        ->where(function ($q) use ($filters) {
-        	if (!empty($filters->where)) {
-        		foreach ($filters->where as $column => $value) {
-        			$q->where($column, $value);
-        		}
-        	}
-        });
-
-        foreach ($filters->order as $column => $order) {
-        	$query = $query->orderBy($column, $order);
-        }
-
-        $resources = $query->paginate($this->paginate);
+        $resources = $this->resourcesList();
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')
@@ -87,13 +98,13 @@ trait ResourceActionsTrait
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
         if(method_exists($this, 'storeValidations')) {
-            $request->validate($this->storeValidations());
+            $this->request->validate($this->storeValidations());
         }
 
         /** Create a new resource */
@@ -155,13 +166,13 @@ trait ResourceActionsTrait
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         /** Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
         if(method_exists($this, 'updateValidations')) {
-            $request->validate($this->updateValidations());
+            $this->request->validate($this->updateValidations());
         }
 
         /** Get the specified resource */

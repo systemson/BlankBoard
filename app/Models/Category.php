@@ -23,4 +23,9 @@ class Category extends Model
     protected $dates = [
         'created_at', 'updated_at',
     ];
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = str_slug($value);
+    }
 }

@@ -17,10 +17,10 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->string('title', 124);
             $table->integer('category_id')->unsigned();
-            $table->string('url_alias', 50)->nullable();
+            $table->string('url_alias', 124);
             $table->string('author_alias', 50)->nullable();
-            $table->string('description', 256)->nullable();
-            $table->string('image', 50)->nullable();
+            $table->text('description')->nullable();
+            $table->string('image', 120)->nullable();
             $table->longText('content');
             $table->smallInteger('status')->default(1);
             $table->smallInteger('highlighted')->default(0);

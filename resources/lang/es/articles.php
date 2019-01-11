@@ -18,8 +18,10 @@ return [
       'category' => 'Categoría',
       'url_alias' => 'Alias de la Url',
       'author_alias' => 'Alias del autor',
+      'image_file' => 'Imagen',
       'description' => 'Descripción',
       'content' => 'Contenido',
+      'created_at' => 'Creado',
       'status' => 'Estado',
     ],
 

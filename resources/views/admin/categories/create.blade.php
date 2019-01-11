@@ -36,9 +36,8 @@
     jQuery('#name').change(function () {
       var value = jQuery(this).val();
       value = value.split(' ').join('-').toLowerCase();
-      value = value.split(' ').join('-').toLowerCase();
 
-      jQuery('#slug').val(encodeURI(value));
+      jQuery('#slug').val(value);
     });
   </script>
 @stop

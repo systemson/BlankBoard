@@ -2,6 +2,7 @@
 {{ Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
 @else
 {{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+{{ Form::hidden('id', $resource->id) }}
 @endif
 
   <div class="form-group">

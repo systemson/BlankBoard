@@ -12,7 +12,7 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'url_alias', 'author_alias', 'status', 'category_id', 'content', 'created_by', 'updated_by',
+        'title', 'image', 'description', 'url_alias', 'author_alias', 'status', 'category_id', 'content', 'created_by', 'updated_by',
     ];
 
     /**
@@ -32,5 +32,10 @@ class Article extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function setUrlAliasAttribute($value)
+    {
+        $this->attributes['url_alias'] = str_slug($value);
     }
 }

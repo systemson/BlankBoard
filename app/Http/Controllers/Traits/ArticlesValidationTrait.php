@@ -14,8 +14,9 @@ trait ArticlesValidationTrait
     protected function storeValidations() {
         return [
             'title' => 'required|max:50',
+            'image' => 'nullable',
             'description' => 'nullable|max:120',
-            'status' => 'integer',
+            'status' => 'required|integer',
             'category_id' => 'required|integer',
             'content' => 'required',
         ];
@@ -29,8 +30,9 @@ trait ArticlesValidationTrait
     protected function updateValidations() {
         return [
             'title' => 'required|max:50',
+            'image' => 'nullable',
             'description' => 'nullable|max:120',
-            'status' => 'integer',
+            'status' => 'required|integer',
             'category_id' => 'required|integer',
             'content' => 'required',
         ];

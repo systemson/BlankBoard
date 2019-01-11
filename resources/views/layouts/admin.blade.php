@@ -32,9 +32,7 @@
         <div class="col-sm-12">
           <div class="row">
 
-            <div class="col-sm-12">
-              @include('admin.includes.alerts')
-            </div>
+            @include('admin.includes.alerts')
 
             @yield('content')
 

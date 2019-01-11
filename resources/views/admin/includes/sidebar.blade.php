@@ -125,13 +125,13 @@
 
         <!-- Inbox -->
         <li class="@if (routeNameIs('articles', true)) active @endif">
-          <a href="{{ URL::route('articles.index') }}"><i class="fa fa-circle-o"></i><span>Publicaciones</span></a>
+          <a href="{{ URL::route('articles.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('articles.title') }}</span></a>
         </li>
         <!-- /. inbox -->
 
         <!-- Sent emails -->
         <li class="@if (routeNameIs('categories', true)) active @endif">
-          <a href="{{ URL::route('categories.index') }}"><i class="fa fa-circle-o"></i><span>Categorias</span></a>
+          <a href="{{ URL::route('categories.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('categories.title') }}</span></a>
         </li>
 
       </ul>

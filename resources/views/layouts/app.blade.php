@@ -4,11 +4,19 @@
   @include('front.includes.head')
   @yield('styles')
 </head>
-<body>
+<body style="margin: 0 0 60px;">
+
+@include('front.includes.menu')
+
 <div class="container">
-  @yield('content')
-  @include('front.includes.footer')
+
+	<div class="row">
+  		@yield('content')
+	</div>
+
 </div>
+
+@include('front.includes.footer')
 
 <!-- scripts -->
 @include('front.includes.scripts')

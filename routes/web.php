@@ -26,7 +26,6 @@ Route::middleware('clear-cache')
 
 /* Group for Public namespace */
 Route::namespace('Front')
-//->middleware('guest')
 ->group(function () {
 
 
@@ -41,9 +40,9 @@ Route::namespace('Front')
     }
     //dd($categories);
 
-    Route::get('/{category}', 'CategoryController@index')->where('category', $categories);
+    Route::get('/{category}', 'BlogController@category')->where('category', $categories)->name('blog.category');
 
-    Route::get('/{category}/{id}', 'ArticleController@index')->where('category', $categories);
+    Route::get('/{category}/{slug}', 'BlogController@single')->where('category', $categories)->name('blog.single');
 });
 
 

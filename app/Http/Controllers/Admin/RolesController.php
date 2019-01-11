@@ -41,15 +41,15 @@ class RolesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $this->request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        $request->validate($this->storeValidations());
+        $this->request->validate($this->storeValidations());
 
         /* Create a new resource */
         $resource = DB::transaction(function () {
@@ -83,13 +83,13 @@ class RolesController extends Controller
      * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
         /* Validate the form input */
-        $request->validate($this->updateValidations());
+        $this->request->validate($this->updateValidations());
 
         DB::transaction(function () use ($id) {
 
