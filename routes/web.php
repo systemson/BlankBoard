@@ -38,7 +38,6 @@ Route::namespace('Front')
     } catch (\Exception $e) {
         $categories = 'default';
     }
-    //dd($categories);
 
     Route::get('/{category}', 'BlogController@category')->where('category', $categories)->name('blog.category');
 
@@ -108,4 +107,7 @@ Route::namespace('Admin')
 
     /* Categories module */
     Route::resource('categories', 'CategoriesController')->except('show');
+
+    /* Menus module */
+    Route::resource('menus', 'MenusController')->except('show');
 });

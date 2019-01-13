@@ -7,7 +7,4 @@
 
 <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}">
 
-<!-- Custom styles for this template -->
-<link href="sticky-footer.css" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">

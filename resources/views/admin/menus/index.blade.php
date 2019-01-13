@@ -32,31 +32,27 @@
             @if (Auth::user()->hasPermission('delete_' . $name))
             <th class="text-center">{{ __($name . '.table.action') }}</th>
             @endif
-            <th class="col-sm-6">{{ __($name . '.table.title') }}</th>
-            <th class="text-center">{{ __($name . '.table.author') }}</th>
-            <th class="text-center">{{ __($name . '.table.category') }}</th>
-            <th class="text-center">{{ __($name . '.table.created_at') }}</th>
+            <th class="col-sm-12">{{ __($name . '.table.title') }}</th>
+            <th class="text-center">{{ __($name . '.table.url') }}</th>
             <th class="text-center">{{ __($name . '.table.status') }}</th>
           </tr>
         </thead>
         <tbody>
 
           @forelse ($resources as $resource)
-          <tr class="text-center">
+          <tr>
             <td>{{ $resource->id }}</td>
             @if (Auth::user()->hasPermission('delete_' . $name))
             <td class="text-nowrap">{!! delete_btn($resource->id, $name) !!}</td>
             @endif
-            <td class="text-left">
+            <td>
               @if (Auth::user()->hasPermission('update_' . $name))
               <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->title }}</a>
               @else
               {{ $resource->title }}
               @endif
             </td>
-            <td>{{ optional($resource->author)->name }}</td>
-            <td>{{ optional($resource->category)->name }}</td>
-            <td>{{ $resource->created_at->diffForHumans() }}</td>
+            <td>{{ url($resource->url) }}</td>
             <td>{!! status_label($resource->status) !!}</td>
           </tr>
           @empty

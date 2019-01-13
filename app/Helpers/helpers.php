@@ -10,7 +10,7 @@
  * @param   array $params the names to add or remove from $actionMap.
  * @return  boolean
  */
-if(!function_exists('routeNameIs')) {
+if (!function_exists('routeNameIs')) {
 
     function routeNameIs($compare, $isResource = false, $params = null)
     {
@@ -44,6 +44,14 @@ if(!function_exists('routeNameIs')) {
     }
 }
 
+if (!function_exists('requestIs')) {
+
+    function requestIs(string $url, $class = 'active')
+    {
+        return \Request::is($url) ? $class : null;
+    }
+}
+
 /**
  * Breadcrumb constructor.
  *
@@ -52,7 +60,7 @@ if(!function_exists('routeNameIs')) {
  * @param   array $children the child items
  * @return  string
  */
-if(!function_exists('breadcrumb')) {
+if (!function_exists('breadcrumb')) {
 
     function breadcrumb($resource, array $children = [], array $before = [])
     {
@@ -99,7 +107,7 @@ if(!function_exists('breadcrumb')) {
     }
 }
 
-if(!function_exists('button')) {
+if (!function_exists('button')) {
 
     function button(string $type, $url = '#', array $param = [])
     {
@@ -116,5 +124,29 @@ if(!function_exists('button')) {
 
 
         return "<a class=\"{$class}\" href=\"{$url}\">{$title}</a>";
+    }
+}
+
+if (!function_exists('status_label')) {
+
+    function status_label(int $status)
+    {
+        return '<span class="' . Lang::get('messages.status.' . $status . '.class') . '">' . Lang::get('messages.status.' . $status . '.name') . '</span>';
+    }
+}
+
+if (!function_exists('delete_btn')) {
+
+    function delete_btn(int $id, $name)
+    {
+        $open = Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $id]]);
+        $btn = Form::button( __('messages.action.trash'), [
+            'type' => 'submit',
+            'class'=> 'btn-danger btn-xs',
+            'onclick'=> 'return confirm("' . __($name . '.confirm-delete') . '")',
+        ]);
+        $close = Form::close();
+
+        return "{$open} {$btn} {$close}";
     }
 }

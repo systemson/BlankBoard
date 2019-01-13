@@ -6,20 +6,14 @@
 </head>
 <body style="margin: 0 0 60px;">
 
-@include('front.includes.menu')
+  @include('front.includes.menu')
 
-<div class="container">
+  @yield('content')
 
-	<div class="row">
-  		@yield('content')
-	</div>
+  @include('front.includes.footer')
 
-</div>
-
-@include('front.includes.footer')
-
-<!-- scripts -->
-@include('front.includes.scripts')
-@yield('scripts')
+  <!-- scripts -->
+  @include('front.includes.scripts')
+  @yield('scripts')
 </body>
 </html>

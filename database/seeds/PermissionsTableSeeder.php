@@ -19,6 +19,7 @@ class PermissionsTableSeeder extends Seeder
             'Permissions',
             'Categories',
             'Articles',
+            'Menus',
         ];
 
         $abilities = [
@@ -32,6 +33,7 @@ class PermissionsTableSeeder extends Seeder
             'Permissions.Create',
             'Permissions.Delete',
             'Roles.View',
+            'Menus.View',
         ];
 
         //$insert = collect();

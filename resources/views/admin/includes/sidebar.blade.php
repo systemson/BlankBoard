@@ -114,25 +114,32 @@
     <!-- /. access section -->
 
     <!-- Content module -->
-    @if (Auth::user()->hasPermission('Categories|Articles', true))
-    <li class="treeview @if (routeNameIs(['categories', 'articles'], true)) menu-open @endif">
+    @if (Auth::user()->hasPermission('Categories|Articles|Menus', true))
+    <li class="treeview @if (routeNameIs(['categories', 'articles', 'menus'], true)) menu-open @endif">
       <a href="#"><i class="fa fa-pencil"></i> <span>Contenido</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" @if (routeNameIs(['categories', 'articles'], true)) style="display: block;"  @endif>
+      <ul class="treeview-menu" @if (routeNameIs(['categories', 'articles', 'menus'], true)) style="display: block;"  @endif>
 
-        <!-- Inbox -->
+        <!-- Articles -->
         <li class="@if (routeNameIs('articles', true)) active @endif">
           <a href="{{ URL::route('articles.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('articles.title') }}</span></a>
         </li>
-        <!-- /. inbox -->
+        <!-- /. articles -->
 
-        <!-- Sent emails -->
+        <!-- Categories-->
         <li class="@if (routeNameIs('categories', true)) active @endif">
           <a href="{{ URL::route('categories.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('categories.title') }}</span></a>
         </li>
+        <!-- /. categories -->
+
+        <!-- Menus-->
+        <li class="@if (routeNameIs('menus', true)) active @endif">
+          <a href="{{ URL::route('menus.index') }}"><i class="fa fa-circle-o"></i><span>{{ __('menus.title') }}</span></a>
+        </li>
+        <!-- /. menus -->
 
       </ul>
     </li>

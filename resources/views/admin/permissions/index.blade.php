@@ -47,9 +47,7 @@
           </td>
           <td>{{ Lang::has($name . '.' .$resource->slug . '.module') ? __($name . '.' .$resource->slug . '.module') : $resource->module }}</td>
           <td>{{ $resource->slug }}</td>
-          <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
-            {{ __('messages.status.' . $resource->status . '.name') }}
-          </span></td>
+          <td>{!! status_label($resource->status) !!}</td>
         </tr>
         @empty
           <tr><td colspan="5">{{ __('messages.no-results') }}</td></tr>

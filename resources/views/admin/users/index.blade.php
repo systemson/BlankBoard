@@ -43,15 +43,7 @@
           <tr>
             <td>{{ $resource->id }}</td>
             @if (Auth::user()->hasPermission('delete_' . $name) && auth()->user()->id !== $resource->id && $resource->id !== 1)
-            <td class="text-nowrap">
-              {{ Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $resource->id]]) }}
-              {{ Form::button( __('messages.action.trash'), array(
-              'type' => 'submit',
-              'class'=> 'btn-danger btn-xs',
-              'onclick'=>'return confirm("' . __($name . '.confirm-delete') . '")'
-              )) }}
-              {{ Form::close() }}
-            </td>
+            <td class="text-nowrap">{!! delete_btn($resource->id, $name) !!}</td>
             @else
             <td></td>
             @endif
@@ -62,9 +54,7 @@
               {{ $resource->name }}
               @endif
             </td>
-            <td><span class="{{ __('messages.status.' . $resource->status . '.class') }}">
-              {{ __('messages.status.' . $resource->status . '.name') }}
-            </span></td>
+            <td>{!! status_label($resource->status) !!}</td>
           </tr>
           @empty
           <tr><td colspan="4">{{ __('messages.no-results') }}</td></tr>
