@@ -150,3 +150,24 @@ if (!function_exists('delete_btn')) {
         return "{$open} {$btn} {$close}";
     }
 }
+
+if (!function_exists('menu')) {
+
+    function menu()
+    {
+        $items = \App\Models\Menu::where('status', 1)->get();
+
+        if (empty($items)) return;
+
+        $list = null;
+
+        $open = '<ul class="navbar-nav">';
+        foreach ($items as $item) {
+            $url = url($item->url);
+            $list .= "<li class=\"nav-item <?php echo requestIs('{$item->url}'); ?>\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
+        }
+        $close = '</ul>';
+
+        return $open.$list.$close;
+    }
+}
