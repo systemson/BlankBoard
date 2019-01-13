@@ -5,6 +5,6 @@
 
 <link rel="stylesheet" href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css', true) }}">
 
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">

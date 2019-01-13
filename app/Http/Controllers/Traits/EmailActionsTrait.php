@@ -49,12 +49,11 @@ trait EmailActionsTrait
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
+        $this->request->validate([
             'to' => 'required',
             'subject' => 'required|max:80',
             'body' => 'nullable|max:1200',
@@ -150,7 +149,7 @@ trait EmailActionsTrait
      * @param  int $id the specified resource id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         /** Get the specified resource */
         $resource = $this->model::findOrFail($id);
