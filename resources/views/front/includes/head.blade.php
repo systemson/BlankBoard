@@ -8,3 +8,9 @@
 <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css', true) }}">
 
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+<style type="text/css">	
+#main-menu {
+  box-shadow: 0 0 30px 0 #df003a;
+  background-color: #df003a;
+}
+</style>

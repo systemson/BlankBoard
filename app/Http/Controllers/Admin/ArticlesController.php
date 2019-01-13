@@ -86,7 +86,7 @@ class ArticlesController extends Controller
 
         $path = Storage::disk('public')->putFile('articles', $this->request->file('image_file'));
 
-        Input::merge(['image' => $path]);
+        Input::merge(['image' => 'storage' . DIRECTORY_SEPARATOR . $path]);
     }
 
     /**
@@ -109,7 +109,7 @@ class ArticlesController extends Controller
 
         $path = Storage::disk('public')->putFile('articles', $this->request->file('image_file'));
 
-        Input::merge(['image' => $path]);
+        Input::merge(['image' =>  'storage' . DIRECTORY_SEPARATOR . $path]);
     }
 
     /**
