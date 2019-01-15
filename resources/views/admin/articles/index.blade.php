@@ -13,9 +13,9 @@
   <div class="box box-primary">
 
     <div class="box-header with-border">
-      <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
+      <h3 class="box-title">@lang($name . '.list', ['title' => __($name . '.title')])</h3>
       <div class="box-tools pull-right">
-        @if (Auth::user()->hasPermission('create_' . $name))
+        @permission('create_' . $name)
         {!! button('new', route($name . '.create')) !!}
         @endif
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
@@ -28,15 +28,15 @@
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
-            <th>{{ __($name . '.table.id') }}</th>
-            @if (Auth::user()->hasPermission('delete_' . $name))
-            <th class="text-center">{{ __($name . '.table.action') }}</th>
+            <th>@lang($name . '.table.id')</th>
+            @permission('delete_' . $name)
+            <th class="text-center">@lang($name . '.table.action')</th>
             @endif
-            <th class="col-sm-6">{{ __($name . '.table.title') }}</th>
-            <th class="text-center">{{ __($name . '.table.author') }}</th>
-            <th class="text-center">{{ __($name . '.table.category') }}</th>
-            <th class="text-center">{{ __($name . '.table.created_at') }}</th>
-            <th class="text-center">{{ __($name . '.table.status') }}</th>
+            <th class="col-sm-6">@lang($name . '.table.title')</th>
+            <th class="text-center">@lang($name . '.table.author')</th>
+            <th class="text-center">@lang($name . '.table.category')</th>
+            <th class="text-center">@lang($name . '.table.created_at')</th>
+            <th class="text-center">@lang($name . '.table.status')</th>
           </tr>
         </thead>
         <tbody>
@@ -44,11 +44,11 @@
           @forelse ($resources as $resource)
           <tr class="text-center">
             <td>{{ $resource->id }}</td>
-            @if (Auth::user()->hasPermission('delete_' . $name))
+            @permission('delete_' . $name)
             <td class="text-nowrap">{!! delete_btn($resource->id, $name) !!}</td>
             @endif
             <td class="text-left">
-              @if (Auth::user()->hasPermission('update_' . $name))
+              @permission('update_' . $name)
               <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->title }}</a>
               @else
               {{ $resource->title }}
@@ -60,7 +60,7 @@
             <td>{!! status_label($resource->status) !!}</td>
           </tr>
           @empty
-          <tr><td colspan="6">{{ __('messages.no-results') }}</td></tr>
+          <tr><td colspan="6">@lang('messages.no-results')</td></tr>
           @endforelse
 
         </tbody>
