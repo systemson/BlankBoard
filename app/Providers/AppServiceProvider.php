@@ -22,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('menu', function () {
             return "<?php echo menu(); ?>";
         });   
+
+        // Render menus
+        Blade::if('permission', function ($permissions, $module = false) {
+            return auth()->user()->hasPermission($permissions, $module);
+        });   
     }
 
     /**

@@ -13,11 +13,8 @@
   <div class="box box-primary">
 
     <div class="box-header with-border">
-      <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
+      <h3 class="box-title">@lang($name . '.list', ['title' => __($name . '.title')])</h3>
       <div class="box-tools pull-right">
-        @permission('create_' . $name)
-        {!! button('new', route($name . '.create')) !!}
-        @endif
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
           <i class="fa fa-minus"></i>
         </button>
@@ -28,13 +25,10 @@
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
-            <th>{{ __($name . '.table.id') }}</th>
-            @permission('delete_' . $name)
-            <th class="text-center">{{ __($name . '.table.action') }}</th>
-            @endif
-            <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
-            <th class="text-center">{{ __($name . '.table.slug') }}</th>
-            <th class="text-center">{{ __($name . '.table.status') }}</th>
+            <th>@lang($name . '.table.id')</th>
+            <th class="col-sm-12">@lang($name . '.table.name')</th>
+            <th class="text-center">@lang($name . '.table.value')</th>
+            <th class="text-center"></th>
           </tr>
         </thead>
         <tbody>
@@ -42,21 +36,16 @@
           @forelse($resources as $resource)
           <tr>
             <td>{{ $resource->id }}</td>
-            @permission('delete_' . $name)
-            <td class="text-nowrap">{!! delete_btn($resource->id, $name) !!}</td>
-            @endif
+            <td>{{ $resource->name }}</td>
             <td>
-              @permission('update_' . $name)
-              <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a>
-              @else
-              {{ $resource->name }}
-              @endif
+              {{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT')) }}
+              {{ Form::text($resource->name, $resource->value) }}
+              {{ Form::close() }}
             </td>
-            <td>{{ $resource->slug }}</td>
-            <td>{!! status_label($resource->status) !!}</td>
+            <td></td>
           </tr>
           @empty
-          <tr><td colspan="5">{{ __('messages.no-results') }}</td></tr>
+          <tr><td colspan="4">@lang('messages.no-results')</td></tr>
           @endforelse
 
         </tbody>

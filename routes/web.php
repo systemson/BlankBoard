@@ -110,4 +110,17 @@ Route::namespace('Admin')
 
     /* Menus module */
     Route::resource('menus', 'MenusController')->except('show');
+
+
+    /*
+     * Configs section
+     */
+    Route::resource('configs', 'ConfigsController')->only([
+        'index',
+        'update',
+    ]);
+    
+    Route::get('configs/site', 'ConfigsController@site')->name('configs.site');
+
+
 });

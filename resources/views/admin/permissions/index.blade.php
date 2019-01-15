@@ -38,7 +38,7 @@
           <tr>
             <td>{{ $resource->id }}</td>
             <td>
-              @if (Auth::user()->hasPermission('update_' . $name))
+              @permission('update_' . $name)
               <a href="{{ route($name . '.edit', $resource->id) }}">{{ Lang::has($name . '.' .$resource->slug . '.name') ? __($name . '.' .$resource->slug . '.name') : $resource->name }}</a>
               @else
               {{ $resource->name }}

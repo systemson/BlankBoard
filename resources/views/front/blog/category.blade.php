@@ -30,9 +30,10 @@
   font-style: italic;
 }
 .blog-item-readmore {
-  font-weight: bold;
+  font-weight: 400;
   color: inherit;
   font-style: italic;
+  text-decoration: underline;
 }
 </style>
 @endsection

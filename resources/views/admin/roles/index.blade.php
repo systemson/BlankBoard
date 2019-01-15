@@ -15,7 +15,7 @@
     <div class="box-header with-border">
       <h3 class="box-title">{{ __($name . '.list', ['title' => __($name . '.title')]) }}</h3>
       <div class="box-tools pull-right">
-        @if (Auth::user()->hasPermission('create_' . $name))
+        @permission('create_' . $name)
         {!! button('new', route($name . '.create')) !!}
         @endif
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
@@ -29,7 +29,7 @@
         <thead>
           <tr>
             <th>{{ __($name . '.table.id') }}</th>
-            @if (Auth::user()->hasPermission('delete_' . $name))
+            @permission('delete_' . $name)
             <th class="text-center">{{ __($name . '.table.action') }}</th>
             @endif
             <th class="col-sm-12">{{ __($name . '.table.name') }}</th>
@@ -42,11 +42,11 @@
           @forelse ($resources as $resource)
           <tr>
             <td>{{ $resource->id }}</td>
-            @if (Auth::user()->hasPermission('delete_' . $name))
+            @permission('delete_' . $name)
             <td class="text-nowrap">{!! delete_btn($resource->id, $name) !!}</td>
             @endif
             <td>
-              @if (Auth::user()->hasPermission('update_' . $name))
+              @permission('update_' . $name)
               <a href="{{ route($name . '.edit', $resource->id) }}">{{ $resource->name }}</a>
               @else
               {{ $resource->name }}
