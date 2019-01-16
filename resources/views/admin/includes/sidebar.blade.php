@@ -152,21 +152,21 @@
     @endif
     <!-- /. content section -->
 
-    <!-- Configs section -->
-    @permission('Configs', true)
-    <li class="treeview {{ requestIs('configs/*', 'menu-open') }}">
-      <a href="#"><i class="fa fa-cog"></i> <span>Configuraciones</span>
+    <!-- Settings section -->
+    @permission('Settings', true)
+    <li class="treeview {{ requestIs('admin/settings/*', 'menu-open') }}">
+      <a href="#"><i class="fa fa-cog"></i> <span>@lang('settings.parent')</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" @if (routeNameIs(['configs'], true)) style="display: block;"  @endif>
+      <ul class="treeview-menu" {!! requestIs('admin/settings/*', 'style="display: block;"') !!}>
 
 
-        @permission('Configs', true)
+        @permission('Settings', true)
         <!-- Articles -->
-        <li class="{{ requestIs('configs/*') }}">
-          <a href="{{ route('configs.site') }}"><i class="fa fa-circle-o"></i><span>@lang('configs.site')</span></a>
+        <li class="{{ requestIs('admin/settings/site') }}">
+          <a href="{{ route('settings.site') }}"><i class="fa fa-circle-o"></i><span>@lang('settings.site')</span></a>
         </li>
         <!-- /. articles -->
         @endif
@@ -174,7 +174,7 @@
       </ul>
     </li>
     @endif
-    <!-- /. config section -->
+    <!-- /. settings section -->
 
   </ul>
   <!-- /.sidebar-menu -->

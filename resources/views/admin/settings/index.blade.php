@@ -26,7 +26,7 @@
         <thead>
           <tr>
             <th>@lang($name . '.table.id')</th>
-            <th class="col-sm-12">@lang($name . '.table.name')</th>
+            <th class="col-sm-6">@lang($name . '.table.name')</th>
             <th class="text-center">@lang($name . '.table.value')</th>
             <th class="text-center"></th>
           </tr>
@@ -37,12 +37,12 @@
           <tr>
             <td>{{ $resource->id }}</td>
             <td>{{ $resource->name }}</td>
+              {{ Form::open(['url' => route($name . '.update', $resource->id), 'method' => 'PUT']) }}
             <td>
-              {{ Form::open(array('url' => route($name . '.update', $resource->id), 'method' => 'PUT')) }}
-              {{ Form::text($resource->name, $resource->value) }}
-              {{ Form::close() }}
+              {{ Form::text('value', $resource->value, ['class' => 'col-sm-12']) }}
             </td>
-            <td></td>
+            <td><button class="btn btn-xs btn-primary" type="submit"><i class="fa fa-pencil"></i></button></td>
+              {{ Form::close() }}
           </tr>
           @empty
           <tr><td colspan="4">@lang('messages.no-results')</td></tr>

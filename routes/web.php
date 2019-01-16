@@ -115,12 +115,12 @@ Route::namespace('Admin')
     /*
      * Configs section
      */
-    Route::resource('configs', 'ConfigsController')->only([
+    Route::resource('settings', 'SettingsController')->only([
         'index',
         'update',
     ]);
     
-    Route::get('configs/site', 'ConfigsController@site')->name('configs.site');
+    Route::get('settings/site', 'SettingsController@site')->name('settings.site');
 
 
 });

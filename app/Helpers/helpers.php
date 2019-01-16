@@ -171,3 +171,11 @@ if (!function_exists('menu')) {
         return $open.$list.$close;
     }
 }
+
+if (!function_exists('settings')) {
+
+    function settings()
+    {
+        return (object) \App\Models\Setting::get()->pluck('value', 'slug')->toArray();
+    }
+}

@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class ConfigsTableSeeder extends Seeder
+class SettingsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class ConfigsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('configs')->insert([
+        DB::table('settings')->insert([
             [
                 'name' => 'Site description',
             	'slug' => 'site_description',

@@ -2,9 +2,10 @@
 
 return [
 
-    'parent' => 'Configuraciones',
+    'parent' => 'Ajustes',
+    'title' => 'Ajustes',
     'site' => 'Pagina',
-    'name' => 'configuracion|configuraciones',
+    'name' => 'ajuste|ajustes',
     'list' => 'Listado de :title',
     'add' => 'Agregar nueva :name',
     'edit' => 'Editar :name :Resource',
@@ -17,9 +18,9 @@ return [
     ],
 
     // Alerts
-    'resource-created' => 'Nueva categoría creada.',
-    'resource-updated' => 'Categoría actualizada satisfactoriamente.',
-    'resource-deleted' => 'Categoría eliminada.',
+    'resource-created' => 'Nuevo ajuste creado.',
+    'resource-updated' => 'Ajuste actualizado satisfactoriamente.',
+    'resource-deleted' => 'Ajuste eliminado.',
 
     'confirm-delete' => 'Esta acción no puede ser revertida. ¿Estás seguro?',
 ];

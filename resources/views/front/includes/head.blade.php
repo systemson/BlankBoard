@@ -1,4 +1,6 @@
 <meta charset="utf-8">
+<meta name="description" content="{{ settings()->site_description }}">
+<meta name="keywords" content="{{ settings()->site_keywords }}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>@yield('title', config('app.name', 'Laravel'))</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

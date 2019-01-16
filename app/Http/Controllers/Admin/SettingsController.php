@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
-use App\Models\Config as Model;
+use App\Models\Setting as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Traits\PermissionValidationTrait;
 
-class ConfigsController extends Controller
+class SettingsController extends Controller
 {
     //use PermissionValidationTrait;
 
@@ -17,7 +17,7 @@ class ConfigsController extends Controller
      *
      * @var string
      */
-    protected $name = 'configs';
+    protected $name = 'settings';
 
     /**
      * Model class.
