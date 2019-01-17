@@ -14,13 +14,6 @@ class ArticlesController extends Controller
     use ArticlesValidationTrait;
 
     /**
-     * The controller resource name.
-     *
-     * @var string
-     */
-    protected $name = 'articles';
-
-    /**
      * Model class.
      *
      * @var string

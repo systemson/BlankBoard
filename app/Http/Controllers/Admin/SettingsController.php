@@ -10,15 +10,6 @@ use App\Http\Controllers\Traits\PermissionValidationTrait;
 
 class SettingsController extends Controller
 {
-    //use PermissionValidationTrait;
-
-    /**
-     * The controller resource name.
-     *
-     * @var string
-     */
-    protected $name = 'settings';
-
     /**
      * Model class.
      *

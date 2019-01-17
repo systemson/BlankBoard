@@ -15,13 +15,6 @@ class EmailsController extends Controller
         PivotTrait;
 
     /**
-     * The controller resource route name.
-     *
-     * @var string
-     */
-    protected $name = 'emails';
-
-    /**
      * Model class.
      *
      * @var class

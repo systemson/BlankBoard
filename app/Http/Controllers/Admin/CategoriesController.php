@@ -12,13 +12,6 @@ class CategoriesController extends Controller
     use CategoriesValidationTrait;
 
     /**
-     * The controller resource name.
-     *
-     * @var string
-     */
-    protected $name = 'categories';
-
-    /**
      * Model class.
      *
      * @var string

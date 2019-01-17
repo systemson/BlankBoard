@@ -63,5 +63,18 @@ abstract class ResourceController extends Controller
 
         /* Store the resource permissions on DB */
         $this->registerPermissions($this->resourceAbilityMap());
+
+        /* Sets the controller resource name. */
+        $this->name = $this->getName();
+    }
+
+    /**
+     * Get the resource name from model.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+    	return with(new $this->model)->getTable();
     }
 }

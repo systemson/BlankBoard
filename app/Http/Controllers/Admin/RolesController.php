@@ -16,13 +16,6 @@ class RolesController extends Controller
     use RoleValidationTrait;
 
     /**
-     * The controller resource route name.
-     *
-     * @var string
-     */
-    protected $name = 'roles';
-
-    /**
      * Model class.
      *
      * @var string

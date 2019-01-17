@@ -8,14 +8,7 @@ use App\Http\Controllers\Traits\ArticlesValidationTrait;
 
 class MenusController extends Controller
 {
-    //use ArticlesValidationTrait;
-
-    /**
-     * The controller resource name.
-     *
-     * @var string
-     */
-    protected $name = 'menus';
+    //use MenusValidationTrait;
 
     /**
      * Model class.

@@ -13,13 +13,6 @@ class PermissionsController extends Controller
     use PermissionValidationTrait;
 
     /**
-     * The controller resource name.
-     *
-     * @var string
-     */
-    protected $name = 'permissions';
-
-    /**
      * Model class.
      *
      * @var string
