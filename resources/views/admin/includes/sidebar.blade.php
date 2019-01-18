@@ -153,20 +153,27 @@
     <!-- /. content section -->
 
     <!-- Settings section -->
-    @permission('Settings', true)
+    @permission(['Settings', 'Modules'], true)
     <li class="treeview {{ requestIs('admin/settings/*', 'menu-open') }}">
       <a href="#"><i class="fa fa-cog"></i> <span>@lang('settings.parent')</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" {!! requestIs('admin/settings/*', 'style="display: block;"') !!}>
-
+      <ul class="treeview-menu" @if (routeNameIs('settings.site') || routeNameIs(['modules'], true)) style="display: block;"  @endif>
 
         @permission('Settings', true)
         <!-- Articles -->
         <li class="{{ requestIs('admin/settings/site') }}">
           <a href="{{ route('settings.site') }}"><i class="fa fa-circle-o"></i><span>@lang('settings.site')</span></a>
+        </li>
+        <!-- /. articles -->
+        @endif
+
+        @permission('Modules', true)
+        <!-- Articles -->
+        <li class="{{ requestIs('admin/modules') }}">
+          <a href="{{ route('modules.index') }}"><i class="fa fa-circle-o"></i><span>@lang('modules.title')</span></a>
         </li>
         <!-- /. articles -->
         @endif

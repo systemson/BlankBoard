@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\AuthorizeActionTrait;
 use App\Http\Controllers\Traits\ResourceActionsTrait;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-use Lang;
+use App\Models\Module;
 
 abstract class ResourceController extends Controller
 {
@@ -61,11 +60,11 @@ abstract class ResourceController extends Controller
         /* Request instance */
         $this->request = $request;
 
-        /* Store the resource permissions on DB */
-        $this->registerPermissions($this->resourceAbilityMap());
-
         /* Set the controller resource name. */
         $this->name = $this->getName();
+
+        /* Register the resource */
+        $this->register();
     }
 
     /**
@@ -76,5 +75,22 @@ abstract class ResourceController extends Controller
     public function getName(): string
     {
     	return with(new $this->model)->getTable();
+    }
+
+    public function register()
+    {
+    	$map = $this->resourceAbilityMap();
+
+    	Module::firstOrCreate(['resource' => $this->name],
+    	[
+    		'name' => ucwords(str_replace('_', ' ', $this->name)),
+    		'can_create' => in_array('create', $map),
+    		'can_read' => in_array('show', $map),
+    		'can_update' => in_array('update', $map),
+    		'can_delete' => in_array('delete', $map),
+    	]);
+
+        /* Store the resource permissions on DB */
+        $this->registerPermissions($this->resourceAbilityMap());
     }
 }

@@ -122,5 +122,6 @@ Route::namespace('Admin')
     
     Route::get('settings/site', 'SettingsController@site')->name('settings.site');
 
+    Route::resource('modules', 'ModulesController')->except('show');
 
 });
