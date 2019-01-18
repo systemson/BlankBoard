@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\ResourceModel as Model;
 
 class Menu extends Model
 {
@@ -16,11 +16,11 @@ class Menu extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates.
+     * The attributes that must be listed for the index page.
      *
      * @var array
      */
-    protected $dates = [
-        'created_at', 'updated_at',
+    protected static $listable = [
+        'id', 'title', 'url', 'status',
     ];
 }

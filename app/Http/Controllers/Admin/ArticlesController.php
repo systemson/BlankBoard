@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
 use App\Models\Article as Model;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Traits\ArticlesValidationTrait;
+use App\Http\Controllers\Admin\Traits\Validations\ArticlesValidationTrait as Validations;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 
 class ArticlesController extends Controller
 {
-    use ArticlesValidationTrait;
+    use Validations;
 
     /**
      * Model class.

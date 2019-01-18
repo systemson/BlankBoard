@@ -5,16 +5,10 @@ namespace App\Http\Controllers\Traits;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Lang;
+use App\Models\Module;
 
 trait ResourceActionsTrait
 {
-    /**
-     * The columns to select for the index table.
-     *
-     * @var array
-     */
-    protected $select = ['*'];
-
     /**
      * The columns to select for the index table.
      *
@@ -32,7 +26,6 @@ trait ResourceActionsTrait
     protected function resourceFilters()
     {
         return (object) [
-            'select' => $this->select,
             'where' => $this->where,
             'order' => $this->order,
         ];
@@ -42,7 +35,7 @@ trait ResourceActionsTrait
     {
         $filters = $this->resourceFilters();
 
-        $query = $this->model::select($filters->select)
+        $query = $this->model::select($this->model::getListable())
         ->where(function ($q) use ($filters) {
             if (!empty($filters->where)) {
                 foreach ($filters->where as $column => $value) {
@@ -65,16 +58,18 @@ trait ResourceActionsTrait
      */
     public function index()
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        /** Get the resources from the model */
+        /* Get the resources from the model */
         $resources = $this->resourcesList();
 
-        /** Display a listing of the resources */
-        return view('admin.' . $this->name . '.index')
+        $this->module->setListable($this->model::getListable());
+
+        /* Display a listing of the resources */
+        return view('admin.includes.actions.index')
         ->with('resources' , $resources)
-        ->with('name', $this->name);
+        ->with('module' , $this->module);
     }
 
     /**
@@ -84,10 +79,10 @@ trait ResourceActionsTrait
      */
     public function create()
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        /** Show the form for creating a new resource. */
+        /* Show the form for creating a new resource. */
         return view('admin.' . $this->name . '.create')
         ->with('name', $this->name);
     }
@@ -100,17 +95,17 @@ trait ResourceActionsTrait
      */
     public function store()
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
         if(method_exists($this, 'storeValidations')) {
             $this->request->validate($this->storeValidations());
         }
 
-        /** Create a new resource */
+        /* Create a new resource */
         $resource = $this->model::create(Input::all());
 
-        /** Redirect to newly created resource page */
+        /* Redirect to newly created resource page */
         return redirect()
         ->route($this->name . '.edit', $resource->id)
         ->with('success', Lang::has($this->name . '.resource-created') ?

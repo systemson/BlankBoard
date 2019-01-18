@@ -2,11 +2,37 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\ResourceModel as Model;
 use App\Models\Role;
 
 class Permission extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'slug', 'module', 'status', 'description',
+    ];
+
+    /**
+     * The attributes that must be listed for the index page.
+     *
+     * @var array
+     */
+    protected static $listable = [
+        'id', 'name', 'slug', 'module', 'status',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at', 'updated_at',
+    ];
 
     public static function boot()
     {
@@ -21,24 +47,6 @@ class Permission extends Model
             }
         });
     }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'slug', 'module', 'status', 'description',
-    ];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'created_at', 'updated_at',
-    ];
 
     /**
      * Create permissions if don't exist.

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Traits;
+namespace App\Http\Controllers\Admin\Traits\Validations;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Rule;
 
-trait RoleValidationTrait
+trait CategoriesValidationTrait
 {
     /**
      * Return validations for storing current resource.
@@ -16,8 +16,9 @@ trait RoleValidationTrait
     protected function storeValidations() {
         return [
             'name' => 'required|max:32',
-            'slug' => 'required|unique:roles|max:32|alpha_dash',
+            'slug' => 'required|unique|max:32',
             'description' => 'nullable|max:120',
+            'status' => 'integer',
         ];
     }
 
@@ -30,8 +31,9 @@ trait RoleValidationTrait
         $id = Input::get('id');
         return [
             'name' => 'required|max:32',
-            'slug' =>['required',Rule::unique('roles')->ignore($id),'max:32','alpha_dash'],
+            'slug' => ['required',Rule::unique('categories')->ignore($id),'max:32'],
             'description' => 'nullable|max:120',
+            'status' => 'integer',
         ];
     }
 }

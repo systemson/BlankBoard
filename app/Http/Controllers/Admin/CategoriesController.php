@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
 use App\Models\Category as Model;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Traits\CategoriesValidationTrait;
+use App\Http\Controllers\Admin\Traits\Validations\CategoriesValidationTrait as Validations;
 
 class CategoriesController extends Controller
 {
-    use CategoriesValidationTrait;
+    use Validations;
 
     /**
      * Model class.

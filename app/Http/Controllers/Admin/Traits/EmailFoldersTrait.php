@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Traits;
+namespace App\Http\Controllers\Admin\Traits;
 
 trait EmailFoldersTrait
 {

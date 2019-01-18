@@ -117,6 +117,7 @@ Route::namespace('Admin')
      */
     Route::resource('settings', 'SettingsController')->only([
         'index',
+        'edit',
         'update',
     ]);
     

@@ -15,8 +15,10 @@
     <div class="box-header with-border">
       <h3 class="box-title">@lang($name . '.list', ['title' => __($name . '.title')])</h3>
       <div class="box-tools pull-right">
+        @if ($module->can_create)
         @permission('create_' . $name)
         {!! button('new', route($name . '.create')) !!}
+        @endif
         @endif
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
           <i class="fa fa-minus"></i>

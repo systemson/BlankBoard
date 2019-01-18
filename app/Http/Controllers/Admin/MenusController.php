@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
 use App\Models\Menu as Model;
-use App\Http\Controllers\Traits\ArticlesValidationTrait;
+use App\Http\Controllers\Admin\Traits\Validations\ArticlesValidationTrait as Validations;
 
 class MenusController extends Controller
 {
-    //use MenusValidationTrait;
+    //use Validations;
 
     /**
      * Model class.

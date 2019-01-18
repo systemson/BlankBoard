@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Traits;
+namespace App\Http\Controllers\Auth\Traits;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;

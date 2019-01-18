@@ -151,6 +151,21 @@ if (!function_exists('delete_btn')) {
     }
 }
 
+if (!function_exists('edit_btn')) {
+
+    function edit_btn(int $id, $name)
+    {
+        $open = Form::open(['method' => 'GET','route' => [$name . '.edit', $id]]);
+        $btn = Form::button( __('messages.action.edit'), [
+            'type' => 'submit',
+            'class'=> 'btn-primary btn-xs',
+        ]);
+        $close = Form::close();
+
+        return "{$open} {$btn} {$close}";
+    }
+}
+
 if (!function_exists('menu')) {
 
     function menu()

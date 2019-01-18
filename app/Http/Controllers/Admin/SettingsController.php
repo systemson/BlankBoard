@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
 use App\Models\Setting as Model;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use App\Http\Controllers\Traits\PermissionValidationTrait;
 
 class SettingsController extends Controller
 {
@@ -30,5 +27,19 @@ class SettingsController extends Controller
     {
         $this->where = ['section' => 'site'];
         return $this->index();
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'index',
+            'edit' => 'update',
+            'update' => 'update',
+        ];
     }
 }

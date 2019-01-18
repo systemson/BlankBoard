@@ -9,5 +9,5 @@
 @stop
 
 @section('content')
-   @include('admin.includes.list', ['resources' => $resources, 'module' => $module])
+   @include('admin.includes.actions.list', ['resources' => $resources, 'module' => $module])
 @stop

@@ -20,6 +20,8 @@ abstract class ResourceController extends Controller
      */
     protected $name;
 
+    protected $module;
+
     /**
      * Model class.
      *
@@ -77,20 +79,20 @@ abstract class ResourceController extends Controller
     	return with(new $this->model)->getTable();
     }
 
-    public function register()
+    public function register(): void
     {
     	$map = $this->resourceAbilityMap();
 
-    	Module::firstOrCreate(['resource' => $this->name],
+    	$this->module = Module::firstOrCreate(['slug' => $this->name],
     	[
     		'name' => ucwords(str_replace('_', ' ', $this->name)),
     		'can_create' => in_array('create', $map),
-    		'can_read' => in_array('show', $map),
+    		'can_read' => in_array('view', $map),
     		'can_update' => in_array('update', $map),
     		'can_delete' => in_array('delete', $map),
     	]);
 
         /* Store the resource permissions on DB */
-        $this->registerPermissions($this->resourceAbilityMap());
+        $this->registerPermissions($map);
     }
 }

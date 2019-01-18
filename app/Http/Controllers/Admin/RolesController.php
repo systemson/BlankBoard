@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Role as Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\ResourceController as Controller;
-use App\Http\Controllers\Traits\RoleValidationTrait;
+use App\Http\Controllers\Admin\Traits\Validations\RolesValidationTrait as Validations;
 use DB;
 use Lang;
 use Illuminate\Support\Facades\Cache;
 
 class RolesController extends Controller
 {
-    use RoleValidationTrait;
+    use Validations;
 
     /**
      * Model class.

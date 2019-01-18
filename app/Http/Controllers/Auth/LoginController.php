@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Auth\Middleware\Authenticate;
-use App\Http\Controllers\Traits\LoginSuspensionTrait;
+use App\Http\Controllers\Auth\Traits\LoginSuspensionTrait;
 
 class LoginController extends Controller
 {
