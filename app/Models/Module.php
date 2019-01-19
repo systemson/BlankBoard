@@ -30,6 +30,11 @@ class Module extends Model
         return (bool) $value;
     }
 
+    public function getCanUpdateAttribute($value)
+    {
+        return (bool) $value;
+    }
+
     public function getCanDeleteAttribute($value)
     {
         return (bool) $value;

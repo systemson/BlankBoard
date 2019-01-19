@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="box-title">Home</h2>
+@forelse ($components as $component)
+  {!! $component->content !!}
+@empty
+@include('front.default')
+@endforelse
 @endsection
+

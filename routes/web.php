@@ -35,11 +35,9 @@ Route::namespace('Front')
 
     $categories = \App\Models\Category::pluck('slug')->implode('|');
 
-    if ($categories == '') $categories = 'default';
-
     Route::get('/{category}', 'BlogController@category')->where('category', $categories)->name('blog.category');
 
-    Route::get('/{category}/{slug}', 'BlogController@single')->where('category', $categories)->name('blog.single');
+    Route::get('/{category}/{slug}', 'BlogController@single')->where('category', $categories ?? 'default')->name('blog.single');
 });
 
 
@@ -108,6 +106,9 @@ Route::namespace('Admin')
 
     /* Menus module */
     Route::resource('menus', 'MenusController')->except('show');
+
+    /* Components module */
+    Route::resource('components', 'ComponentsController')->except('show');
 
 
     /*

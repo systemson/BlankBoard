@@ -2,7 +2,7 @@
   <div class="box box-primary">
 
     <div class="box-header with-border">
-      <h3 class="box-title">{{ __($module->slug . '.list', ['title' => __($module->slug . '.title')]) }}</h3>
+      <h3 class="box-title">{{ __($module->slug . '.list', ['title' => trans_choice($module->slug . '.name', 2)]) }}</h3>
       <div class="box-tools pull-right">
         @if ($module->can_create)
         @permission('create_' . $module->slug)
@@ -18,7 +18,7 @@
     <div class="box-body">
       <div class="table-responsive">
         
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered table-striped table-condensed">
           <thead>
             <tr class="info">
               @foreach ($module->getListable() as $column)
@@ -49,7 +49,7 @@
               </td>
             </tr>
             @empty
-            <tr><td colspan="{{ count($module->getListable()) }}">{{ __('messages.no-results') }}</td></tr>
+            <tr><td colspan="{{ count($module->getListable()) + 1 }}">{{ __('messages.no-results') }}</td></tr>
             @endforelse
 
           </tbody>
