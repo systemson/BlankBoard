@@ -15,43 +15,46 @@
       </div>
     </div><!-- Box header -->
 
-    <div class="box-body no-padding">
-      <table class="table table-hover table-bordered">
-        <thead>
-          <tr>
-            @foreach ($module->getListable() as $column)
-            <th>{{ __($module->slug . '.table.' . $column) }}</th>
-            @endforeach
-            <th>{{ __($module->slug . '.table.action') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @forelse ($resources as $resource)
-          <tr>
-            @foreach ($module->getListable() as $column)
-            <td>{!! $resource[$column] !!}</td>
-            @endforeach
-            <td class="text-nowrap">
+    <div class="box-body">
+      <div class="table-responsive">
+        
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr class="info">
+              @foreach ($module->getListable() as $column)
+              <th class="text-center">{{ __($module->slug . '.table.' . $column) }}</th>
+              @endforeach
+              <th class="text-center">{{ __($module->slug . '.table.action') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @forelse ($resources as $resource)
+            <tr>
+              @foreach ($module->getListable() as $column)
+              <td>{!! $resource[$column] !!}</td>
+              @endforeach
+              <td class="text-nowrap text-center">
 
-            @if ($module->can_update)
-            @permission('update' . $module->slug)
-            {!! edit_btn($resource->id, $module->slug) !!}
-            @endif
-            @endif
+                @if ($module->can_update)
+                @permission('update' . $module->slug)
+                {!! edit_btn($resource->id, $module->slug) !!}
+                @endif
+                @endif
 
-            @if ($module->can_delete)
-            @permission('delete_' . $module->slug)
-            {!! delete_btn($resource->id, $module->slug) !!}
-            @endif
-            @endif
-            </td>
-          </tr>
-          @empty
-          <tr><td colspan="{{ count($module->getListable()) }}">{{ __('messages.no-results') }}</td></tr>
-          @endforelse
+                @if ($module->can_delete)
+                @permission('delete_' . $module->slug)
+                {!! delete_btn($resource->id, $module->slug) !!}
+                @endif
+                @endif
+              </td>
+            </tr>
+            @empty
+            <tr><td colspan="{{ count($module->getListable()) }}">{{ __('messages.no-results') }}</td></tr>
+            @endforelse
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
 
       <div class="col-sm-12">
         <div class="text-right">{{ $resources->links() }}</div>

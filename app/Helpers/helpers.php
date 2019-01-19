@@ -139,10 +139,10 @@ if (!function_exists('delete_btn')) {
 
     function delete_btn(int $id, $name)
     {
-        $open = Form::open(['method' => 'DELETE','route' => [$name . '.destroy', $id]]);
+        $open = Form::open(['method' => 'DELETE', 'route' => [$name . '.destroy', $id], 'style' => 'display: inline-block;']);
         $btn = Form::button( __('messages.action.trash'), [
             'type' => 'submit',
-            'class'=> 'btn-danger btn-xs',
+            'class'=> 'btn btn-danger btn-xs',
             'onclick'=> 'return confirm("' . __($name . '.confirm-delete') . '")',
         ]);
         $close = Form::close();
@@ -155,14 +155,11 @@ if (!function_exists('edit_btn')) {
 
     function edit_btn(int $id, $name)
     {
-        $open = Form::open(['method' => 'GET','route' => [$name . '.edit', $id]]);
-        $btn = Form::button( __('messages.action.edit'), [
-            'type' => 'submit',
-            'class'=> 'btn-primary btn-xs',
-        ]);
-        $close = Form::close();
+        $icon = __('messages.action.edit');
 
-        return "{$open} {$btn} {$close}";
+        $url = route($name . '.edit', $id);
+
+        return "<a class=\"btn btn-primary btn-xs\" href=\"{$url}\">{$icon}</a>";;
     }
 }
 

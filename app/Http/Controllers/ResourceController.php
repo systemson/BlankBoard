@@ -20,6 +20,11 @@ abstract class ResourceController extends Controller
      */
     protected $name;
 
+    /**
+     * The resource module.
+     *
+     * @var string
+     */
     protected $module;
 
     /**
@@ -62,9 +67,6 @@ abstract class ResourceController extends Controller
         /* Request instance */
         $this->request = $request;
 
-        /* Set the controller resource name. */
-        $this->name = $this->getName();
-
         /* Register the resource */
         $this->register();
     }
@@ -81,6 +83,9 @@ abstract class ResourceController extends Controller
 
     public function register(): void
     {
+        /* Set the controller resource name. */
+        $this->name = $this->getName();
+
     	$map = $this->resourceAbilityMap();
 
     	$this->module = Module::firstOrCreate(['slug' => $this->name],
