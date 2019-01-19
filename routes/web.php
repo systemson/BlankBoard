@@ -33,11 +33,9 @@ Route::namespace('Front')
     Route::get('/', 'Home@index')->name( 'home' );
     Route::get('/home', 'Home@index');
 
-    try {
-        $categories = \App\Models\Category::pluck('slug')->implode('|');
-    } catch (\Exception $e) {
-        $categories = 'default';
-    }
+    $categories = \App\Models\Category::pluck('slug')->implode('|');
+
+    if ($categories == '') $categories = 'default';
 
     Route::get('/{category}', 'BlogController@category')->where('category', $categories)->name('blog.category');
 

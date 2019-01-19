@@ -184,6 +184,51 @@ if (!function_exists('menu')) {
     }
 }
 
+if (!function_exists('td')) {
+
+    function td($resource, string $column)
+    {
+        $class = 'text-center';
+        $content = $resource[$column];
+
+        switch ($column) {
+            case 'status':
+                $content = status_label($resource[$column]);
+                break;
+            
+            case 'name':
+            case 'title':
+                $class = 'text-left';
+                break;
+
+            default:
+                break;
+        }
+
+        return "<td class=\"{$class}\">{$content}</td>";
+    }
+}
+
+if (!function_exists('th')) {
+
+    function th(string $column, string $name)
+    {
+        switch ($column) {            
+            case 'name':
+            case 'title':
+                $class = 'col-sm-6';
+                break;
+
+            default:
+                $class = null;
+                break;
+        }
+
+        return "<th class=\"text-center {$class}\">{$name}</td>";
+    }
+}
+
+
 if (!function_exists('settings')) {
 
     function settings()

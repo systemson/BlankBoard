@@ -16,18 +16,13 @@ abstract class ResourceModel extends Model
     ];
 
     /**
-     * The attributes that must be listed for the index page.
+     * The attributes that should be listed for the index page.
      *
      * @var array
      */
     protected static $listable = [
         '*'
     ];
-
-    public function getStatusAttribute($value)
-    {
-        return !is_null($value) ? status_label($value) : null;
-    }
 
     public static function getListable(): array
     {

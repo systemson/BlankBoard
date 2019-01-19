@@ -22,7 +22,7 @@
           <thead>
             <tr class="info">
               @foreach ($module->getListable() as $column)
-              <th class="text-center">{{ __($module->slug . '.table.' . $column) }}</th>
+              @th
               @endforeach
               <th class="text-center">{{ __($module->slug . '.table.action') }}</th>
             </tr>
@@ -31,12 +31,12 @@
             @forelse ($resources as $resource)
             <tr>
               @foreach ($module->getListable() as $column)
-              <td>{!! $resource[$column] !!}</td>
+              @td
               @endforeach
               <td class="text-nowrap text-center">
 
                 @if ($module->can_update)
-                @permission('update' . $module->slug)
+                @permission('update_' . $module->slug)
                 {!! edit_btn($resource->id, $module->slug) !!}
                 @endif
                 @endif

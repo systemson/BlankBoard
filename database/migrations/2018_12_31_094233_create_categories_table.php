@@ -22,6 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('created_by')
             ->references('id')

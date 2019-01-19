@@ -19,11 +19,21 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale(config('app.locale'));
 
         // Render menus
-        Blade::directive('menu', function () {
-            return "<?php echo menu(); ?>";
-        });   
+        Blade::directive('menu', function ($menu = null) {
+            return "<?php echo menu($menu); ?>";
+        });
 
-        // Render menus
+        // Render column celss
+        Blade::directive('td', function () {
+            return '<?php echo td($resource, $column); ?>';
+        });
+
+        // Render column header cells
+        Blade::directive('th', function () {
+            return '<?php echo th($column, __($module->slug . \'.table.\' . $column)); ?>';
+        });
+
+        // Permission custom if
         Blade::if('permission', function ($permissions, $module = false) {
             return auth()->user()->hasPermission($permissions, $module);
         });   
