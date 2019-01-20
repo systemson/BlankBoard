@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'BlankBoard2'),
+    'name' => env('APP_NAME', 'BlankBoard'),
 
     /*
     |--------------------------------------------------------------------------

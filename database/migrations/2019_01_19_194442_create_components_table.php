@@ -16,6 +16,7 @@ class CreateComponentsTable extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 124)->unique();
+            $table->smallInteger('order')->default(0);
             $table->smallInteger('status')->default(1);
             $table->text('description')->nullable();
             $table->longText('content');

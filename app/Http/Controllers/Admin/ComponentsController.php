@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
 use App\Models\Component as Model;
-//use App\Http\Controllers\Admin\Traits\Validations\ArticlesValidationTrait as Validations;
+use App\Http\Controllers\Admin\Traits\Validations\ComponentsValidationTrait as Validations;
 
 class ComponentsController extends Controller
 {
-    //use Validations;
+    use Validations;
 
     /**
      * Model class.

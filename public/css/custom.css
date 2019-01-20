@@ -1,0 +1,24 @@
+body {
+  font-family: 'Poppins';
+}
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.card-body.no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.bg-custom {
+  background-color: #df003a !important;
+  color: white;
+}
+.text-custom {
+  color: #df003a !important;
+}
+.panel {
+  padding: 120px 0;
+}
+.fa-xb {
+  font-size: 80pt;
+}

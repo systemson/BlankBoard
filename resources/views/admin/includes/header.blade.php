@@ -21,6 +21,13 @@
     <ul class="nav navbar-nav">
 
       @auth
+
+        <li class="messages-menu">
+          <a href="{{ url('/') }}" title="{{ config('app.name') }}" target="_blank">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-envelope-o"></i>

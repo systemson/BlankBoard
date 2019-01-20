@@ -236,3 +236,11 @@ if (!function_exists('settings')) {
         return (object) \App\Models\Setting::get()->pluck('value', 'slug')->toArray();
     }
 }
+
+if (!function_exists('version')) {
+
+    function version()
+    {
+        return '1.1';
+    }
+}
