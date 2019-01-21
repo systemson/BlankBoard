@@ -13,7 +13,7 @@ class Component extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'content', 'status',
+        'name', 'content', 'order', 'status',
     ];
 
     /**
@@ -22,6 +22,6 @@ class Component extends Model
      * @var array
      */
     protected static $listable = [
-        'id', 'name', 'status',
+        'id', 'name', 'order', 'status',
     ];
 }

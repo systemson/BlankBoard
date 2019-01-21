@@ -16,13 +16,14 @@ return [
       'name' => 'Nombre',
       'content' => 'Contenido',
       'description' => 'Descripción',
+      'order' => 'Orden',
       'status' => 'Estado',
     ],
 
     // Alerts
-    'resource-created' => 'Nueva categoría creada.',
-    'resource-updated' => 'Categoría actualizada satisfactoriamente.',
-    'resource-deleted' => 'Categoría eliminada.',
+    'resource-created' => 'Nuevo componente creado.',
+    'resource-updated' => 'Componente actualizado satisfactoriamente.',
+    'resource-deleted' => 'Componente eliminado.',
 
     'confirm-delete' => 'Esta acción no puede ser revertida. ¿Estás seguro?',
 ];

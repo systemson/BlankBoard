@@ -16,6 +16,7 @@ trait ComponentsValidationTrait
             'name' => 'required|max:120',
             'description' => 'nullable|max:250',
             'status' => 'required|integer',
+            'order' => 'required|integer',
             'content' => 'required',
         ];
     }
@@ -30,6 +31,7 @@ trait ComponentsValidationTrait
             'name' => 'required|max:120',
             'description' => 'nullable|max:250',
             'status' => 'required|integer',
+            'order' => 'required|integer',
             'content' => 'required',
         ];
     }

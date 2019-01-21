@@ -51,6 +51,17 @@
       @endif
     </div>
 
+    <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
+      {{ Form::label('order', __($name . '.table.order') . ' (*)', array('class' => 'control-label')) }}
+      {{ Form::text('order', $resource->order ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.order'))) }}
+        @if ($errors->has('order'))
+          <span class="help-block">
+            <strong>{{ $errors->first('name') }}</strong>
+          </span>
+        @endif
+      </div>
+    </div>
+
   </div>
 
   <div class="col-sm-12 form-vertical">

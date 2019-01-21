@@ -1,5 +1,5 @@
 body {
-  font-family: 'Poppins';
+  font-family: 'Poppins', 'san-serif';
 }
 .card {
   border-radius: 8px;
@@ -20,5 +20,5 @@ body {
   padding: 120px 0;
 }
 .fa-xb {
-  font-size: 80pt;
+  font-size: 70pt;
 }

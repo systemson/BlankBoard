@@ -10,6 +10,8 @@ class Home extends Controller
 	public function index()
 	{
 		$components = Component::where('status', 1)
+		->orderBy('order')
+		->orderBy('id')
 		->get();
 
 		return view('front.home')
