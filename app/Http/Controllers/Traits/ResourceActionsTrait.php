@@ -83,7 +83,7 @@ trait ResourceActionsTrait
         $this->authorizeAction();
 
         /* Show the form for creating a new resource. */
-        return view('admin.' . $this->name . '.create')
+        return view('admin.includes.actions.create')
         ->with('name', $this->name);
     }
 
@@ -149,7 +149,7 @@ trait ResourceActionsTrait
         $resource = $this->model::findOrFail($id);
 
         /** Displays the edit resource page */
-        return view('admin.' . $this->name . '.edit')
+        return view('admin.includes.actions.edit')
         ->with('resource', $resource)
         ->with('name', $this->name);
     }

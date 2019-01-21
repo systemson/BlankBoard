@@ -35,7 +35,7 @@ Route::namespace('Front')
 
     $categories = \App\Models\Category::pluck('slug')->implode('|');
 
-    Route::get('/{category}', 'BlogController@category')->where('category', $categories)->name('blog.category');
+    Route::get('/{category}', 'BlogController@category')->where('category', $categories ?? 'default')->name('blog.category');
 
     Route::get('/{category}/{slug}', 'BlogController@single')->where('category', $categories ?? 'default')->name('blog.single');
 });

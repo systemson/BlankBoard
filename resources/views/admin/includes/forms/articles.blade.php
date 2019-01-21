@@ -1,3 +1,9 @@
+@section('styles')
+<!-- Include Editor style. -->
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+@stop
+
 @if (isset($new) && $new)
 {{ Form::open(array('url' => route($name . '.store'), 'method' => 'POST', 'class' => 'form-horizontal', 'files' => true)) }}
 {{ Form::hidden('created_by', auth()->user()->id) }}
@@ -118,3 +124,23 @@
   </div>
 
 {{ Form::close() }}
+
+@section('scripts')
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.0/js/froala_editor.pkgd.min.js"></script>
+
+<!-- Initialize the editor. -->
+<script>
+  jQuery(function() {
+    jQuery('#content').froalaEditor()
+  });
+</script>
+  <script type="text/javascript">
+    jQuery('#title').change(function () {
+      var value = jQuery(this).val();
+      value = value.split(' ').join('-').toLowerCase();
+
+      jQuery('#url_alias').val(value);
+    });
+  </script>
+@stop
