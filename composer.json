@@ -65,7 +65,7 @@
         "post-install-cmd": [
             "@php artisan key:generate --ansi",
             "@php artisan storage:link",
-            "@php artisan migrate:fresh --seed",
+            "@php artisan migrate:fresh --seed --force",
             "composer dump-autoload"
         ]
     }
