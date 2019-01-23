@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
-use App\Models\Component as Model;
-use App\Http\Controllers\Admin\Traits\Validations\ComponentsValidationTrait as Validations;
+use App\Models\AccessLog as Model;
 
-class ComponentsController extends Controller
+class AccessLogsController extends Controller
 {
-    use Validations;
-
     /**
      * Model class.
      *
@@ -23,7 +20,7 @@ class ComponentsController extends Controller
      * @var array
      */
     protected $listable = [
-        'id', 'name', 'order', 'status',
+        'user_id', 'user_name', 'user_ip', 'event', 'created_at'
     ];
 
     /**
@@ -31,7 +28,7 @@ class ComponentsController extends Controller
      *
      * @var array
      */
-    protected $order = ['order' => 'asc'];
+    protected $order = ['id' => 'desc'];
 
     /**
      * Get the map of resource methods to ability names.
@@ -41,12 +38,7 @@ class ComponentsController extends Controller
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'index',
-            'create' => 'create',
-            'store' => 'create',
-            'edit' => 'update',
-            'update' => 'update',
-            'destroy' => 'delete',
+            'index' => 'index'
         ];
     }
 }

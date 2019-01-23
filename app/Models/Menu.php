@@ -14,13 +14,4 @@ class Menu extends Model
     protected $fillable = [
         'title', 'url', 'status',
     ];
-
-    /**
-     * The attributes that must be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        'id', 'title', 'url', 'status',
-    ];
 }

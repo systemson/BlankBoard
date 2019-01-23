@@ -176,7 +176,7 @@ if (!function_exists('menu')) {
         $open = '<ul class="navbar-nav">';
         foreach ($items as $item) {
             $url = url($item->url);
-            $list .= "<li class=\"nav-item <?php echo requestIs('{$item->url}'); ?>\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
+            $list .= "<li class=\"nav-item " . requestIs($item->url) . "\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
         }
         $close = '</ul>';
 
@@ -241,6 +241,6 @@ if (!function_exists('version')) {
 
     function version()
     {
-        return '1.1';
+        return 'v1.1-dev';
     }
 }

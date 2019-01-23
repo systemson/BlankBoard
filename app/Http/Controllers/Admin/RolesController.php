@@ -22,11 +22,11 @@ class RolesController extends Controller
     protected $model = Model::class;
 
     /**
-     * The columns to select for the index table.
+     * The attributes that must be listed for the index page.
      *
      * @var array
      */
-    protected $select = [
+    protected $listable = [
         'id', 'name', 'slug', 'status',
     ];
 

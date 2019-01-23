@@ -14,24 +14,4 @@ abstract class ResourceModel extends Model
     protected $dates = [
         'created_at', 'updated_at',
     ];
-
-    /**
-     * The attributes that should be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        '*'
-    ];
-
-    public static function getListable(): array
-    {
-        return static::$listable;
-    }
-
-    public static function setListable(array $listable)
-    {
-        static::$listable = $listable;
-        return self::class;
-    }
 }

@@ -30,6 +30,7 @@ class LogSuccessfulLogout
         AccessLog::create([
             'user_id' => $event->user->id,
             'user_name' => $event->user->username,
+            'user_ip' => request()->getClientIp(),
             'event' => 'logout',
         ]);
     }

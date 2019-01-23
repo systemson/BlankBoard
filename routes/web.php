@@ -91,6 +91,9 @@ Route::namespace('Admin')
         'update',
     ]);
 
+    /* Access Logs module */
+    Route::get('access_logs', 'AccessLogsController@index')->name('access_logs.index');
+
 
     /*
      * Content section

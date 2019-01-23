@@ -30,13 +30,15 @@ class LogFailedLogin
         if(isset($event->user->id)) {
             AccessLog::create([
                 'user_id' => $event->user->id,
-                'user_name' => $event->user->user,
-                'event' => 'failed',
+                'user_name' => $event->user->username,
+                'user_ip' => request()->getClientIp(),
+                'event' => 'failed_login',
             ]);
         } else {
             AccessLog::create([
-                'user_name' => $event->credentials['user'],
-                'event' => 'failed',
+                'user_name' => $event->credentials['username'],
+                'user_ip' => request()->getClientIp(),
+                'event' => 'failed_login',
             ]);
         }
     }

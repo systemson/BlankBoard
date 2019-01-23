@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Render menus
         Blade::directive('menu', function ($menu = null) {
-            return "<?php echo menu($menu); ?>";
+            return "<?php echo menu({$menu}); ?>";
         });
 
         // Render column celss

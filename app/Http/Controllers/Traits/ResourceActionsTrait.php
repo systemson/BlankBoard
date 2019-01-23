@@ -9,6 +9,14 @@ use App\Models\Module;
 
 trait ResourceActionsTrait
 {
+
+    /**
+     * The attributes that should be listed for the index page.
+     *
+     * @var array
+     */
+    protected $listable = [];
+
     /**
      * The columns to select for the index table.
      *
@@ -23,6 +31,17 @@ trait ResourceActionsTrait
      */
     protected $order = ['id' => 'asc'];
 
+
+    public function getListable(): array
+    {
+        return $this->listable;
+    }
+
+    public function setListable(array $listable)
+    {
+        $this->listable = $listable;
+    }
+
     protected function resourceFilters()
     {
         return (object) [
@@ -35,7 +54,7 @@ trait ResourceActionsTrait
     {
         $filters = $this->resourceFilters();
 
-        $query = $this->model::select($this->model::getListable())
+        $query = $this->model::select($this->getListable())
         ->where(function ($q) use ($filters) {
             if (!empty($filters->where)) {
                 foreach ($filters->where as $column => $value) {
@@ -64,7 +83,7 @@ trait ResourceActionsTrait
         /* Get the resources from the model */
         $resources = $this->resourcesList();
 
-        $this->module->setListable($this->model::getListable());
+        $this->module->setListable($this->getListable());
 
         /* Display a listing of the resources */
         return view('admin.includes.actions.index')
@@ -122,13 +141,13 @@ trait ResourceActionsTrait
      */
     public function show($id)
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        /** Get the specified resource */
+        /* Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Displays the specified resource page */
+        /* Displays the specified resource page */
         return view('admin.' . $this->name . '.show')
         ->with('resource', $resource)
         ->with('name', $this->name);
@@ -142,13 +161,13 @@ trait ResourceActionsTrait
      */
     public function edit($id)
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        /** Get the specified resource */
+        /* Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Displays the edit resource page */
+        /* Displays the edit resource page */
         return view('admin.includes.actions.edit')
         ->with('resource', $resource)
         ->with('name', $this->name);
@@ -163,20 +182,20 @@ trait ResourceActionsTrait
      */
     public function update($id)
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
         if(method_exists($this, 'updateValidations')) {
             $this->request->validate($this->updateValidations());
         }
 
-        /** Get the specified resource */
+        /* Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        /** Update the specified resource */
+        /* Update the specified resource */
         $resource->update(Input::all());
 
-        /** Redirect back */
+        /* Redirect back */
         return redirect()->back()
         ->with('info', Lang::has($this->name . '.resource-updated') ?
             $this->name . '.resource-updated' :
@@ -192,7 +211,7 @@ trait ResourceActionsTrait
      */
     public function destroy($id)
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
         if (method_exists($this->model, 'trashed')) {
@@ -240,16 +259,16 @@ trait ResourceActionsTrait
      */
     public function restore($id)
     {
-        /** Check if logged in user is authorized to make this request */
+        /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        /** Get the specified resource */
+        /* Get the specified resource */
         $resource = $this->model::withTrashed()->findOrFail($id);
 
-        /** Delete the specified resource */
+        /* Restore the specified resource */
         $resource->restore();
 
-        /** Redirect to controller index */
+        /* Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
         ->with('success', Lang::has($this->name . '.resource-restored') ?

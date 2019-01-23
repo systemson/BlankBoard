@@ -74,15 +74,15 @@
     <!-- /. mailbox module -->
     @endif
 
-    @permission('Users|Roles|Permissions', true)
+    @permission('Users|Roles|Permissions,AccessLogs', true)
     <!-- Access section -->
-    <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions'], true)) menu-open @endif">
+    <li class="treeview @if (routeNameIs(['users', 'roles', 'permissions', 'access_logs'], true)) menu-open @endif">
       <a href="#"><i class="fa fa-lock"></i> <span>@lang('users.parent')</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions'], true)) style="display: block;"  @endif>
+      <ul class="treeview-menu" @if (routeNameIs(['users', 'roles', 'permissions', 'access_logs'], true)) style="display: block;"  @endif>
 
         @permission('Users', true)
         <!-- Users module -->
@@ -104,6 +104,14 @@
         <!-- Permission module -->
         <li class="@if (routeNameIs('permissions', true)) active @endif">
           <a href="{{ route('permissions.index') }}"><i class="fa fa-user-secret"></i><span>@lang('permissions.title')</span></a>
+        </li>
+        <!-- /. permission module -->
+        @endif
+
+        @permission('AccessLogs', true)
+        <!-- Permission module -->
+        <li class="@if (routeNameIs('access_logs', true)) active @endif">
+          <a href="{{ route('access_logs.index') }}"><i class="fa fa-user-secret"></i><span>@lang('access_logs.title')</span></a>
         </li>
         <!-- /. permission module -->
         @endif

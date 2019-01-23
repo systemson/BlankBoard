@@ -18,12 +18,12 @@ class PermissionsController extends Controller
     protected $model = Model::class;
 
     /**
-     * The columns to select for the index table.
+     * The attributes that must be listed for the index page.
      *
      * @var array
      */
-    protected $select = [
-        'id', 'name', 'module', 'slug', 'status',
+    protected $listable = [
+        'id', 'name', 'slug', 'module', 'status',
     ];
 
     /**

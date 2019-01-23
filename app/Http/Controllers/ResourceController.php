@@ -86,8 +86,10 @@ abstract class ResourceController extends Controller
         /* Set the controller resource name. */
         $this->name = $this->getName();
 
+        /* Get the ability map */
     	$map = $this->resourceAbilityMap();
 
+        /* Register and get the current module */
     	$this->module = Module::firstOrCreate(['slug' => $this->name],
     	[
     		'name' => ucwords(str_replace('_', ' ', $this->name)),

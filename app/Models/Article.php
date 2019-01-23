@@ -15,15 +15,6 @@ class Article extends Model
         'title', 'image', 'description', 'url_alias', 'author_alias', 'status', 'category_id', 'content', 'created_by', 'updated_by',
     ];
 
-    /**
-     * The attributes that must be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        'id', 'title', 'url_alias', 'status',
-    ];
-
     public function author()
     {
         return $this->belongsTo(User::class, 'created_by');

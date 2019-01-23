@@ -17,15 +17,6 @@ class Permission extends Model
     ];
 
     /**
-     * The attributes that must be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        'id', 'name', 'slug', 'module', 'status',
-    ];
-
-    /**
      * The attributes that should be mutated to dates.
      *
      * @var array

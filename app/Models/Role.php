@@ -17,15 +17,6 @@ class Role extends Model
         'name', 'slug', 'status', 'description',
     ];
 
-    /**
-     * The attributes that must be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        'id', 'name', 'slug', 'status',
-    ];
-
     public static function boot()
     {
         parent::boot();

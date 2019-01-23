@@ -18,15 +18,6 @@ class Category extends Model
         'name', 'slug', 'status', 'created_by', 'updated_by',
     ];
 
-    /**
-     * The attributes that must be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        'id', 'name', 'slug', 'status',
-    ];
-
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = str_slug($value);

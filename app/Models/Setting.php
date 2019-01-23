@@ -14,13 +14,4 @@ class Setting extends Model
     protected $fillable = [
         'value',
     ];
-
-    /**
-     * The attributes that must be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        'id', 'name', 'value',
-    ];
 }

@@ -17,6 +17,7 @@ class AccessLogsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->string('user_name', 50);
+            $table->string('user_ip', 50);
             $table->string('event', 50);
             $table->timestamps();
         });

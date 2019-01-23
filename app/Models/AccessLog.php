@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class AccessLog extends Model
 {
@@ -13,6 +14,11 @@ class AccessLog extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'user_name', 'event',
+        'user_id', 'user_name', 'user_ip', 'event',
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+    	return Carbon::parse($value)->diffForHumans();
+    }
 }

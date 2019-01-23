@@ -15,13 +15,4 @@ class Component extends Model
     protected $fillable = [
         'name', 'content', 'order', 'status',
     ];
-
-    /**
-     * The attributes that must be listed for the index page.
-     *
-     * @var array
-     */
-    protected static $listable = [
-        'id', 'name', 'order', 'status',
-    ];
 }

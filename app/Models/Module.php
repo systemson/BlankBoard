@@ -7,6 +7,7 @@ use App\Models\ResourceModel as Model;
 class Module extends Model
 {
     protected $id = 'slug';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,13 +18,12 @@ class Module extends Model
     ];
 
     /**
-     * The attributes that must be listed for the index page.
+     * The attributes that should be listed for the index page.
      *
      * @var array
      */
-    protected static $listable = [
-        'id', 'name', 'slug', 'status',
-    ];
+    protected static $listable = [];
+
 
     public function getCanCreateAttribute($value)
     {
@@ -38,5 +38,16 @@ class Module extends Model
     public function getCanDeleteAttribute($value)
     {
         return (bool) $value;
+    }
+
+    public static function getListable(): array
+    {
+        return static::$listable;
+    }
+
+    public static function setListable(array $listable)
+    {
+        static::$listable = $listable;
+        return self::class;
     }
 }
