@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Traits;
 
-use App\Models\Permission;
-
 trait AuthorizeActionTrait
 {
     /**
@@ -52,35 +50,4 @@ trait AuthorizeActionTrait
     {
         return $this->request->route()->getActionMethod();
     }
-
-    /**
-     * Register the permissions required by the controller actions.
-     *
-     * @params array $abilityMap
-     * @return void
-     */
-    protected function registerPermissions(array $abilityMap)
-    {
-        if(!empty($abilityMap)) {
-
-            $abilities = $this->registrableAbilities($abilityMap);
-
-            Permission::register($this->name, $abilities);
-        }
-    }
-
-    /**
-     * Get the unique abilities from an ability map, excluding index.
-     *
-     * @param array $abilityMap
-     * @return array
-     */
-     protected function registrableAbilities(array $abilityMap)
-     {
-        $abilities = array_unique($abilityMap);
-
-        $abilities = array_diff($abilities, ['index']);
-
-        return $abilities;
-     }
 }

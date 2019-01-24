@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\AuthorizeActionTrait;
 use App\Http\Controllers\Traits\ResourceActionsTrait;
 use Illuminate\Http\Request;
 use App\Models\Module;
+use App\Models\Permission;
 
 abstract class ResourceController extends Controller
 {
@@ -76,30 +77,80 @@ abstract class ResourceController extends Controller
      *
      * @return string
      */
-    public function getName(): string
+    protected function getName(): string
     {
     	return with(new $this->model)->getTable();
     }
 
-    public function register(): void
+    protected function register(): void
     {
         /* Set the controller resource name. */
         $this->name = $this->getName();
 
         /* Get the ability map */
-    	$map = $this->resourceAbilityMap();
-
-        /* Register and get the current module */
-    	$this->module = Module::firstOrCreate(['slug' => $this->name],
-    	[
-    		'name' => ucwords(str_replace('_', ' ', $this->name)),
-    		'can_create' => in_array('create', $map),
-    		'can_read' => in_array('view', $map),
-    		'can_update' => in_array('update', $map),
-    		'can_delete' => in_array('delete', $map),
-    	]);
+        $map = $this->resourceAbilityMap();
 
         /* Store the resource permissions on DB */
         $this->registerPermissions($map);
+        $this->registerModule($this->name, $map);
+    }
+
+    public function registerAction()
+    {
+        $this->register();
+
+        return redirect()->back()
+        ->withSuccess('Module successfully registered.');
+    }
+
+    /**
+     * Register the permissions required by the controller actions.
+     *
+     * @param array $abilityMap
+     * @return void
+     */
+    protected function registerPermissions(array $abilityMap): void
+    {
+        if(!empty($abilityMap)) {
+
+            $abilities = $this->registrableAbilities($abilityMap);
+
+            Permission::register($this->name, $abilities);
+        }
+    }
+
+    /**
+     * Get the unique abilities from an ability map, excluding index.
+     *
+     * @param array $abilityMap
+     * @return array
+     */
+    protected function registrableAbilities(array $abilityMap): array
+    {
+        $abilities = array_unique($abilityMap);
+
+        $abilities = array_diff($abilities, ['index']);
+
+        return $abilities;
+    }
+
+    /**
+     * Register the resource module.
+     *
+     * @param string $name
+     * @param array  $abilityMap
+     * @return void
+     */
+    protected function registerModule(string $name, array $abilityMap): void
+    {
+        /* Register and get the current module */
+        $this->module = Module::firstOrCreate(['slug' => $name],
+        [
+            'name' => ucwords(str_replace('_', ' ', $name)),
+            'can_create' => in_array('create', $abilityMap),
+            'can_read' => in_array('view', $abilityMap),
+            'can_update' => in_array('update', $abilityMap),
+            'can_delete' => in_array('delete', $abilityMap),
+        ]);
     }
 }
