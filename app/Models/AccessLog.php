@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\ResourceModel as Model;
 use Carbon\Carbon;
 
 class AccessLog extends Model

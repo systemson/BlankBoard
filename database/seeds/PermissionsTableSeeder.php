@@ -14,12 +14,16 @@ class PermissionsTableSeeder extends Seeder
     {
 
         $modules = [
-            'Users',
-            'Roles',
-            'Permissions',
-            'Categories',
+            'AccessLogs',
             'Articles',
+            'Categories',
+            'Components',
             'Menus',
+            'Modules',
+            'Permissions',
+            'Roles',
+            'Users',
+            'Settings',
         ];
 
         $abilities = [
@@ -30,10 +34,24 @@ class PermissionsTableSeeder extends Seeder
         ];
 
         $except = [
+            'Articles.View',
+            'AccessLogs.Create',
+            'AccessLogs.Edit',
+            'AccessLogs.Delete',
+            'AccessLogs.Edit',
+            'Categories.View',
+            'Components.View',
+            'Menu.View',
+            'Modules.View',
+            'Modules.Create',
+            'Modules.Delete',
+            'Permissions.View',
             'Permissions.Create',
             'Permissions.Delete',
             'Roles.View',
-            'Menus.View',
+            'Settings.View',
+            'Settings.Create',
+            'Settings.Delete',
         ];
 
         //$insert = collect();
