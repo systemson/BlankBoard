@@ -53,7 +53,7 @@
             ">{{ $article->title }}</a>
         </h3>
         <p class="blog-item-desc">{!! str_limit($article->description ?? $article->content, 126, '... <a class="blog-item-readmore" href="'. route('blog.single', ['category' => $article->category->slug, 'slug' =>$article->url_alias]) .'">read more</a>') !!}</p>
-        <p class="blog-item-time">{{ $article->created_at->diffForHumans() }}</p>
+        <p class="blog-item-time">{{ $article->created_at }}</p>
       </div>
 
       @endforeach

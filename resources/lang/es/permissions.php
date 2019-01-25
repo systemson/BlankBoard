@@ -6,6 +6,7 @@ return [
     'parent' => 'Acceso',
     'name' => 'permiso|permisos',
     'list' => 'Listado de :title',
+    'filters' => 'Filtros de :title',
     'add' => 'Agregar nuevo :name',
     'edit' => 'Editar :name :Resource',
     'view' => 'Ver :name :Resource',

@@ -9,7 +9,7 @@
 
   <div class="col-sm-8">
 
-    <div class="form-group{{ $errors->has('user') ? ' has-error' : '' }}">
+    <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
       {{ Form::label('username', __('auth.username') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
         {{ Form::text('username', null, array('class' => 'col-sm-12 control-form', 'placeholder' => __('auth.username'))) }}

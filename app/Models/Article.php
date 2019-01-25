@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\ResourceModel as Model;
+use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -17,12 +18,17 @@ class Article extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
     }
 
     public function setUrlAliasAttribute($value)

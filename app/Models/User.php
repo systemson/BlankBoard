@@ -20,7 +20,7 @@ class User extends BaseUserModel
      * @var array
      */
     protected $fillable = [
-        'user', 'name', 'last_name', 'email', 'password', 'status', 'image', 'description', 'last_login', 'last_password_change',
+        'username', 'name', 'last_name', 'email', 'password', 'status', 'image', 'description', 'last_login', 'last_password_change',
     ];
 
     /**
@@ -153,5 +153,17 @@ class User extends BaseUserModel
         }
 
         return false;
+    }
+
+    public static function resources($selectables, $filters = [], $sortables = [])
+    {
+        $query = self::select($selectables)
+        ->where($filters);
+
+        foreach ($sortables as $column => $order) {
+            $query->orderBy($column, $order);
+        }
+
+        return $query;
     }
 }

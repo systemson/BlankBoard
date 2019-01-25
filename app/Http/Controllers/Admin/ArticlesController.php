@@ -25,7 +25,7 @@ class ArticlesController extends Controller
      * @var array
      */
     protected $listable = [
-        'id', 'title', 'url_alias', 'status',
+        'id', 'title', 'category_id', 'author_id', 'created_at', 'status',
     ];
 
     /**

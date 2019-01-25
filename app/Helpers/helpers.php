@@ -163,6 +163,18 @@ if (!function_exists('edit_btn')) {
     }
 }
 
+if (!function_exists('show_btn')) {
+
+    function show_btn(int $id, $name)
+    {
+        $icon = __('messages.action.show');
+
+        $url = route($name . '.show', $id);
+
+        return "<a class=\"btn btn-info btn-xs\" href=\"{$url}\">{$icon}</a>";;
+    }
+}
+
 if (!function_exists('menu')) {
 
     function menu()
@@ -192,6 +204,10 @@ if (!function_exists('td')) {
         $content = $resource[$column];
 
         switch ($column) {
+            case ends_with($column, '_id'):
+                $relation = str_replace_last('_id', '', $column);
+                $content = optional($resource->{$relation})->name ?? $content;
+                break;
             case 'status':
                 $content = status_label($resource[$column]);
                 break;
@@ -205,7 +221,7 @@ if (!function_exists('td')) {
                 break;
         }
 
-        return "<td class=\"{$class}\">{$content}</td>";
+        return "<td nowrap class=\"{$class}\">{$content}</td>";
     }
 }
 
@@ -213,14 +229,15 @@ if (!function_exists('th')) {
 
     function th(string $column, string $name)
     {
-        switch ($column) {            
+        $class = null;
+
+        switch ($column) {
             case 'name':
             case 'title':
                 $class = 'col-sm-6';
                 break;
 
             default:
-                $class = null;
                 break;
         }
 

@@ -46,8 +46,9 @@ return [
 
     // Actions
     'action' => [
-        'trash' => '<i class="fa fa-trash"></i>',
+        'show' => '<i class="fa fa-eye"></i>',
         'edit' => '<i class="fa fa-pencil"></i>',
+        'trash' => '<i class="fa fa-trash"></i>',
         'archive' => '<i class="fa fa-archive"></i>',
         'status' => '<i class="fa fa-check"></i>',
     ],

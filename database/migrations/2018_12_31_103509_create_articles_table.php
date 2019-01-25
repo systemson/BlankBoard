@@ -24,16 +24,11 @@ class CreateArticlesTable extends Migration
             $table->longText('content');
             $table->smallInteger('status')->default(1);
             $table->smallInteger('highlighted')->default(0);
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned();
+            $table->integer('author_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('created_by')
-            ->references('id')
-            ->on('users');
-
-            $table->foreign('updated_by')
+            $table->foreign('author_id')
             ->references('id')
             ->on('users');
 

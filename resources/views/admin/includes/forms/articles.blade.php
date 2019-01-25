@@ -93,6 +93,7 @@
     </div>
 
     <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+      {{ Form::label('category_id', __($name . '.table.category_id'), array('class' => 'control-label')) }}
       {{ Form::select('category_id', \App\Models\Category::pluck('name', 'id'), $resource->category_id ?? null, array('class' => 'control-form chosen-select')) }}
       @if ($errors->has('category_id'))
         <span class="help-block">

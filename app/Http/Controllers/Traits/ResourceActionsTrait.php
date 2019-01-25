@@ -9,7 +9,6 @@ use App\Models\Module;
 
 trait ResourceActionsTrait
 {
-
     /**
      * The attributes that should be listed for the index page.
      *
@@ -22,7 +21,7 @@ trait ResourceActionsTrait
      *
      * @var array
      */
-    protected $where = [];
+    protected $filters = [];
 
     /**
      * The columns to oder for the index table.
@@ -42,10 +41,20 @@ trait ResourceActionsTrait
         $this->listable = $listable;
     }
 
+    public function getFilters(): array
+    {
+        return $this->filters;
+    }
+
+    public function setFilters(array $filters)
+    {
+        $this->filters = $filters;
+    }
+
     protected function resourceFilters()
     {
         return (object) [
-            'where' => $this->where,
+            'where' => $this->filters,
             'order' => $this->order,
         ];
     }
@@ -54,20 +63,15 @@ trait ResourceActionsTrait
     {
         $filters = $this->resourceFilters();
 
-        $query = $this->model::select($this->getListable())
-        ->where(function ($q) use ($filters) {
-            if (!empty($filters->where)) {
-                foreach ($filters->where as $column => $value) {
-                    $q->where($column, $value);
-                }
-            }
-        });
+        /*$query = $this->model::select($this->getListable())
+        ->where($this->getFilters());
 
         foreach ($filters->order as $column => $order) {
-            $query = $query->orderBy($column, $order);
-        }
+            $query->orderBy($column, $order);
+        }*/
 
-        return $query->paginate($this->paginate);
+        return $this->model::resources($this->getListable(), $this->getFilters(), $this->order)
+        ->paginate($this->paginate);
     }
 
     /**

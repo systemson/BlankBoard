@@ -111,7 +111,7 @@
         @permission('AccessLogs', true)
         <!-- Permission module -->
         <li class="@if (routeNameIs('access_logs', true)) active @endif">
-          <a href="{{ route('access_logs.index') }}"><i class="fa fa-user-secret"></i><span>@lang('access_logs.title')</span></a>
+          <a href="{{ route('access_logs.index') }}"><i class="fa fa-sign-in"></i><span>@lang('access_logs.title')</span></a>
         </li>
         <!-- /. permission module -->
         @endif

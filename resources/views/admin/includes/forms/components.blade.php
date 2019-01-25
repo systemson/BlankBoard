@@ -62,7 +62,7 @@
     {{ Form::text('order', $resource->order ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.order'))) }}
     @if ($errors->has('order'))
     <span class="help-block">
-      <strong>{{ $errors->first('name') }}</strong>
+      <strong>{{ $errors->first('order') }}</strong>
     </span>
     @endif
   </div>

@@ -35,6 +35,12 @@
               @endforeach
               <td class="text-nowrap text-center">
 
+                @if ($module->can_read)
+                @permission('view_' . $module->slug)
+                {!! show_btn($resource->id, $module->slug) !!}
+                @endif
+                @endif
+
                 @if ($module->can_update)
                 @permission('update_' . $module->slug)
                 {!! edit_btn($resource->id, $module->slug) !!}

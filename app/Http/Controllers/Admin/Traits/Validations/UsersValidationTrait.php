@@ -1,29 +1,35 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Controllers\Admin\Traits\Validations;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rule;
 
-class UpdateUser extends FormRequest
+trait UserValidationTrait
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
+     * Return validations for storing current resource.
      *
      * @return array
      */
-    public function rules()
-    {
-        switch ($this->input()['form']) {
+    protected function storeValidations() {
+        return [
+            'username' => 'required|unique:users|max:18|alpha_num',
+            'name' => 'required|max:50',
+            'email' => 'required|email|unique:users|max:100',
+            'status' => 'required|integer',
+            'roles' => 'nullable|array',
+        ];
+    }
+
+    /**
+     * Return validations for updating current resource.
+     *
+     * @return array
+     */
+    protected function updateValidations() {
+        switch (Input::get('form')) {
 
             case 'user-basic':
                 $rules = [
@@ -52,7 +58,7 @@ class UpdateUser extends FormRequest
                 break;
             case 'avatar-update':
                 $rules = [
-                    'avatar' => 'required|image|max:2048',
+                    'avatar' => 'required|image|max:1024',
                 ];
                 break;
             default:
