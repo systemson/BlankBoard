@@ -63,19 +63,14 @@
             "@php artisan key:generate --ansi"
         ],
         "post-install-cmd": [
+            "@php artisan optimize:clear",
             "@php artisan key:generate --ansi",
             "@php artisan storage:link",
             "@php artisan migrate:fresh --seed --force",
-            "composer dump-autoload",
-            "@php artisan config:clear",
-            "@php artisan route:clear",
-            "@php artisan view:clear",
-            "@php artisan cache:clear"
+            "composer dump-autoload"
         ],
         "deploy": [
-            "@php artisan config:cache",
-            "@php artisan route:cache",
-            "@php artisan view:cache"
+            "@php artisan optimize"
         ]
     }
 }
