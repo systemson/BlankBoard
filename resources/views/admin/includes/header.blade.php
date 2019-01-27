@@ -107,7 +107,9 @@
               <ul class="menu">
                 <div class="col-sm-12 text-center text-nowrap">
                   <a class="btn btn-success" href="{{ route('login') }}" >Login</a>
+                  @if (\Route::has('register'))
                   <a class="btn btn-default" href="{{ route('register') }}" >Register</a>
+                  @endif
                 </div>
               </ul>
             </li>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\AuthorizeActionTrait;
+use App\Http\Controllers\Traits\ResourcesFilterTrait;
 use App\Http\Controllers\Traits\ResourceActionsTrait;
 use Illuminate\Http\Request;
 use App\Models\Module;
@@ -12,6 +13,7 @@ use App\Models\Permission;
 abstract class ResourceController extends Controller
 {
     use AuthorizeActionTrait,
+    ResourcesFilterTrait,
     ResourceActionsTrait;
 
     /**
@@ -54,9 +56,9 @@ abstract class ResourceController extends Controller
      *
      * @var array  view|create|update|delete
      */
-    protected $permissions = [
+    /*protected $permissions = [
         //
-    ];
+    ];*/
 
     /**
      * Instantiate the controller.
@@ -69,7 +71,7 @@ abstract class ResourceController extends Controller
         $this->request = $request;
 
         /* Register the resource */
-        $this->register();
+        $this->registerResource();
     }
 
     /**
@@ -82,7 +84,7 @@ abstract class ResourceController extends Controller
     	return with(new $this->model)->getTable();
     }
 
-    protected function register(): void
+    protected function registerResource(): void
     {
         /* Set the controller resource name. */
         $this->name = $this->getName();
@@ -92,12 +94,14 @@ abstract class ResourceController extends Controller
 
         /* Store the resource permissions on DB */
         $this->registerPermissions($map);
+
+        /* Store the resource module on DB */
         $this->registerModule($this->name, $map);
     }
 
-    public function registerAction()
+    public function registerResourceAction()
     {
-        $this->register();
+        $this->registerResource();
 
         return redirect()->back()
         ->withSuccess('Module successfully registered.');

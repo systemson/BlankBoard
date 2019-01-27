@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConfigsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,6 +20,7 @@ class CreateConfigsTable extends Migration
             $table->string('description', 258)->nullable();
             $table->string('section', 64)->nullable();
             $table->string('value', 124)->nullable();
+            $table->string('type', 32)->default('string');
             $table->timestamps();
         });
     }

@@ -52,7 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed',
@@ -72,7 +72,7 @@ class RegisterController extends Controller
 
             /** Create a new resource */
             $resource = User::create([
-                'user' => $data['user'],
+                'username' => $data['username'],
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),

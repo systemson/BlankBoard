@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Administrator',
             'last_name' => null,
             'description' => 'I am the main administration account. Use me when you need to administrate the app.',
-            'email' => 'devilu@admin.com',
+            'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

@@ -16,7 +16,11 @@
  */
 Route::middleware('clear-cache')
 ->group(function () {
-    Auth::routes();
+    if (settings()->user_registration) {
+        Auth::routes();
+    } else {
+        Auth::routes(['register' => false]);
+    }
 });
 
 

@@ -15,9 +15,11 @@ class PermissionRoleTableSeeder extends Seeder
         $permissions = [];
 
         // Administrator permissions
-        $total = Permission::count();
-        for ($x=1; $x<= $total; $x++) {
-            $permissions[] = ['role_id' => 2, 'permission_id' => $x];
+        $admin_permissions = Permission::where('module', '<>', 'Modules')
+        ->get(['id']);
+
+        foreach ($admin_permissions as $value) {
+            $permissions[] = ['role_id' => 2, 'permission_id' => $value->id];
         }
 
         // Manager permissions

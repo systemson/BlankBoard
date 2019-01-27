@@ -60,9 +60,11 @@
 
       {{ Form::close() }}
 
+      @if (\Route::has('register'))
       <div class="col-sm-12 text-center">
-       <a class="btn btn-link" href="{{ route('register') }}">{{ __('auth.unregistered') }}</a>
-     </div>
+        <a class="btn btn-link" href="{{ route('register') }}">{{ __('auth.unregistered') }}</a>
+      </div>
+      @endif
 
     </div><!-- /. box body -->
 

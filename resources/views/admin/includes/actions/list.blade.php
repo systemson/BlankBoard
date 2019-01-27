@@ -17,7 +17,7 @@
 
     <div class="box-body">
       <div class="table-responsive">
-        
+
         <table class="table table-hover table-bordered table-striped table-condensed">
           <thead>
             <tr class="info">
@@ -52,6 +52,7 @@
                 {!! delete_btn($resource->id, $module->slug) !!}
                 @endif
                 @endif
+
               </td>
             </tr>
             @empty

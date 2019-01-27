@@ -46,8 +46,13 @@ if (!function_exists('routeNameIs')) {
 
 if (!function_exists('requestIs')) {
 
-    function requestIs(string $url, $class = 'active')
+    function requestIs($url, $class = 'active')
     {
+        if (is_array($url)) {
+            foreach ($url as $url) {
+                requestIs($url);
+            }
+        }
         return \Request::is($url) ? $class : null;
     }
 }
@@ -64,16 +69,16 @@ if (!function_exists('breadcrumb')) {
 
     function breadcrumb($resource, array $children = [], array $before = [])
     {
-        /** Open breadcrumb */
+        /* Open breadcrumb */
         $breadcrumb = '<ul class="breadcrumb">';
 
-        /** Set the main item vars */
+        /* Set the main item vars */
         $main = [
             'name' => is_array($resource) ? $resource['name'] : $resource,
             'route' => is_array($resource) ? $resource['route'] : $resource . '.index',
         ];
 
-        /** Add the parent(s) item(s) */
+        /* Add the parent(s) item(s) */
         if (!empty($before)) {
             foreach ($before as $parent) {
                 $breadcrumb .= '<li>';
@@ -87,10 +92,10 @@ if (!function_exists('breadcrumb')) {
             }
         }
 
-        /** Add the main item */
+        /* Add the main item */
         $breadcrumb .= '<li><a href="' . route($main['route']) . '">' . $main['name'] . '</a></li>';
 
-        /** Add the children items */
+        /* Add the children items */
         if (!empty($children)) {
             foreach($children as $child) {
                 $breadcrumb .= '<li class="active">' .$child . '</li>';
@@ -99,10 +104,10 @@ if (!function_exists('breadcrumb')) {
             $breadcrumb .= '<li class="active">' . __('messages.here') . '</li>';
         }
 
-        /** Close breadcrumb */
+        /* Close breadcrumb */
         $breadcrumb .= '</ul>';
 
-        /** Returns the breadcrumb */
+        /* Returns the breadcrumb */
         return $breadcrumb;
     }
 }
@@ -159,7 +164,7 @@ if (!function_exists('edit_btn')) {
 
         $url = route($name . '.edit', $id);
 
-        return "<a class=\"btn btn-primary btn-xs\" href=\"{$url}\">{$icon}</a>";;
+        return "<a class=\"btn btn-primary btn-xs\" href=\"{$url}\">{$icon}</a>";
     }
 }
 
@@ -171,7 +176,7 @@ if (!function_exists('show_btn')) {
 
         $url = route($name . '.show', $id);
 
-        return "<a class=\"btn btn-info btn-xs\" href=\"{$url}\">{$icon}</a>";;
+        return "<a class=\"btn btn-info btn-xs\" href=\"{$url}\">{$icon}</a>";
     }
 }
 
@@ -188,7 +193,7 @@ if (!function_exists('menu')) {
         $open = '<ul class="navbar-nav">';
         foreach ($items as $item) {
             $url = url($item->url);
-            $list .= "<li class=\"nav-item " . requestIs($item->url) . "\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
+            $list .= "<li class=\"nav-item " . requestIs([$item->url, $item->url . '/*']) . "\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
         }
         $close = '</ul>';
 
@@ -205,20 +210,23 @@ if (!function_exists('td')) {
 
         switch ($column) {
             case ends_with($column, '_id'):
-                $relation = str_replace_last('_id', '', $column);
-                $content = optional($resource->{$relation})->name ?? $content;
-                break;
+            $relation = str_replace_last('_id', '', $column);
+            $content = optional($resource->{$relation})->name ?? $content;
+            break;
             case 'status':
-                $content = status_label($resource[$column]);
-                break;
+            $content = status_label($resource[$column]);
+            break;
             
             case 'name':
             case 'title':
-                $class = 'text-left';
-                break;
+            $class = 'text-left';
+            break;
+            case 'value':
+            $content = var_export($content, true);
+            break;
 
             default:
-                break;
+            break;
         }
 
         return "<td nowrap class=\"{$class}\">{$content}</td>";
@@ -234,11 +242,11 @@ if (!function_exists('th')) {
         switch ($column) {
             case 'name':
             case 'title':
-                $class = 'col-sm-6';
-                break;
+            $class = 'col-sm-6';
+            break;
 
             default:
-                break;
+            break;
         }
 
         return "<th class=\"text-center {$class}\">{$name}</td>";
@@ -250,7 +258,7 @@ if (!function_exists('settings')) {
 
     function settings()
     {
-        return (object) \App\Models\Setting::get()->pluck('value', 'slug')->toArray();
+        return App\Helpers\Settings::getInstance();
     }
 }
 

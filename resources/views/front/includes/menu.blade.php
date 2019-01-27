@@ -5,7 +5,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      @menu('main')
+      @menu('main-menu')
     </div>
   </div>
 </nav>

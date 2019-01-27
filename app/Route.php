@@ -8,7 +8,7 @@ class Route extends BaseRoute
 {
     public static function resource($name, $controller, array $options = [])
     {
-        self::get($name . '/register', $controller . '@registerAction')->name($name . '.register');
+        self::get($name . '/register', $controller . '@registerResourceAction')->name($name . '.register');
         return parent::resource($name, $controller, $options);
     }
 }
