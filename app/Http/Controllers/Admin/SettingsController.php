@@ -23,9 +23,9 @@ class SettingsController extends Controller
         'id', 'name', 'value',
     ];
 
-    public function site()
+    public function section(string $section)
     {
-        $this->where = ['section' => 'site'];
+        $this->setFilters(['section' => $section]);
         return $this->index();
     }
 

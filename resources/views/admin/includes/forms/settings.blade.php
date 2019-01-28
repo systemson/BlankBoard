@@ -15,7 +15,11 @@
 
   @switch($resource->type)
     @case('string')
-      @include('admin.includes.forms.inputs.string', ['name' => $name, 'input' => 'value', 'resource' => $resource])
+      @include('admin.includes.forms.inputs.string', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
+      @break
+
+    @case('integer')
+      @include('admin.includes.forms.inputs.integer', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
       @break
 
     @case('boolean')

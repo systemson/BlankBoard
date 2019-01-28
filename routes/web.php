@@ -128,7 +128,7 @@ Route::namespace('Admin')
         'update',
     ]);
     
-    Route::get('settings/site', 'SettingsController@site')->name('settings.site');
+    Route::get('settings/{section}', 'SettingsController@section')->name('settings.section');
 
     Route::resource('modules', 'ModulesController')->except('show');
 

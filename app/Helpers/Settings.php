@@ -24,9 +24,20 @@ class Settings
 
     public static function getInstance(): self
     {
-    	if (!self::$instance instanceof static) {
-    		self::$instance = new static;
-    	}
-    	return self::$instance;
+        if (!self::$instance instanceof static) {
+            self::$instance = new static;
+        }
+        return self::$instance;
+    }
+
+    public static function sections()
+    {
+        return cache()->remember('settings-sections', 15, function() {
+        	return Model::select('section')
+	        ->groupBy('section')
+	        ->get()
+	        ->pluck('section')
+	        ->toArray();
+        });
     }
 }

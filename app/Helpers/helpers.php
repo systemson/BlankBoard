@@ -48,12 +48,15 @@ if (!function_exists('requestIs')) {
 
     function requestIs($url, $class = 'active')
     {
-        if (is_array($url)) {
-            foreach ($url as $url) {
-                requestIs($url);
+        $urls = is_string($url) ? explode('|', $url) : $url;
+
+        foreach ($urls as $url) {
+            if (\Request::is($url)) {
+                return true;
             }
         }
-        return \Request::is($url) ? $class : null;
+
+        return false;
     }
 }
 
@@ -193,7 +196,9 @@ if (!function_exists('menu')) {
         $open = '<ul class="navbar-nav">';
         foreach ($items as $item) {
             $url = url($item->url);
-            $list .= "<li class=\"nav-item " . requestIs([$item->url, $item->url . '/*']) . "\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
+            $active = requestIs([$item->url, $item->url . '/*']) ? 'active' : 'null';
+
+            $list .= "<li class=\"nav-item {$active}\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
         }
         $close = '</ul>';
 
