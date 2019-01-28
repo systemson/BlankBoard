@@ -22,7 +22,7 @@ class ComponentsTableSeeder extends Seeder
 			<div class="card">
 				<div class="card-header bg-custom">
 
-					<h5>Ebay Acocunts</h5>
+					<h5>Ebay + Paypal Accounts</h5>
 				</div>
 				<div class="card-body no-padding">
 
@@ -44,7 +44,7 @@ class ComponentsTableSeeder extends Seeder
 			<div class="card">
 				<div class="card-header bg-custom">
 
-					<h5>Ebay Acocunts</h5>
+					<h5>Ebay + Paypal Accounts</h5>
 				</div>
 				<div class="card-body no-padding">
 
@@ -67,7 +67,7 @@ class ComponentsTableSeeder extends Seeder
 			<div class="card">
 				<div class="card-header bg-custom">
 
-					<h5>Ebay Acocunts</h5>
+					<h5>Ebay + Paypal Accounts</h5>
 				</div>
 				<div class="card-body no-padding">
 
