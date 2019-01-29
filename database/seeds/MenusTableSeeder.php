@@ -36,7 +36,7 @@ class MenusTableSeeder extends Seeder
                 'url' => '#component-packs',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],,
+            ],
             [
                 'title' => 'Contact us',
                 'url' => '#component-contactus',
