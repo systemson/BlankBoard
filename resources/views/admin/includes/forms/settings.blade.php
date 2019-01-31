@@ -23,7 +23,11 @@
       @break
 
     @case('boolean')
-      @include('admin.includes.forms.inputs.boolean', ['name' => $name, 'input' => 'value', 'resource' => $resource])
+      @include('admin.includes.forms.inputs.boolean', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
+      @break
+
+    @case('date')
+      @include('admin.includes.forms.inputs.date', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
       @break
   @endswitch
 
