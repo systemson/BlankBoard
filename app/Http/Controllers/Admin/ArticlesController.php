@@ -95,7 +95,7 @@ class ArticlesController extends Controller
 
         $article = $this->model::findOrFail($id);
 
-        if(!is_null($article->image) && Storage::disk('public')->exists($article->image)) {
+        if (!is_null($article->image) && Storage::disk('public')->exists($article->image)) {
             Storage::disk('public')->delete($article->image);
         }
 

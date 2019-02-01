@@ -32,12 +32,12 @@ class Settings
 
     public static function sections()
     {
-        return cache()->remember('settings-sections', 15, function() {
-        	return Model::select('section')
-	        ->groupBy('section')
-	        ->get()
-	        ->pluck('section')
-	        ->toArray();
+        return cache()->remember('settings-sections', 15, function () {
+            return Model::select('section')
+            ->groupBy('section')
+            ->get()
+            ->pluck('section')
+            ->toArray();
         });
     }
 }

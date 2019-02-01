@@ -59,8 +59,7 @@ class User extends BaseUserModel
      */
     public function image()
     {
-        if(isset($this->image) && $this->image != null) {
-
+        if (isset($this->image) && $this->image != null) {
             return asset('storage/' . $this->image);
         } else {
             return config('user.default_avatar');
@@ -75,8 +74,7 @@ class User extends BaseUserModel
      */
     public function isNew()
     {
-        if($this->last_password_change == null) {
-
+        if ($this->last_password_change == null) {
             return true;
         }
 
@@ -97,8 +95,7 @@ class User extends BaseUserModel
         $days = config('user.password_expire');
 
         /** Check if the password is expired or the user is newly registered */
-        if(($days > 0 && $passwordDays > $days) || $this->isNew()) {
-
+        if (($days > 0 && $passwordDays > $days) || $this->isNew()) {
             return true;
         }
 
@@ -113,12 +110,9 @@ class User extends BaseUserModel
      */
     public function isActive($new_user = false)
     {
-        if($this->status > 0 || $this->isSuperAdmin()) {
-
+        if ($this->status > 0 || $this->isSuperAdmin()) {
             return true;
-
-        } elseif($new_user && $this->passwordExpired()) {
-
+        } elseif ($new_user && $this->passwordExpired()) {
             return false;
         }
 
@@ -132,8 +126,7 @@ class User extends BaseUserModel
      */
     public function isInactive()
     {
-        if($this->status <= 0 && !$this->isSuperAdmin()) {
-
+        if ($this->status <= 0 && !$this->isSuperAdmin()) {
             return true;
         }
 
@@ -147,8 +140,7 @@ class User extends BaseUserModel
      */
     public function isForbidden()
     {
-        if($this->status < 0 && !$this->isSuperAdmin()) {
-
+        if ($this->status < 0 && !$this->isSuperAdmin()) {
             return true;
         }
 

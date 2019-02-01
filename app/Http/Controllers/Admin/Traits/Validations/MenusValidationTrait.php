@@ -11,7 +11,8 @@ trait MenusValidationTrait
      *
      * @return array
      */
-    protected function storeValidations() {
+    protected function storeValidations()
+    {
         return [
             'title' => 'required|max:32',
             'url' => 'required|string|max:120',
@@ -24,7 +25,8 @@ trait MenusValidationTrait
      *
      * @return array
      */
-    protected function updateValidations() {
+    protected function updateValidations()
+    {
         return [
             'title' => 'required|max:32',
             'url' => 'required|string|max:120',

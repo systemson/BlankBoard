@@ -11,7 +11,8 @@ trait ArticlesValidationTrait
      *
      * @return array
      */
-    protected function storeValidations() {
+    protected function storeValidations()
+    {
         return [
             'title' => 'required|max:120',
             'image' => 'nullable',
@@ -27,7 +28,8 @@ trait ArticlesValidationTrait
      *
      * @return array
      */
-    protected function updateValidations() {
+    protected function updateValidations()
+    {
         return [
             'title' => 'required|max:120',
             'image' => 'nullable',

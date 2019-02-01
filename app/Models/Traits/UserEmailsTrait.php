@@ -74,5 +74,4 @@ trait UserEmailsTrait
 
         return $sent->merge($received);
     }
-
 }

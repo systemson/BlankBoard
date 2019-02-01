@@ -18,7 +18,8 @@ trait PivotTrait
     {
         $user_id = $user_id ?? auth()->id();
 
-        $relation->updateExistingPivot($user_id, $column, false);;
+        $relation->updateExistingPivot($user_id, $column, false);
+        ;
     }
 
     /**
@@ -33,7 +34,7 @@ trait PivotTrait
     {
         $user_id = $user_id ?? auth()->id();
 
-        if($relation->wherePivot('user_id', auth()->id())->first() != null) {
+        if ($relation->wherePivot('user_id', auth()->id())->first() != null) {
             return $relation->wherePivot('user_id', auth()->id())
             ->first()
             ->pivot

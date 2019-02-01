@@ -26,8 +26,8 @@ trait ResourceActionsTrait
 
         /* Display a listing of the resources */
         return view('admin.includes.actions.index')
-        ->with('resources' , $resources)
-        ->with('module' , $this->module);
+        ->with('resources', $resources)
+        ->with('module', $this->module);
     }
 
     /**
@@ -56,7 +56,7 @@ trait ResourceActionsTrait
         /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        if(method_exists($this, 'storeValidations')) {
+        if (method_exists($this, 'storeValidations')) {
             $this->request->validate($this->storeValidations());
         }
 
@@ -66,7 +66,9 @@ trait ResourceActionsTrait
         /* Redirect to newly created resource page */
         return redirect()
         ->route($this->name . '.edit', $resource->id)
-        ->with('success', Lang::has($this->name . '.resource-created') ?
+        ->with(
+            'success',
+            Lang::has($this->name . '.resource-created') ?
             $this->name . '.resource-created' :
             'messages.alert.resource-created'
         );
@@ -124,7 +126,7 @@ trait ResourceActionsTrait
         /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
-        if(method_exists($this, 'updateValidations')) {
+        if (method_exists($this, 'updateValidations')) {
             $this->request->validate($this->updateValidations());
         }
 
@@ -136,7 +138,9 @@ trait ResourceActionsTrait
 
         /* Redirect back */
         return redirect()->back()
-        ->with('info', Lang::has($this->name . '.resource-updated') ?
+        ->with(
+            'info',
+            Lang::has($this->name . '.resource-updated') ?
             $this->name . '.resource-updated' :
             'messages.alert.resource-updated'
         );
@@ -154,26 +158,23 @@ trait ResourceActionsTrait
         $this->authorizeAction();
 
         if (method_exists($this->model, 'trashed')) {
-
             $resource = $this->model::withTrashed()->findOrFail($id);
 
-            if($resource->trashed()) {
-
+            if ($resource->trashed()) {
                 $resource->forceDelete();
-
             } else {
-
                 $resource->delete();
 
                 /** Redirect to controller index */
                 return redirect()
                 ->route($this->name . '.index')
-                ->with('warning', Lang::has($this->name . '.resource-trashed') ?
+                ->with(
+                    'warning',
+                    Lang::has($this->name . '.resource-trashed') ?
                     $this->name . '.resource-trashed' :
                     'messages.alert.resource-trashed'
                 );
             }
-
         } else {
             /* Get the specified resource */
             $resource = $this->model::findOrFail($id);
@@ -184,7 +185,9 @@ trait ResourceActionsTrait
         /* Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
-        ->with('danger', Lang::has($this->name . '.resource-deleted') ?
+        ->with(
+            'danger',
+            Lang::has($this->name . '.resource-deleted') ?
             $this->name . '.resource-deleted' :
             'messages.alert.resource-deleted'
         );
@@ -210,7 +213,9 @@ trait ResourceActionsTrait
         /* Redirect to controller index */
         return redirect()
         ->route($this->name . '.index')
-        ->with('success', Lang::has($this->name . '.resource-restored') ?
+        ->with(
+            'success',
+            Lang::has($this->name . '.resource-restored') ?
             $this->name . '.resource-restored' :
             'messages.alert.resource-restored'
         );

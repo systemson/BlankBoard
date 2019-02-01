@@ -50,20 +50,21 @@ class RolesController extends Controller
             $resource = $this->model::create(Input::all());
 
             /* Check if permissions are being set */
-            if((Input::get('permissions') != null)) {
+            if ((Input::get('permissions') != null)) {
 
                 /* Syncronize both tables through pivot table */
                 $resource->permissions()->sync(Input::get('permissions'));
             }
 
             return $resource;
-
         }, 5);
 
         /* Redirect to newly created resource page */
         return redirect()
         ->route($this->name . '.edit', $resource->id)
-        ->with('success', Lang::has($this->name . '.resource-created') ?
+        ->with(
+            'success',
+            Lang::has($this->name . '.resource-created') ?
             $this->name . '.resource-created' :
             'messages.alert.resource-created'
         );
@@ -92,12 +93,11 @@ class RolesController extends Controller
             $resource->update(Input::all());
 
             /* Check if permissions are being set */
-            if((Input::get('permissions') != null)) {
+            if ((Input::get('permissions') != null)) {
 
                 /* Syncronize both tables through pivot table */
                 $resource->permissions()->sync(Input::get('permissions'));
             }
-
         }, 5);
 
         /* Clear user permissions cache */
@@ -105,7 +105,9 @@ class RolesController extends Controller
 
         /* Redirect back */
         return redirect()->back()
-        ->with('info', Lang::has($this->name . '.resource-updated') ?
+        ->with(
+            'info',
+            Lang::has($this->name . '.resource-updated') ?
             $this->name . '.resource-updated' :
             'messages.alert.resource-updated'
         );

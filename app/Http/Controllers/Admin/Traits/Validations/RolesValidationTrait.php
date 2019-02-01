@@ -13,7 +13,8 @@ trait RolesValidationTrait
      *
      * @return array
      */
-    protected function storeValidations() {
+    protected function storeValidations()
+    {
         return [
             'name' => 'required|max:32',
             'slug' => 'required|unique:roles|max:32|alpha_dash',
@@ -26,7 +27,8 @@ trait RolesValidationTrait
      *
      * @return array
      */
-    protected function updateValidations() {
+    protected function updateValidations()
+    {
         $id = Input::get('id');
         return [
             'name' => 'required|max:32',

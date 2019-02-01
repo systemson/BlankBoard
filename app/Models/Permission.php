@@ -29,12 +29,11 @@ class Permission extends Model
     {
         parent::boot();
 
-        self::updated(function($model) {
+        self::updated(function ($model) {
             foreach ($model->roles as $role) {
                 foreach ($role->users as $user) {
                     $user->clearCache();
                 }
-
             }
         });
     }
@@ -48,15 +47,17 @@ class Permission extends Model
      */
     public static function register($module, array $permissions = [])
     {
-        if(!empty($permissions)) {
-            foreach($permissions as $ability) {
+        if (!empty($permissions)) {
+            foreach ($permissions as $ability) {
 
                 /* Create permission if don't exist */
-                self::firstOrCreate(['slug' => strtolower($ability . '_' . $module)],
+                self::firstOrCreate(
+                    ['slug' => strtolower($ability . '_' . $module)],
                     [
                         'name' => ucwords($ability . ' ' . $module),
                         'module' => studly_case($module),
-                    ]);
+                    ]
+                );
             }
         }
     }

@@ -11,7 +11,8 @@ trait PermissionsValidationTrait
      *
      * @return array
      */
-    protected function updateValidations() {
+    protected function updateValidations()
+    {
         return [
             'description' => 'nullable|max:120',
         ];

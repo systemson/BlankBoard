@@ -11,7 +11,6 @@
  * @return  boolean
  */
 if (!function_exists('routeNameIs')) {
-
     function routeNameIs($compare, $isResource = false, $params = null)
     {
         $current = Request::route()->getName();
@@ -20,23 +19,23 @@ if (!function_exists('routeNameIs')) {
         $actionMap = $params['only'] ?? $actionMap;
         $actionMap = isset($params['except']) ? array_diff($actionMap, $params['except']) : $actionMap;
 
-        if(is_array($compare) && $isResource) {
-            foreach($compare as $name) {
-                foreach($actionMap as $action) {
+        if (is_array($compare) && $isResource) {
+            foreach ($compare as $name) {
+                foreach ($actionMap as $action) {
                     $map[] = $name . '.' . $action;
                 }
             }
-        }elseif($isResource) {
-            foreach($actionMap as $action) {
+        } elseif ($isResource) {
+            foreach ($actionMap as $action) {
                 $map[] = $compare . '.' . $action;
             }
         }
 
-        if($isResource && in_array($current, $map)) {
+        if ($isResource && in_array($current, $map)) {
             return true;
-        } elseif(is_array($compare) && in_array($current, $compare)) {
+        } elseif (is_array($compare) && in_array($current, $compare)) {
             return true;
-        } elseif($current == $compare) {
+        } elseif ($current == $compare) {
             return true;
         }
 
@@ -45,7 +44,6 @@ if (!function_exists('routeNameIs')) {
 }
 
 if (!function_exists('requestIs')) {
-
     function requestIs($url, $class = 'active')
     {
         $urls = is_string($url) ? explode('|', $url) : $url;
@@ -69,7 +67,6 @@ if (!function_exists('requestIs')) {
  * @return  string
  */
 if (!function_exists('breadcrumb')) {
-
     function breadcrumb($resource, array $children = [], array $before = [])
     {
         /* Open breadcrumb */
@@ -100,7 +97,7 @@ if (!function_exists('breadcrumb')) {
 
         /* Add the children items */
         if (!empty($children)) {
-            foreach($children as $child) {
+            foreach ($children as $child) {
                 $breadcrumb .= '<li class="active">' .$child . '</li>';
             }
         } else {
@@ -116,10 +113,11 @@ if (!function_exists('breadcrumb')) {
 }
 
 if (!function_exists('button')) {
-
     function button(string $type, $url = '#', array $param = [])
     {
-        if (!Lang::has('messages.btn.' . $type)) return;
+        if (!Lang::has('messages.btn.' . $type)) {
+            return;
+        }
 
         $config = Lang::get('messages.btn.' . $type);
 
@@ -127,7 +125,7 @@ if (!function_exists('button')) {
         $name = $config['name'];
         $icon = $config['icon'] ?? null;
 
-        $title = !is_null($icon) ? "<i class=\"{$icon}\"></i>" : null; 
+        $title = !is_null($icon) ? "<i class=\"{$icon}\"></i>" : null;
         $title .= " <span class=\"hidden-xs\">{$name}</span>";
 
 
@@ -136,7 +134,6 @@ if (!function_exists('button')) {
 }
 
 if (!function_exists('status_label')) {
-
     function status_label(int $status)
     {
         return '<span class="' . Lang::get('messages.status.' . $status . '.class') . '">' . Lang::get('messages.status.' . $status . '.name') . '</span>';
@@ -144,11 +141,10 @@ if (!function_exists('status_label')) {
 }
 
 if (!function_exists('delete_btn')) {
-
     function delete_btn(int $id, $name)
     {
         $open = Form::open(['method' => 'DELETE', 'route' => [$name . '.destroy', $id], 'style' => 'display: inline-block;']);
-        $btn = Form::button( __('messages.action.trash'), [
+        $btn = Form::button(__('messages.action.trash'), [
             'type' => 'submit',
             'class'=> 'btn btn-danger btn-xs',
             'onclick'=> 'return confirm("' . __($name . '.confirm-delete') . '")',
@@ -160,7 +156,6 @@ if (!function_exists('delete_btn')) {
 }
 
 if (!function_exists('edit_btn')) {
-
     function edit_btn(int $id, $name)
     {
         $icon = __('messages.action.edit');
@@ -172,7 +167,6 @@ if (!function_exists('edit_btn')) {
 }
 
 if (!function_exists('show_btn')) {
-
     function show_btn(int $id, $name)
     {
         $icon = __('messages.action.show');
@@ -184,12 +178,13 @@ if (!function_exists('show_btn')) {
 }
 
 if (!function_exists('menu')) {
-
     function menu()
     {
         $items = \App\Models\Menu::where('status', 1)->get();
 
-        if (empty($items)) return;
+        if (empty($items)) {
+            return;
+        }
 
         $list = null;
 
@@ -207,7 +202,6 @@ if (!function_exists('menu')) {
 }
 
 if (!function_exists('td')) {
-
     function td($resource, string $column)
     {
         $class = 'text-center';
@@ -239,7 +233,6 @@ if (!function_exists('td')) {
 }
 
 if (!function_exists('th')) {
-
     function th(string $column, string $name)
     {
         $class = null;
@@ -260,7 +253,6 @@ if (!function_exists('th')) {
 
 
 if (!function_exists('settings')) {
-
     function settings()
     {
         return App\Helpers\Settings::getInstance();
@@ -268,7 +260,6 @@ if (!function_exists('settings')) {
 }
 
 if (!function_exists('version')) {
-
     function version()
     {
         return 'v1.1-dev';

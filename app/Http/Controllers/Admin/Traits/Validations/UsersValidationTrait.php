@@ -13,7 +13,8 @@ trait UserValidationTrait
      *
      * @return array
      */
-    protected function storeValidations() {
+    protected function storeValidations()
+    {
         return [
             'username' => 'required|unique:users|max:18|alpha_num',
             'name' => 'required|max:50',
@@ -28,7 +29,8 @@ trait UserValidationTrait
      *
      * @return array
      */
-    protected function updateValidations() {
+    protected function updateValidations()
+    {
         switch (Input::get('form')) {
 
             case 'user-basic':

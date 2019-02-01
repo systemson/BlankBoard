@@ -21,7 +21,7 @@ abstract class ResourceModel extends Model
         ->where($filters);
 
         foreach ($sortables as $column => $order) {
-        	$query->orderBy($column, $order);
+            $query->orderBy($column, $order);
         }
 
         return $query;

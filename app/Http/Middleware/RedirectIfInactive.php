@@ -19,7 +19,6 @@ class RedirectIfInactive
         $user = $request->user();
 
         if ($user->isActive() || routeNameIs(['users.show', 'users.edit', 'users.update'])) {
-
             return $next($request);
         }
 

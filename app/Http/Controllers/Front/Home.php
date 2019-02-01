@@ -7,14 +7,14 @@ use App\Models\Component;
 
 class Home extends Controller
 {
-	public function index()
-	{
-		$components = Component::where('status', 1)
-		->orderBy('order')
-		->orderBy('id')
-		->get();
+    public function index()
+    {
+        $components = Component::where('status', 1)
+        ->orderBy('order')
+        ->orderBy('id')
+        ->get();
 
-		return view('front.home')
-		->with('components', $components);
-	}
+        return view('front.home')
+        ->with('components', $components);
+    }
 }

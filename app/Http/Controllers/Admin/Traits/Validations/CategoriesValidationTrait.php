@@ -13,7 +13,8 @@ trait CategoriesValidationTrait
      *
      * @return array
      */
-    protected function storeValidations() {
+    protected function storeValidations()
+    {
         return [
             'name' => 'required|max:32',
             'slug' => 'required|unique|max:32',
@@ -27,7 +28,8 @@ trait CategoriesValidationTrait
      *
      * @return array
      */
-    protected function updateValidations() {
+    protected function updateValidations()
+    {
         $id = Input::get('id');
         return [
             'name' => 'required|max:32',

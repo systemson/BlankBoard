@@ -15,7 +15,6 @@ trait ActionPolicyTraits
     public function index(User $user, $name)
     {
         if ($user->hasPermission(ucfirst($name), true)) {
-
             return true;
         }
 
@@ -48,7 +47,6 @@ trait ActionPolicyTraits
     public function create(User $user, $name)
     {
         if ($user->hasPermission('create_' . $name)) {
-
             return true;
         }
 
@@ -65,7 +63,6 @@ trait ActionPolicyTraits
     public function update(User $user, $name)
     {
         if ($user->hasPermission('update_' . $name)) {
-
             return true;
         }
 
@@ -82,7 +79,6 @@ trait ActionPolicyTraits
     public function delete(User $user, $name)
     {
         if ($user->hasPermission('delete_' . $name)) {
-
             return true;
         }
 

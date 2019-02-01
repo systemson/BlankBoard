@@ -13,17 +13,17 @@ trait AuthorizeActionTrait
      */
     protected function authorizeAction(array $params = [], $ability = null)
     {
-        if (auth()->user()->id === config('user.superuser')) return;
+        if (auth()->user()->id === config('user.superuser')) {
+            return;
+        }
 
         $params = empty($params) ? [$this->name] : $params;
 
         $arguments = array_merge([$this->model], $params);
 
         if ($ability != null) {
-
             $this->authorize($ability, $arguments);
-
-        } elseif($this->getAbility($this->request)) {
+        } elseif ($this->getAbility($this->request)) {
             $this->authorize($this->getAbility(), $arguments);
         }
     }
@@ -35,7 +35,7 @@ trait AuthorizeActionTrait
      */
     protected function getAbility()
     {
-        if(isset($this->resourceAbilityMap()[$this->getActionMethod()])) {
+        if (isset($this->resourceAbilityMap()[$this->getActionMethod()])) {
             return $this->resourceAbilityMap()[$this->getActionMethod()];
         }
         return false;

@@ -19,6 +19,6 @@ class AccessLog extends Model
 
     public function getCreatedAtAttribute($value)
     {
-    	return Carbon::parse($value)->diffForHumans();
+        return Carbon::parse($value)->diffForHumans();
     }
 }

@@ -19,8 +19,7 @@ trait EmailActionsTrait
     {
         $resource = Email::find(Input::get('parent_id'));
 
-        if($resource != null) {
-
+        if ($resource != null) {
             $message = [
                 'to' => Input::get('forward') != 1 ? $resource->user_id : null,
                 'subject' => 'Re: ' . $resource->subject,
@@ -35,7 +34,6 @@ trait EmailActionsTrait
                     "\n" .
                     str_limit($resource->body, 1195),
             ];
-
         } else {
             $message = null;
         }
@@ -71,11 +69,10 @@ trait EmailActionsTrait
 
             /** Syncronize both tables through pivot table */
             $resource->recipients()->sync(Input::get('to'));
-
         }, 5);
 
         /** Redirect to inbox */
-        if(Input::get('status') == 1) {
+        if (Input::get('status') == 1) {
             return redirect()
             ->route($this->name . '.index')
             ->with('success', $this->name . '.alert.email-sended');
@@ -103,7 +100,7 @@ trait EmailActionsTrait
         ]);
 
         /** Mark current email as read */
-        if($resource->user_id != auth()->id() && $this->getPivotColumn($resource->recipients(), 'is_read') === 0) {
+        if ($resource->user_id != auth()->id() && $this->getPivotColumn($resource->recipients(), 'is_read') === 0) {
             $this->updatePivotColumn($resource->recipients(), ['is_read' => 1]);
         }
 
@@ -171,16 +168,14 @@ trait EmailActionsTrait
 
             /** Syncronize both tables through pivot table */
             $resource->recipients()->sync(Input::get('to'));
-
         }, 5);
 
-        if(Input::get('status') == 1) {
+        if (Input::get('status') == 1) {
 
             /** If email is sended, redirect to inbox */
             return redirect()
             ->route($this->name . '.index')
             ->with('success', $this->name . '.alert.email-sended');
-
         } else {
 
             /** If email is drafted, redirect back */
@@ -206,13 +201,12 @@ trait EmailActionsTrait
         ]);
 
         /** Move email to trash folder */
-        if(($resource->hasOwner(auth()->id()) && $resource->status == 1) || $this->getPivotColumn($resource->recipients(), 'status') == 1) {
+        if (($resource->hasOwner(auth()->id()) && $resource->status == 1) || $this->getPivotColumn($resource->recipients(), 'status') == 1) {
             $this->trashEmail($resource);
 
             /** Redirect back */
             return back()->with('warning', $this->name . '.alert.email-trashed');
-
-        } elseif(($resource->hasOwner(auth()->id()) && $resource->status < 1) || $this->getPivotColumn($resource->recipients(), 'status') == -1) {
+        } elseif (($resource->hasOwner(auth()->id()) && $resource->status < 1) || $this->getPivotColumn($resource->recipients(), 'status') == -1) {
 
             /** Delete email */
             $this->deleteEmail($resource);
@@ -241,8 +235,7 @@ trait EmailActionsTrait
         ]);
 
         /** Restore email to sent folder */
-        if($resource->hasOwner(auth()->id())) {
-
+        if ($resource->hasOwner(auth()->id())) {
             $resource->update(['status' => 1]);
 
             /** Redirect back */
@@ -254,12 +247,11 @@ trait EmailActionsTrait
 
         /** Redirect back */
         return back()->with('info', $this->name . '.alert.email-restored');
-
     }
 
     protected function trashEmail(Email $email)
     {
-        if($email->hasOwner(auth()->id())) {
+        if ($email->hasOwner(auth()->id())) {
             $email->update(['status' => -1]);
         } else {
             $this->updatePivotColumn($email->recipients(), ['status' => -1]);
@@ -268,12 +260,12 @@ trait EmailActionsTrait
 
     protected function deleteEmail(Email $email)
     {
-        if($email->status == 0) {
+        if ($email->status == 0) {
             DB::transaction(function () use ($email) {
                 $email->delete();
                 $email->recipients()->detach();
             }, 5);
-        } elseif($email->hasOwner(auth()->id())) {
+        } elseif ($email->hasOwner(auth()->id())) {
             $email->update(['status' => -2]);
         } else {
             $this->updatePivotColumn($email->recipients(), ['status' => -2]);

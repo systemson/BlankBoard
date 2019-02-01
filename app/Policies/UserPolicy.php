@@ -90,9 +90,7 @@ class UserPolicy
     public function delete(User $user, $id)
     {
         if ($user->id == $id) {
-
             return abort(403, __('users.delete-self'));
-
         } elseif ($user->hasPermission('delete_' . $this->name)) {
             return true;
         }

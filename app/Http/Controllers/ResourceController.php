@@ -81,7 +81,7 @@ abstract class ResourceController extends Controller
      */
     protected function getName(): string
     {
-    	return with(new $this->model)->getTable();
+        return with(new $this->model)->getTable();
     }
 
     protected function registerResource(): void
@@ -115,8 +115,7 @@ abstract class ResourceController extends Controller
      */
     protected function registerPermissions(array $abilityMap): void
     {
-        if(!empty($abilityMap)) {
-
+        if (!empty($abilityMap)) {
             $abilities = $this->registrableAbilities($abilityMap);
 
             Permission::register($this->name, $abilities);
@@ -148,13 +147,15 @@ abstract class ResourceController extends Controller
     protected function registerModule(string $name, array $abilityMap): void
     {
         /* Register and get the current module */
-        $this->module = Module::firstOrCreate(['slug' => $name],
+        $this->module = Module::firstOrCreate(
+            ['slug' => $name],
         [
             'name' => ucwords(str_replace('_', ' ', $name)),
             'can_create' => in_array('create', $abilityMap),
             'can_read' => in_array('view', $abilityMap),
             'can_update' => in_array('update', $abilityMap),
             'can_delete' => in_array('delete', $abilityMap),
-        ]);
+        ]
+        );
     }
 }

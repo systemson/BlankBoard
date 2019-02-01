@@ -67,7 +67,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         return DB::transaction(function () use ($data) {
 
             /** Create a new resource */

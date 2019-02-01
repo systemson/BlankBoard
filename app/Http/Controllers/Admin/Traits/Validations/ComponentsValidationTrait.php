@@ -11,7 +11,8 @@ trait ComponentsValidationTrait
      *
      * @return array
      */
-    protected function storeValidations() {
+    protected function storeValidations()
+    {
         return [
             'name' => 'required|max:120',
             'description' => 'nullable|max:250',
@@ -26,7 +27,8 @@ trait ComponentsValidationTrait
      *
      * @return array
      */
-    protected function updateValidations() {
+    protected function updateValidations()
+    {
         return [
             'name' => 'required|max:120',
             'description' => 'nullable|max:250',

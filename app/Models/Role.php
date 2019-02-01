@@ -21,7 +21,7 @@ class Role extends Model
     {
         parent::boot();
 
-        self::updated(function($model) {
+        self::updated(function ($model) {
             foreach ($model->users as $user) {
                 $user()->clearCache();
             }

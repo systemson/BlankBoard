@@ -59,11 +59,10 @@ class UsersController extends Controller
             ]);
 
             /* Check if permissions are being set */
-            if(Input::get('roles') != null) {
+            if (Input::get('roles') != null) {
                 /** Synchronize both tables through pivot table */
                 $resource->roles()->sync(Input::get('roles'));
             }
-
         }, 5);
 
         /* Redirect to resource index page */
@@ -130,16 +129,15 @@ class UsersController extends Controller
         /* Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
-        if(Input::get('password')) {
+        if (Input::get('password')) {
             if ($this->passwordUpdate($resource)) {
-
                 return redirect()
                 ->back()->with('info', $this->name . '.password-success');
             }
             return redirect()->back()->with('warning', $this->name . '.password-failed');
         }
 
-        if(Input::file('avatar')) {
+        if (Input::file('avatar')) {
             $this->avatarUpdate($request, $resource);
 
             return redirect()
@@ -147,7 +145,7 @@ class UsersController extends Controller
             ->with('success', $this->name . '.avatar-updated');
         }
 
-        if($this->userUpdate($resource)) {
+        if ($this->userUpdate($resource)) {
             /* Redirect back */
             return redirect()
             ->back()
@@ -194,12 +192,11 @@ class UsersController extends Controller
             $user->update(Input::all());
 
             /* Check if permissions are being set */
-            if(Input::get('roles') != null && auth()->user()->hasPermission('create_users|update_users')) {
+            if (Input::get('roles') != null && auth()->user()->hasPermission('create_users|update_users')) {
 
                 /** Synchronize both tables through pivot table */
                 $user->roles()->sync(Input::get('roles'));
             }
-
         }, 5);
 
         return true;
@@ -216,13 +213,12 @@ class UsersController extends Controller
         /* Validate user's password */
         if (Hash::check(Input::post('old_password'), $user->password) && !Hash::check(Input::post('password'), $user->password)) {
             /* Update user's password */
-            if($user->update([
+            if ($user->update([
                 'password' => bcrypt(Input::get('password')),
                 'last_password_change' => Carbon::now(),
             ])) {
                 return true;
             };
-
         }
         return false;
     }
@@ -236,8 +232,7 @@ class UsersController extends Controller
      */
     protected function avatarUpdate(UpdateUser $request, Model $user)
     {
-        if(Storage::disk(config('user.default_disk'))->exists($user->image)) {
-
+        if (Storage::disk(config('user.default_disk'))->exists($user->image)) {
             Storage::disk(config('user.default_disk'))->delete($user->image);
         }
 

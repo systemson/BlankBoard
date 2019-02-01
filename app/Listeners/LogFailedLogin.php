@@ -27,7 +27,7 @@ class LogFailedLogin
      */
     public function handle(Failed $event)
     {
-        if(isset($event->user->id)) {
+        if (isset($event->user->id)) {
             AccessLog::create([
                 'user_id' => $event->user->id,
                 'user_name' => $event->user->username,

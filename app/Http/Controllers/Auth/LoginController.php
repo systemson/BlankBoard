@@ -29,14 +29,14 @@ class LoginController extends Controller
      *
      * @var int
      */
-     protected $maxAttempts = 3;
+    protected $maxAttempts = 3;
 
     /**
      * Set the number of minutes to throttle for.
      *
      * @var int
      */
-     protected $decayMinutes = 15;
+    protected $decayMinutes = 15;
 
     /**
      * Create a new controller instance.
@@ -78,12 +78,12 @@ class LoginController extends Controller
         }
 
         /** Suspend user if has too many failed attempts */
-        if($this->reachedFailedAttemptsLimit($request)) {
+        if ($this->reachedFailedAttemptsLimit($request)) {
             $this->userSuspension($request);
         }
 
         if ($this->attemptLogin($request)) {
-            if($this->guard()->user()->isForbidden()) {
+            if ($this->guard()->user()->isForbidden()) {
                 return $this->sendForbiddenResponse($request);
             } else {
                 return $this->sendLoginResponse($request);

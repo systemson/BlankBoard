@@ -14,7 +14,7 @@ class Auth extends BaseAuth
      */
     public static function name()
     {
-        if(self::user()->last_name != null) {
+        if (self::user()->last_name != null) {
             return self::user()->name . ' ' . self::user()->last_name;
         } else {
             return self::user()->name;
@@ -28,7 +28,7 @@ class Auth extends BaseAuth
      */
     public static function image()
     {
-        if(self::user()->image != null) {
+        if (self::user()->image != null) {
             return self::user()->image();
         } else {
             return config('user.default_avatar');

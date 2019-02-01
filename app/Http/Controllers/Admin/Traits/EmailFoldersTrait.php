@@ -20,7 +20,7 @@ trait EmailFoldersTrait
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')
-        ->with('resources' , $resources)
+        ->with('resources', $resources)
         ->with('name', $this->name);
     }
     /**
@@ -37,7 +37,7 @@ trait EmailFoldersTrait
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')
-        ->with('resources' , $resources)
+        ->with('resources', $resources)
         ->with('name', $this->name);
     }
 
@@ -55,7 +55,7 @@ trait EmailFoldersTrait
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')
-        ->with('resources' , $resources)
+        ->with('resources', $resources)
         ->with('name', $this->name);
     }
 
@@ -72,7 +72,7 @@ trait EmailFoldersTrait
 
         /** Display a listing of the resources */
         return view('admin.' . $this->name . '.index')
-        ->with('resources' , $resources)
+        ->with('resources', $resources)
         ->with('name', $this->name);
     }
 }

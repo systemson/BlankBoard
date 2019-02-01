@@ -24,7 +24,6 @@ class EmailPolicy
     public function view(User $user, Email $email)
     {
         if ($user->id == $email->user_id || $email->recipients->where('id', $user->id)->isNotEmpty()) {
-
             return true;
         }
 
@@ -40,7 +39,6 @@ class EmailPolicy
     public function update(User $user, Email $email)
     {
         if ($user->id == $email->user_id && $email->status == 0) {
-
             return true;
         }
 
@@ -54,9 +52,9 @@ class EmailPolicy
      * @return mixed
      */
     public function delete(User $user, Email $email)
-    {return true;
+    {
+        return true;
         if ($user->id == $email->user_id || $email->recipients->where('id', $user->id)->isNotEmpty()) {
-
             return true;
         }
 

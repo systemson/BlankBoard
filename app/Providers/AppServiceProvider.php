@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         // Permission custom if
         Blade::if('permission', function ($permissions, $module = false) {
             return auth()->user()->hasPermission($permissions, $module);
-        });   
+        });
     }
 
     /**

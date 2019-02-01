@@ -26,7 +26,7 @@ trait RolesPermissionTrait
     public function permissions()
     {
         $permissions = collect([]);
-        foreach($this->roles as $role) {
+        foreach ($this->roles as $role) {
             foreach ($role->permissions as $permission) {
                 $permissions->push($permission);
             }
@@ -106,7 +106,7 @@ trait RolesPermissionTrait
      */
     public function isSuperAdmin()
     {
-        if($this->hasRole(config('user.superuser'))) {
+        if ($this->hasRole(config('user.superuser'))) {
             return true;
         }
 
@@ -121,12 +121,9 @@ trait RolesPermissionTrait
      */
     public function hasRole($slug)
     {
-        if(is_string($slug)) {
-
+        if (is_string($slug)) {
             return $this->cachedRoles()->contains('slug', strtolower($slug));
-
         } elseif (is_int($slug)) {
-
             return $this->cachedRoles()->contains('id', $slug);
         }
 
@@ -143,23 +140,22 @@ trait RolesPermissionTrait
     public function hasPermission($slugs, $anyInModule = false)
     {
         /** Check if user is super admin */
-        if($this->isSuperAdmin()) {
+        if ($this->isSuperAdmin()) {
             return true;
 
         /** Check if user is inactive */
-        } elseif($this->isInactive() || $this->passwordExpired()) {
+        } elseif ($this->isInactive() || $this->passwordExpired()) {
             return false;
         }
 
         /** Convert $slugs string into array */
-        if(is_string($slugs)) {
+        if (is_string($slugs)) {
             $slugs = explode('|', $slugs);
         }
 
-        if(!$anyInModule) {
+        if (!$anyInModule) {
             /** Find current permissions slugs */
             return $this->cachedPermissions()->whereIn('slug', $slugs)->isNotEmpty();
-
         } else {
             /** Find current role permission modules */
             return $this->cachedPermissions()->whereIn('module', $slugs)->isNotEmpty();
