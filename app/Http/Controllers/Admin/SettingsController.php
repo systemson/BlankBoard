@@ -20,7 +20,7 @@ class SettingsController extends Controller
      * @var array
      */
     protected $listable = [
-        'id', 'name', 'value',
+        'id', 'name', 'value', 'type',
     ];
 
     public function section(string $section)

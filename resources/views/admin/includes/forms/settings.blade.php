@@ -29,6 +29,14 @@
     @case('date')
       @include('admin.includes.forms.inputs.date', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
       @break
+
+    @case('time')
+      @include('admin.includes.forms.inputs.time', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
+      @break
+
+    @case('timestamp')
+      @include('admin.includes.forms.inputs.timestamp', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
+      @break
   @endswitch
 
 </div>
