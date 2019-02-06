@@ -13,7 +13,7 @@ class Setting extends Model
      * @var array
      */
     protected $fillable = [
-        'value',
+        'name', 'slug', 'description', 'section', 'value', 'type',
     ];
 
     public function setValueAttribute($value)

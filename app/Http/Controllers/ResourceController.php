@@ -9,6 +9,7 @@ use App\Http\Controllers\Traits\ResourceActionsTrait;
 use Illuminate\Http\Request;
 use App\Models\Module;
 use App\Models\Permission;
+use App\Models\Setting;
 
 abstract class ResourceController extends Controller
 {
@@ -61,6 +62,20 @@ abstract class ResourceController extends Controller
     ];*/
 
     /**
+     * The settings that should be registered.
+     *
+     * @var array
+     */
+    protected $settings = [
+        'test' => [
+            'name' => 'Test',
+            'type' => 'string',
+            'description' => 'Test description',
+            'default' => 'test string',
+        ],
+    ];
+
+    /**
      * Instantiate the controller.
      *
      * @return void
@@ -97,6 +112,8 @@ abstract class ResourceController extends Controller
 
         /* Store the resource module on DB */
         $this->registerModule($this->name, $map);
+
+        $this->registerSettings();
     }
 
     public function registerResourceAction()
@@ -149,13 +166,31 @@ abstract class ResourceController extends Controller
         /* Register and get the current module */
         $this->module = Module::firstOrCreate(
             ['slug' => $name],
-        [
-            'name' => ucwords(str_replace('_', ' ', $name)),
-            'can_create' => in_array('create', $abilityMap),
-            'can_read' => in_array('view', $abilityMap),
-            'can_update' => in_array('update', $abilityMap),
-            'can_delete' => in_array('delete', $abilityMap),
-        ]
+            [
+                'name' => ucwords(str_replace('_', ' ', $name)),
+                'can_create' => in_array('create', $abilityMap),
+                'can_read' => in_array('view', $abilityMap),
+                'can_update' => in_array('update', $abilityMap),
+                'can_delete' => in_array('delete', $abilityMap),
+            ]
         );
+    }
+
+    /**
+     * Register the permissions required by the controller actions.
+     *
+     * @param array $abilityMap
+     * @return void
+     */
+    protected function registerSettings(): void
+    {
+        if (!empty($this->settings)) {
+            foreach ($this->settings as $slug => $setting) {
+                $setting = Setting::firstOrCreate(
+                    ['slug' => $slug, 'section' => $this->name],
+                    $setting
+                );
+            }
+        }
     }
 }

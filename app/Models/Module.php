@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\ResourceModel as Model;
+use App\Models\Setting;
 
 class Module extends Model
 {
@@ -24,6 +25,10 @@ class Module extends Model
      */
     protected static $listable = [];
 
+    public function settings()
+    {
+        return $this->hasMany(Setting::class, 'section', 'slug');
+    }
 
     public function getCanCreateAttribute($value)
     {
