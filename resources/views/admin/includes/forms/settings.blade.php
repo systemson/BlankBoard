@@ -13,31 +13,7 @@
 
 <div class="col-sm-8 form-horizontal">
 
-  @switch($resource->type)
-    @case('string')
-      @include('admin.includes.forms.inputs.string', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
-      @break
-
-    @case('integer')
-      @include('admin.includes.forms.inputs.integer', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
-      @break
-
-    @case('boolean')
-      @include('admin.includes.forms.inputs.boolean', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
-      @break
-
-    @case('date')
-      @include('admin.includes.forms.inputs.date', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
-      @break
-
-    @case('time')
-      @include('admin.includes.forms.inputs.time', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
-      @break
-
-    @case('timestamp')
-      @include('admin.includes.forms.inputs.timestamp', ['name' => $name, 'input' => 'value', 'value' => $resource->value])
-      @break
-  @endswitch
+  @include('admin.includes.forms.inputs.' . $resource->type, ['name' => $name, 'input' => 'value', 'value' => $resource->value, 'title' =>  $resource->name])
 
 </div>
 

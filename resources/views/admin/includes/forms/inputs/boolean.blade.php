@@ -27,8 +27,10 @@
 
 <div class="form-group{{ $errors->has($input) ? ' has-error' : '' }}">
   <div class="btn-group btn-group-toggle col-sm-12">
+
+  {{ Form::label($input, $title, array('class' => 'col-sm-4 control-label')) }}
     
-  <div class="col-sm-8 col-sm-offset-4" data-toggle="buttons">
+  <div class="col-sm-8" data-toggle="buttons">
     <label class="btn btn-outline-success col-sm-6 {{ $value ? 'active' : null}}">
       {{ Form::radio($input, 1, $value) }}
       Yes

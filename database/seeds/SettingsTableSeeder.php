@@ -43,7 +43,7 @@ class SettingsTableSeeder extends Seeder
             [
                 'name' => 'Number test',
                 'slug' => 'number',
-                'section' => 'site',
+                'section' => 'test',
                 'value' => json_encode(0),
                 'type' => 'integer',
                 'created_at' => Carbon::now(),
@@ -52,7 +52,7 @@ class SettingsTableSeeder extends Seeder
             [
                 'name' => 'Date test',
                 'slug' => 'date',
-                'section' => 'site',
+                'section' => 'test',
                 'value' => json_encode(Carbon::now()->toDateString()),
                 'type' => 'date',
                 'created_at' => Carbon::now(),
@@ -61,7 +61,7 @@ class SettingsTableSeeder extends Seeder
             [
                 'name' => 'Time test',
                 'slug' => 'time',
-                'section' => 'site',
+                'section' => 'test',
                 'value' => json_encode(Carbon::now()->toTimeString()),
                 'type' => 'time',
                 'created_at' => Carbon::now(),
@@ -70,7 +70,7 @@ class SettingsTableSeeder extends Seeder
             [
                 'name' => 'Timestamp test',
                 'slug' => 'timestamp',
-                'section' => 'site',
+                'section' => 'test',
                 'value' => json_encode(Carbon::now()->toDayDateTimeString()),
                 'type' => 'timestamp',
                 'created_at' => Carbon::now(),
