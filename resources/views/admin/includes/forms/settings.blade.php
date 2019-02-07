@@ -13,7 +13,7 @@
 
 <div class="col-sm-8 form-horizontal">
 
-  @include('admin.includes.forms.inputs.' . $resource->type, ['name' => $name, 'input' => 'value', 'value' => $resource->value, 'title' =>  $resource->name])
+  @include('admin.includes.forms.inputs.' . $resource->type, ['name' => 'value', 'module' => $name,  'title' =>  $resource->name, 'default' => $resource->value])
 
 </div>
 

@@ -67,12 +67,7 @@ abstract class ResourceController extends Controller
      * @var array
      */
     protected $settings = [
-        'test' => [
-            'name' => 'Test',
-            'type' => 'string',
-            'description' => 'Test description',
-            'default' => 'test string',
-        ],
+        //
     ];
 
     /**
