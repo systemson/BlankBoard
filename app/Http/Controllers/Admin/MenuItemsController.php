@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ResourceController as Controller;
-use App\Models\Menu as Model;
-use App\Models\MenuItem;
-use App\Http\Controllers\Admin\Traits\Validations\MenusValidationTrait as Validations;
+use App\Models\MenuItem as Model;
+use App\Http\Controllers\Admin\Traits\Validations\MenuItemsValidationTrait as Validations;
 
-class MenusController extends Controller
+class MenuItemsController extends Controller
 {
-    use Validations;
+    //use Validations;
 
     /**
      * Model class.
@@ -42,18 +41,5 @@ class MenusController extends Controller
             'update' => 'update',
             'destroy' => 'delete',
         ];
-    }
-
-    public function edit($id)
-    {
-        $this->setListable(['id', 'title', 'url', 'status']);
-        $this->setFilters(['menu_id' => $id]);
-        $this->registerModule('menu_items', $this->resourceAbilityMap());
-        
-        $menu_items = $this->resourcesList(MenuItem::class);
-
-        return parent::edit($id)
-        ->with('resources', $menu_items)
-        ->withModule($this->module);
     }
 }

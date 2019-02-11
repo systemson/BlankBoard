@@ -14,8 +14,7 @@ class MenusTableSeeder extends Seeder
     {
         DB::table('menus')->insert([
             [
-                'title' => 'Default',
-            	'url' => 'default',
+                'name' => 'Default',
             	'created_at' => Carbon::now(),
             	'updated_at' => Carbon::now(),
             ],

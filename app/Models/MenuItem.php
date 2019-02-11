@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\ResourceModel as Model;
 
-class Menu extends Model
+class MenuItem extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,11 +12,11 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'url', 'status',
+        'title', 'description', 'url', 'status', 'order', 'menu_id',
     ];
 
-    public function items()
+    public function menu()
     {
-        return $this->hasMany(MenuItem::class);
+        return $this->belongsTo(Menu::class);
     }
 }

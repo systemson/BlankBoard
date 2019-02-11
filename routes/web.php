@@ -114,6 +114,7 @@ Route::namespace('Admin')
 
     /* Menus module */
     Route::resource('menus', 'MenusController')->except('show');
+    Route::resource('menu_items', 'MenuItemsController')->except('show');
 
     /* Components module */
     Route::resource('components', 'ComponentsController')->except('show');

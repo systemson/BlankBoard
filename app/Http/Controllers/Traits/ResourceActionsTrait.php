@@ -20,9 +20,7 @@ trait ResourceActionsTrait
         $this->authorizeAction();
 
         /* Get the resources from the model */
-        $resources = $this->resourcesList();
-
-        $this->module->setListable($this->getListable());
+        $resources = $this->resourcesList($this->model);
 
         /* Sets the view */
         if (view()->exists("admin.{$this->name}.index")) {

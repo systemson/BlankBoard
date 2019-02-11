@@ -25,30 +25,54 @@ trait ResourcesFilterTrait
      */
     protected $order = ['id' => 'asc'];
 
-
+    /**
+     * Get the columns to select for the index.
+     *
+     * @return array
+     */
     public function getListable(): array
     {
         return $this->listable;
     }
 
+    /**
+     * Set the columns to select for the index.
+     *
+     * @return array
+     */
     public function setListable(array $listable)
     {
         $this->listable = $listable;
     }
 
+    /**
+     * Get the filters for the index resource list.
+     *
+     * @return array
+     */
     public function getFilters(): array
     {
         return $this->filters;
     }
 
+    /**
+     * Set the filters for the index resource list.
+     *
+     * @return array
+     */
     public function setFilters(array $filters)
     {
         $this->filters = $filters;
     }
 
-    protected function resourcesList()
+    /**
+     * Get the resources list.
+     *
+     * @return array
+     */
+    protected function resourcesList(string $model)
     {
-        return $this->model::resources(
+        return $model::resources(
             $this->getListable(),
             $this->getFilters(),
             $this->order

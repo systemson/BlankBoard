@@ -16,25 +16,25 @@
 
   <div class="col-sm-8 form-horizontal">
 
-    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-      {{ Form::label('title', __($name . '.table.title') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
+    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+      {{ Form::label('name', __($name . '.table.name') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('title', $resource->title ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.title'))) }}
-        @if ($errors->has('title'))
+        {{ Form::text('name', $resource->name ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.name'))) }}
+        @if ($errors->has('name'))
           <span class="help-block">
-            <strong>{{ $errors->first('title') }}</strong>
+            <strong>{{ $errors->first('name') }}</strong>
           </span>
         @endif
       </div>
     </div>
 
-    <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-      {{ Form::label('url', __($name . '.table.url') . ' (*)', array('class' => 'col-sm-4 control-label')) }}
+    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+      {{ Form::label('description', __($name . '.table.description'), array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">
-        {{ Form::text('url', $resource->url ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.url'))) }}
-        @if ($errors->has('url'))
+        {{ Form::textarea('description', $resource->description ?? null, array('class' => 'col-sm-12 control-form', 'rows' => '4')) }}
+        @if ($errors->has('description'))
           <span class="help-block">
-            <strong>{{ $errors->first('url') }}</strong>
+            <strong>{{ $errors->first('description') }}</strong>
           </span>
         @endif
       </div>
@@ -63,4 +63,3 @@
   </div>
 
 {{ Form::close() }}
-

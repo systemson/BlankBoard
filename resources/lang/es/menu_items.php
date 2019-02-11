@@ -2,9 +2,9 @@
 
 return [
 
-    'title' => 'Menús',
+    'title' => 'Elementos de menú',
     'parent' => 'Contenido',
-    'name' => 'menú|menús',
+    'name' => 'elemento de menú|elementos de menú',
     'list' => 'Listado de :title',
     'add' => 'Agregar nueva :name',
     'edit' => 'Editar :name :Resource',
@@ -12,10 +12,11 @@ return [
 
     'table' => [
       'id' => 'ID',
-      'action' => 'Acción',
-      'name' => 'Nombre',
+      'title' => 'Título',
       'description' => 'Descripción',
+      'url' => 'URL',
       'status' => 'Estado',
+      'action' => 'Acción',
     ],
 
     // Alerts

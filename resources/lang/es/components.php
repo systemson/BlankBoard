@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => 'Pagina de inicio',
+    'title' => 'Página de inicio',
     'parent' => 'Contenido',
     'name' => 'componente|componentes',
     'list' => 'Listado de :title',

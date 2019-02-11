@@ -163,6 +163,8 @@ abstract class ResourceController extends Controller
                 'can_delete' => in_array('delete', $abilityMap),
             ]
         );
+
+        $this->module->setListable($this->getListable());
     }
 
     /**
