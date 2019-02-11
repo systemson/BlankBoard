@@ -33,7 +33,7 @@ return [
         'login' =>    ['name' => 'Entrar', 'class' => 'btn btn-success'],
         'send' =>     ['name' => 'Enviar', 'class' => 'btn btn-primary'],
         'save' =>     ['name' => 'Guardar', 'class' => 'btn btn-primary'],
-        'register' => ['name' => 'Registrar', 'class' => 'btn btn-primary'],
+        'register' => ['name' => 'Registrar', 'class' => 'btn btn-warning'],
         'profile' =>  ['name' => 'Mi perfil', 'class' => 'btn btn-primary'],
         'delete' =>   ['name' => 'Borrar', 'class' => 'btn btn-danger'],
         'cancel' =>   ['name' => 'Cancelar', 'class' => 'btn btn-danger'],

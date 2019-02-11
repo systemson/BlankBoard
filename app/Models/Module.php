@@ -15,7 +15,7 @@ class Module extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'status', 'can_create', 'can_read', 'can_update', 'can_delete',
+        'name', 'slug', 'description', 'status', 'can_create', 'can_read', 'can_update', 'can_delete',
     ];
 
     /**

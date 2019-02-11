@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\Traits\Validations\ModulesValidationTrait as Vali
 
 class ModulesController extends Controller
 {
-    //use Validations;
+    use Validations;
 
     /**
      * Model class.

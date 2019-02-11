@@ -16,6 +16,10 @@ return [
       'name' => 'Nombre',
       'slug' => 'Slug',
       'description' => 'Descripción',
+      'can_create' => 'Crear',
+      'can_read' => 'Ver',
+      'can_update' => 'Actualizar',
+      'can_delete' => 'Eliminar',
       'status' => 'Estado',
     ],
 
