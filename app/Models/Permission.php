@@ -54,7 +54,7 @@ class Permission extends Model
                 self::updateOrCreate(
                     ['slug' => strtolower($ability . '_' . $module)],
                     [
-                        'name' => ucwords($ability . ' ' . $module),
+                        'name' => ucwords($ability . ' ' . str_replace('_', ' ', $module)),
                         'module' => studly_case($module),
                     ]
                 );

@@ -23,7 +23,7 @@ class MenuItemsController extends Controller
      * @var array
      */
     protected $listable = [
-        'id', 'name', 'status',
+        'id', 'title', 'status',
     ];
 
     /**

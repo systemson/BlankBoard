@@ -30,7 +30,7 @@
 
 </div><!-- /. col -->
 
-@include('admin.includes.actions.list', ['resources' => $resources, 'module' => $module])
+@include('admin.includes.actions.list', ['resources' => $resources, 'module' => $module, 'create_query_params' => ['menu_id' => $resource->id]])
 @stop
 
 @section('scripts')

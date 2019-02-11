@@ -122,14 +122,14 @@
     <!-- /. access section -->
 
     <!-- Content section -->
-    @permission('Categories|Articles|Menus|Components', true)
-    <li class="treeview @if(routeNameIs(['categories', 'articles', 'menus', 'components'], true)) menu-open @endif">
+    @permission('Categories|Articles|Menus|MenuItems|Components', true)
+    <li class="treeview @if(routeNameIs(['categories', 'articles', 'menus', 'menu_items', 'components'], true)) menu-open @endif">
       <a href="#"><i class="fa fa-pencil"></i> <span>@lang('articles.parent')</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
-      <ul class="treeview-menu" @if(routeNameIs(['categories', 'articles', 'menus', 'components'], true)) style="display: block;"  @endif>
+      <ul class="treeview-menu" @if(routeNameIs(['categories', 'articles', 'menus', 'menu_items', 'components'], true)) style="display: block;"  @endif>
 
         @permission('Articles', true)
         <!-- Articles -->
@@ -155,12 +155,20 @@
         <!-- /. menus -->
         @endif
 
+        @permission('MenuItems', true)
+        <!-- Menu items-->
+        <li class="@if(routeNameIs('menu_items', true)) active @endif">
+          <a href="{{ route('menu_items.index') }}"><i class="fa fa-circle-o"></i><span>@lang('menu_items.title')</span></a>
+        </li>
+        <!-- /. menu items -->
+        @endif
+
         @permission('Components', true)
-        <!-- Menus-->
+        <!-- Components -->
         <li class="@if(routeNameIs('components', true)) active @endif">
           <a href="{{ route('components.index') }}"><i class="fa fa-circle-o"></i><span>@lang('components.title')</span></a>
         </li>
-        <!-- /. menus -->
+        <!-- /. components -->
         @endif
 
       </ul>

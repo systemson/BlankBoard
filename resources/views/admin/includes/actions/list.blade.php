@@ -6,7 +6,8 @@
       <div class="box-tools pull-right">
         @if ($module->can_create)
         @permission('create_' . $module->slug)
-        {!! button('new', route($module->slug . '.create')) !!}
+        <?php $create_query_params = isset($create_query_params) ? '?' . http_build_query($create_query_params) : ''; ?>
+        {!! button('new', route($module->slug . '.create').$create_query_params) !!}
         @endif
         @endif
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
