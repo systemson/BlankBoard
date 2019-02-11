@@ -24,8 +24,15 @@ trait ResourceActionsTrait
 
         $this->module->setListable($this->getListable());
 
+        /* Sets the view */
+        if (view()->exists("admin.{$this->name}.index")) {
+            $view = "admin.{$this->name}.index";
+        } else {
+            $view = 'admin.includes.actions.index';
+        }
+
         /* Display a listing of the resources */
-        return view('admin.includes.actions.index')
+        return view($view)
         ->with('resources', $resources)
         ->with('module', $this->module);
     }
@@ -40,8 +47,15 @@ trait ResourceActionsTrait
         /* Check if logged in user is authorized to make this request */
         $this->authorizeAction();
 
+        /* Sets the view */
+        if (view()->exists("admin.{$this->name}.create")) {
+            $view = "admin.{$this->name}.create";
+        } else {
+            $view = 'admin.includes.actions.create';
+        }
+
         /* Show the form for creating a new resource. */
-        return view('admin.includes.actions.create')
+        return view($view)
         ->with('name', $this->name);
     }
 
@@ -88,8 +102,15 @@ trait ResourceActionsTrait
         /* Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
+        /* Sets the view */
+        if (view()->exists("admin.{$this->name}.show")) {
+            $view = "admin.{$this->name}.show";
+        } else {
+            $view = 'admin.includes.actions.show';
+        }
+
         /* Displays the specified resource page */
-        return view('admin.' . $this->name . '.show')
+        return view($view)
         ->with('resource', $resource)
         ->with('name', $this->name);
     }
@@ -108,8 +129,15 @@ trait ResourceActionsTrait
         /* Get the specified resource */
         $resource = $this->model::findOrFail($id);
 
+        /* Sets the view */
+        if (view()->exists("admin.{$this->name}.edit")) {
+            $view = "admin.{$this->name}.edit";
+        } else {
+            $view = 'admin.includes.actions.edit';
+        }
+
         /* Displays the edit resource page */
-        return view('admin.includes.actions.edit')
+        return view($view)
         ->with('resource', $resource)
         ->with('name', $this->name);
     }
@@ -222,7 +250,7 @@ trait ResourceActionsTrait
     }
 
     /**
-     * Get the map of resource methods to ability names.
+     * Get the map of resource actions to ability names.
      *
      * @return array
      */

@@ -40,7 +40,8 @@ class SettingsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
-            [
+            // Test example
+            /*[
                 'name' => 'Number test',
                 'slug' => 'number',
                 'section' => 'test',
@@ -75,7 +76,7 @@ class SettingsTableSeeder extends Seeder
                 'type' => 'timestamp',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],
+            ],*/
         ]);
     }
 }
