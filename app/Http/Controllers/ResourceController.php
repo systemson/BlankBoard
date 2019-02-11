@@ -94,6 +94,8 @@ abstract class ResourceController extends Controller
         return with(new $this->model)->getTable();
     }
 
+    /* Register the resource module */
+
     protected function registerResource(): void
     {
         /* Set the controller resource name. */
@@ -109,14 +111,6 @@ abstract class ResourceController extends Controller
         $this->registerModule($this->name, $map);
 
         $this->registerSettings();
-    }
-
-    public function registerResourceAction()
-    {
-        $this->registerResource();
-
-        return redirect()->back()
-        ->withSuccess('Module successfully registered.');
     }
 
     /**
@@ -182,6 +176,75 @@ abstract class ResourceController extends Controller
         if (!empty($this->settings)) {
             foreach ($this->settings as $slug => $setting) {
                 $setting = Setting::firstOrCreate(
+                    ['slug' => $slug, 'section' => $this->name],
+                    $setting
+                );
+            }
+        }
+    }
+
+    /* Update the resource module */
+
+    protected function updateResource(): void
+    {
+        /* Set the controller resource name. */
+        $this->name = $this->getName();
+
+        /* Get the ability map */
+        $map = $this->resourceAbilityMap();
+
+        /* Store the resource permissions on DB */
+        $this->registerPermissions($map);
+
+        /* Store the resource module on DB */
+        $this->updateModule($this->name, $map);
+
+        $this->updateSettings();
+    }
+
+    public function updateResourceAction()
+    {
+        try {
+            $this->updateResource();
+            return response()->json(['status' => 'success', 'message' => 'Module successfully registered.']);
+        } catch (\Throable $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+
+    }
+
+    /**
+     * Updates the resource module.
+     *
+     * @param string $name
+     * @param array  $abilityMap
+     * @return void
+     */
+    protected function updateModule(string $name, array $abilityMap): void
+    {
+        /* Register and get the current module */
+        $this->module = Module::updateOrCreate(
+            ['slug' => $name],
+            [
+                'name' => ucwords(str_replace('_', ' ', $name)),
+                'can_create' => in_array('create', $abilityMap),
+                'can_read' => in_array('view', $abilityMap),
+                'can_update' => in_array('update', $abilityMap),
+                'can_delete' => in_array('delete', $abilityMap),
+            ]
+        );
+    }
+
+    /**
+     * Updates the permissions required by the controller actions.
+     *
+     * @return void
+     */
+    protected function updateSettings(): void
+    {
+        if (!empty($this->settings)) {
+            foreach ($this->settings as $slug => $setting) {
+                $setting = Setting::updateOrCreate(
                     ['slug' => $slug, 'section' => $this->name],
                     $setting
                 );

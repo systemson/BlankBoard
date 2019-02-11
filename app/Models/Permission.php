@@ -51,7 +51,7 @@ class Permission extends Model
             foreach ($permissions as $ability) {
 
                 /* Create permission if don't exist */
-                self::firstOrCreate(
+                self::updateOrCreate(
                     ['slug' => strtolower($ability . '_' . $module)],
                     [
                         'name' => ucwords($ability . ' ' . $module),
