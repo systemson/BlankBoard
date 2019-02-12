@@ -28,6 +28,18 @@
       </div>
     </div>
 
+    <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
+      {{ Form::label('slug', __($name . '.table.slug'), array('class' => 'col-sm-4 control-label')) }}
+      <div class="col-sm-8">
+        {{ Form::text('slug', $resource->slug ?? null, array('class' => 'col-sm-12 control-form', 'placeholder' => __($name . '.table.slug'), 'readonly')) }}
+        @if ($errors->has('slug'))
+          <span class="help-block">
+            <strong>{{ $errors->first('slug') }}</strong>
+          </span>
+        @endif
+      </div>
+    </div>
+
     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
       {{ Form::label('description', __($name . '.table.description'), array('class' => 'col-sm-4 control-label')) }}
       <div class="col-sm-8">

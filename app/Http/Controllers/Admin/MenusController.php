@@ -53,7 +53,7 @@ class MenusController extends Controller
         $menu_items = $this->resourcesList(MenuItem::class);
 
         return parent::edit($id)
-        ->with('resources', $menu_items)
+        ->withResources($menu_items)
         ->withModule($this->module);
     }
 }

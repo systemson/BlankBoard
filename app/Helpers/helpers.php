@@ -178,24 +178,37 @@ if (!function_exists('show_btn')) {
 }
 
 if (!function_exists('menu')) {
-    function menu()
+    function menu($slug, $attr = ['item-active' => 'active'])
     {
-        $items = \App\Models\Menu::where('status', 1)->get();
+        $menu = \App\Models\Menu::where('status', 1)
+        ->where('slug', $slug)
+        ->first();
 
-        if (empty($items)) {
-            return;
+        if (empty($menu) || empty($menu->items)) {
+            return '';
         }
-
         $list = null;
 
-        $open = '<ul class="navbar-nav">';
-        foreach ($items as $item) {
-            $url = url($item->url);
-            $active = requestIs([$item->url, $item->url . '/*']) ? 'active' : 'null';
+        $parent_tag = $attr['parent-tag'] ?? 'ul';
+        $parent_class = $attr['parent-class'] ?? 'navbar-nav';
+        $open = "<{$parent_tag} class=\"{$parent_class}\" id=\"{$menu->slug}\">";
 
-            $list .= "<li class=\"nav-item {$active}\"><a class=\"nav-link\" href=\"{$url}\">{$item->title}</a></li>";
+        $item_tag = $attr['item-tag'] ?? 'li';
+        $item_class = $attr['item-class'] ?? 'nav-item';
+        $item_active = $attr['item-active'] ?? nul;
+
+        $link_class = $attr['link-class'] ?? 'nav-link';
+        $link_active = $attr['link-active'] ?? null;
+
+        foreach ($menu->items as $item) {
+            $url = url($item->url);
+
+            $active['item'] = !is_null($item_active) && requestIs([$item->url, $item->url . '/*']) ? " {$item_active}" : '';
+            $active['link'] = !is_null($link_active) && requestIs([$item->url, $item->url . '/*']) ? " {$link_active}" : '';
+
+            $list .= "<{$item_tag} class=\"{$item_class}{$active['item']}\"><a class=\"{$link_class}{$active['link']}\" href=\"{$url}\">{$item->title}</a></{$item_tag}>";
         }
-        $close = '</ul>';
+        $close = "</{$parent_tag}>";
 
         return $open.$list.$close;
     }

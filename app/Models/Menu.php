@@ -12,7 +12,7 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'url', 'status',
+        'name', 'slug', 'description', 'status',
     ];
 
     public function items()

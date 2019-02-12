@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class MenusTableSeeder extends Seeder
+class MenuItemsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,10 +12,11 @@ class MenusTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('menus')->insert([
+        DB::table('menu_items')->insert([
             [
-                'name' => 'Main menu',
-                'slug' => 'main-menu',
+                'title' => 'Default',
+                'url' => 'default',
+                'menu_id' => 1,
             	'created_at' => Carbon::now(),
             	'updated_at' => Carbon::now(),
             ],

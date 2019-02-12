@@ -22,6 +22,11 @@ class CreateMenuItemsTable extends Migration
             $table->smallInteger('order')->unsigned()->default(1);
             $table->integer('menu_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('menu_id')
+            ->references('id')
+            ->on('menus')
+            ->onDelete('cascade');
         });
     }
 

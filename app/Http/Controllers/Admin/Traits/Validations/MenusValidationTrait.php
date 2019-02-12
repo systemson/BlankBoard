@@ -14,8 +14,8 @@ trait MenusValidationTrait
     protected function storeValidations()
     {
         return [
-            'title' => 'required|max:32',
-            'url' => 'required|string|max:120',
+            'name' => 'required|max:32',
+            'slug' => 'required|max:32',
             'status' => 'required|integer',
         ];
     }
@@ -28,8 +28,8 @@ trait MenusValidationTrait
     protected function updateValidations()
     {
         return [
-            'title' => 'required|max:32',
-            'url' => 'required|string|max:120',
+            'name' => 'required|max:32',
+            'slug' => 'required|max:32',
             'status' => 'required|integer',
         ];
     }
