@@ -197,7 +197,7 @@
 
         @permission('Modules', true)
         <!-- Modules -->
-        <li class="@if(requestIs('admin/modules')) active @endif">
+        <li class="@if(routeNameIs('modules', true)) active @endif">
           <a href="{{ route('modules.index') }}"><i class="fa fa-circle-o"></i><span>@lang('modules.title')</span></a>
         </li>
         <!-- /. modules -->

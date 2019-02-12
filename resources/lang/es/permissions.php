@@ -1,55 +1,109 @@
 <?php
 
-return [
-
-    'title' => 'Permisos',
-    'parent' => 'Acceso',
-    'name' => 'permiso|permisos',
-    'list' => 'Listado de :title',
-    'filters' => 'Filtros de :title',
-    'add' => 'Agregar nuevo :name',
-    'edit' => 'Editar :name :Resource',
-    'view' => 'Ver :name :Resource',
-
-    'table' => [
-      'id' => 'ID',
-      'action' => 'Acción',
-      'name' => 'Nombre',
-      'module' => 'Módulo',
-      'slug' => 'Slug',
-      'description' => 'Descripción',
-      'status' => 'Estado',
-    ],
-
-    // Alerts
-    'resource-updated' => 'Permiso actualizado satisfactoriamente.',
-
-    'confirm-delete' => 'Esta acción no puede ser revertida. ¿Estás seguro?',
-
-    // Users permissions
-    'view_users' => ['name' => 'Ver usuarios', 'module' => 'Usuarios'],
-    'create_users' => ['name' => 'Crear usuarios', 'module' => 'Usuarios'],
-    'update_users' => ['name' => 'Editar usuarios', 'module' => 'Usuarios'],
-    'delete_users' => ['name' => 'Eliminar usuarios', 'module' => 'Usuarios'],
-
-    // Roles permissions
-    'create_roles' => ['name' => 'Crear roles', 'module' => 'Roles'],
-    'update_roles' => ['name' => 'Editar roles', 'module' => 'Roles'],
-    'delete_roles' => ['name' => 'Eliminar roles', 'module' => 'Roles'],
-
-    // Permissions permissions
-    'view_permissions' => ['name' => 'Ver permisos', 'module' => 'Permisos'],
-    'update_permissions' => ['name' => 'Editar permisos', 'module' => 'Permisos'],
-
-    // Categories permissions
-    'view_categories' => ['name' => 'Ver categorias', 'module' => 'Categorias'],
-    'create_categories' => ['name' => 'Crear categorias', 'module' => 'Categorias'],
-    'update_categories' => ['name' => 'Editar categorias', 'module' => 'Categorias'],
-    'delete_categories' => ['name' => 'Eliminar categorias', 'module' => 'Categorias'],
-
-    // Articles permissions
-    'view_articles' => ['name' => 'Ver articulos', 'module' => 'Articulos'],
-    'create_articles' => ['name' => 'Crear articulos', 'module' => 'Articulos'],
-    'update_articles' => ['name' => 'Editar articulos', 'module' => 'Articulos'],
-    'delete_articles' => ['name' => 'Eliminar articulos', 'module' => 'Articulos'],
-];
+return array(
+  'title' => 'Permisos',
+  'parent' => 'Acceso',
+  'name' => 'permiso|permisos',
+  'list' => 'Listado de :title',
+  'filters' => 'Filtros de :title',
+  'add' => 'Agregar nuevo :name',
+  'edit' => 'Editar :name :Resource',
+  'view' => 'Ver :name :Resource',
+  'table' =>
+  array(
+    'id' => 'ID',
+    'action' => 'Acción',
+    'name' => 'Nombre',
+    'module' => 'Módulo',
+    'slug' => 'Slug',
+    'description' => 'Descripción',
+    'status' => 'Estado',
+  ),
+  'resource-updated' => 'Permiso actualizado satisfactoriamente.',
+  'confirm-delete' => 'Esta acción no puede ser revertida. ¿Estás seguro?',
+  'view_users' =>
+  array(
+    'name' => 'Ver usuarios',
+    'module' => 'Usuarios',
+  ),
+  'create_users' =>
+  array(
+    'name' => 'Crear usuarios',
+    'module' => 'Usuarios',
+  ),
+  'update_users' =>
+  array(
+    'name' => 'Editar usuarios',
+    'module' => 'Usuarios',
+  ),
+  'delete_users' =>
+  array(
+    'name' => 'Eliminar usuarios',
+    'module' => 'Usuarios',
+  ),
+  'create_roles' =>
+  array(
+    'name' => 'Crear roles',
+    'module' => 'Roles',
+  ),
+  'update_roles' =>
+  array(
+    'name' => 'Editar roles',
+    'module' => 'Roles',
+  ),
+  'delete_roles' =>
+  array(
+    'name' => 'Eliminar roles',
+    'module' => 'Roles',
+  ),
+  'view_permissions' =>
+  array(
+    'name' => 'Ver permisos',
+    'module' => 'Permisos',
+  ),
+  'update_permissions' =>
+  array(
+    'name' => 'Editar permisos',
+    'module' => 'Permisos',
+  ),
+  'view_categories' =>
+  array(
+    'name' => 'Ver categorias',
+    'module' => 'Categorias',
+  ),
+  'create_categories' =>
+  array(
+    'name' => 'Crear categorias',
+    'module' => 'Categorias',
+  ),
+  'update_categories' =>
+  array(
+    'name' => 'Editar categorias',
+    'module' => 'Categorias',
+  ),
+  'delete_categories' =>
+  array(
+    'name' => 'Eliminar categorias',
+    'module' => 'Categorias',
+  ),
+  'view_articles' =>
+  array(
+    'name' => 'Ver articulos',
+    'module' => 'Articulos',
+  ),
+  'create_articles' =>
+  array(
+    'name' => 'Crear articulos',
+    'module' => 'Articulos',
+  ),
+  'update_articles' =>
+  array(
+    'name' => 'Editar articulos',
+    'module' => 'Articulos',
+  ),
+  'delete_articles' =>
+  array(
+    'name' => 'Eliminar articulos',
+    'module' => 'Articulos',
+  ),
+);

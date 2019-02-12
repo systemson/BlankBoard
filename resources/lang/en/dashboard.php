@@ -1,5 +1,5 @@
 <?php
 
 return array(
-  'title' => 'Inicio',
+  'title' => 'Home',
 );

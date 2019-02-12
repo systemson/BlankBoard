@@ -1,0 +1,35 @@
+<?php
+
+return array(
+  'adv-config' => 'Advanced',
+  'avatar-updated' => 'Avatar updated.',
+  'delete-self' => 'Action denied. Can not delete your own account.',
+  'name' => 'user|users',
+  'new-user' => 'Welcome for the first time.',
+  'new-user-small' => 'You account have been registered, but before you can start using it, you must activate it. Please change your password to activate it.',
+  'parent' => 'Access',
+  'password-expired' => 'You account have expired.',
+  'password-expired-small' => 'Please change your password to get access againg.',
+  'password-failed' => 'Password not updated.',
+  'title' => 'Users',
+  'settings' => 'Configs',
+  'show' => 'Profile',
+  'tab-1' => 'Information',
+  'tab-2' => 'Messages',
+  'tab-3' => 'Basic',
+  'tab-4' => 'User data',
+  'tab-5' => 'Password',
+  'tab-6' => 'Avatar',
+  'table' =>
+  array(
+    'action' => 'Action',
+    'id' => 'ID',
+    'name' => 'Name',
+    'status' => 'Status',
+  ),
+  'password-success' => 'Password updated.',
+  'resource-created' => 'User created.',
+  'resource-deleted' => 'User deleted.',
+  'resource-updated' => 'User updated.',
+  'password-failed-small' => 'The "all password" does not match our records. Please try again.',
+);

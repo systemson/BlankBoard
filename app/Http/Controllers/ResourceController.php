@@ -208,11 +208,10 @@ abstract class ResourceController extends Controller
     {
         try {
             $this->updateResource();
-            return response()->json(['status' => 'success', 'message' => 'Module successfully registered.']);
+            return redirect()->back()->withSuccess('Module successfully registered.');
         } catch (\Throable $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            return redirect()->back()->withDanger($e->getMessage());
         }
-
     }
 
     /**

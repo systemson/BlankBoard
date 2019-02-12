@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth as BaseAuth;
 
 class Auth extends BaseAuth
 {
-
     /**
      * Display user's full name.
      *
