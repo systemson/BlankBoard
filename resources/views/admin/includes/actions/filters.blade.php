@@ -2,7 +2,7 @@
   <div class="box box-default">
 
     <div class="box-header with-border">
-      <h3 class="box-title">{{ __($module->slug . '.filters', ['title' => trans_choice($module->slug . '.name', 2)]) }}</h3>
+      <h3 class="box-title">{{ __('messages.resource.filters', ['name' => trans_choice($module->slug . '.name', 2)]) }}</h3>
       <div class="box-tools pull-right">
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
           <i class="fa fa-minus"></i>

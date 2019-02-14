@@ -14,7 +14,7 @@
   <div class="box box-primary">
 
     <div class="box-header with-border">
-      <h3 class="box-title">{{ __($name . '.add', ['name' => trans_choice($name . '.name', 1)]) }}</h3>
+      <h3 class="box-title">{{ __('messages.resource.add', ['name' => trans_choice($name . '.name', 1)]) }}</h3>
       <div class="box-tools pull-right">
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
           <i class="fa fa-minus"></i>

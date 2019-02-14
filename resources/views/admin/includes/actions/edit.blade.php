@@ -14,7 +14,7 @@
   <div class="box box-primary">
 
     <div class="box-header with-border">
-      <h3 class="box-title">{{ __($name . '.edit', ['name' => trans_choice($name . '.name', 1), 'resource' => $resource->name ]) }}</h3>
+      <h3 class="box-title">@lang('messages.resource.edit', ['name' => trans_choice($name . '.name', 1), 'resource' => $resource->name ?? $resource->title ])</h3>
       <div class="box-tools pull-right">
         <button class="btn btn-box-tool" type="button" data-widget="collapse">
           <i class="fa fa-minus"></i>

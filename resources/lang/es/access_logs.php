@@ -4,10 +4,6 @@ return array(
   'title' => 'Logs de acceso',
   'parent' => 'Acceso',
   'name' => 'log de acceso|logs de acceso',
-  'list' => 'Listado de :title',
-  'add' => 'Agregar nueva :name',
-  'edit' => 'Editar :name :Resource',
-  'view' => 'Ver :name :Resource',
   'table' =>
   array(
     'id' => 'ID',

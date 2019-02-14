@@ -4,11 +4,6 @@ return array(
   'title' => 'Permisos',
   'parent' => 'Acceso',
   'name' => 'permiso|permisos',
-  'list' => 'Listado de :title',
-  'filters' => 'Filtros de :title',
-  'add' => 'Agregar nuevo :name',
-  'edit' => 'Editar :name :Resource',
-  'view' => 'Ver :name :Resource',
   'table' =>
   array(
     'id' => 'ID',
@@ -19,8 +14,6 @@ return array(
     'description' => 'Descripción',
     'status' => 'Estado',
   ),
-  'resource-updated' => 'Permiso actualizado satisfactoriamente.',
-  'confirm-delete' => 'Esta acción no puede ser revertida. ¿Estás seguro?',
   'view_users' =>
   array(
     'name' => 'Ver usuarios',

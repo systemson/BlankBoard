@@ -147,7 +147,7 @@ if (!function_exists('delete_btn')) {
         $btn = Form::button(__('messages.action.trash'), [
             'type' => 'submit',
             'class'=> 'btn btn-danger btn-xs',
-            'onclick'=> 'return confirm("' . __($name . '.confirm-delete') . '")',
+            'onclick'=> 'return confirm("' . __('messages.confirm-delete') . '")',
         ]);
         $close = Form::close();
 
@@ -187,11 +187,12 @@ if (!function_exists('menu')) {
         if (empty($menu) || empty($menu->items)) {
             return '';
         }
-        $list = null;
+
+        $container_tag = $attr['parent-tag'] ?? 'div';;
+        $container_class = $attr['parent-class'] ?? 'collapse navbar-collapse';;
 
         $parent_tag = $attr['parent-tag'] ?? 'ul';
         $parent_class = $attr['parent-class'] ?? 'navbar-nav';
-        $open = "<{$parent_tag} class=\"{$parent_class}\" id=\"{$menu->slug}\">";
 
         $item_tag = $attr['item-tag'] ?? 'li';
         $item_class = $attr['item-class'] ?? 'nav-item';
@@ -200,6 +201,9 @@ if (!function_exists('menu')) {
         $link_class = $attr['link-class'] ?? 'nav-link';
         $link_active = $attr['link-active'] ?? null;
 
+        $open = "<{$container_tag} class=\"{$container_class}\"><{$parent_tag} class=\"{$parent_class}\" id=\"{$menu->slug}\">";
+
+        $list = '';
         foreach ($menu->items as $item) {
             $url = url($item->url);
 
@@ -208,7 +212,8 @@ if (!function_exists('menu')) {
 
             $list .= "<{$item_tag} class=\"{$item_class}{$active['item']}\"><a class=\"{$link_class}{$active['link']}\" href=\"{$url}\">{$item->title}</a></{$item_tag}>";
         }
-        $close = "</{$parent_tag}>";
+
+        $close = "</{$parent_tag}></{$container_tag}>";
 
         return $open.$list.$close;
     }

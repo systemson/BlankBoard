@@ -7,10 +7,6 @@ return array(
   'trash' => 'Papelera',
   'parent' => 'Mensajes',
   'name' => 'mensaje|mensajes',
-  'list' => 'Listado de :title',
-  'add' => 'Agregar un nuevo :name',
-  'edit' => 'Editar :name :Resource',
-  'view' => 'Ver :name :Resource',
   'compose' => 'Redactar',
   'table' =>
   array(
