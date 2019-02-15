@@ -68,14 +68,16 @@ trait ResourcesFilterTrait
     /**
      * Get the resources list.
      *
+     * @todo This method should be moved to a trait. And an independent package.
+     *
      * @return array
      */
     protected function resourcesList(string $model)
     {
         return $model::resources(
-            $this->getListable(),
-            $this->getFilters(),
-            $this->order
+        	$this->getListable(),
+        	$this->getFilters(),
+        	$this->order
         )
         ->paginate($this->paginate);
     }

@@ -18,8 +18,9 @@
 
     <div class="box-body">
       <div class="table-responsive">
+      	{{ $resources->list() }}
 
-        <table class="table table-hover table-bordered table-striped table-condensed">
+        <!--<table class="table table-hover table-bordered table-striped table-condensed">
           <thead>
             <tr class="info">
               @foreach ($module->getListable() as $column)
@@ -61,7 +62,7 @@
             @endforelse
 
           </tbody>
-        </table>
+        </table>-->
       </div>
 
       <div class="col-sm-12">
