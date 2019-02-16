@@ -7,12 +7,14 @@ use App\Models\Traits\UserEmailsTrait;
 use App\Models\Traits\RolesPermissionTrait;
 use App\Models\AccessLog;
 use App\User as BaseUserModel;
+use App\Models\Traits\ListableTrait;
 
 class User extends BaseUserModel
 {
     use SoftDeletes,
         UserEmailsTrait,
-        RolesPermissionTrait;
+        RolesPermissionTrait,
+        ListableTrait;
 
     /**
      * The attributes that are mass assignable.

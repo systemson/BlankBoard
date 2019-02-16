@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Builder;
+use App\Models\Traits\ListableTrait;
 
 abstract class ResourceModel extends Model
 {
+    use ListableTrait;
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -26,16 +29,5 @@ abstract class ResourceModel extends Model
         }
 
         return $query;
-    }
-
-    /**
-     * Create a new Eloquent query builder for the model.
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder|static
-     */
-    public function newEloquentBuilder($query)
-    {
-        return new Builder($query);
     }
 }

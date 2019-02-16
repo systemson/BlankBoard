@@ -171,4 +171,19 @@ return array(
         'updated' => ':Name actualizado(a) satisfactoriamente.',
         'deleted' => ':Name eliminado(a).',
     ],
+
+    'table' => [
+        'id' => 'ID',
+        'action' => 'Accion',
+        'name' => 'Nombre',
+        'title' => 'Titulo',
+        'status' => 'Estatus',
+        'module' => 'Modulo',
+        'created_at' => 'Creado',
+        'updated_at' => 'Modificado',
+        'category' => 'Categoria',
+        'author' => 'Autor',
+        'value' => 'Valor',
+        'type' => 'Tipo',
+    ],
 );

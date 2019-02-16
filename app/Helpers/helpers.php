@@ -251,9 +251,13 @@ if (!function_exists('td')) {
 }
 
 if (!function_exists('th')) {
-    function th(string $column, string $name)
+    function th(string $column)
     {
         $class = null;
+
+        $column = str_replace('_id', '', $column);
+
+        $name = \Lang::has('messages.table.' . $column) ? \Lang::get('messages.table.' . $column) : ucwords(str_replace('_', ' ', $column));
 
         switch ($column) {
             case 'name':
