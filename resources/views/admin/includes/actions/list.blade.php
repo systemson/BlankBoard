@@ -18,7 +18,7 @@
 
     <div class="box-body">
       <div class="table-responsive">
-      	{{ $resources->list('', ['module' => $module]) }}
+      	{{ $resources->listable('admin.includes.actions.lists', ['module' => $module]) }}
       </div>
 
       <div class="col-sm-12">

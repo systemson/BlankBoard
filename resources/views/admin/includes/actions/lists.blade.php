@@ -1,16 +1,16 @@
 <table class="table table-hover table-bordered table-striped table-condensed">
-    <thead>
-        <tr class="info">
-            @if (count($resources) > 0)
-                @foreach (array_keys($resources[0]->toArray()) as $column)
+    @if ($resources->count() > 0)
+    	<thead>
+        	<tr class="info">
+                @foreach (array_keys($resources->first()->toArray()) as $column)
                     {!! th($column) !!}
                 @endforeach
-            @endif
-            @if ($module->can_read || $module->can_update || $module->can_delete)
-                <th class="text-center">{{ __('messages.table.action') }}</th>
-            @endif
-        </tr>
-    </thead>
+            	@if ($module->can_read || $module->can_update || $module->can_delete)
+            	    <th class="text-center">{{ __('messages.table.action') }}</th>
+            	@endif
+	        </tr>
+	    </thead>
+    @endif
     <tbody>
 
         @forelse ($resources as $item)
@@ -41,7 +41,7 @@
             </td>
         </tr>
         @empty
-        <tr><td colspan="5">{{ __('messages.no-results') }}</td></tr>
+        <tr><td>{{ __('messages.no-results') }}</td></tr>
         @endforelse
 
     </tbody>
